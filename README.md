@@ -28,7 +28,7 @@
 
 9. git remote add origin https://github.com/2hyjun/summertime-pretzel.git
 
-					여기까지 설정.
+					여기까지 설정. 오류가 없는 이상 여러번 할 필요 없음.
 ------------------------------------------------------------------------------------
 					설정 완료했으면 이후엔 아래 부터.
 10. git pull origin master 
