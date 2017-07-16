@@ -13,6 +13,8 @@
 	(ex. mkdir summertime-pretzel)
 
 6. git init
+	
+	*(항상 여기 git init을 한곳에서 명령을 실행해야 합니당)*
 
 7. git config --global user.name '유저네임 (id 아님)'
 
@@ -35,7 +37,7 @@
 
 	(임시 저장소에 추가.)
 
-	('.'점 꼭있어야함. 현재 폴더 아래의 모든 파일을 추가한다는 뜻.)
+	('.'점 꼭있어야함. 현재 폴더 아래의 *모든 변경된 파일을 추가한다*는 뜻.)
 
 12. git commit -m '메시지'
 
