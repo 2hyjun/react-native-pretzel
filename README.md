@@ -22,7 +22,7 @@
 
 8. git config --global user.email '이메일'
 
-	(ex. git config --global user.email'biper94@gmail.com')
+	(ex. git config --global user.email 'biper94@gmail.com')
 
 9. git remote add origin https://github.com/2hyjun/summertime-pretzel.git
 
