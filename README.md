@@ -5,8 +5,8 @@
 	(명령어: cd (경로) ex 바탕화면: cd ~/Desktop/)
 
 5. git init
-6. git config --global user.name '유저네임 (id 아님)'(ex 2hyjun)
-7. git config --global user.email '이메일'(ex biper94@gmail.com)
+6. git config --global user.name '유저네임 (id 아님)'(ex '2hyjun')
+7. git config --global user.email '이메일'('ex biper94@gmail.com')
 8. git remote add origin https://github.com/2hyjun/summertime-pretzel.git
 						설정
 ------------------------------------------------------------------------------------
