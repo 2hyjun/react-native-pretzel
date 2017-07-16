@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        meta(charshet='utf8')
+        title Register
+    body
+        form(action='/register' method='post')
+            p
+                input(type="text" name='name' placeholder="홍길동")
+            p
+                input(type="text" name='email' placeholder="Email@sample.ac.kr")
+            p
+                input(type="password" name='password' placeholder="Password")
+            p
+                input(type='text' name='univ' placeholder='부산대학교')
+            p
+                input(type='text' name='major' placeholder='정보컴퓨터공학과')
+            p
+                input(type="submit" value='Sign in') 
