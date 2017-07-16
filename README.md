@@ -11,6 +11,8 @@
 	(명령어: mkdir (폴더이름))
 
 	(ex. mkdir summertime-pretzel)
+6. 그 폴더로 들어가기
+	(ex. cd summertime-pretzel)
 
 6. git init
 	
