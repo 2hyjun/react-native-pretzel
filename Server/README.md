@@ -19,5 +19,6 @@ CREATE TABLE timeline_helpme (
     detailInfo TEXT(100) NOT NULL,
     expectedPrice int(5) NOT NULL,
     fee int(5) NOT NULL,
-    deadline DATETIME NOT NULL
+    deadline DATETIME NOT NULL,
+    rid int(11) unsigned PRIMARY KEY auto_increment
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,0 +1,32 @@
+doctype html
+-var specialBulletin;
+html
+    head
+        meta(charset='utf8')
+        title helpme
+        h1
+            a(href='/timeline/') TimeLine
+    body
+        fieldset
+            -if (timeline.length === 0)
+                h1 Empty!
+            -else 
+                each bulletin in timeline
+                    -console.log(id)
+                    -if (id)
+                        -if (bulletin.rid === id)
+                            -specialBulletin = bulletin
+                    li
+                        a(href='/timeline/timeline_helpme/' + bulletin.rid)= bulletin.title
+        if (id)
+            fieldset
+                artcle
+                    h1= specialBulletin.title
+                    hr
+                    h6= specialBulletin.user_email
+                    h6= specialBulletin.content
+                    h6= '상세 사항: ' + specialBulletin.detailInfo
+                    h6= '예상금액: '+ specialBulletin.expectedPrice + '원'
+                    h6= '배달비: ' + specialBulletin.fee + '원'
+                    h6= '기한: ' + specialBulletin.deadline
+        a(href='/timeline/new_request') 글 작성 하기

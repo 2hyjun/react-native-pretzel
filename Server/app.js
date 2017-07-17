@@ -134,6 +134,49 @@ app.get('/timeline', (req, res) => {
     `;
     res.send(output);
 })
+
+app.get(['/timeline/timeline_helpme','/timeline/timeline_helpme/:id'], (req, res) => {
+    var sql = 'SELECT * FROM timeline_helpme';
+    conn.query(sql, (err, results, fields) => {
+        console.log('id in get', req.params.id);
+        res.render('timeline_helpme', {
+            timeline: results,
+            id: parseInt(req.params.id)
+        });    
+    })
+})
+app.get(['/timeline/timeline_helpyou','/timeline/timeline_helpyou/:id'], (req, res) => {
+    var sql = 'SELECT * FROM timeline_helpyou';
+    conn.query(sql, (err, results, fields) => {
+        console.log('id in get', req.params.id);
+        res.render('timeline_helpme', {
+            timeline: results,
+            id: parseInt(req.params.id)
+        });    
+    })
+})
+app.get('/timeline/new_request', (req, res) => {
+    res.render('new_request');
+})
+
+app.post('/timeline/new_request', (req, res) => {
+    var title = req.body.title,
+        content = req.body.content,
+        detailInfo = req.body.detailInfo,
+        expectedPrice = req.body.expectedPrice,
+        fee = req.body.fee,
+        deadLine = req.body.deadLine,
+        type = req.body.type;
+    
+    var db = (type == '해주세요') ? 'timeline_helpme' : 'timeline_helpyou';
+    var sql = 'INSERT INTO ' + db
+        + ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title) '
+        + 'VALUES(?, ?, ?, ?, ?, ?, ?);';
+    var params = [req.session.signedUser.user_email, content, detailInfo, expectedPrice, fee, deadLine, title];
+    conn.query(sql, params, (err, results, fields) => {
+        res.redirect('/timeline');
+    })
+})
 server.listen(port, () => {
     console.log('Pretzel Server listening at port', port);
 })
