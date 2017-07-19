@@ -1,0 +1,36 @@
+doctype html
+html
+    head
+        meta(charset='utf8')
+        title Update Timeline
+    body
+        fieldset
+            form(action='/timeline/update/' + id + '/' + helpme method='POST')
+                p   
+                    h3 제목:
+                        input(type='text' name='title' value= prev.title)
+                p
+                    h3 품목:
+                        input(list='contents' name='content' value= prev.content)                
+                        datalist(id='contents')
+                            option(value='데려다줘')
+                            option(value='책반납')
+                            option(value='커피')
+                            option(value='토스트')
+                            option(value='밥버거')
+                            option(value='기타')
+                p
+                    h3  상세 사항:
+                        textarea(name='detailInfo')= prev.detailInfo
+                p
+                    h3 예상 금액:
+                        input(type='number' name='expectedPrice' value= prev.expectedPrice)
+                p
+                    h3 배달료: 
+                        input(type='number' name='fee' value= prev.expectedPrice)
+                p
+                    h3 배달 기한:
+                        -console.log(prev.deadline);
+                        input(type='datetime-local' name='deadLine')
+                p
+                    input(type='submit')

@@ -17,7 +17,7 @@ html
                         -if (bulletin.rid === id)
                             -specialBulletin = bulletin
                     li
-                        a(href='/timeline/timeline_helpme/' + bulletin.rid)= bulletin.title
+                        a(href='/timeline/timeline_helpyou/' + bulletin.rid)= bulletin.title
         if (id)
             fieldset
                 artcle
@@ -30,7 +30,7 @@ html
                     h4= '배달비: ' + specialBulletin.fee + '원'
                     h4= '기한: ' + specialBulletin.deadline
                     h3
-                        a(href='/timeline/delete/' + specialBulletin.rid + '/' + 'Y') Delete
+                        a(href='/timeline/delete/' + specialBulletin.rid + '/' + 'N') Delete
                     h3
-                        a(href='/timeline/update/' + specialBulletin.rid + '/' + 'Y') Update
+                        a(href='/timeline/update/' + specialBulletin.rid + '/' + 'N') Update
         a(href='/timeline/new_request') 글 작성 하기

@@ -78,8 +78,8 @@ app.post('/login', (req, res) => {
                 crypto.pbkdf2(req.body.password, salt.toString('base64'), 1000, 64, 'sha512', (err, key) => {
                     if (key.toString('base64') === results[0].user_password) {
                         req.session.signedUser = results[0]
-                        
-                        console.log(req.session.signedUser);
+
+                        //console.log(req.session.signedUser);
                         res.send(req.session.signedUser);
                     } else {
                         res.write(`<script language=javascript>alert('Wrong ID & Password')</script>`);
@@ -135,24 +135,24 @@ app.get('/timeline', (req, res) => {
     res.send(output);
 })
 
-app.get(['/timeline/timeline_helpme','/timeline/timeline_helpme/:id'], (req, res) => {
+app.get(['/timeline/timeline_helpme', '/timeline/timeline_helpme/:id'], (req, res) => {
     var sql = 'SELECT * FROM timeline_helpme';
     conn.query(sql, (err, results, fields) => {
-        console.log('id in get', req.params.id);
+        //console.log('id in get', req.params.id);
         res.render('timeline_helpme', {
             timeline: results,
             id: parseInt(req.params.id)
-        });    
+        });
     })
 })
-app.get(['/timeline/timeline_helpyou','/timeline/timeline_helpyou/:id'], (req, res) => {
+app.get(['/timeline/timeline_helpyou', '/timeline/timeline_helpyou/:id'], (req, res) => {
     var sql = 'SELECT * FROM timeline_helpyou';
     conn.query(sql, (err, results, fields) => {
-        console.log('id in get', req.params.id);
-        res.render('timeline_helpme', {
+        //console.log('id in get', req.params.id);
+        res.render('timeline_helpyou', {
             timeline: results,
             id: parseInt(req.params.id)
-        });    
+        });
     })
 })
 app.get('/timeline/new_request', (req, res) => {
@@ -167,15 +167,90 @@ app.post('/timeline/new_request', (req, res) => {
         fee = req.body.fee,
         deadLine = req.body.deadLine,
         type = req.body.type;
-    
+
     var db = (type == '해주세요') ? 'timeline_helpme' : 'timeline_helpyou';
-    var sql = 'INSERT INTO ' + db
-        + ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title) '
-        + 'VALUES(?, ?, ?, ?, ?, ?, ?);';
+    var sql = 'INSERT INTO ' + db +
+        ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title) ' +
+        'VALUES(?, ?, ?, ?, ?, ?, ?);';
     var params = [req.session.signedUser.user_email, content, detailInfo, expectedPrice, fee, deadLine, title];
     conn.query(sql, params, (err, results, fields) => {
+        //console.log(err);
+        //console.log(results)
         res.redirect('/timeline');
     })
+})
+
+app.get("/timeline/delete/:id/:helpme", (req, res) => {
+    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
+    var rid = parseInt(req.params.id);
+    var sql = 'SELECT * FROM ' + db + ' where rid=?;';
+    console.log(sql)
+    var params = [rid];
+    conn.query(sql, params, (err, results, fields) => {
+        if (err)
+            console.log(err);
+        if (req.session.signedUser.user_email !== results[0].user_email) {
+            res.write(`<script language=javascript>alert('권한이 없습니다.')</script>`);
+            res.write(`<script language=javascript>window.location='/timeline'</script>`);
+        } else {
+            var sql = 'DELETE FROM ' + db + ' where rid=?';
+            conn.query(sql, params, (err, results, fields) => {
+                if (err)
+                    res.send(err)
+                else
+                    res.redirect('/timeline');
+            })
+        }
+    })
+})
+
+app.get("/timeline/update/:id/:helpme", (req, res) => {
+    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
+    var rid = parseInt(req.params.id);
+    var sql = 'SELECT * FROM ' + db + ' where rid=?;';
+    console.log(sql)
+    var params = [rid];
+    conn.query(sql, params, (err, results, fields) => {
+        if (err)
+            console.log(err);
+        if (req.session.signedUser.user_email !== results[0].user_email) {
+            res.write(`<script language=javascript>alert('Permission Denied.')</script>`);
+            res.write(`<script language=javascript>window.location='/timeline'</script>`);
+        } else if (results[0] !== undefined) {
+            res.render('timeline_update', {
+                id: rid,
+                helpme: req.params.helpme,
+                prev: results[0]
+            })
+        } else {
+            res.status(500).send('<h1>Internal Server Error</h1>')
+        }
+    })
+})
+
+app.post('/timeline/update/:id/:helpme', (req, res) => {
+    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
+    var rid = parseInt(req.params.id);
+    var title = req.body.title,
+        content = req.body.content,
+        detailInfo = req.body.detailInfo,
+        expectedPrice = req.body.expectedPrice,
+        fee = req.body.fee,
+        deadline = req.body.deadLine;
+    if (title && content && detailInfo && expectedPrice && fee && deadline) {
+        var sql = 'UPDATE ' + db + ' SET title=?, content=?, detailInfo=?, expectedPrice=?, fee=?, deadline=? where rid=?';
+        var params=[title, content, detailInfo, expectedPrice, fee, deadline, rid];
+        conn.query(sql, params, (err, results, fields) => {
+            if (err) 
+                res.send(err);
+            else
+                res.redirect('/timeline/' + db + '/' + rid);
+                
+        })
+    } else {
+        res.status(500).send('<h1>Internal Server Error</h1>')
+    }
+
 })
 server.listen(port, () => {
     console.log('Pretzel Server listening at port', port);
