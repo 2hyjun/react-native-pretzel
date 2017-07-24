@@ -31,6 +31,20 @@ var mysqlSessionOptions = {
     // session에서 만 사용.
 }
 
+function now() {
+    var date;
+    date = new Date();
+    date.getUTCDate()
+    date = date.getUTCFullYear() + '-' +
+        ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
+        ('00' + date.getUTCDate()).slice(-2) + ' ' +
+        ('00' + (date.getUTCHours() + 9)).slice(-2) + ':' +
+        ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+        ('00' + date.getUTCSeconds()).slice(-2);
+    return date;
+}
+
+console.log(now());
 app.use(session({
     secret: 'kGusbVJHUSGD6$VgAS4S^VGB',
     resave: false,
@@ -47,23 +61,19 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', (req, res) => {
     if (req.session.signedUser) {
-        res.render('index', {
-            time: Date(),
-            img: 'hsk.gif',
-            user: req.session.signedUser
-        });
+        res.send({
+            resultCode: 100
+        })
     } else {
-        res.redirect('/login');
+        res.send({
+            resultCode: 1
+        })
     }
 });
 
 app.get('/logout', (req, res) => {
     delete req.session.signedUser;
-    res.redirect('/')
-})
-
-app.get('/login', (req, res) => {
-    res.render('login');
+    res.send('logout success')
 })
 
 app.post('/login', (req, res) => {
@@ -71,30 +81,40 @@ app.post('/login', (req, res) => {
         var sql = 'SELECT * FROM users where user_email=?;';
         var params = [req.body.email];
         conn.query(sql, params, (err, results, fields) => {
-            if (results.length == 0) {
-                res.write(`<script language=javascript>alert('No Such Email')</script>`);
-                res.write(`<script language=javascript>window.location='/login'</script>`);
+            if (err) {
+                console.log(err);
+                res.send({
+                    resultCode: 1,
+                    result: err
+                })
+            } else if (results.length == 0) {
+                res.send({
+                    resultCode: 2,
+                    result: 'No such ID'
+                })
             } else {
                 crypto.pbkdf2(req.body.password, salt.toString('base64'), 1000, 64, 'sha512', (err, key) => {
                     if (key.toString('base64') === results[0].user_password) {
                         req.session.signedUser = results[0]
-
-                        //console.log(req.session.signedUser);
-                        res.send(req.session.signedUser);
+                        res.send({
+                            resultCode: 100,
+                            result: req.session.signedUser
+                        });
                     } else {
-                        res.write(`<script language=javascript>alert('Wrong ID & Password')</script>`);
-                        res.write(`<script language=javascript>window.location='/login'</script>`);
+                        res.send({
+                            resultCode: 3,
+                            result: 'Wrong Password'
+                        });
                     }
                 })
             }
         })
     } else {
-        res.status(500).send('Internal Server Error');
+        res.send({
+            resultCode: 4,
+            result: 'No Body Parameters'
+        });
     }
-})
-
-app.get('/register', (req, res) => {
-    res.render('register');
 })
 
 app.post('/register', (req, res) => {
@@ -110,53 +130,52 @@ app.post('/register', (req, res) => {
             var params = [email, name, key.toString('base64'), univ, major];
             conn.query(sql, params, (err, rows, fields) => {
                 if (err) {
+                    console.log(err);
                     if (err.errno == 1062) {
-                        res.write(`<script language=javascript>alert('Email Duplicated')</script>`);
-                        res.write(`<script language=javascript>window.location='/register'</script>`);
+                        res.send({
+                            registerCode: 1,
+                            result: 'Duplicated Email'
+                        })
                     } else {
-                        res.status(500).send('Internal Server Error');
+                        res.send({
+                            registerCode: 2,
+                            result: err
+                        })
                     }
 
                 } else {
-                    res.redirect('/')
+                    res.send({
+                        registerCode: 100,
+                        result: 'Register Success'
+                    })
                 }
             })
         })
     } else {
-        res.status(500).send('Internal Server Error');
+        res.redirect({
+            registerCode: 3,
+            result: 'No Body Parameters'
+        })
     }
 })
 
 app.get('/timeline', (req, res) => {
-    var output = `
-    <a href='/timeline/timeline_helpme'>Help Me</a><br>
-    <a href='/timeline/timeline_helpyou'>Help You</a><br>
-    `;
-    res.send(output);
-})
+    var sql = 'SELECT * FROM timeline where completed="N"';
+    conn.query(sql, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            res.send({
+                resultCode: 1,
+                result: err
+            })
+        } else {
+            res.send({
+                resultCode: 100,
+                result: results
+            });
+        }
 
-app.get(['/timeline/timeline_helpme', '/timeline/timeline_helpme/:id'], (req, res) => {
-    var sql = 'SELECT * FROM timeline_helpme';
-    conn.query(sql, (err, results, fields) => {
-        //console.log('id in get', req.params.id);
-        res.render('timeline_helpme', {
-            timeline: results,
-            id: parseInt(req.params.id)
-        });
     })
-})
-app.get(['/timeline/timeline_helpyou', '/timeline/timeline_helpyou/:id'], (req, res) => {
-    var sql = 'SELECT * FROM timeline_helpyou';
-    conn.query(sql, (err, results, fields) => {
-        //console.log('id in get', req.params.id);
-        res.render('timeline_helpyou', {
-            timeline: results,
-            id: parseInt(req.params.id)
-        });
-    })
-})
-app.get('/timeline/new_request', (req, res) => {
-    res.render('new_request');
 })
 
 app.post('/timeline/new_request', (req, res) => {
@@ -166,92 +185,181 @@ app.post('/timeline/new_request', (req, res) => {
         expectedPrice = req.body.expectedPrice,
         fee = req.body.fee,
         deadLine = req.body.deadLine,
-        type = req.body.type;
-
-    var db = (type == '해주세요') ? 'timeline_helpme' : 'timeline_helpyou';
-    var sql = 'INSERT INTO ' + db +
-        ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title) ' +
-        'VALUES(?, ?, ?, ?, ?, ?, ?);';
-    var params = [req.session.signedUser.user_email, content, detailInfo, expectedPrice, fee, deadLine, title];
-    conn.query(sql, params, (err, results, fields) => {
-        //console.log(err);
-        //console.log(results)
-        res.redirect('/timeline');
-    })
-})
-
-app.get("/timeline/delete/:id/:helpme", (req, res) => {
-    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
-    var rid = parseInt(req.params.id);
-    var sql = 'SELECT * FROM ' + db + ' where rid=?;';
-    console.log(sql)
-    var params = [rid];
-    conn.query(sql, params, (err, results, fields) => {
-        if (err)
-            console.log(err);
-        if (req.session.signedUser.user_email !== results[0].user_email) {
-            res.write(`<script language=javascript>alert('권한이 없습니다.')</script>`);
-            res.write(`<script language=javascript>window.location='/timeline'</script>`);
-        } else {
-            var sql = 'DELETE FROM ' + db + ' where rid=?';
-            conn.query(sql, params, (err, results, fields) => {
-                if (err)
-                    res.send(err)
-                else
-                    res.redirect('/timeline');
-            })
-        }
-    })
-})
-
-app.get("/timeline/update/:id/:helpme", (req, res) => {
-    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
-    var rid = parseInt(req.params.id);
-    var sql = 'SELECT * FROM ' + db + ' where rid=?;';
-    console.log(sql)
-    var params = [rid];
-    conn.query(sql, params, (err, results, fields) => {
-        if (err)
-            console.log(err);
-        if (req.session.signedUser.user_email !== results[0].user_email) {
-            res.write(`<script language=javascript>alert('Permission Denied.')</script>`);
-            res.write(`<script language=javascript>window.location='/timeline'</script>`);
-        } else if (results[0] !== undefined) {
-            res.render('timeline_update', {
-                id: rid,
-                helpme: req.params.helpme,
-                prev: results[0]
-            })
-        } else {
-            res.status(500).send('<h1>Internal Server Error</h1>')
-        }
-    })
-})
-
-app.post('/timeline/update/:id/:helpme', (req, res) => {
-    var db = req.params.helpme == 'Y' ? 'timeline_helpme' : 'timeline_helpyou';
-    var rid = parseInt(req.params.id);
-    var title = req.body.title,
-        content = req.body.content,
-        detailInfo = req.body.detailInfo,
-        expectedPrice = req.body.expectedPrice,
-        fee = req.body.fee,
-        deadline = req.body.deadLine;
-    if (title && content && detailInfo && expectedPrice && fee && deadline) {
-        var sql = 'UPDATE ' + db + ' SET title=?, content=?, detailInfo=?, expectedPrice=?, fee=?, deadline=? where rid=?';
-        var params=[title, content, detailInfo, expectedPrice, fee, deadline, rid];
+        contentType = req.body.contentType,
+        place = req.body.place;
+    if (title && content && detailInfo && expectedPrice && fee && deadLine && contentType && place) {
+        var sql = 'INSERT INTO timeline' +
+            ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title, contentType, time, place) ' +
+            'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        var params = [req.session.signedUser.user_email, content, detailInfo, expectedPrice, fee, deadLine, title, contentType, now(), place];
         conn.query(sql, params, (err, results, fields) => {
-            if (err) 
-                res.send(err);
-            else
-                res.redirect('/timeline/' + db + '/' + rid);
-                
+            if (err) {
+                console.log(err);
+                res.send({
+                    resultCode: 1,
+                    result: err
+                })
+            } else {
+                res.send({
+                    resultCode: 100,
+                    result: results
+                })
+            }
         })
     } else {
-        res.status(500).send('<h1>Internal Server Error</h1>')
+        res.send({
+            resultCode: 2,
+            result: '파라미터 부족'
+        })
     }
-
 })
+
+app.get("/timeline/delete/:id", (req, res) => {
+    var rid = parseInt(req.params.id);
+    var sql = 'SELECT * FROM timeline where rid=?;';
+    //console.log(sql)
+    var params = [rid];
+    conn.query(sql, params, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            res.send({
+                resultCode: 3,
+                result: err
+            })
+        } else if (req.session.signedUser.user_email !== results[0].user_email) {
+            res.send({
+                resultCode: 1,
+                result: 'Permission Denied'
+            })
+        } else {
+            var sql = 'DELETE FROM timeline where rid=?';
+            conn.query(sql, params, (err, results, fields) => {
+                if (err) {
+                    console.log(err)
+                    res.send({
+                        resultCode: 2,
+                        result: err
+                    })
+                } else {
+                    res.send({
+                        resultCode: 100,
+                        result: results
+                    })
+                }
+            })
+        }
+    })
+})
+
+
+app.post('/timeline/update/:id', (req, res) => {
+    var rid = parseInt(req.params.id);
+    var sql = 'SELECT * FROM timeline where rid=?';
+    var params = [rid];
+    if (rid && req.session.signedUser) {
+        conn.query(sql, params, (err, results, field) => {
+            console.log(results);
+            if (err) {
+                console.log(err);
+                res.send({
+                    resultCode: 2,
+                    result: err
+                })
+            } else if (results[0] === undefined) {
+                res.send({
+                    resultCode: 6,
+                    result: 'No such things that rid=' + rid
+                })
+            } else if (req.session.signedUser.user_email !== results[0].user_email) {
+                res.send({
+                    resultCode: 3,
+                    result: 'Permission Denied'
+                })
+            } else if (results[0] !== undefined) {
+                var title = req.body.title,
+                    content = req.body.content,
+                    detailInfo = req.body.detailInfo,
+                    expectedPrice = req.body.expectedPrice,
+                    fee = req.body.fee,
+                    deadLine = req.body.deadLine,
+                    contentType = req.body.contentType,
+                    place = req.body.place;
+                if (title && content && detailInfo && expectedPrice && fee && deadLine && contentType && place) {
+                    var sql = 'UPDATE timeline SET title=?, content=?, detailInfo=?, expectedPrice=?, fee=?, deadline=?, contentType=? , time=?, place=? where rid=?';
+                    var params = [title, content, detailInfo, expectedPrice, fee, deadLine, contentType, now(), place, rid];
+                    conn.query(sql, params, (err, result, fields) => {
+                        if (err) {
+                            console.log(err);
+                            res.send({
+                                resultCode: 5,
+                                result: err
+                            })
+                        } else {
+                            res.send({
+                                resultCode: 100,
+                                result: result
+                            })
+                        }
+                    })
+                } else {
+                    res.send({
+                        resultCode: 4,
+                        result: 'No Body Parameters'
+                    })
+                }
+            }
+        })
+    } else if (!req.session.signedUser) {
+        res.send({
+            resultCode: 6,
+            result: 'No signed user'
+        })
+    } else {
+        res.send({
+            resultCode: 1,
+            result: 'No id parameter'
+        })
+    }
+ 
+})
+
+
+app.get('/mypage', (req, res) => {
+    var sql = 'SELECT * FROM timeline where user_email=?;';
+    params = [req.session.signedUser.user_email];
+    console.log(req.session.signedUser.user_email);
+    conn.query(sql, params, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            res.send({
+                resultCode: 1,
+                result: err,
+                myInfo: undefined
+            })
+        } else {
+            res.send({
+                resultCode: 100,
+                result: results,
+                myInfo: req.session.signedUser
+            })
+        }
+    })
+})    
+app.get('/test', (req, res) => {
+    // var sql = 'SELECT '+
+    // 'user_email, content, ' + 
+    // 'detailInfo, expectedPrice, ' + 
+    // 'fee, deadline, rid, title'
+    // ' FROM timeline_helpyou, timeline_helpme';
+    var sql = 'SELECT user_email FROM timeline_helpyou';
+    conn.query(sql, (err, results, fields) => {
+        res.send(results);
+    })
+})
+app.get('/chat', (req, res) => {
+    res.sendFile('C:/Users/2hyjun/pretzel/Server/chat.html');
+})
+
 server.listen(port, () => {
     console.log('Pretzel Server listening at port', port);
 })
