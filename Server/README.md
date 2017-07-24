@@ -1,34 +1,42 @@
-CREATE DATABASE pretzel CHARACTER SET utf8 COLLATE utf8_general_ci;
-============================================================
-CREATE TABLE users (
-    user_email VARCHAR(50) NOT NULL,
-    user_name VARCHAR(50) NOT NULL,
-    user_password CHAR(88) NOT NULL,
-    user_univ VARCHAR(50) NOT NULL,
-    user_major VARCHAR(50) NOT NULL,
-    primary key(user_email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-============================================================
-ALTER TABLE users MODIFY user_password CHAR(88) NOT NULL;
-============================================================
-CREATE TABLE timeline(
-    user_email VARCHAR(50) NOT NULL,
-    content VARCHAR(50) NOT NULL,
-    detailInfo TEXT(100) NOT NULL,
-    expectedPrice int(5) UNSIGNED NOT NULL,
-    fee int(5) UNSIGNED NOT NULL,
-    deadline DATETIME NOT NULL,
-    rid int(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    contentType VARCHAR(30) NOT NULL,
-    completed VARCHAR(5) NOT NULL,
-    title VARCAHR(50) NOT NULL,
-    time DATETIME NOT NULL,
-    place VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-============================================================
-url & result forms
+##### CREATE DATABASE pretzel CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-자동로그인 확인( 매 실행 때 마다 체크 )
+---
+
+#####CREATE TABLE users (
+#####    user_email VARCHAR(50) NOT NULL,
+#####    user_name VARCHAR(50) NOT NULL,
+#####    user_password CHAR(88) NOT NULL,
+#####    user_univ VARCHAR(50) NOT NULL,
+#####    user_major VARCHAR(50) NOT NULL,
+#####    primary key(user_email)
+#####) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---
+
+#####ALTER TABLE users MODIFY user_password CHAR(88) NOT NULL;
+
+---
+
+#####CREATE TABLE timeline(
+#####    user_email VARCHAR(50) NOT NULL,
+#####    content VARCHAR(50) NOT NULL,
+#####    detailInfo TEXT(100) NOT NULL,
+#####    expectedPrice int(5) UNSIGNED NOT NULL,
+#####    fee int(5) UNSIGNED NOT NULL,
+#####    deadline DATETIME NOT NULL,
+#####    rid int(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+#####    contentType VARCHAR(30) NOT NULL,
+#####    completed VARCHAR(5) NOT NULL,
+#####    title VARCAHR(50) NOT NULL,
+#####    time DATETIME NOT NULL,
+#####    place VARCHAR(50) NOT NULL
+#####) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---
+
+#**url & result forms**
+
+###자동로그인 확인( 매 실행 때 마다 체크 )
 '/' (Get 방식)
 
     - 자동로그인 시
@@ -37,15 +45,18 @@ url & result forms
     - 자동로그인 실패 (최초 로그인, 기간 만료): 로그인필요.
         response: 
             { resultCode: 1 }
-로그아웃
-'/logout' (Get 방식)
+    
 
+###로그아웃
+'/logout' (Get 방식)
+```
     - 로그아웃
         response: 'logout success'
         실패사항 정의 안했음 아마 실패상황 없을 것임.
+```
 
-로그인
-'/login' (Post 방식)
+###로그인 '/login' (Post 방식)
+```
     body parameter: ['email', 'password']
     - 동일 email 찾기 SQL QUERY err(db에러)
         response: {
@@ -72,8 +83,10 @@ url & result forms
             resultCode: 100,
             result: 로그인 된 사용자 정보(세션으로 저장됨.)
         }
+```
+###회원 가입
 
-회원 가입
+```
 '/register' (Post 방식)
     body parameter: [email, name, password, univ, major]
     - 이미 사용된 이메일
@@ -96,7 +109,12 @@ url & result forms
             resultCode: 3,
             result: 'No Body Parameters'
         }
-timeline 검색.
+```
+
+
+###timeline 검색.
+
+```
 '/timeline' (Get 방식)
     - timeline 검색 실패
         response: {
@@ -108,7 +126,12 @@ timeline 검색.
             resultCode: 100,
             result: timeline 목록 객체 배열
         }
-글 쓰기 요청.
+```
+ 
+
+###글 쓰기 요청.
+
+```
 '/timeline/new_request'(Post 방식)
     body parameter: [title, content, detailInfo, expectedPrice, 
                 fee, deadLine, type] (철자 조심!)
@@ -123,8 +146,12 @@ timeline 검색.
             resultCode: 100,
             result: 글 쓰기 성공 정보 객체
         }
-글 삭제 요청 
+```
+
+###글 삭제 요청 
+```
 '/timeline/delete/id(query parameter)' id에 한 게시글의 rid값(Get 방식)
+
     - 글 삭제 실패(권한 없음)
         response: {
             resultCode: 1,
@@ -145,8 +172,10 @@ timeline 검색.
             resultCode: 100,
             result: 글 삭제 성공 정보 객체
         }
-    
-글 수정 요청
+```
+###글 수정 요청
+
+```
 'timeline/update/id(query parameter)' id에 한 게시글의 rid값
 (Post 방식)
     body parameter:[title, content, detailInfo, expectedPrice, fee, deadLine] 철자조심!
@@ -186,7 +215,8 @@ timeline 검색.
             resultCode: 100,
             result: 수정 성공 정보 객체
         }
-내 정보 요청
+```
+###내 정보 요청
 '/mypage' (Get 방식)
 
     - 내가 쓴 글 검색 실패(MYSQL상의 에러)
