@@ -151,7 +151,7 @@
 ###글 삭제 요청 
 ```
 '/timeline/delete/id(query parameter)' id에 한 게시글의 rid값(Get 방식)
-
+ex) /timeline/delete/3
     - 글 삭제 실패(권한 없음)
         response: {
             resultCode: 1,
@@ -167,11 +167,17 @@
             resultCode: 2,
             result: err
         }
+    - 글 삭제 실패(잘못된 query parameter. 게시물 검색 안됨.)
+        response: {
+            resultCode: 4,
+            result: 'Wrong RID. No such bulletin'
+        }
     - 글 삭제 성공
         response: {
             resultCode: 100,
             result: 글 삭제 성공 정보 객체
         }
+
 ```
 ###글 수정 요청
 
