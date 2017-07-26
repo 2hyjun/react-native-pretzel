@@ -26,8 +26,8 @@
 #####    deadline DATETIME NOT NULL,
 #####    rid int(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 #####    contentType VARCHAR(30) NOT NULL,
-#####    completed VARCHAR(5) NOT NULL,
-#####    title VARCAHR(50) NOT NULL,
+#####    completed VARCHAR(5) NOT NULL DEFAULT 'N',
+#####    title VARCHAR(50) NOT NULL,
 #####    time DATETIME NOT NULL,
 #####    place VARCHAR(50) NOT NULL
 #####) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -152,7 +152,7 @@ app.post('/register', (req, res) => {
             })
         })
     } else {
-        res.redirect({
+        res.send({
             registerCode: 3,
             result: 'No Body Parameters'
         })
