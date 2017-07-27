@@ -1,0 +1,32 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        script(src="socket.io/socket.io.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js")
+        script(src='index.js')
+        h3 Hello, 
+            = user
+        fieldset
+            h3 Online users
+            each usr in list
+                li= usr.email
+            
+
+    body
+        fieldset
+            h3 Message
+            ul(class='messages')
+        h5 Destination email: 
+            input(list='tolist' id='to' placeholder='Dest Email')
+        datalist(id='tolist')
+            each email in list
+                option(value= email.email)
+        
+        h5 Your Email: 
+            input(id='email' placeholder='email' value= user)        
+        h5 Enter Message:
+            input(id='messageinput' placeholder='Enter message' onkeypress='pressEvent(event)')
+
+
+    

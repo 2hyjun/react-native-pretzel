@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
-	<head><title>Hello world</title></head>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
-	  var socket = io();
-	  socket.on('new',function(data){
-			  document.body.innerHTML = '';
-			  document.write(data);
-	  });
-	</script>
-	<body>Hello world</body>
+
+    <head>
+        <title>Hello world</title>
+    </head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('new', function (data) {
+            document.body.innerHTML = '';
+            document.write(data);
+        });
+        socket.on('conn', (data) => {
+            document.body.innerHTML = '';
+            document.write(data);
+        })
+    </script>
+
+    <body>Hello world</body>
+
 </html>
