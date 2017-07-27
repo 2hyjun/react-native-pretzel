@@ -56,7 +56,19 @@ app.post('/timeline/update/:id', timeline_update);
 app.get('/mypage', mypage);
 
 app.get('/chat', (req, res) => {
-    res.sendFile('C:/Users/2hyjun/pretzel/Server/chat.html');
+    res.sendfile('./chat.html');
+})
+
+var onlineUser = {};
+io.on('connection', (socket) => {
+    clients++;
+    socket.emit('Hello!');
+    socket.broadcast.emit('new', clients + ' clients connected!\nYour Socket ID: ' + socket.id)
+    socket.on('disconnect', () => {
+        clients--;
+        socket.broadcast.emit('new', clients + ' clients connected!\nYour Socket ID: ' + socket.id)
+    })
+    socket.send(socket.id)
 })
 
 server.listen(port, () => {

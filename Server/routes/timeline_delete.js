@@ -43,7 +43,7 @@ router.get('/timeline/delete/:id', (req, res) => {
                         result: err
                     })
                 } else {
-                    res.send({
+                    res.json({
                         resultCode: 100,
                         result: results
                     })
