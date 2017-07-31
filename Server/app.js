@@ -55,19 +55,13 @@ app.get("/timeline/delete/:id", timeline_delete);
 app.post('/timeline/update/:id', timeline_update);
 app.get('/mypage', mypage);
 
-<<<<<<< HEAD
 app.get('/login', (req, res) => {
     res.render('login');
-=======
-app.get('/chat', (req, res) => {
-    res.sendfile('./chat.html');
->>>>>>> ee7aa2542caf1034fe692446deb84711a97d1cce
 })
 
 var onlineUser = {};
 io.on('connection', (socket) => {
     clients++;
-<<<<<<< HEAD
     var email = socket.handshake.session.signedUser.user_email;
     if (email) {
         var isInList = _.find(onlineUser, (user) => {
@@ -98,13 +92,6 @@ io.on('connection', (socket) => {
             return user.email == data.dest
         })
         io.to(onlineUser[index].id).emit('message', data);
-=======
-    socket.emit('Hello!');
-    socket.broadcast.emit('new', clients + ' clients connected!\nYour Socket ID: ' + socket.id)
-    socket.on('disconnect', () => {
-        clients--;
-        socket.broadcast.emit('new', clients + ' clients connected!\nYour Socket ID: ' + socket.id)
->>>>>>> ee7aa2542caf1034fe692446deb84711a97d1cce
     })
     socket.send(socket.id)
 })
