@@ -72,7 +72,7 @@ app.post('/timeline/update/:id', timeline_update);
 app.get('/mypage', mypage);
 
 app.get('/login', (req, res) => {
-    res.render('new_request');
+    res.render('login');
 })
 var onlineUser = [];
 var clients = 0;
@@ -90,13 +90,12 @@ io.on('connection', (socket) => {
                 return user.email == email
             })
             onlineUser[index].id = socket.id;
-            socket.emit('conn', 'Re Hello, ' + socket.handshake.session.signedUser.user_email)
         } else {
             var user = {};
             user['email'] = email;
             user['id'] = socket.id;
             onlineUser.push(user);
-            socket.emit('conn', 'Hello, ' + socket.handshake.session.signedUser.user_email)
+            socket.broadcast.emit('new', email);
         }
         io.to(socket.id).emit('message', {
             from: 'admin',

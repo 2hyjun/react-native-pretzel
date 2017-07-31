@@ -11,7 +11,20 @@ socket.on('message', function (data) {
         scrollTop: $('.messages').get(0).scrollHeight
     }, 500);
 })
+socket.on('new', (data) => {
+    var html = "<li>" + data + '</li>';
+    $('.users').append(html)
+    $('.users').animate({
+        scrollTop: $('.users').get(0).scrollHeight
+    }, 500);
 
+    html = "<option>" + email + '</option>'
+    $('#tolist').append(html);
+})
+
+socket.on('disc', (data) => {
+    var html
+})
 function pressEvent(event) {
     
     if (event.keyCode == 13) {
