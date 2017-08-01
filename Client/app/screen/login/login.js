@@ -1,18 +1,17 @@
-/* This page is for intending initial screen which is showing our logo and name
- to log in screen which helps users to login, find the password, or registration */
-
 import React, { Component, } from 'react';
 import {
     Image,
     View,
     TouchableOpacity,
-    TextInput,
     Text,
     Alert,
+    TextInput,
 } from 'react-native';
 
 import styles from './style';
-import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import Fumi from '../../components/TextInputEffect/Fumi';
+//import { Fumi, } from 'react-native-textinput-effects';
 
 class login extends Component {
     constructor(props) {
@@ -20,19 +19,24 @@ class login extends Component {
         this._handleSignIn = this._handleSignIn.bind(this);
         this.httpRequest = this.httpRequest.bind(this);
         this.state={
-            incorrectInfo: false,
-            errorString: '',
             email: '',
             password: '',
-
         }
     }
 
+    componentWillMount() {
+        fetch('http://localhost:8124/')
+            .then((res) => res.json())
+            .then((rJSON) => {
+                if (rJSON.resultCode === 100) {
+                    Alert.alert('Hi!')
+                }
+            })
+            .catch((err) => console.error(err))
+            .done();
+    }
     _handleSignIn() {
-        this.setState({
-            incorrectInfo: true,
-            errorString: '',
-        }, this.httpRequest)
+        this.httpRequest();
     }
 
     httpRequest() {
@@ -48,7 +52,7 @@ class login extends Component {
         }
         formBody = formBody.join("&");
 
-        fetch('http://localhost:8124/login', {
+        fetch('http://127.0.0.1:8124/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,29 +63,17 @@ class login extends Component {
                 if (resJSON.resultCode === 100) {
                     Alert.alert('Login Success', "Hello, " + resJSON.result.user_name)
                 } else if (resJSON.resultCode === 4) {
-                    this.setState({
-                        incorrectInfo: true,
-                        errorString: '이메일과 비밀번호 모두 입력 해주세요.'
-                    })
+                    Alert.alert('이메일과 비밀번호 모두 입력 해주세요.');
                 } else if (resJSON.resultCode === 3) {
-                    this.setState({
-                        incorrectInfo: true,
-                        errorString: '잘못 된 비밀번호 입니다.'
-                    })
+                    Alert.alert('잘못 된 비밀번호 입니다.');
                 } else if (resJSON.resultCode === 2) {
-                    this.setState({
-                        incorrectInfo: true,
-                        errorString: '잘못 된 이메일 입니다.'
-                    })
+                    Alert.alert('등록 되지 않은 이메일 입니다')
                 } else {
-                    this.setState({
-                        incorrectInfo: true,
-                        errorString: '알 수 없는 오류입니다.'
-                    })
+                    Alert.alert('알 수 없는 오류입니다.')
                 }
             })
             .catch((err) => {
-                Alert.alert("ERROR",JSON.stringify(err))
+                console.error(err)
             })
             .done()
     }
@@ -89,38 +81,52 @@ class login extends Component {
 
         return (
             <View style={styles.container}>
+
                 <View style={styles.cell_logo}>
                     <Image source={require('../../../img/join+login/join,login_logotype.png')}
                         style={styles.logo}/>
                 </View>
                 <View style={styles.cell_form}>
-                    <View style={styles.form_email}>
-                        <View style={{flex: 1}}>
-                            <Image source={require('../../../img/join+login/login_idicon.png')}
-                                   style={styles.email_icon}/>
-                        </View>
-                        <TextInput style={styles.email_txt}
-                                   placeholder={"Example@pusan.ac.kr"}
-                                    keyboardType="email-address"
-                                    onChangeText={(email) => this.setState({email})}
-                                   autoCapitalize = 'none'/>
+                    <View style={styles.sae_form_email}>
+                        <Fumi style={{flex: 1}}
+                              label={'이메일'}
+                              iconClass={FontAwesomeIcon}
+                              iconName={'pencil'}
+                              iconColor={'#f95a25'}
+                              secure={false}
+                              onTextChanged={(email) => this.setState({email}, console.log(this.state))}
+                              keyType="email-address"
+                              autoCorrection={false}
+                              autoCapital={'none'}
+                        />
+                        {/*<Jiro*/}
+                            {/*style={{flex: 1, marginTop: 20, marginBottom: 20}}*/}
+                            {/*label={"이메일"}*/}
+                            {/*borderColor={'#f95a25'}*/}
+                            {/*inputStyle={{color: 'white'}}*/}
+                            {/*secureTextEntry={true}/>*/}
                     </View>
-                    <View style={styles.form_pw}>
-                        <View style={{flex: 1}}>
-                            <Image source={require('../../../img/join+login/login_passwordicon.png')}
-                                   style={styles.pw_icon}/>
-                        </View>
-                        <TextInput style={styles.pw_txt}
-                                    placeholder="Password"
-                                   secureTextEntry={true}
-                                   onChangeText={(password) => this.setState({password})}
-                                   autoCapitalize = 'none'
-                            />
-                    </View>
-                    {
-                        this.state.incorrectInfo ? <ErrorMsg msg={this.state.errorString}/> : undefined
-                    }
+                    <View style={styles.sae_form_email}>
+                        <Fumi style={{flex: 1}}
+                              label={'비밀번호'}
+                              iconClass={FontAwesomeIcon}
+                              iconName={'lock'}
+                              iconColor={'#f95a25'}
+                              secure={true}
+                              onTextChanged={(password) => this.setState({password})}
+                              keyType="number-pad"
+                              autoCorrection={false}
+                              autoCapital={'none'}
+                        />
+                        {/*<Jiro*/}
+                            {/*style={{flex: 1, marginTop: 20, marginBottom: 20}}*/}
+                            {/*label={"비밀번호"}*/}
+                            {/*borderColor={'#f95a25'}*/}
+                            {/*inputStyle={{color: 'white'}}*/}
+                            {/*secureTextEntry={true}/>*/}
 
+
+                    </View>
                     <View style={styles.form_config}>
                         <TouchableOpacity style={styles.config_signin}
                                         onPress={this._handleSignIn}>
@@ -145,6 +151,5 @@ class login extends Component {
         );
     }
 }
-
 
 export default login;

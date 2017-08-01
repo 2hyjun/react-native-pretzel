@@ -9,13 +9,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        height: height,
-        width: width,
+        justifyContent: 'center'
     },
     backgroundImg: {
         flex: 1,
+        width: width,
         height: height,
-        width: width
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     logo: {
         flex: 1,

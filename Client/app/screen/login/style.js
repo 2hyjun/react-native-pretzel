@@ -35,7 +35,13 @@ const styles = StyleSheet.create({
         marginRight: 30,
         flexDirection: 'row',
         justifyContent: 'center'
-
+    },
+    sae_form_email: {
+        flex: 1,
+        marginLeft: 30,
+        marginRight: 30,
+        borderRadius: 5,
+        borderColor: '#EAEAEA'
     },
     email_icon: {
         flex: 1,

@@ -5,15 +5,22 @@ import {
 
 import loading from '../screen/loading/loading';
 import login from '../screen/login/login';
-
+import main from '../screen/meanless1';
 
 export const Loading = StackNavigator({
     Loading: {
-        screen: loading
+        screen: loading,
     },
     Login: {
-        screen: login
+        screen: login,
+        navigationOptions: {
+            gesturesEnabled: false,
+        },
     },
+
+    Main: {
+        screen: main
+    }
 
 }, {
     headerMode: 'none',
