@@ -3,9 +3,10 @@ import {
     StackNavigator
 } from 'react-navigation';
 
-import loading from '../screen/loading/loading';
-import login from '../screen/login/login';
-import main from '../screen/meanless1';
+import loading from '../../../summertime-pretzel/Client/app/screen/loading/loading';
+import login from '../../../summertime-pretzel/Client/app/screen/login/login';
+import mainScreen from '../../../summertime-pretzel/Client/app/screen/mainPage/mainScreen';
+import myPageScreen from '../../../summertime-pretzel/Client/app/screen/myPage/myPageScreen';
 
 export const Loading = StackNavigator({
     Loading: {
@@ -19,8 +20,12 @@ export const Loading = StackNavigator({
     },
 
     Main: {
-        screen: main
-    }
+        screen: mainScreen,
+    },
+    MyPage: {
+        screen: myPageScreen,
+    },
+
 
 }, {
     headerMode: 'none',

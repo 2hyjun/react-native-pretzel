@@ -1,0 +1,1 @@
+npm install react-native-textinput-effects --save
