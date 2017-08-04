@@ -22,29 +22,19 @@ class checkOrderScreen extends Component {
         super(props);
     }
     _handleback = () => {
-        Alert.alert('back');
-        //나중에 네비게이션 넣기
-        //this.props.navigation.navigate('NoticeBoard');
+        this.props.navigation.navigate('NoticeBoard');
     };
     _handleMain = () => {
-        Alert.alert('To the Main Page');
-        //나중에 네비게이션 넣기
-        //this.props.navigation.navigate('mainPage');
+        this.props.navigation.navigate('mainScreen');
     };
     _handleNotice = () => {
-        Alert.alert('To the Notice Board');
-        //나중에 네비게이션 넣기
-        //this.props.navigation.navigate('mainPage');
+        this.props.navigation.navigate('makeOrderScreen');
     };
     _handleChat = () => {
-        Alert.alert('To the Chatting Room');
-        //나중에 네비게이션 넣기
-        //this.props.navigation.navigate('mainPage');
+        this.props.navigation.navigate('mainPage');
     };
     _handleMy = () => {
-        Alert.alert('To the My Page');
-        //나중에 네비게이션 넣기
-        //this.props.navigation.navigate('mainPage');
+        this.props.navigation.navigate('myPageScreen');
     };
 
     render() {
@@ -84,25 +74,31 @@ class checkOrderScreen extends Component {
                 <View style={styles.cellFour}>
                     <Text> Information Lists </Text>
                 </View>
+
+
                 <View style={styles.cellFive}>
                     <TabBar style={styles.content}>
                         <TabBar.Item
+                            onPress={this._handleMain}
                             icon={require('../../../img/underBarIcon/underbar_home_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_home_highlighted.png')}
-                            onPress={() => {
+                            /*onPress={() => {
                                 console.log("first onPress");
-                            }}>
+                            }}*/>
                             <View style={styles.text}>
                             </View>
                         </TabBar.Item>
 
                         <TabBar.Item
+                            onPress={this._handleNotice}
                             icon={require('../../../img/underBarIcon/underbar_request_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_request_highlighted.png')}>
                             <View style={styles.text}>
                             </View>
+
                         </TabBar.Item>
                         <TabBar.Item
+                            onPress={this._handleChat}
                             icon={require('../../../img/underBarIcon/underbar_chatting_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_chatting_highlighted.png')}>
                             <View style={styles.text}>
@@ -110,6 +106,7 @@ class checkOrderScreen extends Component {
                         </TabBar.Item>
 
                         <TabBar.Item
+                            onPress={this._handleMy}
                             icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}>
                             <View style={styles.text}>

@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 
 import styles from './styleMkOrder';
-import TogglePicker from 'react-native-toggle-picker';
 //import SmartPicker from 'react-native-smart-picker';
 import TabBar from 'react-native-xtabbar';
 
@@ -74,18 +73,7 @@ class makeOrderScreen extends Component {
             <View>
             <ScrollView>
                 <View style={{flex: 1, marginTop: 20}}>
-                    <ScrollView style>
-                        <TogglePicker
-                            selectedValue='CZ'
-                            label='Set you favorite country'
-                            onValueChange={() => {this.handleChange}}>
-                            <Picker.Item label='Austria' value='A' />
-                    <Picker.Item label='Czechia' value='CZ' />
-                    <Picker.Item label='Germany' value='DE' />
-                    <Picker.Item label='Poland' value='PL' />
-                    <Picker.Item label='Slovakia' value='SLO' />
-                </TogglePicker>
-            </ScrollView>
+
                 </View>
             </ScrollView>
                 <View style={styles.cellFive}>

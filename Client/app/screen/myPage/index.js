@@ -14,7 +14,6 @@ import {
     ListView,
 } from 'react-native';
 
-
 import styles from './style';
 import TabBar from 'react-native-xtabbar';
 import {Navigator} from 'react-native-deprecated-custom-components';
@@ -22,8 +21,8 @@ import {Navigator} from 'react-native-deprecated-custom-components';
 class myPageScreen extends Component {
 
     constructor(props) {
-
         super(props);
+
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             dataSource: ds.cloneWithRows([
@@ -33,6 +32,9 @@ class myPageScreen extends Component {
     }
 
     handleMain = () => {
+        this.props.navigation.navigate('Main');
+    };
+    LogOut = () => {
         this.props.navigation.navigate('Main');
     };
 
@@ -53,9 +55,13 @@ class myPageScreen extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <View style={styles.cellTwo}>
-                    <Text> Log Out </Text>
-                </View>
+
+                <TouchableHighlight onPress={this.LogOut}>
+                    <View style={styles.cellTwo}>
+                        <Text style={{color: '#ff6666'}}>로그아웃</Text>
+                    </View>
+                </TouchableHighlight>
+
                 <View style={styles.cellThree}>
                     <ListView style={styles.container}
                               dataSource={this.state.dataSource}
@@ -73,8 +79,8 @@ class myPageScreen extends Component {
                                   <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
                                   />}
                     />
-
                 </View>
+
                 <View style={styles.cellFive}>
                     <TabBar style={styles.content}>
                         <TabBar.Item
@@ -86,7 +92,6 @@ class myPageScreen extends Component {
                             <View style={styles.text}>
                             </View>
                         </TabBar.Item>
-
                         <TabBar.Item
                             icon={require('../../../img/underBarIcon/underbar_request_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_request_highlighted.png')}>
@@ -99,7 +104,6 @@ class myPageScreen extends Component {
                             <View style={styles.text}>
                             </View>
                         </TabBar.Item>
-
                         <TabBar.Item
                             icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}>
@@ -112,6 +116,5 @@ class myPageScreen extends Component {
         );
     }
 }
-
 
 export default myPageScreen;
