@@ -11,7 +11,6 @@ import {
 import styles from './style';
 import Fumi from '../../components/TextInputEffect/Fumi';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 
 import { Hoshi } from 'react-native-textinput-effects';
 

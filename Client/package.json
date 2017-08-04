@@ -7,21 +7,14 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"core-js": "^2.4.1",
 		"react": "16.0.0-alpha.12",
+		"react-native": "0.47.1",
 		"react-native-animatable": "^1.2.3",
-		"react-native-hyperlink": "0.0.10",
-		"react-native-image-resizer": "^0.1.1",
-		"react-native-keyboard-aware-scroll-view": "^0.2.9",
-		"react-native-text-input": "^1.1.0",
-		"react-native": "0.47.0",
 		"react-native-deprecated-custom-components": "^0.1.1",
-		"react-native-dimension": "^1.0.6",
 		"react-native-elements": "^0.15.0",
-		"react-native-show-hide-toggle-box": "^1.0.1",
 		"react-native-textinput-effects": "^0.4.0",
-		"react-native-toggle-picker": "^1.0.2",
 		"react-native-vector-icons": "^4.3.0",
-		"react-native-xtabbar": "^0.2.1",
 		"react-navigation": "^1.0.0-beta.11"
 	},
 	"devDependencies": {
