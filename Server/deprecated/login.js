@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router();
 var db = require('../db/mysql')
 var crypto = require('crypto')
-var config = require('../config/config')
+var config = require('../config')
 
 router.post('/login', (req, res) => {
     var conn = db.connect();

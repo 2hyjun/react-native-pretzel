@@ -41,6 +41,8 @@ export default class Fumi extends BaseInput {
         iconSize: 20,
         passiveIconColor: '#a3a3a3',
         animationDuration: 300,
+        keyType: 'default',
+        autoCapital: 'none'
     };
     constructor(props, context) {
         super(props, context);

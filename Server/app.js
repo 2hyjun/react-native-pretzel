@@ -10,9 +10,16 @@ var io = require('socket.io').listen(server);
 var session = require('express-session');
 var MYSQLStore = require('express-mysql-session')(session);
 
+var jwt = require('express-jwt');
+
 var mysql = require('mysql'),
     crypto = require('crypto'),
     bodyParser = require('body-parser');
+
+var sharedsession = require('express-socket.io-session');
+
+var _ = require("underscore")
+
 var mysqlSessionOptions = {
     host: 'localhost',
     port: 3306, // 기본
@@ -22,13 +29,17 @@ var mysqlSessionOptions = {
     // mysql 접속 정보.
     // session에서 만 사용.
 }
-app.use(session({
+var Session = session({
     secret: 'kGusbVJHUSGD6$VgAS4S^VGB',
     resave: false,
     saveUninitialized: true,
     store: new MYSQLStore(mysqlSessionOptions)
-}))
+});
+app.use(Session)
 
+io.use(sharedsession(Session, {
+    autosave: true
+}))
 app.set('view engine', 'pug');
 app.locals.pretty = true;
 app.use(express.static('public'));
@@ -36,32 +47,20 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-var homepage = require('./routes/hompage');
-var logout = require('./routes/logout.js');
-var login = require('./routes/login');
-var register = require('./routes/register');
-var timeline = require('./routes/timeline');
-var new_request = require('./routes/newRequest');
-var timeline_delete = require('./routes/timeline_delete');
-var timeline_update = require('./routes/timeline_update');
-var mypage = require('./routes/mypage')
-app.get('/', homepage);
-app.get('/logout', logout);
-app.post('/login', login);
-app.post('/register', register);
-app.get('/timeline', timeline);
-app.post('/timeline/new_request', new_request);
-app.get("/timeline/delete/:id", timeline_delete);
-app.post('/timeline/update/:id', timeline_update);
-app.get('/mypage', mypage);
+app.use('/api', require('./routes/api'));
 
-app.get('/login', (req, res) => {
-    res.render('login');
+var onlineUser = [];
+var clients = 0;
+app.get('/chat', (req, res) => {
+    res.render('chat', {
+        list: onlineUser
+    })
 })
 
-var onlineUser = {};
+
 io.on('connection', (socket) => {
     clients++;
+    console.log(socket.handshake.session)
     var email = socket.handshake.session.signedUser.user_email;
     if (email) {
         var isInList = _.find(onlineUser, (user) => {

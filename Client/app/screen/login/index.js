@@ -5,8 +5,10 @@ import {
     TouchableOpacity,
     Text,
     Alert,
-    TextInput,
+    AsyncStorage
 } from 'react-native';
+
+const STORAGE_KEY = '@PRETZEL:jwt';
 
 import styles from './style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -18,6 +20,7 @@ class login extends Component {
         super(props);
         this._handleSignIn = this._handleSignIn.bind(this);
         this.httpRequest = this.httpRequest.bind(this);
+        this.Register = this.Register.bind(this);
         this.state={
             email: '',
             password: '',
@@ -25,20 +28,19 @@ class login extends Component {
     }
 
     componentWillMount() {
-        fetch('http://localhost:8124/')
-            .then((res) => res.json())
-            .then((rJSON) => {
-                if (rJSON.resultCode === 100) {
-                    Alert.alert('Hi!')
-                }
-            })
-            .catch((err) => console.error(err))
-            .done();
+
     }
     _handleSignIn() {
         this.httpRequest();
     }
 
+    static FindPassword() {
+        Alert.alert('', '구현중입니다.ㅠㅠ')
+    }
+
+    Register() {
+        this.props.navigation.navigate('Register')
+    }
     httpRequest() {
         let params = {
             email: this.state.email,
@@ -51,8 +53,9 @@ class login extends Component {
             formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
+        console.log(formBody);
 
-        fetch('http://127.0.0.1:8124/login', {
+        fetch('http://localhost:8124/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,22 +63,25 @@ class login extends Component {
             body: formBody
         }).then((res) => res.json())
             .then((resJSON) => {
-                if (resJSON.resultCode === 100) {
-                    Alert.alert('Login Success', "Hello, " + resJSON.result.user_name)
-                } else if (resJSON.resultCode === 4) {
-                    Alert.alert('이메일과 비밀번호 모두 입력 해주세요.');
-                } else if (resJSON.resultCode === 3) {
-                    Alert.alert('잘못 된 비밀번호 입니다.');
-                } else if (resJSON.resultCode === 2) {
-                    Alert.alert('등록 되지 않은 이메일 입니다')
-                } else {
-                    Alert.alert('알 수 없는 오류입니다.')
-                }
-            })
-            .catch((err) => {
-                console.error(err)
-            })
-            .done()
+            if (resJSON.resultCode === 100) {
+                const token = resJSON.result;
+
+                AsyncStorage.setItem(STORAGE_KEY, token)
+                    .then(() =>  {
+                        console.log('saved token to disk: ' + token);
+                        this.props.navigation.navigate('Main');
+                    })
+                    .catch((error) => console.log('AsynchStorage error:' + error.message))
+                    .done();
+            } else {
+                Alert.alert('로그인 실패', resJSON.result)
+            }
+
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     render() {
 
@@ -94,17 +100,10 @@ class login extends Component {
                               iconName={'pencil'}
                               iconColor={'#f95a25'}
                               secure={false}
-                              onTextChanged={(email) => this.setState({email}, console.log(this.state))}
-                              keyType="email-address"
+                              onTextChanged={(email) => this.setState({email})}
                               autoCorrection={false}
                               autoCapital={'none'}
                         />
-                        {/*<Jiro*/}
-                            {/*style={{flex: 1, marginTop: 20, marginBottom: 20}}*/}
-                            {/*label={"이메일"}*/}
-                            {/*borderColor={'#f95a25'}*/}
-                            {/*inputStyle={{color: 'white'}}*/}
-                            {/*secureTextEntry={true}/>*/}
                     </View>
                     <View style={styles.sae_form_email}>
                         <Fumi style={{flex: 1}}
@@ -114,28 +113,22 @@ class login extends Component {
                               iconColor={'#f95a25'}
                               secure={true}
                               onTextChanged={(password) => this.setState({password})}
-                              keyType="number-pad"
+
                               autoCorrection={false}
                               autoCapital={'none'}
                         />
-                        {/*<Jiro*/}
-                            {/*style={{flex: 1, marginTop: 20, marginBottom: 20}}*/}
-                            {/*label={"비밀번호"}*/}
-                            {/*borderColor={'#f95a25'}*/}
-                            {/*inputStyle={{color: 'white'}}*/}
-                            {/*secureTextEntry={true}/>*/}
-
-
                     </View>
                     <View style={styles.form_config}>
                         <TouchableOpacity style={styles.config_signin}
                                         onPress={this._handleSignIn}>
                             <Text style={styles.signin_txt}>로그인</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.config_forgot_pw}>
+                        <TouchableOpacity style={styles.config_forgot_pw}
+                                        onPress={this.FindPassword}>
                             <Text>비밀번호를 잊으셨나요?</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.config_register}>
+                        <TouchableOpacity style={styles.config_register}
+                                        onPress={this.Register}>
                             <Text>회원가입</Text>
                         </TouchableOpacity>
 

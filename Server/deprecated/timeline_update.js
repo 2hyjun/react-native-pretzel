@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router();
 var db = require('../db/mysql')
 var conn = db.connect();
-var config = require('../config/config');
+var config = require('../config');
 router.post('/timeline/update/:id', (req, res) => {
     var rid = parseInt(req.params.id);
     var sql = 'SELECT * FROM timeline where rid=?';

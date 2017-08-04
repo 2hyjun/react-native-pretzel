@@ -1,4 +1,4 @@
-var config = {
+const config = {
     salt: 'fuckyouhackerthisissaltforyou',
     now: () => {
         var date;
@@ -11,6 +11,7 @@ var config = {
             ('00' + date.getUTCMinutes()).slice(-2) + ':' +
             ('00' + date.getUTCSeconds()).slice(-2);
         return date;
-    } 
+    } ,
+    secret: 'pretzelauthsecretkey'
 }
 module.exports = config;

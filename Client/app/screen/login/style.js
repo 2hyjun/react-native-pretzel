@@ -1,9 +1,10 @@
 import React from 'react';
 import {
     StyleSheet,
+    Dimensions
 } from 'react-native';
 
-
+const {height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -18,7 +19,6 @@ const styles = StyleSheet.create({
     },
     logo: {
         marginTop: 60,
-        resizeMode: 'center'
     },
 
 
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     },
     wave: {
         flex: 1,
-        resizeMode: 'contain'
+        width: width,
+        //resizeMode: 'contain'
     }
 });
 

@@ -3,11 +3,11 @@ import {
     StackNavigator
 } from 'react-navigation';
 
-import loading from '../screen/loading/loading';
-import login from '../screen/login/login';
+import loading from '../screen/loading';
+import login from '../screen/login';
 import main from '../screen/meanless1';
-
-export const Loading = StackNavigator({
+import register from '../screen/register';
+export const Root = StackNavigator({
     Loading: {
         screen: loading,
     },
@@ -20,8 +20,11 @@ export const Loading = StackNavigator({
 
     Main: {
         screen: main
-    }
+    },
 
+    Register: {
+        screen: register
+    }
 }, {
     headerMode: 'none',
 });
