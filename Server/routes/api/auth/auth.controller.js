@@ -22,35 +22,58 @@ exports.register = (req, res) => {
         univ,
         major
     } = req.body;
+    const checkParams = () => {
 
-    const Register = () => {
+        if (email && name && password && univ && major) {
+            return Promise.resolve()
+        } else {
+            return Promise.reject({
+                error: 'Not Enough Params'
+            })
+        }
+    }
+
+    const Encrypt = () => {
+        return new Promise((resolve, reject) => {
+            crypto.pbkdf2(password, config.salt.toString('base64'), 1000, 64, 'sha512', (err, key) => {
+                if (err) {
+                    console.error(err)
+                    reject({
+                        error: err
+                    })
+                }
+                else {
+                    resolve(key.toString('base64'));
+                }
+            })
+        })
+    }
+
+    const Register = (encryptPassword) => {
         return new Promise((resolve, reject) => {
 
-            if (email && name && password && univ && major) {
-                var sql =
-                    'INSERT INTO users ' +
-                    '(user_email, user_name, user_password, ' +
-                    'user_univ, user_major) ' +
-                    'VALUES(?, ?, ?, ?, ?);';
-                var params = [email, name, password, univ, major];
 
-                conn.query(sql, params, (err, results, fields) => {
-                    if (err)
-                        reject({
-                            error: err
-                        })
-                    resolve();
-                })
-            } else {
-                reject({
-                    error: 'Not Enough Params'
-                })
-            }
+            var sql =
+                'INSERT INTO users ' +
+                '(user_email, user_name, user_password, ' +
+                'user_univ, user_major) ' +
+                'VALUES(?, ?, ?, ?, ?);';
+            var params = [email, name, encryptPassword, univ, major];
+
+            conn.query(sql, params, (err, results, fields) => {
+                if (err)
+                    reject({
+                        error: err
+                    })
+                resolve();
+            })
+
 
         })
     }
 
     const HandleError = (err) => {
+        console.log(err);
         if (err.error === 'Not Enough Params') {
             res.status(500).send({
                 resultCode: 3,
@@ -75,9 +98,11 @@ exports.register = (req, res) => {
             result: 'Register Success'
         })
     }
-    Register()
+    checkParams()
+        .then(Encrypt)
+        .then(Register)
         .then(respond)
-        .catch(HandleError)
+        .catch(HandleError);
 }
 
 /*
@@ -94,7 +119,7 @@ exports.login = (req, res) => {
         password
     } = req.body;
     const secret = config.secret;
-
+    
     const checkEmail = (email) => {
         return new Promise((resolve, reject) => {
             var sql = 'SELECT * FROM users where user_email=?;';
@@ -114,10 +139,28 @@ exports.login = (req, res) => {
             })
         })
     }
-    const checkPassword = (result) => {
+    const Encrypt = (result) => {
         return new Promise((resolve, reject) => {
-            if (password === result.user_password) {
-                resolve(result);
+            crypto.pbkdf2(password, config.salt.toString('base64'), 1000, 64, 'sha512', (err, key) => {
+                if (err) {
+                    console.error(err)
+                    reject({
+                        error: err
+                    })
+                }
+                else {
+                    resolve({
+                        result: result, 
+                        encryptPassword: key.toString('base64')
+                    });
+                }
+            })
+        })
+    }
+    const checkPassword = (obj) => {
+        return new Promise((resolve, reject) => {
+            if (obj.encryptPassword === obj.result.user_password) {
+                resolve(obj.result);
             } else {
                 reject({
                     err: 'Wrong Password'
@@ -188,6 +231,7 @@ exports.login = (req, res) => {
     }
 
     checkEmail(email)
+        .then(Encrypt)
         .then(checkPassword)
         .then(createToken)
         .then(respond)

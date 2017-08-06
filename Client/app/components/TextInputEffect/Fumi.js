@@ -32,7 +32,8 @@ export default class Fumi extends BaseInput {
         ]),
         keyType: PropTypes.oneOf([
             'default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search'
-        ])
+        ]),
+        myOnFocus: PropTypes.func,
     };
 
     static defaultProps = {
@@ -64,7 +65,8 @@ export default class Fumi extends BaseInput {
             onTextChanged,
             keyType,
             autoCorrection,
-            autoCapital
+            autoCapital,
+            myOnFocus
         } = this.props;
         const { focusedAnim, value } = this.state;
         const AnimatedIcon = Animated.createAnimatedComponent(iconClass);
@@ -161,7 +163,11 @@ export default class Fumi extends BaseInput {
                     ]}
                     value={value}
                     onBlur={this._onBlur}
-                    onFocus={this._onFocus}
+                    onFocus={(event) => {
+                        this._onFocus(event);
+                        if (typeof(myOnFocus) === 'function')
+                            myOnFocus(event);
+                    }}
                     onChange={this._onChange}
                     underlineColorAndroid={'transparent'}
                     secureTextEntry={secure}

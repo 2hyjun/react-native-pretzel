@@ -4,14 +4,16 @@ import {
     Text
 } from 'react-native'
 import {
-    Root
+    Loading
 } from '../config/router.js';
 
+//import Loading from '../screen/loading'
 import Register from '../screen/register';
+
 class App extends React.Component {
     render() {
         return (
-            <Register/>
+            <Loading/>
         );
     }
 }

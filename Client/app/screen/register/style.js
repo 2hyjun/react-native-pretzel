@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         flex: 1,
-        resizeMode: 'stretch'
+        resizeMode: 'contain'
     },
     cell_info: {
         alignItems: 'center',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     textInput: {
-        height: '13%',
+        height: '15%',
         marginLeft: 20,
         marginRight: 20,
         marginBottom: 10,

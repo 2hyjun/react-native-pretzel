@@ -1,4 +1,4 @@
-import { PropTypes, Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 import { Animated, Text, View, ViewPropTypes } from 'react-native';
 

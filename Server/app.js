@@ -49,14 +49,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', require('./routes/api'));
 
-var onlineUser = [];
-var clients = 0;
-app.get('/chat', (req, res) => {
-    res.render('chat', {
-        list: onlineUser
-    })
-})
-
 
 io.on('connection', (socket) => {
     clients++;
@@ -92,7 +84,6 @@ io.on('connection', (socket) => {
         })
         io.to(onlineUser[index].id).emit('message', data);
     })
-    socket.send(socket.id)
 })
 
 server.listen(port, () => {
