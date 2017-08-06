@@ -1,2 +1,5 @@
 Server/node_modules/*
 Server/package-lock.json
+Client/node_modules/*
+jwt_pr/*
+Client.backup/*

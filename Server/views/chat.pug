@@ -9,8 +9,9 @@ html
             = user
         fieldset
             h3 Online users
-            each usr in list
-                li= usr.email
+            ul(class='users')
+                each usr in list
+                    li= usr.email
             
 
     body
