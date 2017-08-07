@@ -3,6 +3,8 @@ import {
     StyleSheet,
 } from 'react-native';
 
+import { width, height, totalSize } from 'react-native-dimension';
+
 const styles = StyleSheet.create({
     parent: {
         flexDirection: 'column',
@@ -11,37 +13,23 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        backgroundColor: '#efefef',
+        alignItems: 'center',
+    },
+    cellOne: { //상단 바
+
         backgroundColor: '#ffffff',
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
     },
-    cellOne: { //logoBar
+    content: {
         flex: 1,
-        backgroundColor: '#F2A54D',
-        flexDirection: 'row',
-        alignItems: 'center',
     },
-    cellTwo: { //DoItPlz
-        flex: 3,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#009999',
-    },
-    cellThree: { //DoItMyself
-        flex: 3,
-        marginTop: 20,
-        flexDirection: 'column',
-        backgroundColor: '#F2A54D',
-    },
-    cellFour: { //DoItTogether
-        flex: 3,
-        marginTop: 20,
-        flexDirection: 'column',
-    },
-    cellFive: { //FooterBar
+    text: {
         flex: 1,
-        backgroundColor: '#ffffff',
-        marginTop: 20,
-        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
