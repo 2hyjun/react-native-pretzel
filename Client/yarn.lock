@@ -3417,6 +3417,12 @@ react-native-shadow@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-shadow/-/react-native-shadow-1.2.1.tgz#cff9295363097f534c32c2b43c753261334cb43a"
 
+react-native-show-hide-toggle-box@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-show-hide-toggle-box/-/react-native-show-hide-toggle-box-1.0.1.tgz#93e0e89b6356cf280ce3a6c6270869a423bf1d71"
+  dependencies:
+    react-native-vector-icons "^4.0.0"
+
 react-native-side-menu@^0.20.1:
   version "0.20.3"
   resolved "https://registry.yarnpkg.com/react-native-side-menu/-/react-native-side-menu-0.20.3.tgz#5dffe3e237018360ed081433d505ea454cba9ca4"
@@ -3433,7 +3439,13 @@ react-native-tab-view@^0.0.65:
   dependencies:
     prop-types "^15.5.8"
 
-react-native-vector-icons@^4.3.0:
+react-native-toggle-picker@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-toggle-picker/-/react-native-toggle-picker-1.0.2.tgz#bf3769c3bd3a3e88a29b8465a81ecccabca0a847"
+  dependencies:
+    react-native-show-hide-toggle-box "^1.0.1"
+
+react-native-vector-icons@^4.0.0, react-native-vector-icons@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.3.0.tgz#49eab845fbcde6354cb3dbcb62c1abd1f6abc866"
   dependencies:

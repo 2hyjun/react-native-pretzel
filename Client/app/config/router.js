@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-    StackNavigator
+    StackNavigator,
 } from 'react-navigation';
 
 import loading from '../screen/loading';
 import login from '../screen/login';
 import main from '../screen/meanless1';
 import register from '../screen/register';
+import post from '../screen/post';
 
 
 
@@ -14,10 +15,15 @@ export const MainStack = StackNavigator({
     Main: {
         screen: main,
     },
-    Main2: {
-        screen: main,
+    Post: {
+        screen: post,
     }
-}, );
+}, {
+    headerMode: 'none'
+});
+
+
+
 
 export const auth = StackNavigator({
     Login: {

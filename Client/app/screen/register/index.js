@@ -100,10 +100,10 @@ export default class Register extends React.Component {
                                 {/*onContentSizeChange={( contentWidth, contentHeight ) => {*/}
                                     {/*this._contentHeight = contentHeight*/}
                                 {/*}}>*/}
-                    {/*<KeyboardAwareView*/}
-                        {/*animated={true}*/}
+                    <KeyboardAwareView
+                        animated={false}
 
-                        {/*>*/}
+                        >
                         <ScrollView
                             ref="scroll"
                             contentContainerStyle={{paddingVertical: 20}}
@@ -173,7 +173,7 @@ export default class Register extends React.Component {
                                 onTextChanged={(univ) => this.setState({univ})}
                                 autoCorrection={false}
                                 myOnFocus={() =>
-                                    this.refs.scroll.scrollTo({x: 0, y: 150, animated: true})
+                                    this.refs.scroll.scrollTo({x: 0, y: 200, animated: true})
                                 }
                                 autoCapital={'none'}/>
                             <Fumi
@@ -187,7 +187,7 @@ export default class Register extends React.Component {
                                 onTextChanged={(major) => this.setState({major})}
                                 autoCorrection={false}
                                 myOnFocus={() => {
-                                    this.refs.scroll.scrollTo({x: 0, y: 200, animated: true})
+                                    this.refs.scroll.scrollTo({x: 0, y: 250, animated: true})
                                     //this._scrollToInput(ReactNative.findNodeHandle(event.target))
                                 }}
                                 autoCapital={'none'}/>
@@ -202,7 +202,7 @@ export default class Register extends React.Component {
                                 {/*</Text>*/}
                             {/*</View>*/}
                         </ScrollView>
-                    {/*</KeyboardAwareView>*/}
+                    </KeyboardAwareView>
 
                 </View>
 

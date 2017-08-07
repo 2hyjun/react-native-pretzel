@@ -82,6 +82,13 @@ class meanLess1 extends React.Component {
                     onPress={() => this.Logout()}>
                     <Text>Log Out</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={{height: 50, width: 50, backgroundColor: 'skyblue', marginTop: 100, alignItems: 'center', justifyContent: 'center'}}
+                    onPress={() => {
+                        this.props.navigation.navigate('Post')
+                    }}>
+                    <Text>Post</Text>
+                </TouchableOpacity>
             </View>
         );
     }
