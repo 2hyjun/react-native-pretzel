@@ -3,7 +3,7 @@ import {
     View,
     Image,
     AsyncStorage,
-    Alert
+    Alert,
 } from 'react-native'
 
 import styles from './style';

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactNative from 'react-native';
 import {
     View,
     Text,
@@ -13,7 +12,6 @@ import {
 import styles from './style';
 import Fumi from '../../components/TextInputEffect/Fumi';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
 
 
@@ -102,15 +100,14 @@ export default class Register extends React.Component {
                                 {/*onContentSizeChange={( contentWidth, contentHeight ) => {*/}
                                     {/*this._contentHeight = contentHeight*/}
                                 {/*}}>*/}
-                    <KeyboardAwareView
-                        animated={true}
+                    {/*<KeyboardAwareView*/}
+                        {/*animated={true}*/}
 
-                        >
+                        {/*>*/}
                         <ScrollView
                             ref="scroll"
-                            style={{backgroundColor: 'skyblue'}}
-                            keyboardDismissMode='on-drag'
-                            showsVerticalScrollIndicator={true}>
+                            contentContainerStyle={{paddingVertical: 20}}
+                        >
                             <Fumi
                                 ref="email"
                                 style={styles.textInput}
@@ -190,7 +187,7 @@ export default class Register extends React.Component {
                                 onTextChanged={(major) => this.setState({major})}
                                 autoCorrection={false}
                                 myOnFocus={() => {
-                                    this.refs.scroll.scrollTo({x: 0, y: 300, animated: true})
+                                    this.refs.scroll.scrollTo({x: 0, y: 200, animated: true})
                                     //this._scrollToInput(ReactNative.findNodeHandle(event.target))
                                 }}
                                 autoCapital={'none'}/>
@@ -205,7 +202,7 @@ export default class Register extends React.Component {
                                 {/*</Text>*/}
                             {/*</View>*/}
                         </ScrollView>
-                    </KeyboardAwareView>
+                    {/*</KeyboardAwareView>*/}
 
                 </View>
 
