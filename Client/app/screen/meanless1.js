@@ -31,7 +31,7 @@ class meanLess1 extends React.Component {
     }
 
     HTTPRequest(value) {
-        return fetch('http://localhost:8124/api/timeline/mypage', {
+        return fetch('http://13.124.147.152:8124/api/timeline/mypage', {
                 method: 'GET',
                 headers: {
                     'x-access-token': value
