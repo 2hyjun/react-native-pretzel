@@ -14,7 +14,7 @@ import styles from './style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Fumi from '../../components/TextInputEffect/Fumi';
 //import { Fumi, } from 'react-native-textinput-effects';
-
+import { encrypt } from 'react-native-simple-encryption';
 class login extends Component {
     constructor(props) {
         super(props);
@@ -42,46 +42,54 @@ class login extends Component {
         this.props.navigation.navigate('Register')
     }
     httpRequest() {
-        let params = {
-            email: this.state.email,
-            password: this.state.password,
-        };
-        let formBody = [];
-        for (let property in params) {
-            let encodedKey = encodeURIComponent(property);
-            let encodedValue = encodeURIComponent(params[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        console.log(formBody);
-
-        fetch('http://localhost:8124/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formBody
-        }).then((res) => res.json())
-            .then((resJSON) => {
-            if (resJSON.resultCode === 100) {
-                const token = resJSON.result;
-
-                AsyncStorage.setItem(STORAGE_KEY, token)
-                    .then(() =>  {
-                        console.log('saved token to disk: ' + token);
-                        this.props.navigation.navigate('Main');
-                    })
-                    .catch((error) => console.log('AsynchStorage error:' + error.message))
-                    .done();
-            } else {
-                Alert.alert('로그인 실패', resJSON.result)
+        if (this.state.email && this.state.password) {
+            let params = {
+                email: this.state.email,
+                password: this.state.password,
+            };
+            let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
+            params.password = encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
+            let formBody = [];
+            for (let property in params) {
+                let encodedKey = encodeURIComponent(property);
+                let encodedValue = encodeURIComponent(params[property]);
+                formBody.push(encodedKey + "=" + encodedValue);
             }
+            formBody = formBody.join("&");
+            console.log(formBody);
+
+            fetch('http://13.124.147.152:8124/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formBody
+            }).then((res) => res.json())
+                .then((resJSON) => {
+                    if (resJSON.resultCode === 100) {
+                        const token = resJSON.result;
+
+                        AsyncStorage.setItem(STORAGE_KEY, token)
+                            .then(() =>  {
+                                console.log('saved token to disk: ' + token);
+                                this.props.navigation.navigate('Main');
+                            })
+                            .catch((error) => console.log('AsynchStorage error:' + error.message))
+                            .done();
+                    } else {
+                        Alert.alert('로그인 실패', resJSON.result)
+                    }
 
 
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } else {
+            Alert.alert('아이디와 비밀번호 모두 입력해주세요.');
+        }
+
+
     }
     render() {
 

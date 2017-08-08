@@ -18,7 +18,7 @@ class Loading extends React.Component {
         AsyncStorage.getItem(STORAGE_KEY)
             .then((value) => {
                 if (value) {
-                    fetch('http://localhost:8124/api/auth/check', {
+                    fetch('http://13.124.147.152:8124/api/auth/check', {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',

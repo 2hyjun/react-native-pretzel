@@ -13,7 +13,7 @@ import styles from './style';
 import Fumi from '../../components/TextInputEffect/Fumi';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
-
+import { encrypt } from 'react-native-simple-encryption';
 
 
 export default class Register extends React.Component {
@@ -50,6 +50,8 @@ export default class Register extends React.Component {
             Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
         else {
             //params.password = cryptDecrypt('pretzelWOwAwesome', params.password);
+            let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
+            params.password = encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
             for (let property in params) {
                 let encodedKey = encodeURIComponent(property);
                 let encodedValue = encodeURIComponent(params[property]);
@@ -57,7 +59,7 @@ export default class Register extends React.Component {
             }
             formBody = formBody.join("&");
 
-            fetch('http://localhost:8124/api/auth/register', {
+            fetch('http://13.124.147.152:8124/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,6 +69,7 @@ export default class Register extends React.Component {
                 .then((rJSON) => {
                     if (rJSON.resultCode === 100) {
                         Alert.alert('회원가입 성공');
+                        this.props.navigate('Login')
                     } else {
                         Alert.alert('회원가입 실패', rJSON.result)
                     }

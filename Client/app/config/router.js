@@ -37,9 +37,6 @@ export const auth = StackNavigator({
     },
     Register: {
         screen: register,
-        navigationOptions: {
-            title: '회원가입'
-        }
     }
 }, {
     headerMode: 'none'
