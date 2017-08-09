@@ -82,6 +82,10 @@ const styles = StyleSheet.create({
         height: 40,
         alignItems: 'center',
     },
+    tabBarIcon: {
+        width: width(10), height: height(5),
+        resizeMode: 'contain'
+    }
 });
 
 

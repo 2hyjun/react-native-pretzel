@@ -23,6 +23,8 @@ import {Navigator} from 'react-native-deprecated-custom-components';
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class myPageScreen extends Component {
+
+
     constructor(props) {
         super(props);
 
@@ -116,38 +118,6 @@ class myPageScreen extends Component {
 
                 <View style={styles.cellThree}>
                     <Text>adsf</Text>
-                </View>
-
-                <View style={styles.cellFive}>
-                    <TabBar style={styles.content}>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_home_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_home_highlighted.png')}
-                            onPress={() => {this.handleMain}}
-                            >
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_request_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_request_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_chatting_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_chatting_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}
-                            onPress={() => {this.handleMyPage}}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                    </TabBar>
                 </View>
             </View>
         );

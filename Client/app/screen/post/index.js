@@ -12,10 +12,7 @@ import {
 import ToggleBox from '../../components/ToggleBox'
 import styles from './style';
 export default class post extends React.Component {
-    static navigationOptions = {
-        tabBarIcon: ({tintColor}) =>
-            <Image style={styles.tabBarIcon} source={require('../../../img/underBarIcon/underbar_request_highlighted.png')}/>
-    };
+
     constructor(props){
         super(props);
 
