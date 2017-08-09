@@ -17,42 +17,41 @@ const styles = StyleSheet.create({
         backgroundColor: '#efefef',
         alignItems: 'center',
     },
-    cellOne: { // setting 톱니바퀴 아이콘
-        height: 50,
+    cellOne: { //logoBar
+        height: height(12.5),
         width: width(100),
         backgroundColor: '#ffffff',
-        alignItems: 'flex-end',
-    },
-    cellTwo: { //User info : profile pic, major/student ID/name
-        flex: 1,
-        width: width(100),
         flexDirection: 'row',
-        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    cellTwoProfile: { //User info : profile pic
-        width: width(30),
-        margin: 10,
-        flexDirection: 'column',
+    cellOneLogo: { //Left arrow
+        width: width(86),
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    cellOneBack: { //index logo
+        width: width(14),
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    cellTwoProfilePic: { //User info : profile pic
-        flex:3,
+    cellTwo: { //Log Out
+        width: width(100),
+        height: 60,
+        marginTop: 40,
+        flexDirection: 'row',
         alignItems: 'center',
-    },
-    cellTwoProfileID: { //User info : profile pic
-        flex:1,
-        alignItems: 'center',
-    },
-    cellTwoInfo: { //major/student ID/name
-        width: width(70),
-        margin: 10,
-        marginRight: 20,
+        backgroundColor: '#ffffff',
+        padding: 10,
     },
     cellThree: { //Detailed sets
         //flex: 2,
         marginTop: 40,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
+
     },
     cellFive: { //Under Bar(Tab bar)
         flex: 2,
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        height: 40,
+        height: 50,
         alignItems: 'center',
     },
 });

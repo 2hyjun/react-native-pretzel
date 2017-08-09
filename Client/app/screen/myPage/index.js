@@ -2,83 +2,120 @@
 
 import React, { Component, } from 'react';
 import {
-    StyleSheet,
     Image,
     View,
     Button,
     TextInput,
     Text,
-    Linking,
     TouchableHighlight,
-    TouchableOpacity,
     ListView,
+    AsyncStorage,
+    Alert,
 } from 'react-native';
+import {
+    List,
+    ListItem,
+} from 'react-native-elements';
 
 import styles from './style';
 import TabBar from 'react-native-xtabbar';
 import {Navigator} from 'react-native-deprecated-custom-components';
+const STORAGE_KEY = '@PRETZEL:jwt';
 
 class myPageScreen extends Component {
-
     constructor(props) {
         super(props);
 
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             dataSource: ds.cloneWithRows([
-                '비밀번호 변경', '푸시알림 설정', '피드백'
+                '학과', '학번', '이름'
             ])
         };
     }
 
+    /*
+    GetToken() {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getItem(STORAGE_KEY, (err, value) => {
+                if (err) reject(err);
+                else resolve(value);
+            })
+        })
+    }
+
+    componentDidMount() {
+        this.GetToken()
+            .then(this.HTTPRequest)
+            .then((res) => {
+                console.log(res.result);
+
+                this.setState({
+                    user_name: res.myInfo.user_name,
+                    user_univ: res.myInfo.user_univ,
+                    user_major: res.myInfo.user_major,
+                })
+            })
+            .catch((err) => console.error(err))
+
+    }*/
+
+    Setting() {
+        //this.props.navigation.navigate('Setting');
+    }
+
     handleMain = () => {
-        this.props.navigation.navigate('Main');
+        this.props.navigation.navigate('main');
     };
     LogOut = () => {
-        this.props.navigation.navigate('Main');
+        this.props.navigation.navigate('main');
     };
+    handleMyPage = () => {
+        this.props.navigation.navigate('MyPage');
+    };
+
 
     render() {
         return (
             <View style={styles.parent}>
                 <View style={styles.cellOne}>
                     <View>
-                        <TouchableHighlight onPress={this._handleback}>
-                            <Image source={require('../../../img/basic/basic_arrow_left.png')}
-                                   style={{resizeMode:'center'}}/>
-                        </TouchableHighlight>
-                    </View>
-                    <View>
-                        <TouchableHighlight onPress={this.handleMain}>
-                            <Image source={require('../../../img/index/index_logo.png')}
-                                   style={{resizeMode:'center'}}/>
+                        <TouchableHighlight onPress={this.Setting}>
+                            <Image source={require('../../../img/mypage/mypage_main_settingbutton.png')}
+                                   resizeMode="center"/>
                         </TouchableHighlight>
                     </View>
                 </View>
-
-                <TouchableHighlight onPress={this.LogOut}>
-                    <View style={styles.cellTwo}>
-                        <Text style={{color: '#ff6666'}}>로그아웃</Text>
+                <View style={styles.cellTwo}>
+                    <View style={styles.cellTwoProfile}>
+                        <View style={styles.cellTwoProfilePic}>
+                        <Image source={require('../../../img/mypage/mypage_main_default_profile_user.png')}
+                                   style={{resizeMode:'center'}}/>
+                        </View>
+                        <View style={styles.cellTwoProfileID}>
+                        <Text>user101</Text>
+                        </View>
                     </View>
-                </TouchableHighlight>
+                    <View style={styles.cellTwoInfo}>
+                        <List>
+                            <ListView
+                                      dataSource={this.state.dataSource}
+                                      renderRow={(rowData) =>
+                                          <View style={styles.row}>
+                                                  <Text>{rowData}</Text>
+                                              </View>
+                                      }
+                                      renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
+                                          <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
+                                          />}
+                            />
+                        </List>
+                    </View>
+                </View>
+
 
                 <View style={styles.cellThree}>
-                    <ListView style={styles.container}
-                              dataSource={this.state.dataSource}
-                              renderRow={(rowData) =>
-                                  <TouchableOpacity
-                                      onPress={()=>this.props.navigator.push({index: 1,
-                                          passProps:{}})}
-                                  >
-                                      <View style={styles.row}>
-                                          <Text>{rowData}</Text>
-                                      </View>
-                                  </TouchableOpacity>
-                              }
-                              renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                                  <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
-                                  />}
-                    />
+                    <Text>adsf</Text>
                 </View>
 
                 <View style={styles.cellFive}>
@@ -86,9 +123,8 @@ class myPageScreen extends Component {
                         <TabBar.Item
                             icon={require('../../../img/underBarIcon/underbar_home_disabled.png')}
                             selectedIcon={require('../../../img/underBarIcon/underbar_home_highlighted.png')}
-                            onPress={() => {
-                                console.log("first onPress");
-                            }}>
+                            onPress={() => {this.handleMain}}
+                            >
                             <View style={styles.text}>
                             </View>
                         </TabBar.Item>
@@ -106,7 +142,8 @@ class myPageScreen extends Component {
                         </TabBar.Item>
                         <TabBar.Item
                             icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}>
+                            selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}
+                            onPress={() => {this.handleMyPage}}>
                             <View style={styles.text}>
                             </View>
                         </TabBar.Item>
