@@ -6,7 +6,9 @@ import {
 
 //import Register from '../screen/register'
 //import Loading from '../screen/loading'
-import Encrypt from '../screen/meanless2';
+//import Encrypt from '../screen/meanless2';
+//import Login from '../screen/login';
+//import Meanless from '../screen/meanless1'
 
 class App extends React.Component {
     render() {
