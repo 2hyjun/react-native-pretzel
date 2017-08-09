@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     cellTwo: { //User info : profile pic, major/student ID/name
-        flex: 1,
+        flex: 1.3,
         width: width(100),
         flexDirection: 'row',
         marginTop: 10,
     },
     cellTwoProfile: { //User info : profile pic
-        width: width(30),
+        width: width(25),
         margin: 10,
         flexDirection: 'column',
         alignItems: 'center',
@@ -44,9 +44,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cellTwoInfo: { //major/student ID/name
-        width: width(70),
+        width: width(75),
         margin: 10,
         marginRight: 20,
+        flexDirection: 'row',
+    },
+    cellTwoInfoFix: { //학교, 학과, 이름
+        flex:1,
+        flexDirection: 'column',
+        marginTop:10,
+    },
+    rowFix: {
+        flex: 1,
+    },
+    cellTwoInfoVari: { //사람에 따라 달라요
+        flex:5,
     },
     cellThree: { //Detailed sets
         //flex: 2,
@@ -79,13 +91,17 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        height: 40,
+        height: 35,
         alignItems: 'center',
     },
+<<<<<<< HEAD
     tabBarIcon: {
         width: width(10), height: height(5),
         resizeMode: 'contain'
     }
+=======
+
+>>>>>>> 4d0d3593cffaab511e69c0e2f915933fb6e61aeb
 });
 
 
