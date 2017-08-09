@@ -66,6 +66,7 @@ class login extends Component {
                 body: formBody
             }).then((res) => res.json())
                 .then((resJSON) => {
+                    console.log('hehe');
                     if (resJSON.resultCode === 100) {
                         const token = resJSON.result;
 
@@ -83,7 +84,7 @@ class login extends Component {
 
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.error(err)
                 })
         } else {
             Alert.alert('아이디와 비밀번호 모두 입력해주세요.');

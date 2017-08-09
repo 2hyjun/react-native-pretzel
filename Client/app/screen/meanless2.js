@@ -7,7 +7,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-
 import { encrypt } from 'react-native-simple-encryption';
 
 const STORAGE_KEY = '@PRETZEL:jwt';
