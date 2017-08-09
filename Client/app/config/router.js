@@ -1,28 +1,52 @@
 import React from 'react';
 import {
     StackNavigator,
+    TabRouter,
+    StackRouter,
+    TabNavigator,
+    TabView,
+    TabBarBottom,
+    TabBarTop
 } from 'react-navigation';
 
 import loading from '../screen/loading';
 import login from '../screen/login';
-import main from '../screen/meanless1';
+import timeline from '../screen/timeline';
 import register from '../screen/register';
 import post from '../screen/post';
+import chat from '../screen/chat';
+import mypage from '../screen/myPage';
+//import tab from '../components/Tabs';
 
 
 
-export const MainStack = StackNavigator({
-    Main: {
-        screen: main,
+export const MainTab = TabNavigator({
+    Timeline: {
+        screen: timeline,
+
     },
     Post: {
         screen: post,
+    },
+    Chat: {
+        screen: chat,
+    },
+    MyPage: {
+        screen: mypage,
     }
 }, {
-    headerMode: 'none'
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    swipeEnabled: false,
+    animationEnabled: true,
+    tabBarOptions: {
+        activeTintColor: '#e91e63',
+        showIcon: true,
+        showLabel: false,
+
+    }
+
 });
-
-
 
 
 export const auth = StackNavigator({
@@ -30,7 +54,7 @@ export const auth = StackNavigator({
         screen: login
     },
     Main: {
-        screen: MainStack,
+        screen: MainTab,
         navigationOptions: {
             title: '메인'
         }

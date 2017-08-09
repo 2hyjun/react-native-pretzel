@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {
-    Loading
+    Loading,
+    MainTab,
 } from '../config/router.js';
 
 //import Register from '../screen/register'
