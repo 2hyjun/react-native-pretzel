@@ -17,6 +17,7 @@ export default StyleSheet.create({
     },
     label: {
         flex: 5,
+        fontWeight: 'bold',
     },
     value: {
         flex: 5,

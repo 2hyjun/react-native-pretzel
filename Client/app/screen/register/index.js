@@ -6,6 +6,8 @@ import {
     TouchableOpacity,
     ScrollView,
     Alert,
+    FlatList,
+    Platform
 } from 'react-native';
 
 
@@ -14,7 +16,7 @@ import Fumi from '../../components/TextInputEffect/Fumi';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
 import { encrypt } from 'react-native-simple-encryption';
-
+import DropdownAlert from '../../components/DropdownAlert';
 
 export default class Register extends React.Component {
 
@@ -30,9 +32,11 @@ export default class Register extends React.Component {
             major: ''
         };
         this.Register = this.Register.bind(this);
-        this._scrollToInput = this._scrollToInput.bind(this);
     }
-
+    componentDidMount() {
+        if (Platform.OS === 'android')
+            this.dropdown.alertWithType('info', '', '안드로이드에서는 키보드가 올라와 있는 상태에서만 스크롤이 가능합니다.');
+    }
     Register() {
         let params = {
             email: this.state.email,
@@ -45,9 +49,12 @@ export default class Register extends React.Component {
         let formBody = [];
         if (!params.email || !params.password || !params.password_confirm || !params.name ||
             !params.univ || !params.major)
-            Alert.alert('', '6개 항목을 모두 입력해주세요.');
+            this.dropdown.alertWithType('error', '회원가입 실패', '6개 항목을 모두 입력해주세요.');
+
+            //Alert.alert('', '6개 항목을 모두 입력해주세요.');
         else if (this.state.password !== this.state.password_confirm)
-            Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
+            this.dropdown.alertWithType('error', '회원가입 실패', '비밀번호와 비밀번호 확인 값이 다릅니다.');
+            //Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
         else {
             //params.password = cryptDecrypt('pretzelWOwAwesome', params.password);
             let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
@@ -68,10 +75,12 @@ export default class Register extends React.Component {
             }).then((res) => res.json())
                 .then((rJSON) => {
                     if (rJSON.resultCode === 100) {
-                        Alert.alert('회원가입 성공');
-                        this.props.navigate('Login')
+                        this.dropdown.alertWithType('success', '회원가입 성공', rJSON.result);
+                        //Alert.alert('회원가입 성공');
+                        this.props.navigation.navigate('Login')
                     } else {
-                        Alert.alert('회원가입 실패', rJSON.result)
+                        this.dropdown.alertWithType('error', '회원가입 실패', rJSON.result);
+                        //Alert.alert('회원가입 실패', rJSON.result)
                     }
                 })
                 .catch((err) => console.error(err))
@@ -81,10 +90,7 @@ export default class Register extends React.Component {
 
     }
 
-    _scrollToInput (reactNode: any) {
-        // Add a 'scroll' ref to your ScrollView
-        this.refs.scroll.scrollToFocusedInput(reactNode)
-    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -219,6 +225,8 @@ export default class Register extends React.Component {
                     {/*<Image source={require('../../../img/join+login/login_wave.png')}*/}
                            {/*style={styles.wave}/>*/}
                 {/*</View>*/}
+                <DropdownAlert
+                    ref={(ref) => this.dropdown = ref}/>
 
             </View>
         );

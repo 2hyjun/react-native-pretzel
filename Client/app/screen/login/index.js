@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     Text,
     Alert,
-    AsyncStorage
+    AsyncStorage,
+    ScrollView
 } from 'react-native';
 
 const STORAGE_KEY = '@PRETZEL:jwt';
@@ -13,7 +14,7 @@ const STORAGE_KEY = '@PRETZEL:jwt';
 import styles from './style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Fumi from '../../components/TextInputEffect/Fumi';
-//import { Fumi, } from 'react-native-textinput-effects';
+import { KeyboardAwareView }from 'react-native-keyboard-aware-view';
 import { encrypt } from 'react-native-simple-encryption';
 
 import DropdownAlert from '../../components/DropdownAlert';
@@ -90,7 +91,7 @@ class login extends Component {
                     console.error(err)
                 })
         } else {
-            Alert.alert('아이디와 비밀번호 모두 입력해주세요.');
+            this.dropdown.alertWithType('error', '로그인 실패', '아이디와 비밀번호 모두 입력해주세요.');
         }
 
 
@@ -99,57 +100,61 @@ class login extends Component {
 
         return (
             <View style={styles.container}>
+                <KeyboardAwareView style={styles.kav}>
+                    <ScrollView sytle={{flex: 1, flexDirection: 'column'}}>
+                        <View style={styles.cell_logo}>
+                            <Image source={require('../../../img/join+login/join,login_logotype.png')}
+                                style={styles.logo}/>
+                        </View>
+                        <View style={styles.cell_form}>
+                            <View style={styles.sae_form_email}>
+                                <Fumi style={{flex: 1}}
+                                      label={'이메일'}
+                                      iconClass={FontAwesomeIcon}
+                                      iconName={'pencil'}
+                                      iconColor={'#f95a25'}
+                                      secure={false}
+                                      onTextChanged={(email) => this.setState({email})}
+                                      autoCorrection={false}
+                                      autoCapital={'none'}
+                                />
+                            </View>
+                            <View style={styles.sae_form_email}>
+                                <Fumi style={{flex: 1}}
+                                      label={'비밀번호'}
+                                      iconClass={FontAwesomeIcon}
+                                      iconName={'lock'}
+                                      iconColor={'#f95a25'}
+                                      secure={true}
+                                      onTextChanged={(password) => this.setState({password})}
 
-                <View style={styles.cell_logo}>
-                    <Image source={require('../../../img/join+login/join,login_logotype.png')}
-                        style={styles.logo}/>
-                </View>
-                <View style={styles.cell_form}>
-                    <View style={styles.sae_form_email}>
-                        <Fumi style={{flex: 1}}
-                              label={'이메일'}
-                              iconClass={FontAwesomeIcon}
-                              iconName={'pencil'}
-                              iconColor={'#f95a25'}
-                              secure={false}
-                              onTextChanged={(email) => this.setState({email})}
-                              autoCorrection={false}
-                              autoCapital={'none'}
-                        />
-                    </View>
-                    <View style={styles.sae_form_email}>
-                        <Fumi style={{flex: 1}}
-                              label={'비밀번호'}
-                              iconClass={FontAwesomeIcon}
-                              iconName={'lock'}
-                              iconColor={'#f95a25'}
-                              secure={true}
-                              onTextChanged={(password) => this.setState({password})}
+                                      autoCorrection={false}
+                                      autoCapital={'none'}
+                                />
+                            </View>
+                            <View style={styles.form_config}>
+                                <TouchableOpacity style={styles.config_signin}
+                                                onPress={this._handleSignIn}>
+                                    <Text style={styles.signin_txt}>로그인</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.config_forgot_pw}
+                                                onPress={this.FindPassword}>
+                                    <Text>비밀번호를 잊으셨나요?</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.config_register}
+                                                onPress={this.Register}>
+                                    <Text>회원가입</Text>
+                                </TouchableOpacity>
 
-                              autoCorrection={false}
-                              autoCapital={'none'}
-                        />
-                    </View>
-                    <View style={styles.form_config}>
-                        <TouchableOpacity style={styles.config_signin}
-                                        onPress={this._handleSignIn}>
-                            <Text style={styles.signin_txt}>로그인</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.config_forgot_pw}
-                                        onPress={this.FindPassword}>
-                            <Text>비밀번호를 잊으셨나요?</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.config_register}
-                                        onPress={this.Register}>
-                            <Text>회원가입</Text>
-                        </TouchableOpacity>
+                            </View>
+                        </View>
 
-                    </View>
-                </View>
-                <View style={styles.cell_wave}>
-                    <Image source={require('../../../img/join+login/login_wave.png')}
-                        style={styles.wave}/>
-                </View>
+                        <View style={styles.cell_wave}>
+                            <Image source={require('../../../img/join+login/login_wave.png')}
+                                style={styles.wave}/>
+                        </View>
+                    </ScrollView>
+                </KeyboardAwareView>
                 <DropdownAlert
                     ref={(ref) => this.dropdown = ref}/>
             </View>

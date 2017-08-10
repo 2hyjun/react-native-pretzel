@@ -4,7 +4,7 @@ import {
     Dimensions
 } from 'react-native';
 
-const {height, width } = Dimensions.get('window');
+import { height, width, totalSize } from 'react-native-dimension';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
 
     cell_logo: {
-        flex: 1.5,
+        height: height(15),
         alignItems: 'center'
     },
     logo: {
@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
 
 
     cell_form: {
-        flex: 2
+        marginTop: height(10),
+        height: height(40)
     },
     form_email: {
         flex: 1,
@@ -106,14 +107,19 @@ const styles = StyleSheet.create({
         borderRadius: 17,
     },
     cell_wave: {
-        flex: 1.2,
+        marginTop: height(5),
+        height: height(30),
         alignItems: 'center',
 
     },
     wave: {
         flex: 1,
-        width: width,
+        alignSelf: 'flex-end',
+        width: width(100),
         //resizeMode: 'contain'
+    },
+    kav: {
+        flex: 1,
     }
 });
 
