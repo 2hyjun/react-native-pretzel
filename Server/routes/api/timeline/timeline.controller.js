@@ -2,6 +2,7 @@ var config = require("../../../config");
 var db = require("../../../db/mysql");
 var conn = db.connect();
 
+
 exports.timeline = (req, res) => {
 
     const query = () => {
@@ -55,7 +56,7 @@ exports.post = (req, res) => {
                 resolve();
             else
                 reject({
-                    err: 'Not Enough Params'
+                    err: '모든 항목을 모두 입력해주십시오.'
                 })
         })
     }
@@ -88,7 +89,7 @@ exports.post = (req, res) => {
     }
 
     const onError = (err) => {
-        if (err.err === 'Not Enough Params') {
+        if (err.err === '모든 항목을 모두 입력해주십시오.') {
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
@@ -115,7 +116,7 @@ exports.delete = (req, res) => {
             return Promise.resolve(rid);
         else
             return Promise.reject({
-                err: 'Not Enough Params'
+                err: '모든 항목을 모두 입력해주십시오.'
             })
     }
 
@@ -131,13 +132,13 @@ exports.delete = (req, res) => {
                     })
                 else if (results.length === 0)
                     reject({
-                        err: 'Wrong RID. No such bulletin'
+                        err: '해당 하는 게시물이 없습니다.'
                     })
                 else if (req.decoded.user_email !== results[0].user_email) {
                     console.log(req.decoded.user_email)
                     console.log(results[0])
                     reject({
-                        err: 'Permisison Denied'
+                        err: '권한이 없습니다.'
                     })
                 } else
                     resolve(rid);
@@ -162,17 +163,17 @@ exports.delete = (req, res) => {
     }
 
     const onError = (err) => {
-        if (err.err === 'Not Eought Params')
+        if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
             })
-        else if (err.err === 'Wrong RID. No such bulletin')
+        else if (err.err === '해당 하는 게시물이 없습니다.')
             res.status(500).send({
                 resultCode: 2,
                 result: err.err
             })
-        else if (err.err === 'Permisison Denied')
+        else if (err.err === '권한이 없습니다.')
             res.status(500).send({
                 resultCode: 3,
                 result: err.err
@@ -217,7 +218,7 @@ exports.update = (req, res) => {
             return Promise.resolve(rid);
         else
             return Promise.reject({
-                err: 'Not Enough Params'
+                err: '모든 항목을 모두 입력해주십시오.'
             })
     }
     const checkBodyParams = () => {
@@ -226,7 +227,7 @@ exports.update = (req, res) => {
                 resolve();
             else
                 reject({
-                    err: 'Not Enough Body Params'
+                    err: '모든 항목을 모두 입력해주십시오.'
                 })
         })
     }
@@ -243,11 +244,11 @@ exports.update = (req, res) => {
                     })
                 } else if (results[0] === undefined) {
                     reject({
-                        err: 'No such bulletin. Wrong rid'
+                        err: '해당하는 게시물이 없습니다.'
                     })
                 } else if (req.decoded.user_email !== results[0].user_email) {
                     reject({
-                        err: 'Permission Denied'
+                        err: '권한이 없습니다.'
                     })
                 } else {
                     resolve();
@@ -280,22 +281,22 @@ exports.update = (req, res) => {
     }
 
     const onError = (err) => {
-        if (err.err === 'Not Enough Params')
+        if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
             })
-        else if (err.err === 'Not Enough Body Params')
+        else if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 2,
                 result: err.err
             })
-        else if (err.err === 'No such bulletin. Wrong rid')
+        else if (err.err === '해당하는 게시물이 없습니다.')
             res.status(500).send({
                 resultCode: 3,
                 result: err.err
             })
-        else if (err.err === 'Permission Denied')
+        else if (err.err === '권한이 없습니다.')
             res.status(500).send({
                 resultCode: 4,
                 result: err.err

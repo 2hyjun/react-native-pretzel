@@ -3376,6 +3376,14 @@ react-native-animatable@^1.2.3:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-autogrow-textinput@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-autogrow-textinput/-/react-native-autogrow-textinput-4.1.0.tgz#a7e5b17eb3c16ab08e31bbfb88d92488ed87f276"
+
+react-native-chooser@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-chooser/-/react-native-chooser-1.5.3.tgz#1b3a250dd13f480de165ddd2d8535193bb8fddde"
+
 react-native-deprecated-custom-components@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/react-native-deprecated-custom-components/-/react-native-deprecated-custom-components-0.1.1.tgz#bb911f01bf2f47f0a91764757bf918f3216e94e9"
@@ -3405,6 +3413,12 @@ react-native-drawer-layout@1.3.2:
   resolved "https://registry.yarnpkg.com/react-native-drawer-layout/-/react-native-drawer-layout-1.3.2.tgz#b9740d7663a1dc4f88a61b9c6d93d2d948ea426e"
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
+
+react-native-dropdownalert@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-2.10.0.tgz#450466c467d376bf091c762e7e414a17700e2221"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-elements@^0.15.0:
   version "0.15.0"

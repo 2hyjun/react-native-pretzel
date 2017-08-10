@@ -47,6 +47,7 @@
 		2396314126EE45D79D96F981 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0951A38156414B8CAB532EC8 /* Zocial.ttf */; };
 		E4A23182ED6E4160BD7D23BC /* libRNAES.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E4CAB7958084C6D8E8D2B36 /* libRNAES.a */; };
 		0DF73CB3FF5D49DA98A8967F /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BF92E7630B4F369135BBDF /* libRNRandomBytes.a */; };
+		1F8C5B3B83164FD48F6754D3 /* libAutoGrowTextInput.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6B642F921743A58EB990D5 /* libAutoGrowTextInput.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +283,8 @@
 		8E4CAB7958084C6D8E8D2B36 /* libRNAES.a */ = {isa = PBXFileReference; name = "libRNAES.a"; path = "libRNAES.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BEBA31D9541B4B818DC89C35 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; name = "RNRandomBytes.xcodeproj"; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		46BF92E7630B4F369135BBDF /* libRNRandomBytes.a */ = {isa = PBXFileReference; name = "libRNRandomBytes.a"; path = "libRNRandomBytes.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		6316A5367CF64F76A5117EE8 /* AutoGrowTextInput.xcodeproj */ = {isa = PBXFileReference; name = "AutoGrowTextInput.xcodeproj"; path = "../node_modules/react-native-autogrow-textinput/ios/AutoGrowTextInput.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AF6B642F921743A58EB990D5 /* libAutoGrowTextInput.a */ = {isa = PBXFileReference; name = "libAutoGrowTextInput.a"; path = "libAutoGrowTextInput.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +314,7 @@
 				E4A23182ED6E4160BD7D23BC /* libRNAES.a in Frameworks */,
 				0DF73CB3FF5D49DA98A8967F /* libRNRandomBytes.a in Frameworks */,
 				71299E0B9B2A4CF59DD8CC1D /* libRCTActionSheet.a in Frameworks */,
+				1F8C5B3B83164FD48F6754D3 /* libAutoGrowTextInput.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +484,7 @@
 				CD200CC1E5884D0E882D2754 /* RNVectorIcons.xcodeproj */,
 				9DFEDE9D73BD4BE1A04C039A /* RNAES.xcodeproj */,
 				BEBA31D9541B4B818DC89C35 /* RNRandomBytes.xcodeproj */,
+				6316A5367CF64F76A5117EE8 /* AutoGrowTextInput.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1029,12 +1034,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pretzel.app/pretzel";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Debug;
@@ -1055,12 +1062,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pretzel.app/pretzel";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Release;
@@ -1085,6 +1094,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Debug;
@@ -1108,6 +1118,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Release;
@@ -1137,12 +1148,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Debug;
@@ -1172,12 +1185,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-aes/ios/RNAES",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
+					"$(SRCROOT)/../node_modules/react-native-autogrow-textinput/ios",
 				);
 			};
 			name = Release;
@@ -1202,6 +1217,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1226,6 +1242,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;

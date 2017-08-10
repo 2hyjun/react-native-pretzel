@@ -19,13 +19,11 @@ import timeline from '../screen/timeline';
 import register from '../screen/register';
 import post from '../screen/post';
 import chat from '../screen/chat';
-import mypage from '../screen/myPage';
+import myPage from '../screen/myPage';
 
 import meanless1 from '../screen/meanless/meanless1';
 import meanless2 from '../screen/meanless/meanless2';
 import meanless3 from '../screen/meanless/meanless3';
-//import tab from '../components/Tabs';
-import TypeTabs from '../screen/typeTabs';
 
 import styles from './style';
 
@@ -107,7 +105,7 @@ export const MainTab = TabNavigator({
         }
     },
     MyPage: {
-        screen: mypage,
+        screen: myPage,
         navigationOptions: {
             tabBarIcon: ({focused}) => {
                 let imgSource = focused

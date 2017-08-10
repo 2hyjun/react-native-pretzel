@@ -28,7 +28,7 @@ exports.register = (req, res) => {
             return Promise.resolve()
         } else {
             return Promise.reject({
-                error: 'Not Enough Params'
+                error: '모든 항목을 다 입력해주십시오.'
             })
         }
     }
@@ -74,7 +74,7 @@ exports.register = (req, res) => {
 
     const HandleError = (err) => {
         console.log(err);
-        if (err.error === 'Not Enough Params') {
+        if (err.error === '모든 항목을 다 입력해주십시오.') {
             res.status(500).send({
                 resultCode: 3,
                 result: err.error
@@ -82,7 +82,7 @@ exports.register = (req, res) => {
         } else if (err.error.errno == 1062) {
             res.status(500).send({
                 resultCode: 1,
-                result: 'Duplicated Email'
+                result: '중복된 이메일입니다.'
             })
         } else {
             res.status(500).send({
@@ -95,7 +95,7 @@ exports.register = (req, res) => {
     const respond = () => {
         res.status(201).send({
             resultCode: 100,
-            result: 'Register Success'
+            result: '회원가입이 성공적으로 완료되었습니다.'
         })
     }
     checkParams()
@@ -131,7 +131,7 @@ exports.login = (req, res) => {
                     })
                 } else if (results.length === 0) {
                     reject({
-                        err: 'No such Email'
+                        err: '존재 하지 않는 이메일입니다.'
                     })
                 } else {
                     resolve(results[0]);
@@ -163,7 +163,7 @@ exports.login = (req, res) => {
                 resolve(obj.result);
             } else {
                 reject({
-                    err: 'Wrong Password'
+                    err: '잘못 된 비밀번호 입니다.'
                 })
             }
         })
@@ -186,7 +186,7 @@ exports.login = (req, res) => {
             jwt.sign(payload, secret, options, (err, token) => {
                 if (err) {
                     reject({
-                        err: 'Error while creating token'
+                        err: '토큰 생성 중 오류가 발생했습니다.'
                     });
                 } else {
                     console.log('sign success')
@@ -198,17 +198,17 @@ exports.login = (req, res) => {
     const onError = (err) => {
         var resultCode;
         console.log(err);
-        if (err.err === 'Wrong Password') {
+        if (err.err === '잘못 된 비밀번호 입니다.') {
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
             })
-        } else if (err.err === 'Error while creating token') {
+        } else if (err.err === '토큰 생성중 오류가 발생했습니다.') {
             res.status(500).send({
                 resultCode: 2,
                 result: err.err
             })
-        } else if (err.err === 'No such Email') {
+        } else if (err.err === '존재 하지 않는 이메일입니다.') {
             res.status(500).send({
                 resultCode: 3,
                 result: err.err

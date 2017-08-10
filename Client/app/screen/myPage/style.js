@@ -94,14 +94,6 @@ const styles = StyleSheet.create({
         height: 35,
         alignItems: 'center',
     },
-<<<<<<< HEAD
-    tabBarIcon: {
-        width: width(10), height: height(5),
-        resizeMode: 'contain'
-    }
-=======
-
->>>>>>> 4d0d3593cffaab511e69c0e2f915933fb6e61aeb
 });
 
 

@@ -15,6 +15,9 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Fumi from '../../components/TextInputEffect/Fumi';
 //import { Fumi, } from 'react-native-textinput-effects';
 import { encrypt } from 'react-native-simple-encryption';
+
+import DropdownAlert from '../../components/DropdownAlert';
+import global from '../../config/global';
 class login extends Component {
     constructor(props) {
         super(props);
@@ -69,7 +72,7 @@ class login extends Component {
                     console.log('hehe');
                     if (resJSON.resultCode === 100) {
                         const token = resJSON.result;
-
+                        global.setEmail(this.state.email);
                         AsyncStorage.setItem(STORAGE_KEY, token)
                             .then(() =>  {
                                 console.log('saved token to disk: ' + token);
@@ -78,7 +81,7 @@ class login extends Component {
                             .catch((error) => console.log('AsynchStorage error:' + error.message))
                             .done();
                     } else {
-                        Alert.alert('로그인 실패', resJSON.result)
+                        this.dropdown.alertWithType('error', '로그인 실패', resJSON.result);
                     }
 
 
@@ -146,9 +149,9 @@ class login extends Component {
                 <View style={styles.cell_wave}>
                     <Image source={require('../../../img/join+login/login_wave.png')}
                         style={styles.wave}/>
-
-
                 </View>
+                <DropdownAlert
+                    ref={(ref) => this.dropdown = ref}/>
             </View>
         );
     }

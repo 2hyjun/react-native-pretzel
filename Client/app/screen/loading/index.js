@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 import styles from './style';
-
+import global from '../../config/global'
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class Loading extends React.Component {
@@ -27,6 +27,7 @@ class Loading extends React.Component {
                     }).then((res) => res.json())
                         .then((rJSON) => {
                             if (rJSON.resultCode === 100) {
+                                global.setEmail(rJSON.result.user_email);
                                 this.props.navigation.navigate('Main');
                             } else {
                                 this.props.navigation.navigate('Login')

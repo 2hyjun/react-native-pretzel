@@ -87,7 +87,7 @@ class myPageScreen extends Component {
                 <View style={styles.cellTwo}>
                     <View style={styles.cellTwoProfile}>
                         <View style={styles.cellTwoProfilePic}>
-                            <Image source={require('../../../img/mypage/mypage_main_default_profile_user2.png')}
+                            <Image source={require('../../../img/mypage/mypage_main_default_profile_user.png')}
                                    style={{resizeMode:'center'}}/>
 
                         </View>
@@ -128,41 +128,6 @@ class myPageScreen extends Component {
                 <View style={styles.cellThree}>
                     <Text>adsf</Text>
                 </View>
-<<<<<<< HEAD
-=======
-
-                <View style={styles.cellFive}>
-                    <TabBar style={styles.content}>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_home_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_home_highlighted.png')}
-                            onPress={() => {this.handleMain}}
-                        >
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_request_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_request_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_chatting_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_chatting_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}
-                            onPress={() => {this.handleMyPage}}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                    </TabBar>
-                </View>
->>>>>>> 4d0d3593cffaab511e69c0e2f915933fb6e61aeb
             </View>
         );
     }
