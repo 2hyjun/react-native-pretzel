@@ -1,7 +1,7 @@
 var crypto = require('crypto'),
     db = require('../../../db/mysql'),
     config = require("../../../config"),
-    conn = db.connect(),
+    conn = db.get(),
     jwt = require('jsonwebtoken')
 /*
     POST /api/auth/register

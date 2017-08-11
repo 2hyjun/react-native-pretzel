@@ -110,8 +110,7 @@ export default class post extends React.Component {
         const elevation = this.state.isPopupShowing ? {elevation: 0} : {elevation: 5};
         return(
             <View style={styles.container}>
-                <Text style={{color: '#f95a25', fontWeight: 'bold', fontSize: 20, textAlign: 'center', marginTop: 20}}>배달 요청</Text>
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 1, marginTop: 30}}>
                         <View style={styles.contents_container}>
                             <Ripple
                                 rippleColor={"#f95a25"}
@@ -120,7 +119,8 @@ export default class post extends React.Component {
                                 style={[styles.ripple, elevation]}
                                 onPress={this.content_showPopOver.bind(this)}>
                                 {/*<Icon name="briefcase" size={20} color={'#f95a25'}/>*/}
-                                <Text style={styles.ripple_text}>#{this.state.contentItem}</Text>
+                                <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                                <Text style={styles.ripple_text}>{this.state.contentItem}</Text>
                             </Ripple>
 
                             <Ripple
@@ -130,7 +130,8 @@ export default class post extends React.Component {
                                 style={[styles.ripple, elevation]}
                                 onPress={this.type_showPopOver.bind(this)}>
                                 {/*<Icon name="question" size={24} color={'#f95a25'}/>*/}
-                                <Text style={styles.ripple_text}>#{this.state.typeItem}</Text>
+                                <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                                <Text style={styles.ripple_text}>{this.state.typeItem}</Text>
                             </Ripple>
                         </View>
 
@@ -142,6 +143,7 @@ export default class post extends React.Component {
                                 style={[styles.ripple_detail, elevation]}
                                 onPress={this.detail_showPopOver.bind(this)}>
                                 {/*<Icon name="asterisk" size={24} color={'#f95a25'}/>*/}
+                                <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
                                 <Text style={styles.ripple_text}>상세 정보 작성</Text>
                             </Ripple>
                         </View>

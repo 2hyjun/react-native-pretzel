@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     ripple_text: {
         fontSize: 16,
         marginLeft: 10,
+        marginTop: 5,
     },
     dialogContentView: {
         flex: 1,

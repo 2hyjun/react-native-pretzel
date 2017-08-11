@@ -35,6 +35,10 @@ var Session = session({
     saveUninitialized: true,
     store: new MYSQLStore(mysqlSessionOptions)
 });
+
+var db = require('./db/mysql');
+db.connect();
+
 app.use(Session)
 
 io.use(sharedsession(Session, {

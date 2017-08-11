@@ -5,7 +5,7 @@ var crypto = require('crypto')
 var config = require('../config')
 
 router.post('/login', (req, res) => {
-    var conn = db.connect();
+    var conn = db.get();
     if (req.body.email && req.body.password) {
         var sql = 'SELECT * FROM users where user_email=?;';
         var params = [req.body.email];
