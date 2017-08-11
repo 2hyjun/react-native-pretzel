@@ -119,7 +119,7 @@ export default class post extends React.Component {
                                 rippleDuration={500}
                                 style={[styles.ripple, elevation]}
                                 onPress={this.content_showPopOver.bind(this)}>
-                                <Icon name="briefcase" size={20} color={'#f95a25'}/>
+                                {/*<Icon name="briefcase" size={20} color={'#f95a25'}/>*/}
                                 <Text style={styles.ripple_text}>#{this.state.contentItem}</Text>
                             </Ripple>
 
@@ -129,7 +129,7 @@ export default class post extends React.Component {
                                 rippleDuration={500}
                                 style={[styles.ripple, elevation]}
                                 onPress={this.type_showPopOver.bind(this)}>
-                                <Icon name="question" size={24} color={'#f95a25'}/>
+                                {/*<Icon name="question" size={24} color={'#f95a25'}/>*/}
                                 <Text style={styles.ripple_text}>#{this.state.typeItem}</Text>
                             </Ripple>
                         </View>
@@ -141,7 +141,7 @@ export default class post extends React.Component {
                                 rippleDuration={500}
                                 style={[styles.ripple_detail, elevation]}
                                 onPress={this.detail_showPopOver.bind(this)}>
-                                <Icon name="asterisk" size={24} color={'#f95a25'}/>
+                                {/*<Icon name="asterisk" size={24} color={'#f95a25'}/>*/}
                                 <Text style={styles.ripple_text}>상세 정보 작성</Text>
                             </Ripple>
                         </View>
@@ -241,8 +241,8 @@ export default class post extends React.Component {
                             onPress={() => {
                                 this.detail.dismiss();
                             }}
-                            textContainerStyle={styles.dialog_button_detail}
-                            buttonStyle={styles.dialog_button_detail}
+                            //textContainerStyle={styles.dialog_button_detail}
+                            //buttonStyle={styles.dialog_button_detail}
                             textStyle={[{color: '#f95a25', textAlign: 'center'}, styles.dialog_button_detail, ]}
                             align={'center'}
                             key="button-1"
@@ -253,7 +253,7 @@ export default class post extends React.Component {
                         this.setState({isPopupShowing: false});
                     }}
                     spellCheck={false}
-                    dialogStyle={{marginTop: -300}}
+                    dialogStyle={{marginTop: -250}}
                 >
                     <View style={styles.detailInfo}>
                         <TextInput

@@ -70,7 +70,6 @@ class login extends Component {
                 body: formBody
             }).then((res) => res.json())
                 .then((resJSON) => {
-                    console.log('hehe');
                     if (resJSON.resultCode === 100) {
                         const token = resJSON.result;
                         global.setEmail(this.state.email);
