@@ -408,7 +408,7 @@ exports.mypage = (req, res) => {
             })
         })
     }
-    const myPosts = () => {
+    const myPosts = (conn) => {
         return new Promise((resolve, reject) => {
             var sql = 'SELECT * FROM timeline where user_email=?;';
             params = [email];
@@ -434,6 +434,7 @@ exports.mypage = (req, res) => {
     }
 
     const onError = (err) => {
+        console.log(err);
         res.status(500).send({
             resultCode: 1,
             result: err.err.message,
