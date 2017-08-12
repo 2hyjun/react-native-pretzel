@@ -12,10 +12,6 @@ import {
     AsyncStorage,
     Alert,
 } from 'react-native';
-import {
-    List,
-    ListItem,
-} from 'react-native-elements';
 
 import styles from './style';
 import TabBar from 'react-native-xtabbar';
@@ -70,7 +66,7 @@ class myPageScreen extends Component {
     }
 
     Setting() {
-        this.props.navigation.navigate('Setting');
+        this.props.navigation.navigate('Login')
     }
 
     render() {
