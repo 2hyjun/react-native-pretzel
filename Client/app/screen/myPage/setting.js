@@ -2,13 +2,10 @@
 
 import React, { Component, } from 'react';
 import {
-    StyleSheet,
     Image,
     View,
-    Button,
-    TextInput,
     Text,
-    Linking,
+    AsyncStorage,
     TouchableHighlight,
     TouchableOpacity,
     ListView,
@@ -17,7 +14,8 @@ import {
 
 import styles from './settingStyle';
 import TabBar from 'react-native-xtabbar';
-import {Navigator} from 'react-native-deprecated-custom-components';
+
+const STORAGE_KEY = '@PRETZEL:jwt';
 
 class settingScreen extends Component {
 
@@ -35,7 +33,7 @@ class settingScreen extends Component {
     handleMain = () => {
         this.props.navigation.navigate('main');
     };
-    LogOut = () => {
+    /*LogOut = () => {
         //this.props.navigation.navigate('main');
         Alert.alert('','로그아웃 하시겠습니까?',[{
                 text: '네',
@@ -52,7 +50,16 @@ class settingScreen extends Component {
 
             ]
         );
-    };
+    };*/
+
+    Logout() {
+        AsyncStorage.removeItem(STORAGE_KEY)
+            .then(this.props.navigation.navigate('Login'))
+            .catch((err) => console.log(err))
+        Alert.alert('로그아웃 되었습니다!');
+    }
+
+
     handleMyPage = () => {
         this.props.navigation.navigate('MyPage');
     };
@@ -76,7 +83,7 @@ class settingScreen extends Component {
                     </View>
                 </View>
 
-                <TouchableHighlight onPress={this.LogOut}>
+                <TouchableHighlight onPress={this.Logout}>
                     <View style={styles.cellTwo}>
                         <Text style={{color: '#ff6666'}}>로그아웃</Text>
                     </View>

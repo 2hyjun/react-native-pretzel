@@ -23,55 +23,50 @@ import {Navigator} from 'react-native-deprecated-custom-components';
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class myPageScreen extends Component {
-
-
     constructor(props) {
         super(props);
 
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state = {
-            dataSource: ds.cloneWithRows([
-                '학교 받아오깅!', '학과열세글자까지가능', '이름'
-            ])
-        };
     }
 
-    /*
-     GetToken() {
-     return new Promise((resolve, reject) => {
-     AsyncStorage.getItem(STORAGE_KEY, (err, value) => {
-     if (err) reject(err);
-     else resolve(value);
-     })
-     })
-     }
+    GetToken() {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getItem(STORAGE_KEY, (err, value) => {
+                if (err) reject(err);
+                else resolve(value);
+            })
+        })
+    }
 
-     componentDidMount() {
-     this.GetToken()
-     .then(this.HTTPRequest)
-     .then((res) => {
-     console.log(res.result);
+    HTTPRequest(value) {
+        return fetch('http://13.124.147.152:8124/api/timeline/mypage', {
+            method: 'GET',
+            headers: {
+                'x-access-token': value
+            }
+        })
+            .then((res) => res.json())
+    }
 
-     this.setState({
-     user_name: res.myInfo.user_name,
-     user_univ: res.myInfo.user_univ,
-     user_major: res.myInfo.user_major,
-     })
-     })
-     .catch((err) => console.error(err))
+    componentDidMount() {
+        this.GetToken()
+            .then(this.HTTPRequest)
+            .then((res) => {
+                console.log(res.result);
 
-     }*/
+                this.setState({
+                    user_email: res.myInfo.user_email,
+                    user_name: res.myInfo.user_name,
+                    user_univ: res.myInfo.user_univ,
+                    user_major: res.myInfo.user_major,
+                })
+            })
+            .catch((err) => console.error(err))
+
+    }
 
     Setting() {
         this.props.navigation.navigate('Setting');
     }
-    handleMain = () => {
-        this.props.navigation.navigate('main');
-    };
-    handleMyPage = () => {
-        this.props.navigation.navigate('MyPage');
-    };
-
 
     render() {
         return (
@@ -85,48 +80,66 @@ class myPageScreen extends Component {
                     </View>
                 </View>
                 <View style={styles.cellTwo}>
-                    <View style={styles.cellTwoProfile}>
-                        <View style={styles.cellTwoProfilePic}>
+                    <View style={styles.cellTwoOne}>
+                        <View style={styles.cellTwoOnePic}>
                             <Image source={require('../../../img/mypage/mypage_main_default_profile_user.png')}
                                    style={{resizeMode:'center'}}/>
 
                         </View>
-                        <View style={styles.cellTwoProfileID}>
+                        <View style={styles.cellTwoOneID}>
                             <Text>user101</Text>
                         </View>
                     </View>
-                    <View style={styles.cellTwoInfo}>
-                        <View style={styles.cellTwoInfoFix}>
-                                <View style={styles.rowFix}>
-                                    <Text>학교</Text>
-                                </View>
-                                <View style={styles.rowFix}>
-                                    <Text>학과</Text>
-                                </View>
-                                <View style={styles.rowFix}>
-                                    <Text>이름</Text>
-                                </View>
-
-                        </View>
-                        <View style={styles.cellTwoInfoVari}>
-                            <ListView
-                                dataSource={this.state.dataSource}
-                                renderRow={(rowData) =>
-                                    <View style={styles.row}>
-                                        <Text>{rowData}</Text>
+                    <View style={styles.cellTwoTwo}>
+                        <View style={styles.cellTwoTwoInfo}>
+                            <View style={styles.cellTwoTwoInfo}>
+                                <View style={styles.cellTwoRow}>
+                                    <View style={styles.cellTwoRow1}>
+                                        <Text style={{color:'#dae000', fontWeight:'bold',}}>●</Text>
                                     </View>
-                                }
-                                renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                                    <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
-                                    />}
-                            />
+                                    <View style={styles.cellTwoRow2}>
+                                        <Text style={{fontWeight:'bold',}}>학교</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.cellTwoRow}>
+                                    <View style={styles.cellTwoRow1}>
+                                        <Text style={{color:'#dae000', fontWeight:'bold',}}>●</Text>
+                                    </View>
+                                    <View style={styles.cellTwoRow2}>
+                                        <Text style={{fontWeight:'bold',}}>학과</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.cellTwoRow}>
+                                    <View style={styles.cellTwoRow1}>
+                                        <Text style={{color:'#dae000', fontWeight:'bold',}}>●</Text>
+                                    </View>
+                                    <View style={styles.cellTwoRow2}>
+                                        <Text style={{fontWeight:'bold',}}>이름</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.cellTwoTwoVari}>
+                            <View style={styles.cellTwoVariRow}>
+                                <Text style={{textDecorationLine:'underline',}}>{this.state.user_univ}</Text>
+                            </View>
+                            <View style={styles.cellTwoVariRow}>
+                                <Text style={{textDecorationLine:'underline',}}>{this.state.user_major}</Text>
+                            </View>
+                            <View style={styles.cellTwoVariRow}>
+                                <Text style={{textDecorationLine:'underline',}}>{this.state.user_name}</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
 
-
                 <View style={styles.cellThree}>
-                    <Text>adsf</Text>
+                    <Text style={{alignSelf:'center', color:'orange'}}>요청현황</Text>
+
+                </View>
+                <View style={styles.cellFour}>
+                    <Text>그그그그그 게시글 올린거</Text>
+
                 </View>
             </View>
         );
@@ -134,20 +147,3 @@ class myPageScreen extends Component {
 }
 
 export default myPageScreen;
-
-
-/*
- <List>
- <ListView style={styles.cellTwoInfoVari}
- dataSource={this.state.dataSource}
- renderRow={(rowData) =>
- <View style={styles.row}>
- <Text>{rowData}</Text>
- </View>
- }
- renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
- <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
- />}
- />
- </List>
- */

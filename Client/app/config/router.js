@@ -20,6 +20,8 @@ import register from '../screen/register';
 import post from '../screen/post';
 import chat from '../screen/chat';
 import myPage from '../screen/myPage';
+import alarm from '../screen/myPage';
+import setting from '../screen/myPage';
 
 import meanless1 from '../screen/meanless/meanless1';
 import meanless2 from '../screen/meanless/meanless2';
@@ -54,9 +56,6 @@ export const TypeTab = TabNavigator({
     lazyLoad: true,
     tabBarOptions: {
         showLabel: true,
-        tabStyle: {
-            marginTop: 10,
-        },
         indicatorStyle: {
             backgroundColor: '#E3502A'
         },
@@ -158,4 +157,18 @@ export const Loading = StackNavigator({
     },
 }, {
     headerMode: 'none',
+});
+
+export const My = StackNavigator({
+    MyPage: {
+        screen: myPage,
+    },
+    Setting: {
+        screen: setting,
+    },
+    Alarm: {
+        screen: alarm,
+    }
+}, {
+    headerMode: 'none'
 });
