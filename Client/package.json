@@ -1,45 +1,45 @@
 {
-	"name": "pretzel",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "16.0.0-alpha.12",
-		"react-native": "0.47.1",
-		"react-native-aes": "^1.0.0",
-		"react-native-animatable": "^1.2.3",
-		"react-native-autogrow-textinput": "^4.1.0",
-		"react-native-deprecated-custom-components": "^0.1.1",
-		"react-native-dimension": "^1.0.6",
-		"react-native-dropdownalert": "^2.10.0",
-		"react-native-elements": "^0.15.0",
-		"react-native-keyboard-aware-view": "^0.0.12",
-		"react-native-lightbox": "^0.6.0",
-		"react-native-list-popover": "^1.0.5",
-		"react-native-material-ripple": "^0.7.4",
-		"react-native-modal-datetime-picker": "^4.9.0",
-		"react-native-panel": "^1.0.3",
-		"react-native-popup-dialog": "^0.9.32",
-		"react-native-randombytes": "^2.2.0",
-		"react-native-show-hide-toggle-box": "^1.0.1",
-		"react-native-simple-encryption": "^1.2.1",
-		"react-native-tab-navigator": "^0.3.3",
-		"react-native-toggle-picker": "^1.0.2",
-		"react-native-vector-icons": "^4.3.0",
-		"react-native-wheel-picker": "^1.1.1",
-		"react-native-xtabbar": "^0.2.1",
-		"react-navigation": "^1.0.0-beta.11"
-	},
-	"devDependencies": {
-		"babel-jest": "20.0.3",
-		"babel-preset-react-native": "2.1.0",
-		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "pretzel",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.1",
+    "react-native-aes": "^1.0.0",
+    "react-native-animatable": "^1.2.3",
+    "react-native-autogrow-textinput": "^4.1.0",
+    "react-native-deprecated-custom-components": "^0.1.1",
+    "react-native-dimension": "^1.0.6",
+    "react-native-dropdownalert": "^2.10.0",
+    "react-native-elements": "^0.15.0",
+    "react-native-keyboard-aware-view": "^0.0.12",
+    "react-native-lightbox": "^0.6.0",
+    "react-native-list-popover": "^1.0.5",
+    "react-native-material-ripple": "^0.7.4",
+    "react-native-modal-datetime-picker": "^4.9.0",
+    "react-native-panel": "^1.0.3",
+    "react-native-popup-dialog": "^0.9.32",
+    "react-native-randombytes": "^2.2.0",
+    "react-native-show-hide-toggle-box": "^1.0.1",
+    "react-native-simple-encryption": "^1.2.1",
+    "react-native-tab-navigator": "^0.3.3",
+    "react-native-toggle-picker": "^1.0.2",
+    "react-native-vector-icons": "^4.3.0",
+    "react-native-wheel-picker": "^1.1.1",
+    "react-native-xtabbar": "^0.2.1",
+    "react-navigation": "^1.0.0-beta.11"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

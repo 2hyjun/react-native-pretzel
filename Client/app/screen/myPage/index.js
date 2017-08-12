@@ -26,6 +26,13 @@ class myPageScreen extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            user_email: '',
+            user_name: "",
+            user_univ: "",
+            user_major: "",
+        }
+
     }
 
     GetToken() {
