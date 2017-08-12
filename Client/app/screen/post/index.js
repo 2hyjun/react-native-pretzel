@@ -47,8 +47,9 @@ import DropdownAlert from '../../components/DropdownAlert';
             "place": "정문 스타벅스"*/
 
 
-const contents = ['커피', '밥버거', '인쇄', '데려다줘'];
+const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const types = ['해주세요', '해줄게요', '같이해요'];
+
 export default class post extends React.Component {
 
     constructor(props){
@@ -64,7 +65,7 @@ export default class post extends React.Component {
             contentType: '방식 선택', // 해주세요
             title: '',
             place: '',
-
+            elevationToZero: false,
 
             contentItem: '',
             typeItem: '',
@@ -86,18 +87,18 @@ export default class post extends React.Component {
     }
     content_showPopOver() {
         //console.log(this.refs);
-        this.setState({isPopupShowing: true});
+        this.setState({elevationToZero: true});
 
         this.content.show();
 
     }
     type_showPopOver() {
         //console.log(this.refs);
-        this.setState({isPopupShowing: true});
+        this.setState({elevationToZero: true});
         this.type.show();
     }
     detail_showPopOver() {
-        this.setState({isPopupShowing: true});
+        this.setState({elevationToZero: true});
         this.detail.show();
         this.detail_input.focus();
     }
@@ -167,20 +168,29 @@ export default class post extends React.Component {
             .then(this.HttpRequest)
             .then((rJSON) => {
                 if (rJSON.resultCode === 100) {
-                    this.dropdown.alertWithType('success', '글 작성 성공', '');
-                    setTimeout(() => {
-                        this.props.navigation.navigate('Timeline')
-                    }, 1000);
-                } else {
-                    this.dropdown.alertWithType('error', '글 작성 실패', rJSON.result);
+                    this.setState({elevationToZero: true}, () => {
+                        this.dropdown.alertWithType('success', '글 작성 성공', '');
+
+                        setTimeout(() => {
+                            this.props.navigation.navigate('Timeline')
+                        }, 1000);
+                    });
+
+                }
+                else {
+                    this.setState({elevationToZero: true}, () => {
+                        this.dropdown.alertWithType('error', '글 작성 실패', rJSON.result);
+                    });
+
                 }
 
             })
     }
     render() {
 
-        const elevation = this.state.isPopupShowing ? {elevation: 0} : {elevation: 5};
+        const elevation = this.state.elevationToZero ? {elevation: 0} : {elevation: 5};
         const deadLineText = this.state.deadLine === '배달 기한 설정' ? {color: 'grey'} : {color: '#f95a25'};
+        console.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
                     <View style={{flex: 1, marginTop: 30}}>
@@ -252,7 +262,7 @@ export default class post extends React.Component {
                                           onTextChanged={(expectedPrice) => this.setState({expectedPrice})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
-                                          keyboardType="phone-pad"
+                                          keyType={"decimal-pad"}
                                     />
                                     <Fumi style={styles.form_input}
                                           label={'배달금액 (숫자만)'}
@@ -263,7 +273,7 @@ export default class post extends React.Component {
                                           onTextChanged={(fee) => this.setState({fee})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
-                                          keyboardType="number-pad"
+                                          keyType="decimal-pad"
                                     />
                                     <TouchableOpacity
                                         style={styles.deadline}
@@ -288,7 +298,8 @@ export default class post extends React.Component {
                 <PopupDialog
                     ref={(ref) => {this.content = ref}}
                     dialogAnimation = { new SlideAnimation({slideFrom: 'left'})}
-                    dialogTitle={<DialogTitle title="배달 항목 선택" />}>
+                    dialogTitle={<DialogTitle title="배달 항목 선택" />}
+                    onDismissed={() => this.setState({elevationToZero: false})}>
                     <View style={styles.dialogContentView}>
                         <Picker style={{width: 150, height: 180}}
                             //selectedValue={this.state.contentItem}
@@ -303,7 +314,8 @@ export default class post extends React.Component {
                 <PopupDialog
                     ref={(ref) => {this.type = ref}}
                     dialogAnimation = { new SlideAnimation({slideFrom: 'right'})}
-                    dialogTitle={<DialogTitle title="방식 선택" />}>
+                    dialogTitle={<DialogTitle title="방식 선택" />}
+                    onDismissed={() => this.setState({elevationToZero: false})}>
                     <View style={styles.dialogContentView}>
                         <Picker style={{width: 150, height: 180}}
                                 selectedValue={this.state.contentItem}
@@ -319,7 +331,8 @@ export default class post extends React.Component {
                 <PopupDialog
                     ref={(ref) => {this.detail = ref}}
                     dialogAnimation = { new ScaleAnimation()}
-                    dialogTitle={<DialogTitle title="상세 정보 작성" titleTextStyle={{color: '#f95a25'}}/>}
+                    dialogTitle={<DialogTitle title="상세 정보 작성" titleTextStyle={{color: '#f95a25'}}
+                    />}
                     // actions={[
                     //     <DialogButton
                     //         text="작성 완료"
@@ -337,6 +350,7 @@ export default class post extends React.Component {
                         Keyboard.dismiss();
                         this.setState({
                             isPopupShowing: false,
+                            elevationToZero: false,
                         });
                     }}
                     spellCheck={false}
@@ -372,7 +386,10 @@ export default class post extends React.Component {
                     onCancel={() => this.setState({isDateTimePickerVisible: false})}
                 />
                 <DropdownAlert
-                    ref={(ref) => this.dropdown = ref}/>
+                    ref={(ref) => this.dropdown = ref}
+                    onCancel={() => this.setState({elevationToZero: false})}
+                    onClose={() => this.setState({elevationToZero: false})}
+                />
             </View>
         )
     }

@@ -31,7 +31,7 @@ import styles from './style';
 
 export const TypeTab = TabNavigator({
     Helpme: {
-        screen: meanless1,
+        screen: timeline,
         navigationOptions: {
            title: '해주세요'
         }
@@ -62,9 +62,11 @@ export const TypeTab = TabNavigator({
         labelStyle: {
             color: 'black',
             fontSize: 17,
+            marginTop: 20,
         },
         style: {
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+
         }
     }
 });
@@ -122,7 +124,7 @@ export const MainTab = TabNavigator({
     lazyLoad: true,
     tabBarOptions: {
         showIcon: true,
-        showLabel: false
+        showLabel: false,
     }
 
 });
