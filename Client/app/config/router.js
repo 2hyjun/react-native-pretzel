@@ -20,8 +20,8 @@ import register from '../screen/register';
 import post from '../screen/post';
 import chat from '../screen/chat';
 import myPage from '../screen/myPage';
-import alarm from '../screen/myPage';
-import setting from '../screen/myPage';
+import alarm from '../screen/myPage/alarm';
+import setting from '../screen/myPage/setting';
 
 import meanless1 from '../screen/meanless/meanless1';
 import meanless2 from '../screen/meanless/meanless2';
@@ -159,7 +159,8 @@ export const Loading = StackNavigator({
     headerMode: 'none',
 });
 
-export const My = StackNavigator({
+
+export const MyPage = StackNavigator({
     MyPage: {
         screen: myPage,
     },
