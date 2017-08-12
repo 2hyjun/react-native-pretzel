@@ -26,7 +26,8 @@ class myPageScreen extends Component {
             user_name: '',
             user_univ: '',
             user_major: '',
-        }
+        };
+        this.Setting = this.Setting.bind(this);
     }
 
     GetToken() {
@@ -66,7 +67,7 @@ class myPageScreen extends Component {
     }
 
     Setting() {
-        this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('Setting')
     }
 
     render() {

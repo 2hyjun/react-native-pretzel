@@ -31,14 +31,21 @@ class settingScreen extends Component {
     }
 
     handleMain = () => {
-        this.props.navigation.navigate('main');
+        this.props.navigation.navigate('MyPage');
     };
-    /*LogOut = () => {
+
+    Logout() {
+        AsyncStorage.removeItem(STORAGE_KEY)
+            .then(this.props.navigation.navigate('Login'))
+            .catch((err) => console.log(err))
+    };
+
+    LogOut = () => {
         //this.props.navigation.navigate('main');
         Alert.alert('','로그아웃 하시겠습니까?',[{
                 text: '네',
                 onPress: (text)=>{
-                    console.log('button press yes')
+                    this.Logout();
                 }
             },
                 {
@@ -50,15 +57,7 @@ class settingScreen extends Component {
 
             ]
         );
-    };*/
-
-    Logout() {
-        AsyncStorage.removeItem(STORAGE_KEY)
-            .then(this.props.navigation.navigate('Login'))
-            .catch((err) => console.log(err))
-        Alert.alert('로그아웃 되었습니다!');
-    }
-
+    };
 
     handleMyPage = () => {
         this.props.navigation.navigate('MyPage');
@@ -83,7 +82,7 @@ class settingScreen extends Component {
                     </View>
                 </View>
 
-                <TouchableHighlight onPress={this.Logout}>
+                <TouchableHighlight onPress={this.LogOut}>
                     <View style={styles.cellTwo}>
                         <Text style={{color: '#ff6666'}}>로그아웃</Text>
                     </View>
