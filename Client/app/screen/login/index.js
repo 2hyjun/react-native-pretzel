@@ -53,6 +53,7 @@ class login extends Component {
             };
             let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
             params.password = encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
+            console.log(params.password);
             let formBody = [];
             for (let property in params) {
                 let encodedKey = encodeURIComponent(property);

@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     filter_head: {
-        marginTop: height(1.5),
         marginLeft: width(3),
         height: height(3),
     },
@@ -25,26 +24,52 @@ const styles = StyleSheet.create({
         width: width(100),
         height: height(10),
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        //backgroundColor: 'skyblue'
     },
     filter_item_disabled: {
         padding: 10,
         borderWidth: 1,
         borderRadius: 20,
-        borderColor: '#e6e6e6',
+        borderColor: 'lightgrey',
         backgroundColor: 'white',
         margin: 3,
         marginBottom: 10,
+        justifyContent: 'center'
     },
-    filter_text_disable: {
-        color: '#e6e6e6',
-        textAlign: 'center'
+    filter_text_disabled: {
+        color: 'lightgrey',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
     },
+    filter_item_enabled: {
+        padding: 10,
+        backgroundColor: '#f95a25',
+        margin: 3,
+        marginBottom: 10,
+        justifyContent: 'center',
+        borderRadius: 15,
+
+    },
+    filter_text_enabled: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+    },
+    filter_scrollview: {
+        height: height(8),
+        //backgroundColor: 'red'
+    }
+    ,
     timeline_container: {
         height: height(90),
         width: width(100),
-        backgroundColor: '#efefef'
+        backgroundColor: '#e2e2e2',
+        marginTop: -20,
+
     },
 });
 
