@@ -20,57 +20,73 @@ const styles = StyleSheet.create({
     cellOne: { // setting 톱니바퀴 아이콘
         height: 50,
         width: width(100),
-        backgroundColor: '#ffffff',
         alignItems: 'flex-end',
     },
     cellTwo: { //User info : profile pic, major/student ID/name
-        flex: 1.3,
+        height: height(20),
         width: width(100),
         flexDirection: 'row',
         marginTop: 10,
     },
-    cellTwoProfile: { //User info : profile pic
-        width: width(25),
+    cellTwoOne: { //User info : profile pic
+        width: width(30),
         margin: 10,
         flexDirection: 'column',
         alignItems: 'center',
     },
-    cellTwoProfilePic: { //User info : profile pic
+    cellTwoOnePic: { //User info : profile pic
         flex:3,
         alignItems: 'center',
     },
-    cellTwoProfileID: { //User info : profile pic
+    cellTwoOneID: { //User info : profile pic
         flex:1,
         alignItems: 'center',
     },
-    cellTwoInfo: { //major/student ID/name
-        width: width(75),
-        margin: 10,
-        marginRight: 20,
+    cellTwoTwo: { //major/student ID/name
+        width: width(70),
         flexDirection: 'row',
     },
-    cellTwoInfoFix: { //학교, 학과, 이름
+    cellTwoTwoInfo: { //학교, 학과, 이름
         flex:1,
         flexDirection: 'column',
+    },
+    cellTwoRow:{
+        flex:4,
+        flexDirection:'row',
+        alignItems:'center',
+    },
+    cellTwoRow1:{
+        flex:1,
+    },
+    cellTwoRow2:{
+        flex:3,
+    },
+    cellTwoTwoVari: { //사람에 따라 달라용
+        flex:4,
+        flexDirection: 'column',
+    },
+    cellTwoVariRow:{
+        flex:1,
+        justifyContent: 'center',
+        //borderWidth: 0.5,
+        //borderBottomColor: '#d6d7da',
+    },
+    cellThree: { //요청현황
+        flex: 0.2,
+        alignSelf:'flex-start',
+        width:width(25),
         marginTop:10,
+        marginLeft:20,
+        borderWidth: 1,
+        borderColor: 'orange',
+        borderRadius:10,
+        justifyContent: 'center',
     },
-    rowFix: {
-        flex: 1,
-    },
-    cellTwoInfoVari: { //사람에 따라 달라요
-        flex:5,
-    },
-    cellThree: { //Detailed sets
-        //flex: 2,
-        marginTop: 40,
+    cellFour: { //Detailed sets
+        flex: 2,
+        marginTop: 10,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
-    },
-    cellFive: { //Under Bar(Tab bar)
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     imageStyle: {
         marginTop : 20,

@@ -13,7 +13,6 @@ import {
     Text,
 } from 'react-native-elements';
 import { width, height, totalSize } from 'react-native-dimension';
-import { BoxShadow } from 'react-native-shadow';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 
@@ -42,10 +41,6 @@ class alarmScreen extends React.Component {
     };
 
 
-
-
-
-
     render() {
         //const { email, phone, login, dob, location } = this.props.navigation.state.params;
         return (
@@ -68,7 +63,9 @@ class alarmScreen extends React.Component {
                         title="시간대 설정"
                         hideChevron
                     />
-                        <Text style={{color: '#ff6666', margin: 10}}>시작 시간</Text>
+                    <View style={styles.cellStart}>
+                        <Text style={{alignSelf:'center', color:'#ff6666',}}>종료 시간</Text>
+                    </View>
 
                     <TouchableOpacity onPress={this._showTimePicker}>
                         <View style={styles.button}>
@@ -80,11 +77,13 @@ class alarmScreen extends React.Component {
                         onConfirm={this._handleTimePicked}
                         onCancel={this._hideTimePicker}
                     />
-                        <Text style={{color: '#0066cc', margin: 10}}>종료 시간</Text>
+                    <View style={styles.cellEnd}>
+                        <Text style={{alignSelf:'center', color:'#0066cc',}}>종료 시간</Text>
+                    </View>
 
                     <TouchableOpacity onPress={this._showTimePicker}>
                         <View style={styles.button}>
-                            <Text>종료료 시각 정하기</Text>
+                            <Text>종료 시각 정하기</Text>
                         </View>
                     </TouchableOpacity>
                     <DateTimePicker
@@ -102,7 +101,6 @@ class alarmScreen extends React.Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     parent: {
         flexDirection: 'column',
@@ -115,8 +113,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
-
-
     },
     cellOneFirst: { // listView
         flex: 7,
@@ -137,6 +133,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    cellStart: { //시작시각
+        flex: 0.2,
+        alignSelf:'flex-start',
+        width:width(25),
+        marginTop:10,
+        marginLeft:10,
+        borderWidth: 1,
+        borderColor: '#ff6666',
+        borderRadius:10,
+        justifyContent: 'center',
+    },
+    cellEnd: { //종료시각
+        flex: 0.2,
+        alignSelf:'flex-start',
+        width:width(25),
+        marginTop:10,
+        marginLeft:10,
+        borderWidth: 1,
+        borderColor: '#0066cc',
+        borderRadius:10,
+        justifyContent: 'center',
     },
 
 });
