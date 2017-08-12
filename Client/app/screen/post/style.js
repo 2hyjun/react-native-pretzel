@@ -12,9 +12,6 @@ const styles = StyleSheet.create({
         //height: height(5),
         flexDirection: 'row',
         justifyContent: 'center',
-
-
-
     },
     ripple: {
         flexDirection: 'row',
@@ -101,11 +98,13 @@ const styles = StyleSheet.create({
         width: width(90),
     },
     detail_input: {
+        height: 180,
         fontSize: 20,
+        //backgroundColor: 'skyblue'
     },
     forms: {
         //backgroundColor: 'skyblue',
-        height: height(50)
+        height: height(70)
     },
     detail_cell_style: {
         alignItems: 'center',
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
 
     },
     deadline_text: {
-        color: 'grey',
+        //color: 'grey',
         fontWeight: 'bold',
         fontSize: 18,
         padding: 7,
@@ -141,7 +140,28 @@ const styles = StyleSheet.create({
     detail_done: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    submit_cell: {
+        width: width(50),
+        height: width(10),
+        backgroundColor: 'red'
+    },
+    submitBtn: {
+        flex: 1,
+        borderRadius: 10,
+        backgroundColor: '#d3e229',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width(50),
+        height: height(10),
+        marginTop: 10,
+        alignSelf: 'center'
+    },
+    submitTxt: {
+        fontSize: 20,
+        fontWeight: 'bold'
     }
+
 
 
 });

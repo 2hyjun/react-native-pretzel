@@ -8,7 +8,10 @@ import {
     Alert,
     Image,
     Keyboard,
+    AsyncStorage
 } from 'react-native';
+const STORAGE_KEY = '@PRETZEL:jwt';
+
 import ToggleBox from '../../components/ToggleBox';
 import styles from './style';
 import global from '../../config/global';
@@ -25,6 +28,7 @@ import PopupDialog, {
 import Picker from 'react-native-wheel-picker'
 import Fumi from '../../components/TextInputEffect/Fumi';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import DropdownAlert from '../../components/DropdownAlert';
 
 
 
@@ -68,7 +72,17 @@ export default class post extends React.Component {
             isDateTimePickerVisible: false,
 
         };
+        this._submit = this._submit.bind(this);
+        this.GetToken = this.GetToken.bind(this);
+
         this.handleDateTimePick = this.handleDateTimePick.bind(this);
+        this.content_showPopOver = this.content_showPopOver.bind(this);
+        this.type_showPopOver = this.type_showPopOver.bind(this);
+        this.detail_showPopOver = this.detail_showPopOver.bind(this);
+        this.HttpRequest = this.HttpRequest.bind(this);
+        this.content_setItem = this.content_setItem.bind(this);
+        this.type_setItem = this.type_setItem.bind(this);
+
     }
     content_showPopOver() {
         //console.log(this.refs);
@@ -86,7 +100,6 @@ export default class post extends React.Component {
         this.setState({isPopupShowing: true});
         this.detail.show();
         this.detail_input.focus();
-
     }
     content_setItem(index) {
         this.setState({content: contents[index]});
@@ -103,13 +116,71 @@ export default class post extends React.Component {
         console.log(global.nowKST());
     }
     handleDateTimePick(date) {
-        console.log(date);
-        console.log(this.state);
-        this.setState({isDateTimePickerVisible: false});
+        console.log(global.nowKstParms(date));
+        this.setState({
+            deadLine: global.nowKstParms(date),
+            isDateTimePickerVisible: false
+        });
+    }
+    GetToken() {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getItem(STORAGE_KEY, (err, value) => {
+                if (err) reject(err);
+                else resolve(value);
+            })
+        })
+    }
+    HttpRequest(token) {
+        let params = {
+            content: this.state.content,
+            expectedPrice: this.state.expectedPrice,
+            fee: this.state.fee,
+            deadLine: this.state.deadLine,
+            detailInfo: this.detailTxt,
+            contentType: this.state.contentType,
+            title: this.state.title,
+            place: this.state.place,
+        };
+        let formBody = [];
+        for (let property in params) {
+            let encodedKey = encodeURIComponent(property);
+            let encodedValue = encodeURIComponent(params[property]);
+            console.log(encodedKey + "=" + encodedValue);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join('&');
+        console.log(formBody);
+        return (
+            fetch('http://13.124.147.152:8124/api/timeline', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'x-access-token': token,
+                },
+                body: formBody,
+            }).then((res) => res.json())
+        )
+    }
+
+    _submit() {
+        this.GetToken()
+            .then(this.HttpRequest)
+            .then((rJSON) => {
+                if (rJSON.resultCode === 100) {
+                    this.dropdown.alertWithType('success', '글 작성 성공', '');
+                    setTimeout(() => {
+                        this.props.navigation.navigate('Timeline')
+                    }, 1000);
+                } else {
+                    this.dropdown.alertWithType('error', '글 작성 실패', rJSON.result);
+                }
+
+            })
     }
     render() {
 
         const elevation = this.state.isPopupShowing ? {elevation: 0} : {elevation: 5};
+        const deadLineText = this.state.deadLine === '배달 기한 설정' ? {color: 'grey'} : {color: '#f95a25'};
         return(
             <View style={styles.container}>
                     <View style={{flex: 1, marginTop: 30}}>
@@ -150,7 +221,7 @@ export default class post extends React.Component {
                             </Ripple>
                         </View>
                         <View style={styles.forms}>
-                            <KeyboardAwareView>
+                            <KeyboardAwareView >
                                 <ScrollView>
                                     <Fumi style={styles.form_input}
                                           label={'제목'}
@@ -173,7 +244,7 @@ export default class post extends React.Component {
                                           autoCapital={'none'}
                                     />
                                     <Fumi style={styles.form_input}
-                                          label={'예상금액'}
+                                          label={'예상금액 (숫자만)'}
                                           iconClass={Icon}
                                           iconName={'money'}
                                           iconColor={'#f95a25'}
@@ -184,7 +255,7 @@ export default class post extends React.Component {
                                           keyboardType="phone-pad"
                                     />
                                     <Fumi style={styles.form_input}
-                                          label={'배달금액'}
+                                          label={'배달금액 (숫자만)'}
                                           iconClass={Icon}
                                           iconName={'motorcycle'}
                                           iconColor={'#f95a25'}
@@ -198,8 +269,17 @@ export default class post extends React.Component {
                                         style={styles.deadline}
                                         onPress={() => this.setState({isDateTimePickerVisible: true})}>
                                         <IconM name="timer" size={20} color={this.state.deadLine === '배달 기한 설정' ? 'grey' : '#f95a25'}/>
-                                        <Text style={styles.deadline_text}>{this.state.deadLine}</Text>
+                                        <Text style={[styles.deadline_text, deadLineText]}>{this.state.deadLine}</Text>
                                     </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        style={styles.submitBtn}
+                                        onPress={this._submit}>
+                                        <Text style={styles.submitTxt}>
+                                            글 작성
+                                        </Text>
+                                    </TouchableOpacity>
+
                                 </ScrollView>
                             </KeyboardAwareView>
                         </View>
@@ -255,7 +335,9 @@ export default class post extends React.Component {
                     // ]}
                     onDismissed={() => {
                         Keyboard.dismiss();
-                        this.setState({isPopupShowing: false});
+                        this.setState({
+                            isPopupShowing: false,
+                        });
                     }}
                     spellCheck={false}
                     dialogStyle={{marginTop: -250}}
@@ -269,6 +351,8 @@ export default class post extends React.Component {
                             spellCheck={false}
                             style={styles.detail_input}
                             placeholder={'12시까지 제도관 학생회실로 노스커피 아이스 아메리카노 4잔 배달해주세요.'}
+                            onChangeText={(value) => this.detailTxt = value}
+
                         />
                     </View>
                     <View style={styles.detail_done}>
@@ -280,12 +364,15 @@ export default class post extends React.Component {
 
                     </View>
                 </PopupDialog>
+
                 <DateTimePicker
                     mode="datetime"
                     isVisible={this.state.isDateTimePickerVisible}
                     onConfirm={this.handleDateTimePick}
                     onCancel={() => this.setState({isDateTimePickerVisible: false})}
                 />
+                <DropdownAlert
+                    ref={(ref) => this.dropdown = ref}/>
             </View>
         )
     }

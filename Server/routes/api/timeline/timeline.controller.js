@@ -69,7 +69,8 @@ exports.post = (req, res) => {
 
     const checkParams = () => {
         return new Promise((resolve, reject) => {
-            if (title && content && detailInfo && expectedPrice && fee && deadLine && contentType && place) {
+            if (title && content && detailInfo && expectedPrice 
+                && fee && deadLine && contentType && place) {
                 //console.log('checkParams')
                 resolve();
                 
@@ -398,6 +399,7 @@ exports.mypage = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
+                conn.release();
                 // console.log('getConn Error: ', err);
                 // if (err)
                 //     reject({
