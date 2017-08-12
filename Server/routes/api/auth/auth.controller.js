@@ -1,7 +1,6 @@
 var crypto = require('crypto'),
     db = require('../../../db/mysql'),
     config = require("../../../config"),
-    conn = db.get(),
     jwt = require('jsonwebtoken')
 /*
     POST /api/auth/register
@@ -22,6 +21,7 @@ exports.register = (req, res) => {
         univ,
         major
     } = req.body;
+    
     const checkParams = () => {
 
         if (email && name && password && univ && major) {
@@ -48,19 +48,37 @@ exports.register = (req, res) => {
             })
         })
     }
-
-    const Register = (encryptPassword) => {
+    const getConn = (encryptedPassword) => {
         return new Promise((resolve, reject) => {
-
-
+            db.get().getConnection((err, conn) => {
+                if (err) {
+                    console.log('getConn Error: ', err);
+                    reject({
+                        err: err
+                    })
+                } else
+                    resolve({
+                        password: encryptedPassword,
+                        conn: conn
+                    });
+            })
+        })
+        // return Promise.resolve(db.get());
+    }
+    const Register = (obj) => {
+        return new Promise((resolve, reject) => {
+            
             var sql =
                 'INSERT INTO users ' +
                 '(user_email, user_name, user_password, ' +
                 'user_univ, user_major) ' +
                 'VALUES(?, ?, ?, ?, ?);';
-            var params = [email, name, encryptPassword, univ, major];
-
+            var encryptedPassword = obj.password;
+            var conn = obj.conn;
+            var params = [email, name, encryptedPassword, univ, major];
+            
             conn.query(sql, params, (err, results, fields) => {
+                conn.release();
                 if (err)
                     reject({
                         error: err
@@ -100,6 +118,7 @@ exports.register = (req, res) => {
     }
     checkParams()
         .then(Encrypt)
+        .then(getConn)
         .then(Register)
         .then(respond)
         .catch(HandleError);
@@ -120,11 +139,26 @@ exports.login = (req, res) => {
     } = req.body;
     const secret = config.secret;
     
-    const checkEmail = (email) => {
+    const getConn = () => {
+        return new Promise((resolve, reject) => {
+            db.get().getConnection((err, conn) => {
+                if (err) {
+                    console.log('getConn Error: ', err);
+                    reject({
+                        err: err
+                    })
+                } else
+                    resolve(conn);
+            })
+        })
+        // return Promise.resolve(db.get());
+    }
+    const checkEmail = (conn) => {
         return new Promise((resolve, reject) => {
             var sql = 'SELECT * FROM users where user_email=?;';
             var params = [email];
             conn.query(sql, params, (err, results, fields) => {
+                conn.release();
                 if (err) {
                     reject({
                         err: err
@@ -151,7 +185,7 @@ exports.login = (req, res) => {
                 else {
                     resolve({
                         result: result, 
-                        encryptPassword: key.toString('base64')
+                        encryptedPassword: key.toString('base64')
                     });
                 }
             })
@@ -159,7 +193,7 @@ exports.login = (req, res) => {
     }
     const checkPassword = (obj) => {
         return new Promise((resolve, reject) => {
-            if (obj.encryptPassword === obj.result.user_password) {
+            if (obj.encryptedPassword === obj.result.user_password) {
                 resolve(obj.result);
             } else {
                 reject({
@@ -230,7 +264,8 @@ exports.login = (req, res) => {
         })
     }
 
-    checkEmail(email)
+    getConn()
+        .then(checkEmail)
         .then(Encrypt)
         .then(checkPassword)
         .then(createToken)
