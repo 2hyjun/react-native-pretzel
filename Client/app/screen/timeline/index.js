@@ -5,16 +5,24 @@ import {
     ScrollView,
     TouchableOpacity,
     AsyncStorage,
+    ListView
 
 } from 'react-native';
 import DropdownAlert from '../../components/DropdownAlert';
 import styles from './style'
+
+
+import TimelineListItem from '../../components/TimelineListItem';
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
+
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 
 export default class timeline extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             'CoffeeEnabled': false,
             'RiceBurgerEnabled': false,
@@ -23,10 +31,12 @@ export default class timeline extends React.Component {
             'PrintEnabled': false,
             'ReturnBookEnabled': false,
             'ETCEnabled': false,
-            'QueryResult': [],
+            dataSource: ds.cloneWithRows([]),
+
         };
         this.GetToken = this.GetToken.bind(this);
         this.HttpRequest = this.HttpRequest.bind(this);
+        this._renderRefresh = this._renderRefresh.bind(this);
 
 
     }
@@ -50,18 +60,23 @@ export default class timeline extends React.Component {
         )
     }
 
-    componentWillMount() {
+    _renderRefresh() {
         this.GetToken()
             .then(this.HttpRequest)
             .then((res) => {
-                if (res.resultCode === 100)
-                    this.setState({QueryResult: res});
-                else {
+                if (res.resultCode !== 100) {
                     this.dropdown.alertWithType('error', '서버 에러', res.result);
+                } else {
+                    this.setState({
+                        dataSource: this.state.dataSource.cloneWithRows(res.result)
+                    })
+
                 }
             })
     }
-
+    componentDidMount() {
+        this._renderRefresh();
+    }
     render() {
         return(
             <View style={styles.container}>
@@ -72,21 +87,37 @@ export default class timeline extends React.Component {
                     <View style={styles.filter_content}>
                         <ScrollView horizontal={true} style={styles.filter_scrollview}>
                             <TouchableOpacity style={styles.filter_item_enabled}>
-                                <Text style={styles.filter_text_enabled}>Test</Text>
+                                <Text style={styles.filter_text_enabled}>모두보기</Text>
                             </TouchableOpacity>
                             {contents.map((value, i) => (
                                 <TouchableOpacity style={styles.filter_item_disabled}
-                                                key={i}>
+                                                  key={i}>
                                     <Text style={styles.filter_text_disabled}>{value}</Text>
                                 </TouchableOpacity>
                             ))}
 
                         </ScrollView>
                     </View>
+                </View>
+                <View style={styles.timeline_container}>
 
-                    <View style={styles.timeline_container}>
-
-                    </View>
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        enableEmptySections={true}
+                        renderRow={(rowData) =>
+                            <TimelineListItem
+                                user_email={rowData.user_email}
+                                detailInfo={rowData.detailInfo}
+                                expectedPrice={rowData.expectedPrice}
+                                fee={rowData.fee}
+                                deadline={rowData.deadline}
+                                rid={rowData.rid}
+                                title={rowData.title}
+                                time={rowData.time}
+                                place={rowData.place}
+                            />
+                        }
+                    />
                 </View>
                 <DropdownAlert
                     ref={(ref) => this.dropdown = ref}

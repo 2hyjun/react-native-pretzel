@@ -113,13 +113,13 @@ export default class post extends React.Component {
 
     componentWillMount() {
         this.setState({user_email: global.user_email});
-        console.log(global.now());
-        console.log(global.nowKST());
+        //console.log(global.now());
+        //console.log(global.nowKST());
     }
     handleDateTimePick(date) {
-        console.log(global.nowKstParms(date));
+        //console.log(global.nowKSTParams(date));
         this.setState({
-            deadLine: global.nowKstParms(date),
+            deadLine: global.nowKSTParams(date),
             isDateTimePickerVisible: false
         });
     }
@@ -146,11 +146,11 @@ export default class post extends React.Component {
         for (let property in params) {
             let encodedKey = encodeURIComponent(property);
             let encodedValue = encodeURIComponent(params[property]);
-            console.log(encodedKey + "=" + encodedValue);
+            //console.log(encodedKey + "=" + encodedValue);
             formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join('&');
-        console.log(formBody);
+        //console.log(formBody);
         return (
             fetch('http://13.124.147.152:8124/api/timeline', {
                 method: 'POST',
@@ -190,7 +190,7 @@ export default class post extends React.Component {
 
         const elevation = this.state.elevationToZero ? {elevation: 0} : {elevation: 5};
         const deadLineText = this.state.deadLine === '배달 기한 설정' ? {color: 'grey'} : {color: '#f95a25'};
-        console.log(this.state.elevationToZero);
+        //console.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
                     <View style={{flex: 1, marginTop: 30}}>

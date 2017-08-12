@@ -31,7 +31,7 @@ const global = {
             ('00' + date.getUTCSeconds()).slice(-2);
         return date;
     },
-    nowKstParms: (date) => {
+    nowKSTParams: (date) => {
         date = date.getUTCFullYear() + '-' +
             ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
             ('00' + date.getUTCDate()).slice(-2) + ' ' +
@@ -39,6 +39,23 @@ const global = {
             ('00' + date.getUTCMinutes()).slice(-2) + ':' +
             ('00' + date.getUTCSeconds()).slice(-2);
         return date;
+    },
+    DateStrtoObj: (str) => {
+        let obj = {};
+        let date = str.split('T')[0];
+
+        obj.year = parseInt(date.split('-')[0]);
+        obj.month = parseInt(date.split('-')[1]);
+        obj.day = parseInt(date.split('-')[2]);
+
+        let time = str.split('T')[1];
+
+        obj.hour = parseInt(time.split(':')[0]);
+        obj.minutes = parseInt(time.split(':')[1]);
+        obj.second = parseInt(time.split(':')[2].split('.')[0]);
+
+        return obj;
+
     }
 };
 

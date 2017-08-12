@@ -53,8 +53,6 @@ class myPageScreen extends Component {
         this.GetToken()
             .then(this.HTTPRequest)
             .then((res) => {
-                console.log(res.result);
-
                 this.setState({
                     user_email: res.myInfo.user_email,
                     user_name: res.myInfo.user_name,

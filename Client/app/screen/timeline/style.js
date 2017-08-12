@@ -65,12 +65,19 @@ const styles = StyleSheet.create({
     }
     ,
     timeline_container: {
+
+        height: height(90),
+        width: width(100),
+        //backgroundColor: '#e2e2e2',
+        marginTop: 20,
+        //backgroundColor: 'skyblue'
+    },
+    timeline_scrollview: {
         height: height(90),
         width: width(100),
         backgroundColor: '#e2e2e2',
-        marginTop: -20,
-
-    },
+        alignItems: 'center'
+    }
 });
 
 export default styles;

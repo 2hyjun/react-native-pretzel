@@ -19,7 +19,7 @@ exports.timeline = (req, res) => {
     }
     const query = (conn) => {
         return new Promise((resolve, reject) => {
-            var sql = 'SELECT * FROM timeline where completed="N"';
+            var sql = 'SELECT * FROM timeline where completed="N" ORDER BY time DESC';
             conn.query(sql, (err, results, fields) => {
                 conn.release();
                 if (err) {
