@@ -51,12 +51,12 @@ exports.register = (req, res) => {
     const getConn = (encryptedPassword) => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                if (err) {
-                    console.log('getConn Error: ', err);
-                    reject({
-                        err: err
-                    })
-                } else
+                // if (err) {
+                //     console.log('getConn Error: ', err);
+                //     reject({
+                //         err: err
+                //     })
+                // } else
                     resolve({
                         password: encryptedPassword,
                         conn: conn
@@ -142,12 +142,12 @@ exports.login = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                if (err) {
-                    console.log('getConn Error: ', err);
-                    reject({
-                        err: err
-                    })
-                } else
+                // if (err) {
+                //     console.log('getConn Error: ', err);
+                //     reject({
+                //         err: err
+                //     })
+                // } else
                     resolve(conn);
             })
         })

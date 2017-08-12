@@ -6,12 +6,12 @@ exports.timeline = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                if (err) {
-                    console.log('getConn Error: ', err);
-                    reject({
-                        err: err
-                    })
-                } else
+                // if (err) {
+                //     console.log('getConn Error: ', err);
+                //     reject({
+                //         err: err
+                //     })
+                // } else
                     resolve(conn);
             })
         })
@@ -83,15 +83,15 @@ exports.post = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                if (err) {
-                    console.log('getConn Error: ', err);
-                    reject({
-                        err: err
-                    })
-                }
-                else {
+                // if (err) {
+                //     console.log('getConn Error: ', err);
+                //     reject({
+                //         err: err
+                //     })
+                // }
+                // else {
                     resolve(conn);
-                }
+                // }
                     
             })
         })
@@ -169,12 +169,12 @@ exports.delete = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                console.log('getConn Error: ', err);
-                if (err)
-                    reject({
-                        err: err
-                    })
-                else
+                // console.log('getConn Error: ', err);
+                // if (err)
+                //     reject({
+                //         err: err
+                //     })
+                // else
                     resolve(conn);
             })
         })
@@ -295,12 +295,12 @@ exports.update = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                console.log('getConn Error: ', err);
-                if (err)
-                    reject({
-                        err: err
-                    })
-                else
+                // console.log('getConn Error: ', err);
+                // if (err)
+                //     reject({
+                //         err: err
+                //     })
+                // else
                     resolve(conn);
             })
         })
@@ -398,12 +398,12 @@ exports.mypage = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                console.log('getConn Error: ', err);
-                if (err)
-                    reject({
-                        err: err
-                    })
-                else
+                // console.log('getConn Error: ', err);
+                // if (err)
+                //     reject({
+                //         err: err
+                //     })
+                // else
                     resolve(conn);
             })
         })
