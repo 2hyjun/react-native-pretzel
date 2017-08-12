@@ -29,6 +29,19 @@ import meanless3 from '../screen/meanless/meanless3';
 
 import styles from './style';
 
+export const MyPageStack = StackNavigator({
+    MyPage: {
+        screen: myPage,
+    },
+    Setting: {
+        screen: setting,
+    },
+    Alarm: {
+        screen: alarm,
+    }
+}, {
+    headerMode: 'none'
+});
 export const TypeTab = TabNavigator({
     Helpme: {
         screen: timeline,
@@ -106,7 +119,7 @@ export const MainTab = TabNavigator({
         }
     },
     MyPage: {
-        screen: myPage,
+        screen: MyPageStack,
         navigationOptions: {
             tabBarIcon: ({focused}) => {
                 let imgSource = focused
@@ -162,16 +175,3 @@ export const Loading = StackNavigator({
 });
 
 
-export const MyPage = StackNavigator({
-    MyPage: {
-        screen: myPage,
-    },
-    Setting: {
-        screen: setting,
-    },
-    Alarm: {
-        screen: alarm,
-    }
-}, {
-    headerMode: 'none'
-});
