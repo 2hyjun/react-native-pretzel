@@ -137,6 +137,10 @@ const styles = StyleSheet.create({
         padding: 7,
         paddingLeft: 0,
         marginLeft: 20,
+    },
+    detail_done: {
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 
 

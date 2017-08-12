@@ -3477,6 +3477,12 @@ react-native-keyboard-aware-view@^0.0.12:
     react-native ">=0.13.0"
     react-timer-mixin "^0.13.3"
 
+react-native-lightbox@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.6.0.tgz#291701fb3dd0d7eaf88cebb5f105d7891bea5452"
+  dependencies:
+    react-timer-mixin "^0.13.3"
+
 react-native-list-popover@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-list-popover/-/react-native-list-popover-1.0.5.tgz#a14bab87f28c59481d4d12d08bcd458a41a7bb20"

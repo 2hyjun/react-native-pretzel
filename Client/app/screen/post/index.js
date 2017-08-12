@@ -27,6 +27,7 @@ import Fumi from '../../components/TextInputEffect/Fumi';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 
+
 /*
             * "user_email": "biper94@gmail.com",
             "content": "커피",
@@ -51,18 +52,18 @@ export default class post extends React.Component {
 
         this.state = {
             user_email: '',
-            content: '', // 커피
+            content: '배달 항목 선택', // 커피
             detailInfo: '',
             expectedPrice: '',
             fee: '',
             deadLine: '배달 기한 설정',
-            contentType: '', // 해주세요
+            contentType: '방식 선택', // 해주세요
             title: '',
             place: '',
 
 
-            contentItem: '배달 항목 선택',
-            typeItem: '방식 선택',
+            contentItem: '',
+            typeItem: '',
             isPopupShowing: false,
             isDateTimePickerVisible: false,
 
@@ -88,11 +89,11 @@ export default class post extends React.Component {
 
     }
     content_setItem(index) {
-        this.setState({contentItem: contents[index]});
+        this.setState({content: contents[index]});
         this.content.dismiss();
     }
     type_setItem(index) {
-        this.setState({typeItem: types[index]});
+        this.setState({contentType: types[index]});
         this.type.dismiss();
     }
 
@@ -103,6 +104,7 @@ export default class post extends React.Component {
     }
     handleDateTimePick(date) {
         console.log(date);
+        console.log(this.state);
         this.setState({isDateTimePickerVisible: false});
     }
     render() {
@@ -120,7 +122,7 @@ export default class post extends React.Component {
                                 onPress={this.content_showPopOver.bind(this)}>
                                 {/*<Icon name="briefcase" size={20} color={'#f95a25'}/>*/}
                                 <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
-                                <Text style={styles.ripple_text}>{this.state.contentItem}</Text>
+                                <Text style={styles.ripple_text}>{this.state.content}</Text>
                             </Ripple>
 
                             <Ripple
@@ -131,7 +133,7 @@ export default class post extends React.Component {
                                 onPress={this.type_showPopOver.bind(this)}>
                                 {/*<Icon name="question" size={24} color={'#f95a25'}/>*/}
                                 <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
-                                <Text style={styles.ripple_text}>{this.state.typeItem}</Text>
+                                <Text style={styles.ripple_text}>{this.state.contentType}</Text>
                             </Ripple>
                         </View>
 
@@ -156,7 +158,7 @@ export default class post extends React.Component {
                                           iconName={'title'}
                                           iconColor={'#f95a25'}
                                           secure={false}
-                                          onTextChanged={(email) => this.setState({email})}
+                                          onTextChanged={(title) => this.setState({title})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
                                     />
@@ -166,7 +168,7 @@ export default class post extends React.Component {
                                           iconName={'place'}
                                           iconColor={'#f95a25'}
                                           secure={false}
-                                          onTextChanged={(email) => this.setState({email})}
+                                          onTextChanged={(place) => this.setState({place})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
                                     />
@@ -176,9 +178,10 @@ export default class post extends React.Component {
                                           iconName={'money'}
                                           iconColor={'#f95a25'}
                                           secure={false}
-                                          onTextChanged={(email) => this.setState({email})}
+                                          onTextChanged={(expectedPrice) => this.setState({expectedPrice})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
+                                          keyboardType="phone-pad"
                                     />
                                     <Fumi style={styles.form_input}
                                           label={'배달금액'}
@@ -186,9 +189,10 @@ export default class post extends React.Component {
                                           iconName={'motorcycle'}
                                           iconColor={'#f95a25'}
                                           secure={false}
-                                          onTextChanged={(email) => this.setState({email})}
+                                          onTextChanged={(fee) => this.setState({fee})}
                                           autoCorrection={false}
                                           autoCapital={'none'}
+                                          keyboardType="number-pad"
                                     />
                                     <TouchableOpacity
                                         style={styles.deadline}
@@ -214,7 +218,6 @@ export default class post extends React.Component {
                                 <Picker.Item label={value} value={i} key={value}/>
                             ))}
                         </Picker>
-
                     </View>
                 </PopupDialog>
                 <PopupDialog
@@ -237,19 +240,19 @@ export default class post extends React.Component {
                     ref={(ref) => {this.detail = ref}}
                     dialogAnimation = { new ScaleAnimation()}
                     dialogTitle={<DialogTitle title="상세 정보 작성" titleTextStyle={{color: '#f95a25'}}/>}
-                    actions={[
-                        <DialogButton
-                            text="작성 완료"
-                            onPress={() => {
-                                this.detail.dismiss();
-                            }}
-                            //textContainerStyle={styles.dialog_button_detail}
-                            //buttonStyle={styles.dialog_button_detail}
-                            textStyle={[{color: '#f95a25', textAlign: 'center'}, styles.dialog_button_detail, ]}
-                            align={'center'}
-                            key="button-1"
-                        />,
-                    ]}
+                    // actions={[
+                    //     <DialogButton
+                    //         text="작성 완료"
+                    //         onPress={() => {
+                    //             this.detail.dismiss();
+                    //         }}
+                    //         textContainerStyle={styles.dialog_button_detail}
+                    //         buttonStyle={styles.dialog_button_detail}
+                    //         textStyle={[{color: '#f95a25', textAlign: 'center'}, styles.dialog_button_detail, ]}
+                    //         align={'center'}
+                    //         key="button-1"
+                    //     />,
+                    // ]}
                     onDismissed={() => {
                         Keyboard.dismiss();
                         this.setState({isPopupShowing: false});
@@ -268,8 +271,12 @@ export default class post extends React.Component {
                             placeholder={'12시까지 제도관 학생회실로 노스커피 아이스 아메리카노 4잔 배달해주세요.'}
                         />
                     </View>
-                    <View style={styles.forms}>
-
+                    <View style={styles.detail_done}>
+                        <TouchableOpacity
+                            style={{width: 300}}
+                            onPress={() => { this.detail.dismiss() }}>
+                            <Text style={{fontSize: 18, color: '#f95a25', textAlign: 'center'}}>작성 완료</Text>
+                        </TouchableOpacity>
 
                     </View>
                 </PopupDialog>
