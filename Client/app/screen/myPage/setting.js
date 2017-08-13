@@ -13,12 +13,10 @@ import {
 } from 'react-native';
 
 import styles from './settingStyle';
-import TabBar from 'react-native-xtabbar';
 
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class settingScreen extends Component {
-
     constructor(props) {
         super(props);
 
@@ -29,10 +27,6 @@ class settingScreen extends Component {
             ])
         };
     }
-
-    handleMain = () => {
-        this.props.navigation.navigate('MyPage');
-    };
 
     Logout() {
         AsyncStorage.removeItem(STORAGE_KEY)
@@ -59,8 +53,12 @@ class settingScreen extends Component {
         );
     };
 
-    handleMyPage = () => {
+    handleBack = () => {
         this.props.navigation.navigate('MyPage');
+    };
+
+    Alarm = () => {
+        this.props.navigation.navigate('Alarm');
     };
 
 
@@ -68,18 +66,10 @@ class settingScreen extends Component {
         return (
             <View style={styles.parent}>
                 <View style={styles.cellOne}>
-                    <View>
-                        <TouchableHighlight onPress={this._handleback}>
-                            <Image source={require('../../../img/basic/basic_arrow_left.png')}
-                                   style={{resizeMode:'center'}}/>
-                        </TouchableHighlight>
-                    </View>
-                    <View>
-                        <TouchableHighlight onPress={this.handleMain}>
-                            <Image source={require('../../../img/index/index_logo.png')}
-                                   style={{resizeMode:'center'}}/>
-                        </TouchableHighlight>
-                    </View>
+                    <TouchableHighlight onPress={this.handleBack}>
+                        <Image source={require('../../../img/basic/basic_arrow_left.png')}
+                               style={{resizeMode:'center'}}/>
+                    </TouchableHighlight>
                 </View>
 
                 <TouchableHighlight onPress={this.LogOut}>
@@ -89,54 +79,19 @@ class settingScreen extends Component {
                 </TouchableHighlight>
 
                 <View style={styles.cellThree}>
-                    <ListView style={styles.container}
-                              dataSource={this.state.dataSource}
-                              renderRow={(rowData) =>
-                                  <TouchableOpacity
-                                      onPress={()=>this.props.navigator.push({index: 1,
-                                          passProps:{}})}
-                                  >
-                                      <View style={styles.row}>
-                                          <Text>{rowData}</Text>
-                                      </View>
-                                  </TouchableOpacity>
-                              }
-                              renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                                  <View key={rowID} style={{height:1, backgroundColor: 'lightgray'}}
-                                  />}
-                    />
-                </View>
-
-                <View style={styles.cellFive}>
-                    <TabBar style={styles.content}>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_home_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_home_highlighted.png')}
-                            onPress={() => {this.handleMain}}
-                        >
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_request_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_request_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_chatting_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_chatting_highlighted.png')}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                        <TabBar.Item
-                            icon={require('../../../img/underBarIcon/underbar_mypage_disabled.png')}
-                            selectedIcon={require('../../../img/underBarIcon/underbar_mypage_highlighted.png')}
-                            onPress={() => {this.handleMyPage}}>
-                            <View style={styles.text}>
-                            </View>
-                        </TabBar.Item>
-                    </TabBar>
+                    <View style={styles.container}>
+                        <View style={styles.row}>
+                            <Text>비밀번호 변경</Text>
+                        </View>
+                        <View style={styles.row}>
+                            <TouchableOpacity onPress={this.Alarm}>
+                                <Text>푸시알림 설정</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.row}>
+                            <Text>피드백</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
         );

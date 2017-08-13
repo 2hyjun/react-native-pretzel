@@ -87,7 +87,7 @@ class myPageScreen extends Component {
 
                         </View>
                         <View style={styles.cellTwoOneID}>
-                            <Text>user101</Text>
+                            <Text>{this.state.user_email.split("@")[0]}</Text>
                         </View>
                     </View>
                     <View style={styles.cellTwoTwo}>
