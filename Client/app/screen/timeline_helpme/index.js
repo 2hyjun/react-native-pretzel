@@ -25,7 +25,7 @@ const STORAGE_KEY = '@PRETZEL:jwt';
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 
-export default class timeline extends React.Component {
+export default class timeline_helpme extends React.Component {
     constructor(props) {
         super(props);
 
@@ -82,7 +82,8 @@ export default class timeline extends React.Component {
             })
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        console.log('helpme');
         this._renderRefresh();
     }
 
@@ -121,28 +122,33 @@ export default class timeline extends React.Component {
                         refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={this._renderRefresh.bind(this)}
+                                onRefresh={this._renderRefresh}
                             />
                         }
+                        contentContainerStyle={{paddingBottom: 200}}
+                        automaticallyAdjustContentInsets={false}
                         removeClippedSubviews={false}
                         renderRow={(rowData, sectionID, rowID, highlightRow) =>
-                            <TimelineListItem
-                                user_email={rowData.user_email}
-                                detailInfo={rowData.detailInfo}
-                                expectedPrice={rowData.expectedPrice}
-                                fee={rowData.fee}
-                                deadline={rowData.deadline}
-                                rid={rowData.rid}
-                                title={rowData.title}
-                                time={rowData.time}
-                                place={rowData.place}
-                                onPress={() => {
-                                    this.setState({selectedRow: rowData}, () => {
+                            <View>
+                                <TimelineListItem
+                                    user_email={rowData.user_email}
+                                    detailInfo={rowData.detailInfo}
+                                    expectedPrice={rowData.expectedPrice}
+                                    fee={rowData.fee}
+                                    deadline={rowData.deadline}
+                                    rid={rowData.rid}
+                                    title={rowData.title}
+                                    time={rowData.time}
+                                    place={rowData.place}
+                                    onPress={() => {
+                                        this.setState({selectedRow: rowData}, () => {
 
-                                        this._showModal();
-                                    })
-                                }}
-                            />
+                                            this._showModal();
+                                        })
+                                    }}
+                                />
+                            </View>
+
                         }
                     />
                 </View>

@@ -6,6 +6,20 @@ import {
 
 
 class meanless2 extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        console.log('Will 2');
+    }
+
+    componentDidMount() {
+        console.log('Did 2');
+    }
+
+
     render() {
         return (
             <View style={{height: '100%', alignItems: 'center', justifyContent: 'center'}}>

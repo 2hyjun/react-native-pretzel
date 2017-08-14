@@ -15,7 +15,9 @@ import {
 
 import loading from '../screen/loading';
 import login from '../screen/login';
-import timeline from '../screen/timeline';
+import timeline_helpme from '../screen/timeline_helpme';
+import timeline_helpyou from '../screen/timeline_helpyou';
+import timeline_together from '../screen/timeline_together';
 import register from '../screen/register';
 import post from '../screen/post';
 import chat from '../screen/chat';
@@ -26,6 +28,11 @@ import setting from '../screen/myPage/setting';
 import meanless1 from '../screen/meanless/meanless1';
 import meanless2 from '../screen/meanless/meanless2';
 import meanless3 from '../screen/meanless/meanless3';
+import meanless4 from '../screen/meanless/meanless4';
+import meanless5 from '../screen/meanless/meanless5';
+import meanless6 from '../screen/meanless/meanless6';
+import meanless7 from '../screen/meanless/meanless7';
+
 
 import styles from './style';
 
@@ -44,19 +51,19 @@ export const MyPageStack = StackNavigator({
 });
 export const TypeTab = TabNavigator({
     Helpme: {
-        screen: timeline,
+        screen: timeline_helpme,
         navigationOptions: {
            title: '해주세요'
         }
     },
     HelpYou: {
-        screen: meanless2,
+        screen: timeline_helpyou,
         navigationOptions: {
             title: '해줄게요'
         }
     },
     Together: {
-        screen: meanless3,
+        screen: timeline_together,
         navigationOptions: {
             title: '같이해요'
         }

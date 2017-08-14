@@ -54,12 +54,12 @@ export default class TimelineListItem extends React.Component {
         this._computeUploadTime = this._computeUploadTime.bind(this);
     }
     componentDidMount() {
-        this._computeDeadLine();
-        this._computeUploadTime();
+        this._computeDeadLine()
+            .then(this._computeUploadTime);
         //console.log(this.props.time);
     }
 
-    _computeUploadTime() {
+    _computeUploadTime(deadline) {
         //console.log(this.props.deadline);
         let uptime = global.DateStrtoObj(this.props.time);
         let current = global.nowKST();
@@ -69,20 +69,19 @@ export default class TimelineListItem extends React.Component {
         // console.log('cur', cur)
 
         let sub = global.DateSubtraction(cur, uptime);
-        console.log(sub);
+        console.log(this.props.title, sub);
         if (sub.year) {
-            this.setState({uploadTime: sub.year.toString() + '년 전'})
+            this.setState({uploadTime: sub.year.toString() + '년 전', timeToDeadLine: deadline})
         } else if (sub.month) {
-            this.setState({uploadTime: sub.month.toString() + '개월 전'})
+            this.setState({uploadTime: sub.month.toString() + '개월 전', timeToDeadLine: deadline})
         } else if (sub.day) {
-            console.log(sub.day);
-            this.setState({uploadTime: sub.day.toString() + '일 전'})
+            this.setState({uploadTime: sub.day.toString() + '일 전', timeToDeadLine: deadline})
         } else if (sub.hour) {
-            this.setState({uploadTime: sub.hour.toString() + '시간 전'})
+            this.setState({uploadTime: sub.hour.toString() + '시간 전', timeToDeadLine: deadline})
         } else if (sub.minutes) {
-            this.setState({uploadTime: sub.minutes.toString() + '분 전'})
+            this.setState({uploadTime: sub.minutes.toString() + '분 전', timeToDeadLine: deadline})
         } else if (sub.second) {
-            this.setState({uploadTime: sub.second.toString() + '초 전'})
+            this.setState({uploadTime: sub.second.toString() + '초 전', timeToDeadLine: deadline})
         }
 
 
@@ -98,22 +97,22 @@ export default class TimelineListItem extends React.Component {
         let sub = global.DateSubtraction(deadline, cur);
         if (sub.year) {
             let ba = sub.year > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.year).toString() + '년 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.year).toString() + '년 ' + ba + '까지');
         } else if (sub.month) {
             let ba = sub.month > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.month).toString() + '개월 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.month).toString() + '개월 ' + ba + '까지');
         } else if (sub.day) {
             let ba = sub.day > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.day).toString() + '일 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.day).toString() + '일 ' + ba + '까지');
         } else if (sub.hour) {
             let ba = sub.hour > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.hour).toString() + '시간 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.hour).toString() + '시간 ' + ba + '까지');
         } else if (sub.minutes) {
             let ba = sub.minutes > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.minutes).toString() + '분 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.minutes).toString() + '분 ' + ba + '까지');
         } else if (sub.second) {
             let ba = sub.second > 0 ? '후' : '전';
-            this.setState({timeToDeadLine: Math.abs(sub.second).toString() + '초 ' + ba + '까지'});
+            return Promise.resolve(Math.abs(sub.second).toString() + '초 ' + ba + '까지');
         }
     }
     render() {

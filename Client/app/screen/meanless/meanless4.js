@@ -5,17 +5,17 @@ import {
 } from 'react-native';
 
 
-class meanless3 extends React.Component {
+class meanless4 extends React.Component {
     constructor(props) {
         super(props);
     }
 
     componentWillMount() {
-        console.log('Will 3');
+        console.log('Will 4');
     }
 
     componentDidMount() {
-        console.log('Did 3');
+        console.log('Did 4');
     }
     render() {
         return (
@@ -28,4 +28,4 @@ class meanless3 extends React.Component {
     }
 }
 
-export default meanless3;
+export default meanless4;
