@@ -39,14 +39,13 @@ export default class TimelineListItem extends React.Component {
         "contentType": PropTypes.oneOf(['해주세요', '해줄게요', '같이해요']),
         "title": PropTypes.string.isRequired,
         "time": PropTypes.string.isRequired,
-        "place": PropTypes.string.isRequired
-
+        "place": PropTypes.string.isRequired,
+        "onPress": PropTypes.func.isRequired,
     };
-
 
     constructor(props) {
         super(props);
-        console.log(props);
+        //console.log(props);
         this.state = {
             uploadTime: '',
             timeToDeadLine: '',
@@ -62,31 +61,76 @@ export default class TimelineListItem extends React.Component {
 
     _computeUploadTime() {
         //console.log(this.props.deadline);
-        let deadline = global.DateStrtoObj(this.props.deadline);
+        let uptime = global.DateStrtoObj(this.props.time);
         let current = global.nowKST();
-        console.log(deadline, current)
-        //let current = global.DateStrtoObj(global.nowKST());
-        //console.log(deadline, current);
+        let cur = global.DateStrtoObj2(current);
+
+        // console.log('uptime', uptime);
+        // console.log('cur', cur)
+
+        let sub = global.DateSubtraction(cur, uptime);
+        console.log(sub);
+        if (sub.year) {
+            this.setState({uploadTime: sub.year.toString() + '년 전'})
+        } else if (sub.month) {
+            this.setState({uploadTime: sub.month.toString() + '개월 전'})
+        } else if (sub.day) {
+            console.log(sub.day);
+            this.setState({uploadTime: sub.day.toString() + '일 전'})
+        } else if (sub.hour) {
+            this.setState({uploadTime: sub.hour.toString() + '시간 전'})
+        } else if (sub.minutes) {
+            this.setState({uploadTime: sub.minutes.toString() + '분 전'})
+        } else if (sub.second) {
+            this.setState({uploadTime: sub.second.toString() + '초 전'})
+        }
 
 
     }
     _computeDeadLine() {
-        let uptime = this.props.time;
 
+        let deadline = global.DateStrtoObj(this.props.deadline);
+        let current = global.nowKST();
+        let cur = global.DateStrtoObj2(current);
+        //console.log('deadline', deadline);
+        //console.log('cur', cur);
+
+        let sub = global.DateSubtraction(deadline, cur);
+        if (sub.year) {
+            let ba = sub.year > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.year).toString() + '년 ' + ba + '까지'});
+        } else if (sub.month) {
+            let ba = sub.month > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.month).toString() + '개월 ' + ba + '까지'});
+        } else if (sub.day) {
+            let ba = sub.day > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.day).toString() + '일 ' + ba + '까지'});
+        } else if (sub.hour) {
+            let ba = sub.hour > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.hour).toString() + '시간 ' + ba + '까지'});
+        } else if (sub.minutes) {
+            let ba = sub.minutes > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.minutes).toString() + '분 ' + ba + '까지'});
+        } else if (sub.second) {
+            let ba = sub.second > 0 ? '후' : '전';
+            this.setState({timeToDeadLine: Math.abs(sub.second).toString() + '초 ' + ba + '까지'});
+        }
     }
     render() {
         return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container}
+                onPress={this.props.onPress}>
                 <View style={styles.infoms}>
                     <View style={styles.header}>
                         <Text style={styles.header_title}>{this.props.title}</Text>
-                        <Text style={styles.header_time}>{this.props.time}</Text>
+                        <Text style={styles.header_time}>{this.state.uploadTime}</Text>
                     </View>
+                    <Text>{this.state.timeToDeadLine}</Text>
                 </View>
                 <View>
                     <TouchableOpacity
                         style={styles.acceptButtonView}>
-                        <Text>{this.props.deadline}</Text>
+
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>

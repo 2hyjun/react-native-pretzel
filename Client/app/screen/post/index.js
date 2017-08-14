@@ -88,7 +88,7 @@ export default class post extends React.Component {
     content_showPopOver() {
         //console.log(this.refs);
         this.setState({elevationToZero: true});
-
+        this.dropdown.alertWithType('info', '휠 피커', '휠피커에서 가장 상위의 항목을 선택 할려면, 다른 항목으로 이동후 다시 가장 상위 항목으로 가시면 됩니다.');
         this.content.show();
 
     }
@@ -254,7 +254,7 @@ export default class post extends React.Component {
                                           autoCapital={'none'}
                                     />
                                     <Fumi style={styles.form_input}
-                                          label={'예상금액 (숫자만)'}
+                                          label={'예상금액 (숫자만, "데려다줘"일 경우 0)'}
                                           iconClass={Icon}
                                           iconName={'money'}
                                           iconColor={'#f95a25'}

@@ -2,7 +2,20 @@ var config = require("../../../config");
 var db = require("../../../db/mysql");
 
 exports.timeline = (req, res) => {
+    const checkParams = () => {
+        
+        if (req.params.type) {
+            if (req.params.type === 'helpme' ||
+                req.params.type === 'helpyou' ||
+                req.params.type === 'together')
+                return Promise.resolve();
+            else
+                return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.'})
 
+        } else {
+            return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 없습니다.'})
+        }
+    }
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
@@ -19,8 +32,16 @@ exports.timeline = (req, res) => {
     }
     const query = (conn) => {
         return new Promise((resolve, reject) => {
-            var sql = 'SELECT * FROM timeline where completed="N" ORDER BY time DESC';
-            conn.query(sql, (err, results, fields) => {
+            var type = '';
+            if (req.params.type === 'helpme') 
+                type = '해주세요'
+            else if (req.params.type === 'helpyou')
+                type = '해줄게요'
+            else 
+                type = '같이해요'
+            var sql = 'SELECT * FROM timeline where completed="N" AND contentType=? ORDER BY time DESC';
+            var params = [type];
+            conn.query(sql, params, (err, results, fields) => {
                 conn.release();
                 if (err) {
                     console.log(err);
@@ -42,12 +63,24 @@ exports.timeline = (req, res) => {
     }
 
     const onError = (err) => {
-        res.status(500).send({
-            resultCode: 1,
-            result: err.message
-        })
+        if (err.err === '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.')
+            res.status(500).send({
+                resultCode: 2, 
+                result: err.err
+            })
+        else if (err.err === '컨텐트 타입에 대한 파라미터가 없습니다.')
+            res.status(500).send({
+                resultCode: 3,
+                result: err.err
+            })
+        else 
+            res.status(500).send({
+                resultCode: 1,
+                result: err.err.message
+            })
     }
-    getConn()
+    checkParams()
+        .then(getConn)
         .then(query)
         .then(respond)
         .catch(onError);

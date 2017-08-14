@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         color: 'lightgrey',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 15
     },
     filter_item_enabled: {
         padding: 10,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 15
     },
     filter_scrollview: {
         height: height(8),
@@ -65,11 +65,9 @@ const styles = StyleSheet.create({
     }
     ,
     timeline_container: {
-
         height: height(90),
         width: width(100),
         //backgroundColor: '#e2e2e2',
-        marginTop: 20,
         //backgroundColor: 'skyblue'
     },
     timeline_scrollview: {
@@ -77,7 +75,12 @@ const styles = StyleSheet.create({
         width: width(100),
         backgroundColor: '#e2e2e2',
         alignItems: 'center'
-    }
+    },
+    dialog_container: {
+        marginTop: -200,
+        height: height(60)
+    },
+
 });
 
 export default styles;

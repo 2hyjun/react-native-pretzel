@@ -44,7 +44,8 @@ export default StyleSheet.create({
     header_title: {
         width: width(60),
         height: height(5),
-        marginLeft: 10,
+        marginLeft: 20,
+        marginTop: 5,
         fontSize: 18,
         fontWeight: 'bold',
         color: '#585858'
@@ -53,8 +54,8 @@ export default StyleSheet.create({
     header_time: {
         width: width(20),
         height: height(5),
-        fontSize: 12,
+        marginTop: 5,
+        fontSize: 15,
         color: '#585858'
-
     }
 })
