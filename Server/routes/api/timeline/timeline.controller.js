@@ -4,10 +4,10 @@ var db = require("../../../db/mysql");
 exports.timeline = (req, res) => {
     const checkParams = () => {
         
-        if (req.params.type) {
-            if (req.params.type === 'helpme' ||
-                req.params.type === 'helpyou' ||
-                req.params.type === 'together')
+        if (req.query.type) {
+            if (req.query.type === 'helpme' ||
+                req.query.type === 'helpyou' ||
+                req.query.type === 'together')
                 return Promise.resolve();
             else
                 return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.'})
@@ -33,14 +33,14 @@ exports.timeline = (req, res) => {
     const query = (conn) => {
         return new Promise((resolve, reject) => {
             var type = '';
-            if (req.params.type === 'helpme') 
+            if (req.query.type === 'helpme') 
                 type = '해주세요'
-            else if (req.params.type === 'helpyou')
+            else if (req.query.type === 'helpyou')
                 type = '해줄게요'
             else 
                 type = '같이해요'
             var sql = 'SELECT * FROM timeline where completed="N" AND contentType=? ORDER BY time DESC';
-            var params = [type];
+            var query = [type];
             conn.query(sql, params, (err, results, fields) => {
                 conn.release();
                 if (err) {

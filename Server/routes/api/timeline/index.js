@@ -4,7 +4,7 @@ const authMiddleware = require("../../../middlewares/auth");
 
 router.use('/', authMiddleware);
 
-router.get(['/:type', '/'], controller.timeline);
+router.get('/', controller.timeline);
 router.delete(['/:rid', '/'], controller.delete);
 router.post('/', controller.post);
 router.put(['/', '/:rid'], controller.update);
