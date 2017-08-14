@@ -1,0 +1,114 @@
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+sign success
+Login SUccess
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+{ err: 'No auth token in "x-access-token" headers' }
+err:  { err: 'No auth token in "x-access-token" headers' }
+token:  undefined
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+{ err: 'No auth token in "x-access-token" headers' }
+err:  { err: 'No auth token in "x-access-token" headers' }
+token:  undefined
+sign success
+Login SUccess
+{ err: 'No auth token in "x-access-token" headers' }
+err:  { err: 'No auth token in "x-access-token" headers' }
+token:  undefined
+{ err: 'No auth token in "x-access-token" headers' }
+err:  { err: 'No auth token in "x-access-token" headers' }
+token:  undefined
+sign success
+Login SUccess
