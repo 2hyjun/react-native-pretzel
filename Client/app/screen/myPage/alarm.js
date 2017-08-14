@@ -64,8 +64,9 @@ class alarmScreen extends React.Component {
                         hideChevron
                     />
                     <View style={styles.cellStart}>
-                        <Text style={{alignSelf:'center', color:'#ff6666',}}>종료 시간</Text>
+                        <Text style={{alignSelf:'center', color:'#ff6666',}}>시작 시각</Text>
                     </View>
+                    <Text>바뀐시간:{this._onValueChange}</Text>
 
                     <TouchableOpacity onPress={this._showTimePicker}>
                         <View style={styles.button}>
@@ -78,7 +79,7 @@ class alarmScreen extends React.Component {
                         onCancel={this._hideTimePicker}
                     />
                     <View style={styles.cellEnd}>
-                        <Text style={{alignSelf:'center', color:'#0066cc',}}>종료 시간</Text>
+                        <Text style={{alignSelf:'center', color:'#0066cc',}}>종료 시각</Text>
                     </View>
 
                     <TouchableOpacity onPress={this._showTimePicker}>
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
         borderRadius:10,
         justifyContent: 'center',
     },
-
 });
 
 
