@@ -40,7 +40,7 @@ exports.timeline = (req, res) => {
             else 
                 type = '같이해요'
             var sql = 'SELECT * FROM timeline where completed="N" AND contentType=? ORDER BY time DESC';
-            var query = [type];
+            var params = [type];
             conn.query(sql, params, (err, results, fields) => {
                 conn.release();
                 if (err) {
@@ -63,6 +63,7 @@ exports.timeline = (req, res) => {
     }
 
     const onError = (err) => {
+        console.log(err);
         if (err.err === '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.')
             res.status(500).send({
                 resultCode: 2, 
@@ -76,7 +77,7 @@ exports.timeline = (req, res) => {
         else 
             res.status(500).send({
                 resultCode: 1,
-                result: err.err.message
+                result: err.err
             })
     }
     checkParams()

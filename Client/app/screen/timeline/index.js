@@ -58,7 +58,7 @@ export default class timeline extends React.Component {
         })
     }
     HttpRequest(token) {
-        return fetch('http://13.124.147.152:8124/api/timeline/helpme', {
+        return fetch('http://13.124.147.152:8124/api/timeline?type=helpme', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
