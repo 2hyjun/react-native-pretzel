@@ -68,18 +68,21 @@ export default class timeline_helpme extends React.Component {
     }
 
     _renderRefresh() {
-        this.GetToken()
-            .then(this.HttpRequest)
-            .then((res) => {
-                if (res.resultCode !== 100) {
-                    this.dropdown.alertWithType('error', '서버 에러', res.result);
-                } else {
-                    this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(res.result)
-                    })
+        this.setState({dataSource: ds.cloneWithRows([])}, () => {
+            this.GetToken()
+                .then(this.HttpRequest)
+                .then((res) => {
+                    if (res.resultCode !== 100) {
+                        this.dropdown.alertWithType('error', '서버 에러', res.result);
+                    } else {
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(res.result)
+                        })
 
-                }
-            })
+                    }
+                })
+        });
+
     }
 
     componentDidMount() {

@@ -56,7 +56,6 @@ export default class TimelineListItem extends React.Component {
     componentDidMount() {
         this._computeDeadLine()
             .then(this._computeUploadTime);
-        //console.log(this.props.time);
     }
 
     _computeUploadTime(deadline) {
@@ -69,7 +68,7 @@ export default class TimelineListItem extends React.Component {
         // console.log('cur', cur)
 
         let sub = global.DateSubtraction(cur, uptime);
-        console.log(this.props.title, sub);
+       // console.log(this.props.title, sub);
         if (sub.year) {
             this.setState({uploadTime: sub.year.toString() + '년 전', timeToDeadLine: deadline})
         } else if (sub.month) {

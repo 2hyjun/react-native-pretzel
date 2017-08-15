@@ -8,7 +8,8 @@ import {
     Alert,
     Image,
     Keyboard,
-    AsyncStorage
+    AsyncStorage,
+    Platform
 } from 'react-native';
 const STORAGE_KEY = '@PRETZEL:jwt';
 
@@ -118,10 +119,16 @@ export default class post extends React.Component {
     }
     handleDateTimePick(date) {
         //console.log(global.nowKSTParams(date));
-        this.setState({
-            deadLine: global.nowKSTParams(date),
-            isDateTimePickerVisible: false
-        });
+        if (Platform.OS === 'ios')
+            this.setState({
+                deadLine: global.nowKSTParams(date),
+                isDateTimePickerVisible: false
+            });
+        else if (Platform.OS === 'android')
+            this.setState({
+                deadLine: global.nowParams(date),
+                isDateTimePickerVisible: false,
+            })
     }
     GetToken() {
         return new Promise((resolve, reject) => {
