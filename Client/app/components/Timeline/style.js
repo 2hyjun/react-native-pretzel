@@ -24,9 +24,6 @@ const styles = StyleSheet.create({
         width: width(100),
         height: height(10),
         flexDirection: 'row',
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: 'skyblue'
     },
     filter_item_disabled: {
         padding: 10,
@@ -46,11 +43,13 @@ const styles = StyleSheet.create({
     },
     filter_item_enabled: {
         padding: 10,
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: '#f95a25',
         backgroundColor: '#f95a25',
         margin: 3,
         marginBottom: 10,
         justifyContent: 'center',
-        borderRadius: 15,
 
     },
     filter_text_enabled: {
@@ -78,7 +77,12 @@ const styles = StyleSheet.create({
     },
     dialog_container: {
         marginTop: -200,
-        height: height(60)
+        height: height(60),
+        backgroundColor: 'skyblue',
+        borderRadius: 10,
+        marginLeft: 30,
+        marginRight: 30,
+
     },
 
 });

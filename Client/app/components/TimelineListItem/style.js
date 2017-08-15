@@ -27,6 +27,8 @@ export default StyleSheet.create({
         height: height(15),
         width: width(10),
         backgroundColor: '#D2DB08',
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
 
     },
     infoms: {
@@ -38,8 +40,10 @@ export default StyleSheet.create({
         //backgroundColor: 'red',
         height: height(5),
         width: width(80),
+        marginTop: 5,
         justifyContent: 'center',
         flexDirection: 'row',
+
     },
     header_title: {
         width: width(60),
@@ -57,5 +61,67 @@ export default StyleSheet.create({
         marginTop: 5,
         fontSize: 15,
         color: '#585858'
+    },
+    acceptButtonTxt1: {
+        padding: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333333',
+        marginTop: 10,
+    },
+    acceptButtonTxt2: {
+        padding: 10,
+        paddingBottom: 0,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333333',
+        marginTop: 0,
+    },
+    body: {
+        //backgroundColor: 'red',
+        height: height(10),
+        width: width(80),
+        flexDirection: 'row',
+        marginTop: 10,
+        //justifyContent: 'center',
+        // backgroundColor: 'skyblue'
+    },
+    body_header: {
+        flexDirection: 'row',
+        marginLeft: 10,
+    },
+    body_body: {
+        flexDirection: 'row',
+        marginLeft: 10,
+    },
+    body_location: {
+
+        width: width(25)
+    },
+    body_fee: {
+
+        width: width(25)
+    },
+    body_deadline: {
+
+        marginLeft: 10,
+        width: width(25)
+    },
+    body_header_text: {
+        fontSize: 15,
+        color: '#333333'
+    },
+    body_header_line: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 8,
+        height: 0.5,
+        width: width(10),
+        backgroundColor: '#eb6736'
+    },
+    body_body_text: {
+        marginTop: 10,
+        color: '#eb6736',
+        fontSize: 17,
     }
 })

@@ -49,16 +49,55 @@ export default class TimelineListItem extends React.Component {
         this.state = {
             uploadTime: '',
             timeToDeadLine: '',
+            minimizedPlace: '',
+            minimizedTitle: '',
         };
         this._computeDeadLine = this._computeDeadLine.bind(this);
         this._computeUploadTime = this._computeUploadTime.bind(this);
+        this._minimizePlace = this._minimizePlace.bind(this);
+        this._minimizeTitle = this._minimizeTitle.bind(this);
     }
     componentDidMount() {
         this._computeDeadLine()
+            .then(this._minimizePlace)
+            .then(this._minimizeTitle)
             .then(this._computeUploadTime);
     }
+    _minimizeTitle(obj) {
+        let title = this.props.title;
+        let isKorean = global.CheckKorean(title);
+        if (isKorean) {
+            if (title.length >= 14)
+                title = title.substring(0, 13) + '..';
+            obj.title = title;
+        } else {
+            if (title.length >= 22)
+                title = title.substring(0, 22) + '..';
+            obj.title = title;
+        }
 
-    _computeUploadTime(deadline) {
+        return Promise.resolve(obj);
+
+    }
+    _minimizePlace(deadline) {
+        let obj = {};
+        obj.deadline = deadline;
+        let location = this.props.place;
+        let isKorean = global.CheckKorean(location);
+        if (isKorean) {
+            if (location.length >= 5)
+                location = location.substring(0, 4) + '..';
+            obj.location = location;
+        } else {
+            if (location.length >= 7)
+                location = location.substring(0, 6) + '..';
+            obj.location = location;
+        }
+        return Promise.resolve(obj)
+
+
+    }
+    _computeUploadTime(obj) {
         //console.log(this.props.deadline);
         let uptime = global.DateStrtoObj(this.props.time);
         let current = global.nowKST();
@@ -70,17 +109,17 @@ export default class TimelineListItem extends React.Component {
         let sub = global.DateSubtraction(cur, uptime);
        // console.log(this.props.title, sub);
         if (sub.year) {
-            this.setState({uploadTime: sub.year.toString() + '년 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.year.toString() + '년 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.month) {
-            this.setState({uploadTime: sub.month.toString() + '개월 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.month.toString() + '개월 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.day) {
-            this.setState({uploadTime: sub.day.toString() + '일 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.day.toString() + '일 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.hour) {
-            this.setState({uploadTime: sub.hour.toString() + '시간 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.hour.toString() + '시간 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.minutes) {
-            this.setState({uploadTime: sub.minutes.toString() + '분 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.minutes.toString() + '분 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.second) {
-            this.setState({uploadTime: sub.second.toString() + '초 전', timeToDeadLine: deadline})
+            this.setState({uploadTime: sub.second.toString() + '초 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         }
 
 
@@ -120,15 +159,58 @@ export default class TimelineListItem extends React.Component {
                 onPress={this.props.onPress}>
                 <View style={styles.infoms}>
                     <View style={styles.header}>
-                        <Text style={styles.header_title}>{this.props.title}</Text>
+                        <Text style={styles.header_title}>{this.state.minimizedTitle}</Text>
                         <Text style={styles.header_time}>{this.state.uploadTime}</Text>
                     </View>
-                    <Text>{this.state.timeToDeadLine}</Text>
+
+                    <View style={styles.body}>
+                        <View style={styles.body_location}>
+                            <View style={styles.body_header}>
+                                <Text style={styles.body_header_text}>위치</Text>
+                                <View style={styles.body_header_line}/>
+                            </View>
+                            <View style={styles.body_body}>
+                                <Text style={styles.body_body_text}>{this.state.minimizedPlace}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.body_fee}>
+                            <View style={styles.body_header}>
+                                <Text style={styles.body_header_text}>배달비</Text>
+                                <View style={styles.body_header_line}/>
+                            </View>
+                            <View style={styles.body_body}>
+                                <Text style={styles.body_body_text}>{this.props.fee}원</Text>
+                            </View>
+                        </View>
+                        <View style={styles.body_deadline}>
+                            <View style={styles.body_header}>
+                                <Text style={styles.body_header_text}>시간</Text>
+                            </View>
+                            <View style={styles.body_body}>
+                                <Text style={[styles.body_body_text, {fontSize: 15}]}>{this.state.timeToDeadLine}</Text>
+                            </View>
+                        </View>
+                        {/*<View style={styles.body_header}>*/}
+                            {/*<Text style={styles.body_header_text}>위치</Text>*/}
+                            {/*<View style={styles.body_header_line}/>*/}
+                            {/*<Text style={styles.body_header_text}>배달비</Text>*/}
+                            {/*<View style={styles.body_header_line}/>*/}
+                            {/*<Text style={styles.body_header_text}>시간</Text>*/}
+                        {/*</View>*/}
+                        {/*<View style={styles.body_body}>*/}
+                            {/*<Text style={styles.body_location}>{this.props.place}</Text>*/}
+                            {/*<Text style={styles.body_fee}>{this.props.fee}원</Text>*/}
+                            {/*<Text style={styles.body_deadline}>{this.state.timeToDeadLine}</Text>*/}
+                        {/*</View>*/}
+
+                    </View>
+
                 </View>
                 <View>
                     <TouchableOpacity
                         style={styles.acceptButtonView}>
-
+                        <Text style={styles.acceptButtonTxt1}>수</Text>
+                        <Text style={styles.acceptButtonTxt2}>락</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>

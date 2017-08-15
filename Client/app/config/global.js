@@ -91,7 +91,12 @@ const global = {
         obj.second = d1.second - d2.second;
 
         return obj;
+    },
+    CheckKorean: (str) => {
+        let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        return check.test(str);
     }
+
 
 };
 

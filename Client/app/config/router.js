@@ -49,6 +49,8 @@ export const MyPageStack = StackNavigator({
 }, {
     headerMode: 'none'
 });
+
+
 export const TypeTab = TabNavigator({
     Helpme: {
         screen: timeline_helpme,
