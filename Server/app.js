@@ -5,13 +5,9 @@ var app = express();
 
 var server = app.listen(port);
 
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 
-var jwt = require('express-jwt');
-
-var mysql = require('mysql'),
-    crypto = require('crypto'),
-    bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 var _ = require("underscore")
 
@@ -27,6 +23,9 @@ app.use(bodyParser.urlencoded({
 app.use('/api', require('./routes/api'));
 
 
+var RegisterSocketIoServer = require('./socket.io/chat');
+
+RegisterSocketIoServer(server);
 // io.on('connection', (socket) => {
 //     clients++;
 //     //console.log(socket.handshake.session)
