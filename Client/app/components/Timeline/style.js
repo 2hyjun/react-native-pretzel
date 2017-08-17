@@ -78,13 +78,99 @@ const styles = StyleSheet.create({
     dialog_container: {
         marginTop: -200,
         height: height(60),
-        backgroundColor: 'skyblue',
         borderRadius: 10,
         marginLeft: 30,
         marginRight: 30,
-
     },
 
+    //팝업창 스타일
+    popCell:{
+        flexDirection:'column',
+        backgroundColor:'#ffffff',
+        height: height(60),
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+    popCellOne: { //날짜, 항목(커피), 타입(해주세요)
+        flex: 1,
+        width: width(100),
+        flexDirection:'column',
+    },
+    popCellOneRow:{
+        flexDirection:'row'
+    },
+    popCellOneLine:{
+        flex:2,
+        borderTopColor: '#D2DB08',
+        borderColor: 'transparent',
+        borderWidth: 2,
+        marginTop:10,
+        marginLeft: 10,
+    },
+    popCellOneDate:{
+        flex:1,
+        backgroundColor:'#ffffff',
+        flexDirection:'row',
+        marginLeft:5,
+        marginTop:5,
+    },
+    popCellOneInfo:{
+        flex:1,
+        borderColor: '#D2DB08',
+        borderWidth: 1,
+        borderRadius: 30,
+        height: height(6.5),
+        alignItems:'center',
+        justifyContent: 'center',
+        flexDirection:'row',
+        marginTop: 10,
+        marginLeft: 30,
+        marginRight: 30,
+    },
+    popCellTwo: { //상세
+        flex: 1,
+        flexDirection:'column',
+        alignItems:'center',
+        width: width(75),
+    },
+    popCellTwoTitle:{
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    popCellThree: { //배달장소, 배달기한, 예상가격, 배달료
+        flex: 2,
+        backgroundColor: '#f7f7f7',
+        marginTop: 20,
+        width: width(85),
+        flexDirection: 'column',
+        borderRadius: 10,
+        marginBottom: 10,
+    },
+    popCellThreeInfo:{
+        marginTop:10,
+        flex:1,
+        flexDirection:'row',
+    },
+    popCellThreeRow: { //배달장소, 배달기한, 예상가격, 배달료 글씨
+        flex: 1,
+        alignItems: 'flex-end',
+    },
+    popCellThreeColumn: { //받아오는 정보
+        flex: 2.5,
+        alignItems: 'center',
+    },
+    popCellFour: {
+        flex:0.1,
+        borderTopColor: '#D2DB08',
+        borderColor: 'transparent',
+        borderWidth: 2,
+        marginLeft:10,
+        marginRight:10,
+        width: width(95),
+    },
+    popCellText:{
+        color : '#D2DB08', fontWeight:'bold',
+    },
 });
 
 export default styles;

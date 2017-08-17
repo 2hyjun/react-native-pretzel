@@ -132,11 +132,11 @@ export default class TimeLine extends React.Component {
                                 style={
                                     _.find(this.state.otherEnabled, (o) => {return o})
                                         ?
-                                    styles.filter_item_disabled
+                                        styles.filter_item_disabled
                                         :
-                                    styles.filter_item_enabled
+                                        styles.filter_item_enabled
 
-                            }
+                                }
                                 onPress={() => {
                                     let arr = [];
                                     for (let i in contents) {
@@ -156,29 +156,29 @@ export default class TimeLine extends React.Component {
                             </TouchableOpacity>
                             {contents.map((value, i) => (
                                 <TouchableOpacity style=
-                                                  {
-                                                    this.state.otherEnabled[i]
-                                                        ?
-                                                        styles.filter_item_enabled
-                                                        :
-                                                        styles.filter_item_disabled
-                                                  }
+                                                      {
+                                                          this.state.otherEnabled[i]
+                                                              ?
+                                                              styles.filter_item_enabled
+                                                              :
+                                                              styles.filter_item_disabled
+                                                      }
                                                   key={i}
-                                                    onPress={() => {
-                                                        let prevState = this.state.otherEnabled;
-                                                        prevState[i] = !prevState[i];
-                                                        this.setState({otherEnabled: prevState}, () => {
-                                                            this._renderRefresh();
-                                                        });
-                                                    }}>
+                                                  onPress={() => {
+                                                      let prevState = this.state.otherEnabled;
+                                                      prevState[i] = !prevState[i];
+                                                      this.setState({otherEnabled: prevState}, () => {
+                                                          this._renderRefresh();
+                                                      });
+                                                  }}>
                                     <Text style=
-                                        {
-                                            this.state.otherEnabled[i]
-                                            ?
-                                            styles.filter_text_enabled
-                                            :
-                                            styles.filter_text_disabled
-                                        }
+                                              {
+                                                  this.state.otherEnabled[i]
+                                                      ?
+                                                      styles.filter_text_enabled
+                                                      :
+                                                      styles.filter_text_disabled
+                                              }
                                     >{value}</Text>
                                 </TouchableOpacity>
                             ))}
@@ -204,25 +204,25 @@ export default class TimeLine extends React.Component {
                             this.state.dataSource.length === 0 ?
                                 <View><Text>Empty..</Text></View>
                                 :
-                            <View>
-                                <TimelineListItem
-                                    user_email={rowData.user_email}
-                                    detailInfo={rowData.detailInfo}
-                                    expectedPrice={rowData.expectedPrice}
-                                    fee={rowData.fee}
-                                    deadline={rowData.deadline}
-                                    rid={rowData.rid}
-                                    title={rowData.title}
-                                    time={rowData.time}
-                                    place={rowData.place}
-                                    onPress={() => {
-                                        this.setState({selectedRow: rowData}, () => {
+                                <View>
+                                    <TimelineListItem
+                                        user_email={rowData.user_email}
+                                        detailInfo={rowData.detailInfo}
+                                        expectedPrice={rowData.expectedPrice}
+                                        fee={rowData.fee}
+                                        deadline={rowData.deadline}
+                                        rid={rowData.rid}
+                                        title={rowData.title}
+                                        time={rowData.time}
+                                        place={rowData.place}
+                                        onPress={() => {
+                                            this.setState({selectedRow: rowData}, () => {
 
-                                            this._showModal();
-                                        })
-                                    }}
-                                />
-                            </View>
+                                                this._showModal();
+                                            })
+                                        }}
+                                    />
+                                </View>
 
                         }
                     />
@@ -234,17 +234,71 @@ export default class TimeLine extends React.Component {
                     dialogStyle={styles.dialog_container}
                 >
                     <View style={styles.dialog}>
-                        <Text>제목: {this.state.selectedRow.title}</Text>
-                        <Text>요청자 이메일: {this.state.selectedRow.user_email}</Text>
-                        <Text>항목: {this.state.selectedRow.content}</Text>
-                        <Text>타입: {this.state.selectedRow.contentType}</Text>
-                        <Text>상세 정보: {this.state.selectedRow.detailInfo}</Text>
-                        <Text>업로드 시간: {this.state.selectedRow.time}</Text>
-                        <Text>배달 기한: {this.state.selectedRow.deadline}</Text>
-                        <Text>예상 물품 가격: {this.state.selectedRow.expectedPrice}원</Text>
-                        <Text>배달료: {this.state.selectedRow.fee}원</Text>
-                        <Text>배달 장소: {this.state.selectedRow.place}</Text>
-
+                        <View style={styles.popCell}>
+                            <View style={styles.popCellOne}>
+                                <View style={styles.popCellOneRow}>
+                                    <View style={styles.popCellOneLine}>
+                                    </View>
+                                    <View style={styles.popCellOneDate}>
+                                        <Text style={{fontSize:10}}>{this.state.selectedRow.time}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.popCellOneRow}>
+                                    <View style={styles.popCellOneInfo}>
+                                        <Text style={{color : '#D2DB08', fontWeight:'bold', fontSize:30}}># </Text>
+                                        <Text style={{fontSize:20}}>{this.state.selectedRow.content}</Text>
+                                    </View>
+                                    <View style={styles.popCellOneInfo}>
+                                        <Text style={{color : '#D2DB08', fontWeight:'bold', fontSize:30}}># </Text>
+                                        <Text style={{fontSize:20}}>{this.state.selectedRow.contentType}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={styles.popCellTwo}>
+                                <View style={{flex:1}}>
+                                    <Text style={styles.popCellTwoTitle}>{this.state.selectedRow.title}</Text>
+                                </View>
+                                <View style={{flex:2}}>
+                                    <Text>{this.state.selectedRow.detailInfo}</Text>
+                                </View>
+                            </View>
+                            <View style={styles.popCellThree}>
+                                <View style={styles.popCellThreeInfo}>
+                                    <View style={styles.popCellThreeRow}>
+                                        <Text style={{fontWeight:'bold',}}>배달장소 │ </Text>
+                                    </View>
+                                    <View style={styles.popCellThreeColumn}>
+                                        <Text style={styles.popCellText}>{this.state.selectedRow.place}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.popCellThreeInfo}>
+                                    <View style={styles.popCellThreeRow}>
+                                        <Text style={{fontWeight:'bold',}}>배달기한 │ </Text>
+                                    </View>
+                                    <View style={styles.popCellThreeColumn}>
+                                        <Text style={styles.popCellText}>{this.state.selectedRow.deadline}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.popCellThreeInfo}>
+                                    <View style={styles.popCellThreeRow}>
+                                        <Text style={{fontWeight:'bold',}}>예상가격 │ </Text>
+                                    </View>
+                                    <View style={styles.popCellThreeColumn}>
+                                        <Text style={styles.popCellText}>{this.state.selectedRow.expectedPrice}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.popCellThreeInfo}>
+                                    <View style={styles.popCellThreeRow}>
+                                        <Text style={{fontWeight:'bold',}}>배달료  │ </Text>
+                                    </View>
+                                    <View style={styles.popCellThreeColumn}>
+                                        <Text style={styles.popCellText}>{this.state.selectedRow.fee}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={styles.popCellFour}>
+                            </View>
+                        </View>
                     </View>
                 </PopupDialog>
                 <DropdownAlert

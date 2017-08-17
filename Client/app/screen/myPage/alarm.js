@@ -5,7 +5,8 @@ import {
     Switch,
     View,
     TouchableOpacity,
-    TimePickerAndroid,
+    Platform,
+    AsyncStorage,
 } from 'react-native';
 import {
     List,
@@ -14,12 +15,18 @@ import {
 } from 'react-native-elements';
 import { width, height, totalSize } from 'react-native-dimension';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import global from '../../config/global';
 
+const STORAGE_KEY = '@PRETZEL:time';
 
 class alarmScreen extends React.Component {
     constructor(props){
         super(props);
-        this.state = {value: false};
+        this.state = {
+            value: false,
+            timeStart: '',
+            timeEnd: '',
+        };
     }
     _onValueChange(value){
         this.setState({value: value});
@@ -28,7 +35,6 @@ class alarmScreen extends React.Component {
         }
     }
 
-
     state = {
         isDateTimePickerVisible: true,
     };
@@ -36,68 +42,90 @@ class alarmScreen extends React.Component {
     _showTimePicker = () => this.setState({ isDateTimePickerVisible: true });
     _hideTimePicker = () => this.setState({ isDateTimePickerVisible: false });
     _handleTimePicked = time => {
-        console.log('A date has been picked: ', time);
+        if (Platform.OS === 'ios')
+            this.setState({
+                timeStart: global.nowKSTParams(time),
+                isDateTimePickerVisible: false
+            });
+        else if (Platform.OS === 'android')
+            this.setState({
+                timeStart: global.nowParams(time),
+                isDateTimePickerVisible: false,
+            })
         this._hideTimePicker();
     };
-
+    _handleTimePicked2 = time => {
+        AsyncStorage.setItem(STORAGE_KEY)
+            .then(() =>  {
+                if (value !== null) {
+                    this.setState({timeEnd: Number(value)});
+                }
+            })
+            .catch((error) => console.log('AsynchStorage error:' + error.message))
+            .done();
+        if (Platform.OS === 'ios')
+            this.setState({
+                timeEnd: global.nowKSTParams(time),
+                isDateTimePickerVisible: false
+            });
+        else if (Platform.OS === 'android')
+            this.setState({
+                timeEnd: global.nowParams(time),
+                isDateTimePickerVisible: false,
+            })
+        this._hideTimePicker();
+    };
 
     render() {
         //const { email, phone, login, dob, location } = this.props.navigation.state.params;
         return (
             <ScrollView>
                 <View style={styles.parent}>
-                <List style={styles.cellOne}>
-                    <ListItem style={styles.cellOneFirst}
-                        title="푸시알림 받기"
-                        hideChevron
-                    />
-                    <Switch style={styles.cellOneSecond}
-                        onValueChange={(value) => this.setState({value: value})}
-                        value={this.state.value}
-                    />
-
-                </List>
+                    <List style={styles.cellOne}>
+                        <ListItem style={styles.cellOneFirst}
+                                  title="푸시알림 받기"
+                                  hideChevron
+                        />
+                        <Switch style={styles.cellOneSecond}
+                                onValueChange={(value) => this.setState({value: value})}
+                                value={this.state.value}
+                        />
+                    </List>
                 </View>
                 <List>
                     <ListItem
                         title="시간대 설정"
                         hideChevron
                     />
-                    <View style={styles.cellStart}>
-                        <Text style={{alignSelf:'center', color:'#ff6666',}}>시작 시각</Text>
+                    <View style={styles.cell}>
+                        <TouchableOpacity onPress={this._showTimePicker}>
+                            <View style={styles.buttonStart}>
+                                <Text style={{color:'white', fontSize:totalSize(3),}}>시작 시각</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <Text>바뀐시각 : {this.state.timeStart.split(" ")[1]}</Text>
+                        <DateTimePicker
+                            mode="time"
+                            isVisible={this.state.isDateTimePickerVisible}
+                            onConfirm={this._handleTimePicked}
+                            onCancel={this._hideTimePicker}
+                        />
                     </View>
-                    <Text>바뀐시간:{this._onValueChange}</Text>
-
-                    <TouchableOpacity onPress={this._showTimePicker}>
-                        <View style={styles.button}>
-                            <Text>시작 시각 정하기</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleTimePicked}
-                        onCancel={this._hideTimePicker}
-                    />
-                    <View style={styles.cellEnd}>
-                        <Text style={{alignSelf:'center', color:'#0066cc',}}>종료 시각</Text>
-                    </View>
-
-                    <TouchableOpacity onPress={this._showTimePicker}>
-                        <View style={styles.button}>
-                            <Text>종료 시각 정하기</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <DateTimePicker
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleTimePicked}
-                        onCancel={this._hideTimePicker}
-                    />
-
+                    <View style={styles.cell}>
+                        <TouchableOpacity onPress={this._showTimePicker}>
+                            <View style={styles.buttonEnd}>
+                                <Text style={{color:'white', fontSize:totalSize(3)}}>종료 시각</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <Text>바뀐시각 : {this.state.timeEnd.split(" ")[1]}</Text>
+                        <DateTimePicker
+                            mode="time"
+                            isVisible={this.state.isDateTimePickerVisible}
+                            onConfirm={this._handleTimePicked2}
+                            onCancel={this._hideTimePicker}
+                        /></View>
                 </List>
-
             </ScrollView>
-
-
         );
     }
 }
@@ -126,40 +154,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginRight: 10,
     },
-    button: {
-        backgroundColor: 'lightblue',
-        padding: 12,
-        margin: 16,
+    buttonStart: {
+        backgroundColor: '#eb6736',
+        width:width(40),
+        height: height(10),
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4,
-        borderColor: 'rgba(0, 0, 0, 0.1)',
+        borderRadius: 40,
     },
-    cellStart: { //시작시각
-        flex: 0.2,
-        alignSelf:'flex-start',
-        width:width(25),
-        marginTop:10,
-        marginLeft:10,
-        borderWidth: 1,
-        borderColor: '#ff6666',
-        borderRadius:10,
+    buttonEnd: {
+        backgroundColor: '#511e81',
+        width:width(40),
+        height: height(10),
         justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 40,
     },
-    cellEnd: { //종료시각
-        flex: 0.2,
-        alignSelf:'flex-start',
-        width:width(25),
-        marginTop:10,
-        marginLeft:10,
-        borderWidth: 1,
-        borderColor: '#0066cc',
-        borderRadius:10,
+    cell: {
+        flex: 1,
+        height: height(25),
         justifyContent: 'center',
+        alignItems: 'center',
     },
 });
-
-
-
 
 export default alarmScreen;
