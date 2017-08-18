@@ -54,7 +54,7 @@ class settingScreen extends Component {
     };
 
     handleBack = () => {
-        this.props.navigation.navigate('MyPage');
+        this.props.navigation.goBack();
     };
 
     Alarm = () => {

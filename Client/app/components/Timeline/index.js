@@ -29,7 +29,8 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class TimeLine extends React.Component {
     static propTypes = {
-        type: PropTypes.oneOf(['helpme', 'helpyou', 'together']).isRequired
+        type: PropTypes.oneOf(['helpme', 'helpyou', 'together']).isRequired,
+        onNavigate: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -221,6 +222,7 @@ export default class TimeLine extends React.Component {
                                                 this._showModal();
                                             })
                                         }}
+                                        onNavigate={this.props.onNavigate}
                                     />
                                 </View>
 

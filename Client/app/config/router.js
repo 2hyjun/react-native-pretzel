@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import {
     StackNavigator,
@@ -11,6 +12,7 @@ import {
     TabBarBottom,
     TabBarTop,
 
+
 } from 'react-navigation';
 
 import loading from '../screen/loading';
@@ -20,7 +22,8 @@ import timeline_helpyou from '../screen/timeline_helpyou';
 import timeline_together from '../screen/timeline_together';
 import register from '../screen/register';
 import post from '../screen/post';
-import chat from '../screen/chat';
+import chat from '../components/ChatRoom';
+import chatList from '../screen/ChatList';
 import myPage from '../screen/myPage';
 import alarm from '../screen/myPage/alarm';
 import setting from '../screen/myPage/setting';
@@ -36,6 +39,8 @@ import meanless7 from '../screen/meanless/meanless7';
 
 import styles from './style';
 
+
+
 export const MyPageStack = StackNavigator({
     MyPage: {
         screen: myPage,
@@ -49,7 +54,18 @@ export const MyPageStack = StackNavigator({
 }, {
     headerMode: 'none'
 });
+export const ChatStack = StackNavigator({
+    ChatList: {
+        screen: chatList,
 
+    },
+    ChatRoom: {
+        screen: chat
+    }
+}, {
+
+    headerMode: 'none'
+});
 
 export const TypeTab = TabNavigator({
     Helpme: {
@@ -75,7 +91,7 @@ export const TypeTab = TabNavigator({
     tabBarPosition: 'Top',
     swipeEnabled: false,
     animationEnabled: false,
-    lazyLoad: false,
+    lazy: true,
     tabBarOptions: {
         showLabel: true,
         indicatorStyle: {
@@ -107,47 +123,48 @@ export const MainTab = TabNavigator({
     },
     Post: {
         screen: post,
-        navigationOptions : {
+        navigationOptions : ({navigation}) => ({
             tabBarIcon: ({ focused }) => {
                 let imgSource = focused
                     ? require('../../img/underBarIcon/underbar_request_highlighted.png')
                     : require('../../img/underBarIcon/underbar_request_disabled.png');
                 return <Image style={styles.tabBarIcon} source={imgSource}/>
             }
-        }
+        })
     },
     Chat: {
-        screen: chat,
-        navigationOptions:{
+        screen: ChatStack,
+        navigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused}) => {
                 let imgSource = focused
                     ? require('../../img/underBarIcon/underbar_chatting_highlighted.png')
                     : require('../../img/underBarIcon/underbar_chatting_disabled.png');
-                return <Image style={styles.tabBarIcon} source={imgSource}/>
+                return <TouchableOpacity onPress={() => {navigation.navigate('Chat')}}><Image style={styles.tabBarIcon} source={imgSource}/></TouchableOpacity>
             }
-        }
+        })
     },
     MyPage: {
         screen: MyPageStack,
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused}) => {
                 let imgSource = focused
                     ? require('../../img/underBarIcon/underbar_mypage_highlighted.png')
                     : require('../../img/underBarIcon/underbar_mypage_disabled.png');
-                return <Image style={styles.tabBarIcon} source={imgSource}/>
+                return <TouchableOpacity onPress={() => {navigation.navigate('MyPage')}}><Image style={styles.tabBarIcon} source={imgSource}/></TouchableOpacity>
             }
-        }
+        })
     }
 }, {
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: true,
-    lazyLoad: false,
+    lazy: true,
     tabBarOptions: {
         showIcon: true,
         showLabel: false,
-    }
+    },
+    gesturesEnabled: false,
 
 });
 
@@ -166,7 +183,8 @@ export const auth = StackNavigator({
         screen: register,
     }
 }, {
-    headerMode: 'none'
+    headerMode: 'none',
+    gesturesEnabled: false,
 });
 
 export const Loading = StackNavigator({
@@ -176,11 +194,12 @@ export const Loading = StackNavigator({
     AuthStack: {
         screen: auth,
         navigationOptions: {
-            gesturesEnabled: false,
+
         },
     },
 }, {
     headerMode: 'none',
+    gesturesEnabled: false,
 });
 
 

@@ -17,14 +17,8 @@
     "react-native-dimension": "^1.0.6",
     "react-native-dropdownalert": "^2.11.0",
     "react-native-elements": "^0.15.0",
-<<<<<<< HEAD
     "react-native-gifted-chat": "^0.2.5",
     "react-native-keyboard-aware-view": "^0.0.12",
-=======
-    "react-native-gifted-listview": "0.0.15",
-    "react-native-gifted-spinner": "^0.1.0",
-    "react-native-keyboard-aware-view": "0.0.12",
->>>>>>> 16afee08613e332afe2f64361599187f234ff988
     "react-native-lightbox": "^0.6.0",
     "react-native-list-popover": "^1.0.5",
     "react-native-material-ripple": "^0.7.4",

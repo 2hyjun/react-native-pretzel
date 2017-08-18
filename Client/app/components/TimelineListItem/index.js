@@ -3,14 +3,15 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Alert
+    Alert,
+    AsyncStorage,
 } from 'react-native';
 
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 
 import styles from './style';
 import global from '../../config/global';
-
+const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 export default class TimelineListItem extends React.Component {
     /**
      * {
@@ -41,6 +42,7 @@ export default class TimelineListItem extends React.Component {
         "time": PropTypes.string.isRequired,
         "place": PropTypes.string.isRequired,
         "onPress": PropTypes.func.isRequired,
+        "onNavigate": PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -56,6 +58,7 @@ export default class TimelineListItem extends React.Component {
         this._computeUploadTime = this._computeUploadTime.bind(this);
         this._minimizePlace = this._minimizePlace.bind(this);
         this._minimizeTitle = this._minimizeTitle.bind(this);
+        this._handleAccept = this._handleAccept.bind(this);
     }
     componentDidMount() {
         this._computeDeadLine()
@@ -153,6 +156,53 @@ export default class TimelineListItem extends React.Component {
             return Promise.resolve(Math.abs(sub.second).toString() + '초 ' + ba + '까지');
         }
     }
+    _handleAccept() {
+        Alert.alert('', this.props.user_email + '님과의 채팅화면으로 이동하시겠습니까?', [{
+            text: '네',
+            onPress: () => {
+                let props = {
+                    user_email: global.user_email,
+                    partner_email: this.props.user_email,
+                };
+                //this.props.navigation.navigate('Chat', { user:  'Lucy' });
+                AsyncStorage.getItem(ChatListSTORAGEKEY)
+                    .then((value) => {
+                        if (value) {
+                            return new Promise.resolve(JSON.parse(value))
+                        } else {
+                            return new Promise.resolve([])
+                        }
+                    })
+                    .then((list) => {
+                        list.push({
+                            user_email: global.user_email,
+                            partner_email: props.partner_email,
+                            title: this.props.title,
+                            rid: this.props.rid,
+                        });
+                        AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
+                            .then(() => console.log(JSON.stringify(list), 'saved'))
+                            .catch(e => console.error(e))
+                            .done();
+                    })
+                    .catch(e => console.error(e))
+                    .done();
+                this.props.onNavigate('ChatRoom',
+                    {
+                        user_email: global.user_email,
+                        partner_email: this.props.user_email,
+                        title: this.props.title,
+                        rid: this.props.rid,
+                    })
+            }
+        }, {
+            text: '아니오',
+            onPress: () => {
+
+            }
+        }])
+
+    }
     render() {
         return (
             <TouchableOpacity style={styles.container}
@@ -195,7 +245,9 @@ export default class TimelineListItem extends React.Component {
                 </View>
                 <View>
                     <TouchableOpacity
-                        style={styles.acceptButtonView}>
+                        style={styles.acceptButtonView}
+                        onPress={this._handleAccept}
+                    >
                         <Text style={styles.acceptButtonTxt1}>수</Text>
                         <Text style={styles.acceptButtonTxt2}>락</Text>
                     </TouchableOpacity>

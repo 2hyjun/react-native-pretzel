@@ -3,6 +3,7 @@ import TimeLine from '../../components/Timeline';
 
 export default class timeline_together extends React.Component {
     render() {
-        return <TimeLine type={'together'}/>;
+        return <TimeLine type={'together'}
+                         onNavigate={this.props.navigation.navigate}/>;
     }
 }

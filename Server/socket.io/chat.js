@@ -16,11 +16,6 @@ module.exports = (server) => {
             email = user_email;
             user[email] = socket.id;
             console.log(user);
-            io.to(user[email]).emit('join', socket.id);
-        })
-
-        socket.on('getPartnerId', (partnerEmail) => {
-            io.to(user[email]).emit('getPartnelId', user[partnerEmail]);
         })
         
         socket.on('message', (data) => {
