@@ -33,7 +33,7 @@ export default class Chat extends React.Component {
         this._onReceive = this._onReceive.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = SocketIOClient('http://localhost:8124');
+        this.socket = SocketIOClient('http://13.124.147.152:8124');
         this.socket.on('message', this._onReceive);
 
         this._init();
