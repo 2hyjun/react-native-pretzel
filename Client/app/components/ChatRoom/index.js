@@ -59,7 +59,7 @@ export default class Chat extends React.Component {
         messages[0]['to'] = params.partner_email;
         this.socket.emit('message', messages[0]);
 
-        this._storeMessages(messages);
+        this._storeMessages(messages)
 
     }
 
@@ -82,21 +82,23 @@ export default class Chat extends React.Component {
         });
     }
 
+
     render() {
+
         return (
-            <View>
-                <GiftedChat
-                    messages={this.state.messages}
-                    onSend={(messages) => this._onSend(messages)}
-                    placeholder={this.props.navigation.state.params.title}
-                    locale={'kr'}
-                    renderAvatarOnTop={true}
-                    user={{
-                        _id: global.user_email,
-                        name: global.user_email,
-                    }}
-                />
-            </View>
+
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={(messages) => this._onSend(messages)}
+                placeholder={this.props.navigation.state.params.title}
+                locale={'ko'}
+                renderAvatarOnTop={true}
+                user={{
+                    _id: global.user_email,
+                    name: global.user_email,
+                }}
+            />
+
         );
     }
 }

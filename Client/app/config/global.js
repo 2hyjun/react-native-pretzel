@@ -51,6 +51,7 @@ const global = {
     },
     DateStrtoObj: (str) => {
         let obj = {};
+        console.log('***************', str);
         let date = str.split('T')[0];
 
         obj.year = parseInt(date.split('-')[0]);
@@ -95,6 +96,27 @@ const global = {
     CheckKorean: (str) => {
         let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
         return check.test(str);
+    },
+    DateToStr: (date) => {
+        console.log("!!!!!!!!!!!!!!!!!", date);
+        let obj = global.DateStrtoObj(date);
+        console.log(obj);
+        let str = obj.hour + '시 ';
+        str += obj.minutes + '분';
+
+        return str;
+    },
+    DateToStr2: (date) => {
+        console.log("!!!!!!!!!!!!!!!!!", date);
+        let obj = global.DateStrtoObj(date);
+        console.log(obj);
+        let str = '' + obj.month + '월 ';
+        str += obj.day + '일 ';
+        str += obj.hour + '시 ';
+        str += obj.minutes + '분 ';
+        str += '까지';
+
+        return str;
     }
 
 
