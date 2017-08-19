@@ -20,7 +20,7 @@ import PopupDialog, {
 } from 'react-native-popup-dialog';
 
 import _ from 'lodash';
-
+import global from '../../config/global'
 import TimelineListItem from '../../components/TimelineListItem';
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
@@ -57,9 +57,6 @@ export default class TimeLine extends React.Component {
         this.HttpRequest = this.HttpRequest.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._showModal = this._showModal.bind(this);
-
-
-
     }
     GetToken() {
         return new Promise((resolve, reject) => {
@@ -128,8 +125,12 @@ export default class TimeLine extends React.Component {
         this.modal.show();
     }
 
+
+
     render() {
         const ListViewMarginTop = Platform.OS === 'ios' ? {marginTop: 20} : {marginTop: 0};
+
+
         return(
             <View style={styles.container}>
                 <View style={styles.filter}>
@@ -140,11 +141,7 @@ export default class TimeLine extends React.Component {
                         <ScrollView horizontal={true} style={styles.filter_scrollview}>
                             <TouchableOpacity
                                 style={
-                                    _.find(this.state.otherEnabled, (o) => {return o})
-                                        ?
-                                        styles.filter_item_disabled
-                                        :
-                                        styles.filter_item_enabled
+                                    _.find(this.state.otherEnabled, (o) => {return o}) ? styles.filter_item_disabled : styles.filter_item_enabled
 
                                 }
                                 onPress={() => {
@@ -157,21 +154,13 @@ export default class TimeLine extends React.Component {
                                     });
                                 }} >
                                 <Text style={
-                                    _.find(this.state.otherEnabled, (o) => {return o})
-                                        ?
-                                        styles.filter_text_disabled
-                                        :
-                                        styles.filter_text_enabled
+                                    _.find(this.state.otherEnabled, (o) => {return o}) ? styles.filter_text_disabled : styles.filter_text_enabled
                                 }>모두보기</Text>
                             </TouchableOpacity>
                             {contents.map((value, i) => (
                                 <TouchableOpacity style=
                                                       {
-                                                          this.state.otherEnabled[i]
-                                                              ?
-                                                              styles.filter_item_enabled
-                                                              :
-                                                              styles.filter_item_disabled
+                                                          this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
                                                       }
                                                   key={i}
                                                   onPress={() => {
@@ -183,11 +172,7 @@ export default class TimeLine extends React.Component {
                                                   }}>
                                     <Text style=
                                               {
-                                                  this.state.otherEnabled[i]
-                                                      ?
-                                                      styles.filter_text_enabled
-                                                      :
-                                                      styles.filter_text_disabled
+                                                  this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
                                               }
                                     >{value}</Text>
                                 </TouchableOpacity>
@@ -227,20 +212,19 @@ export default class TimeLine extends React.Component {
                                         place={rowData.place}
                                         onPress={() => {
                                             this.setState({selectedRow: rowData}, () => {
-
                                                 this._showModal();
                                             })
                                         }}
                                         onNavigate={this.props.onNavigate}
                                     />
                                 </View>
-
                         }
                     />
                 </View>
                 <PopupDialog
                     ref={(ref) => this.modal = ref}
                     dialogAnimation = { new ScaleAnimation()}
+                    dialogTitle={null}
                     //dialogTitle={<DialogTitle title="상세 정보" titleTextStyle={{color: '#f95a25'}}/>}
                     dialogStyle={styles.dialog_container}
                 >
@@ -251,7 +235,7 @@ export default class TimeLine extends React.Component {
                                     <View style={styles.popCellOneLine}>
                                     </View>
                                     <View style={styles.popCellOneDate}>
-                                        <Text style={{fontSize:10}}>{this.state.selectedRow.time}</Text>
+                                        <Text style={{fontSize:10}}>{this.state.selectedRow.time ? global.DateToStr(this.state.selectedRow.time) : undefined}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.popCellOneRow}>
@@ -287,7 +271,7 @@ export default class TimeLine extends React.Component {
                                         <Text style={{fontWeight:'bold',}}>배달기한 │ </Text>
                                     </View>
                                     <View style={styles.popCellThreeColumn}>
-                                        <Text style={styles.popCellText}>{this.state.selectedRow.deadline}</Text>
+                                        <Text style={styles.popCellText}>{this.state.selectedRow.deadline ? global.DateToStr2(this.state.selectedRow.deadline) : undefined}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.popCellThreeInfo}>
