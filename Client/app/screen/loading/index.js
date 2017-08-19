@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
     View,
     Image,
     AsyncStorage,
     Alert,
+
 } from 'react-native'
 
 import styles from './style';
@@ -14,31 +15,35 @@ class Loading extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-        AsyncStorage.getItem(STORAGE_KEY)
-            .then((value) => {
-                if (value) {
-                    fetch('http://13.124.147.152:8124/api/auth/check', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'x-access-token': value
-                        }
-                    }).then((res) => res.json())
-                        .then((rJSON) => {
-                            if (rJSON.resultCode === 100) {
-                                global.setEmail(rJSON.result.user_email);
-                                this.props.navigation.navigate('Main');
-                            } else {
-                                this.props.navigation.navigate('Login')
-                            }
-                        })
-                        .catch((err) => console.error(err))
 
-                } else {
-                    this.props.navigation.navigate('Login')
-                }
-            }).catch((err) => console.error(err));
+    componentDidMount() {
+        // AsyncStorage.getItem(STORAGE_KEY)
+        //     .then((value) => {
+        //         if (value) {
+        //             fetch('http://13.124.147.152:8124/api/auth/check', {
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'Content-Type': 'application/x-www-form-urlencoded',
+        //                     'x-access-token': value
+        //                 }
+        //             }).then((res) => res.json())
+        //                 .then((rJSON) => {
+        //                     if (rJSON.resultCode === 100) {
+        //                         global.setEmail(rJSON.result.user_email);
+        //                         this.props.navigation.navigate('Main');
+        //                     } else {
+        //                         this.props.navigation.navigate('Login')
+        //                     }
+        //                 })
+        //                 .catch((err) => console.error(err))
+        //
+        //         } else {
+        //             this.props.navigation.navigate('Login')
+        //         }
+        //     }).catch((err) => console.error(err));
+        // setTimeout(() => {
+        //     this.props.navigation.navigate('AuthStack')
+        // }, 1000)
 
 
     }

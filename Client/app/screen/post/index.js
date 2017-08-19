@@ -200,7 +200,7 @@ export default class post extends React.Component {
         //console.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
-                    <View style={{flex: 1, marginTop: 30}}>
+                    <ScrollView style={{flex: 1, marginTop: 30}}>
                         <View style={styles.contents_container}>
                             <Ripple
                                 rippleColor={"#f95a25"}
@@ -301,7 +301,7 @@ export default class post extends React.Component {
                             </KeyboardAwareView>
                         </View>
 
-                    </View>
+                    </ScrollView>
                 <PopupDialog
                     ref={(ref) => {this.content = ref}}
                     dialogAnimation = { new SlideAnimation({slideFrom: 'left'})}

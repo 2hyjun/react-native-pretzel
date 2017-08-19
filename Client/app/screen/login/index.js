@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React, { Component, PropTypes} from 'react';
 import {
     Image,
     View,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 const STORAGE_KEY = '@PRETZEL:jwt';
+import { NavigationActions } from 'react-navigation';
 
 import styles from './style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -30,6 +31,9 @@ class login extends Component {
             password: '',
         }
     }
+    static propTypes = {
+        navigation : PropTypes.object.isRequired,
+    };
 
     componentWillMount() {
 
@@ -77,7 +81,13 @@ class login extends Component {
                         AsyncStorage.setItem(STORAGE_KEY, token)
                             .then(() =>  {
                                 console.log('saved token to disk: ' + token);
-                                this.props.navigation.navigate('Main');
+                                const resetAction = NavigationActions.reset({
+                                    index: 0,
+                                    actions: [
+                                        NavigationActions.navigate({ routeName: 'MainTab'})
+                                    ]
+                                });
+                                this.props.navigation.dispatch(resetAction);
                             })
                             .catch((error) => console.log('AsynchStorage error:' + error.message))
                             .done();
@@ -114,6 +124,7 @@ class login extends Component {
                                       iconName={'pencil'}
                                       iconColor={'#f95a25'}
                                       secure={false}
+                                      keyType={'email-address'}
                                       onTextChanged={(email) => this.setState({email})}
                                       autoCorrection={false}
                                       autoCapital={'none'}

@@ -8,6 +8,7 @@ import {
     ListView,
     RefreshControl,
     Platform,
+    Alert
 } from 'react-native';
 import DropdownAlert from '../../components/DropdownAlert';
 import styles from './style';
@@ -23,9 +24,12 @@ import _ from 'lodash';
 import TimelineListItem from '../../components/TimelineListItem';
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
+import global from '../../config/global'
+
+
+
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
 
 export default class TimeLine extends React.Component {
     static propTypes = {
@@ -40,6 +44,8 @@ export default class TimeLine extends React.Component {
             arr.push(false);
         }
 
+
+
         this.state = {
             otherEnabled: arr,
             dataSource: ds.cloneWithRows([]),
@@ -51,6 +57,9 @@ export default class TimeLine extends React.Component {
         this.HttpRequest = this.HttpRequest.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._showModal = this._showModal.bind(this);
+
+
+
     }
     GetToken() {
         return new Promise((resolve, reject) => {

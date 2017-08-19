@@ -1,12 +1,14 @@
 import {
     StyleSheet,
+    Platform
 } from 'react-native';
 
 import { height, width, totalSize } from 'react-native-dimension';
 
+const containerHeight = Platform.OS === 'ios' ? height(15) : height(17);
 export default StyleSheet.create({
     container: {
-        height: height(15),
+        height: containerHeight,
         width: width(90),
         flexDirection: 'row',
         //backgroundColor: 'skyblue',
@@ -15,16 +17,16 @@ export default StyleSheet.create({
         margin: 15,
         marginBottom: 0,
         borderRadius: 10,
-        elevation: 6,
-        shadowRadius: 4,
-        shadowOpacity: 0.5,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
+        // elevation: 6,
+        // shadowRadius: 4,
+        // shadowOpacity: 0.5,
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
     },
     acceptButtonView: {
-        height: height(15),
+        height: containerHeight,
         width: width(10),
         backgroundColor: '#D2DB08',
         borderTopRightRadius: 10,
@@ -32,7 +34,7 @@ export default StyleSheet.create({
 
     },
     infoms: {
-        height: height(15),
+        height: containerHeight,
         width: width(80),
         backgroundColor: 'white',
     },
