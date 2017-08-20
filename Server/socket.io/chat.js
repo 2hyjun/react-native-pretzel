@@ -18,6 +18,10 @@ module.exports = (server) => {
             console.log(user);
         })
         
+        socket.on('disconnect', () => {
+            console.log(email, 'has been disconnected');
+            console.log(user)
+        })
         socket.on('message', (data) => {
 		console.log('MESSAGE: ',data);
             if (user[data.to]) {
