@@ -7,6 +7,8 @@ import {
     GiftedChat
 } from 'react-native-gifted-chat';
 
+import _ from 'lodash';
+import global from './global'
 const socket = null;
 const Socket = {
     onReceive: (data) => {
@@ -30,16 +32,24 @@ const Socket = {
             const SetChatList = (list) => {
                 return new Promise((resolve, reject) => {
                     console.log("SetChatList")
-                    list.push({
+                    let messageInfo = {
                         user_email: data.to,
                         partner_email: data.user.name,
                         title: data.title,
                         rid: data.rid,
-                    });
-                    AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                        .then(() => {
-                            resolve();
-                        })
+                    }
+                    console.log(_.find(list, messageInfo))
+                    if (_.find(list, messageInfo)) {
+                        resolve();
+                    }
+                    else {
+                        list.push(messageInfo);
+                        AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
+                            .then(() => {
+                                resolve();
+                            })
+                    }
+                    
                 });
             }
             const GetPrevMessages = () => {
@@ -48,7 +58,7 @@ const Socket = {
                     AsyncStorage.getItem(ChatRoomSTORAGEKEY)
                         .then((value) => {
                             if (value)
-                                reject({em: 'alreadyExist'})
+                                resolve(value)
                             else
                                 resolve([]);
                         })
@@ -111,6 +121,7 @@ const Socket = {
     connectSocket: () => {
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124');
+            socket.emit('join', global.user_email);
         }
         console.log(socket);
         return socket;

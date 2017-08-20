@@ -92,7 +92,7 @@ export const TypeTab = TabNavigator({
     tabBarPosition: 'Top',
     swipeEnabled: false,
     animationEnabled: false,
-    lazy: true,
+    lazy: false,
     tabBarOptions: {
         showLabel: true,
         indicatorStyle: {
@@ -162,7 +162,7 @@ export const MainTab = TabNavigator({
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: true,
-    lazy: true,
+    lazy: false,
     tabBarOptions: {
         showIcon: true,
         showLabel: false,

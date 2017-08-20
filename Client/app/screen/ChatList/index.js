@@ -121,7 +121,6 @@ export default class ChatList extends React.Component {
     }
 
     render() {
-        console.log('render',this.state.dataSource);
 
         return (
             <View style={{flex: 1}}>
