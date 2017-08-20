@@ -19,9 +19,9 @@ module.exports = (server) => {
         })
         
         socket.on('message', (data) => {
-		console.log(data);
+		console.log('MESSAGE: ',data);
             if (user[data.to]) {
-                console.log(data);
+                
                 io.to(user[data.to]).emit('message', data);
                 //console.log(data);
                 console.log('message', data.text, 'delivered from', data.user.name, 'to', data.to)
