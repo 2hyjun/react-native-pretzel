@@ -7,6 +7,7 @@ import {
     GiftedChat
 } from 'react-native-gifted-chat';
 
+const socket = null;
 const Socket = {
     onReceive: (data) => {
         return new Promise((Resolve, Reject) => {
@@ -47,7 +48,7 @@ const Socket = {
                     AsyncStorage.getItem(ChatRoomSTORAGEKEY)
                         .then((value) => {
                             if (value)
-                                resolve(JSON.parse(value));
+                                reject({em: 'alreadyExist'})
                             else
                                 resolve([]);
                         })
@@ -71,7 +72,10 @@ const Socket = {
                 .then(SetChatList)
                 .then(GetPrevMessages)
                 .then(SetMessages)
-                .catch(e => console.error(e))
+                .catch(e => {
+                    if (!e.em)
+                        console.error(e)
+                })
                 .then(() => {
                     return new Promise((resolve, reject) => {
                         console.log('hehe')
@@ -104,9 +108,12 @@ const Socket = {
 
             });
     },
-    SocketIo: () => {
-
-        return SocketIOClient('http://13.124.147.152:8124');
+    connectSocket: () => {
+        if (socket === null) {
+            socket = SocketIOClient('http://13.124.147.152:8124');
+        }
+        console.log(socket);
+        return socket;
     },
 };
 

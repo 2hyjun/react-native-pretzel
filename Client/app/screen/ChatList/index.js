@@ -31,7 +31,8 @@ export default class ChatList extends React.Component {
             refreshing: false
         };
 
-        this.socket = socket.SocketIo();
+        this.socket = socket.connectSocket();
+        this.socket.emit('join', global.user_email);
         this.socket.on('message', this.onChatRecieve);
 
         this._getAllKey = this._getAllKey.bind(this);
