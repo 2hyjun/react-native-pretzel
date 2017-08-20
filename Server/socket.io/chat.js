@@ -19,10 +19,13 @@ module.exports = (server) => {
         })
         
         socket.on('disconnect', () => {
-            clients--;
-            console.log(email, 'has been disconnected', clients, 'user connected now.');
-            delete user[email];
-            console.log(user)
+            if (user[email]) {
+                clients--;
+                console.log(email, 'has been disconnected', clients, 'user connected now.');
+                delete user[email];
+                console.log(user)
+            }
+            
         })
         socket.on('message', (data) => {
 		console.log('MESSAGE: ',data);
