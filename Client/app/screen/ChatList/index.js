@@ -14,8 +14,9 @@ import {List, ListItem} from 'react-native-elements';
 import SwipeOut from 'react-native-swipeout';
 import _ from 'lodash';
 import Button from "react-native-elements/src/buttons/Button";
-import SocketIOClient from 'socket.io-client';
+
 import global from '../../config/global'
+import socket from '../../config/socket.io';
 
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 
@@ -30,37 +31,42 @@ export default class ChatList extends React.Component {
             refreshing: false
         };
 
-        this.socket = global.SocketIo();
-        this.socket.on('message', () => {Alert.alert('', 'got it')});
+        this.socket = socket.SocketIo();
+        this.socket.on('message', this.onChatRecieve);
 
         this._getAllKey = this._getAllKey.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._delete = this._delete.bind(this);
     }
-    _onRecieve() {
-
+    onChatRecieve(data) {
+        socket.onReceive(data)
+            .then(() => {
+                Alert.alert('ChatList', 'Messages Got it!')
+                this._renderRefresh();
+            })
     }
     componentWillMount() {
-        AsyncStorage.getItem(ChatListSTORAGEKEY)
-            .then((value) => {
-                if (value) {
-                    let list = JSON.parse(value);
-                    list = _.uniqBy(list, 'rid');
-                    console.log('*********',list);
-                    this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
-                } else {
-                    this.setState({dataSource: this.state.dataSource.cloneWithRows([])})
-                }
-            })
-            .catch(e => console.error(e))
-            .done();
+        
     }
 
     componentDidMount() {
-
+        AsyncStorage.getItem(ChatListSTORAGEKEY)
+        .then((value) => {
+            if (value) {
+                let list = JSON.parse(value);
+                //list = _.uniqBy(list, 'rid');
+                list = _.reverse(list);
+                console.log('*********',list);
+                this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
+            } else {
+                this.setState({dataSource: this.state.dataSource.cloneWithRows([])})
+            }
+        })
+        .catch(e => console.error(e))
+        .done();
     }
     _delete(item) {
-
+        
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 let list = JSON.parse(value);
@@ -90,7 +96,8 @@ export default class ChatList extends React.Component {
                 if (value) {
 
                     let list = JSON.parse(value);
-                    list = _.uniqBy(list, 'rid');
+                    //list = _.uniqBy(list, 'rid');
+                    list = _.reverse(list);
                     //console.log('*********',list);
                     this.setState(this.state.dataSource.cloneWithRows([]), () => {
                         this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
