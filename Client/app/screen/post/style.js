@@ -117,13 +117,13 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         height: height(10),
-        backgroundColor: "#F2F2F2"
+        backgroundColor: "#F2F2F2",
     },
     deadline: {
         flexDirection: 'row',
         backgroundColor: '#F2F2F2',
         padding: 16,
-        height: height(10),
+        height: height(20),
         //backgroundColor: 'skyblue',
         marginLeft: 30,
         marginRight: 30,

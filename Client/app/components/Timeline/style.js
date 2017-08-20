@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     popCellOneLine:{
-        flex:2,
+        flex:5,
         borderTopColor: '#D2DB08',
         borderColor: 'transparent',
         borderWidth: 2,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#ffffff',
         flexDirection:'row',
-        marginLeft:5,
+        marginLeft:15,
         marginTop:5,
     },
     popCellOneInfo:{
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     popCellTwoTitle:{
         fontSize: 20,
         fontWeight: 'bold',
+        color: '#292929',
     },
     popCellThree: { //배달장소, 배달기한, 예상가격, 배달료
         flex: 2,
@@ -169,7 +170,8 @@ const styles = StyleSheet.create({
         width: width(95),
     },
     popCellText:{
-        color : '#D2DB08', fontWeight:'bold',
+        color : '#333333',
+        fontWeight:'bold',
     },
 });
 

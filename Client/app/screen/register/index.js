@@ -34,8 +34,7 @@ export default class Register extends React.Component {
         this.Register = this.Register.bind(this);
     }
     componentDidMount() {
-        if (Platform.OS === 'android')
-            this.dropdown.alertWithType('info', '', '안드로이드에서는 키보드가 올라와 있는 상태에서만 스크롤이 가능합니다.');
+
     }
     Register() {
         let params = {
@@ -77,7 +76,7 @@ export default class Register extends React.Component {
                     if (rJSON.resultCode === 100) {
                         this.dropdown.alertWithType('success', '회원가입 성공', rJSON.result);
                         //Alert.alert('회원가입 성공');
-                        this.props.navigation.navigate('Login')
+                        this.props.navigation.navigate('auth')
                     } else {
                         this.dropdown.alertWithType('error', '회원가입 실패', rJSON.result);
                         //Alert.alert('회원가입 실패', rJSON.result)

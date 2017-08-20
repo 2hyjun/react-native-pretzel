@@ -27,6 +27,7 @@ import chatList from '../screen/ChatList';
 import myPage from '../screen/myPage';
 import alarm from '../screen/myPage/alarm';
 import setting from '../screen/myPage/setting';
+import auth from '../screen/auth';
 
 import meanless1 from '../screen/meanless/meanless1';
 import meanless2 from '../screen/meanless/meanless2';
@@ -113,6 +114,8 @@ export const MainTab = TabNavigator({
     Timeline: {
         screen: TypeTab,
         navigationOptions: {
+
+            gesturesEnabled: false,
             tabBarIcon: ({ focused }) => {
                 let imgSource = focused
                     ? require('../../img/underBarIcon/underbar_home_highlighted.png')
@@ -169,37 +172,22 @@ export const MainTab = TabNavigator({
 });
 
 
-export const auth = StackNavigator({
-    Login: {
-        screen: login
-    },
-    Main: {
-        screen: MainTab,
-        navigationOptions: {
-            title: '메인'
-        }
+export const Auth = StackNavigator({
+    auth: {
+        screen: auth,
     },
     Register: {
         screen: register,
+    },
+    MainTab: {
+        screen: MainTab
+    },
+    Login: {
+        screen: login
     }
+
 }, {
     headerMode: 'none',
     gesturesEnabled: false,
 });
-
-export const Loading = StackNavigator({
-    Loading: {
-        screen: loading,
-    },
-    AuthStack: {
-        screen: auth,
-        navigationOptions: {
-
-        },
-    },
-}, {
-    headerMode: 'none',
-    gesturesEnabled: false,
-});
-
 

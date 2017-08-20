@@ -111,6 +111,13 @@ export default class TimelineListItem extends React.Component {
 
         let sub = global.DateSubtraction(cur, uptime);
        // console.log(this.props.title, sub);
+        sub.year = Math.abs(sub.year);
+        sub.month = Math.abs(sub.month);
+        sub.day = Math.abs(sub.day);
+        sub.hour = Math.abs(sub.hour);
+        sub.minutes = Math.abs(sub.minutes);
+        sub.second = Math.abs(sub.second);
+
         if (sub.year) {
             this.setState({uploadTime: sub.year.toString() + '년 전', timeToDeadLine: obj.deadline, minimizedPlace: obj.location, minimizedTitle: obj.title})
         } else if (sub.month) {

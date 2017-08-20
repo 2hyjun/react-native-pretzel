@@ -200,7 +200,7 @@ export default class post extends React.Component {
         //console.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
-                    <View style={{flex: 1, marginTop: 30}}>
+                    <ScrollView style={{flex: 1, marginTop: 30}}>
                         <View style={styles.contents_container}>
                             <Ripple
                                 rippleColor={"#f95a25"}
@@ -301,7 +301,7 @@ export default class post extends React.Component {
                             </KeyboardAwareView>
                         </View>
 
-                    </View>
+                    </ScrollView>
                 <PopupDialog
                     ref={(ref) => {this.content = ref}}
                     dialogAnimation = { new SlideAnimation({slideFrom: 'left'})}
@@ -373,7 +373,7 @@ export default class post extends React.Component {
                             style={styles.detail_input}
                             placeholder={'12시까지 제도관 학생회실로 노스커피 아이스 아메리카노 4잔 배달해주세요.'}
                             onChangeText={(value) => this.detailTxt = value}
-
+                            maxLength={92}
                         />
                     </View>
                     <View style={styles.detail_done}>

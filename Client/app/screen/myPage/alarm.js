@@ -92,14 +92,16 @@ class alarmScreen extends React.Component {
                         />
                     </List>
                 </View>
-                <List>
+                <List style={this.state.value ? {marginTop:20, backgroundColor:'#ffffff'} : {marginTop:20, backgroundColor:'#efefef'}}>
                     <ListItem
                         title="시간대 설정"
                         hideChevron
                     />
-                    <View style={styles.cell}>
-                        <TouchableOpacity onPress={this._showTimePicker}>
-                            <View style={styles.buttonStart}>
+                    <View style={this.state.value ? styles.cell : styles.cellDisabled}>
+                        <TouchableOpacity
+                            disabled={this.state.value ? false : true}
+                            onPress={this._showTimePicker}>
+                            <View style={this.state.value ? styles.buttonStart : styles.buttonStartDisabled}>
                                 <Text style={{color:'white', fontSize:totalSize(3),}}>시작 시각</Text>
                             </View>
                         </TouchableOpacity>
@@ -111,9 +113,11 @@ class alarmScreen extends React.Component {
                             onCancel={this._hideTimePicker}
                         />
                     </View>
-                    <View style={styles.cell}>
-                        <TouchableOpacity onPress={this._showTimePicker}>
-                            <View style={styles.buttonEnd}>
+                    <View style={this.state.value ? styles.cell : styles.cellDisabled}>
+                        <TouchableOpacity
+                            disabled={this.state.value ? false : true}
+                            onPress={this._showTimePicker}>
+                            <View style={this.state.value ? styles.buttonEnd : styles.buttonEndDisabled}>
                                 <Text style={{color:'white', fontSize:totalSize(3)}}>종료 시각</Text>
                             </View>
                         </TouchableOpacity>
@@ -175,6 +179,28 @@ const styles = StyleSheet.create({
         height: height(25),
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    cellDisabled: {
+        flex: 1,
+        height: height(25),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonStartDisabled: {
+        backgroundColor: '#F7C3B0',
+        width:width(40),
+        height: height(10),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 40,
+    },
+    buttonEndDisabled: {
+        backgroundColor: '#baa6cd',
+        width:width(40),
+        height: height(10),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 40,
     },
 });
 

@@ -153,6 +153,7 @@ export default class Fumi extends BaseInput {
                 <TextInput
                     ref="input"
                     //{...this.props}
+                    height={this.props.height}
                     style={[
                         styles.textInput,
                         {
@@ -161,6 +162,7 @@ export default class Fumi extends BaseInput {
                         },
                         inputStyle,
                     ]}
+                    keyboardType={keyType}
                     value={value}
                     onBlur={this._onBlur}
                     onFocus={(event) => {
@@ -174,6 +176,7 @@ export default class Fumi extends BaseInput {
                     onChangeText={onTextChanged}
                     autoCorrect={autoCorrection}
                     autoCapitalize={autoCapital}
+                    maxLength={16}
                 />
             </View>
         );

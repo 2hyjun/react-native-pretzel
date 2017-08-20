@@ -1,10 +1,13 @@
 import React from 'react';
 import {
     StyleSheet,
-    Dimensions
+    Dimensions,
+    Platform
 } from 'react-native';
 
+
 import { height, width, totalSize } from 'react-native-dimension';
+const cell_form_height = Platform.OS === 'ios' ?  height(40) : height(43);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -24,7 +27,9 @@ const styles = StyleSheet.create({
 
     cell_form: {
         marginTop: height(10),
-        height: height(40)
+        height: cell_form_height,
+        //backgroundColor: 'skyblue',
+
     },
     form_email: {
         flex: 1,

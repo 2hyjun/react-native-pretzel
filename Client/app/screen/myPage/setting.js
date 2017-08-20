@@ -10,10 +10,11 @@ import {
     TouchableOpacity,
     ListView,
     Alert,
+
 } from 'react-native';
 
 import styles from './settingStyle';
-
+import { NavigationActions } from 'react-navigation'
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class settingScreen extends Component {
@@ -30,7 +31,9 @@ class settingScreen extends Component {
 
     Logout() {
         AsyncStorage.removeItem(STORAGE_KEY)
-            .then(this.props.navigation.navigate('Login'))
+            .then(() => {
+                this.props.navigation.navigate('auth')
+            })
             .catch((err) => console.log(err))
     };
 
@@ -88,9 +91,10 @@ class settingScreen extends Component {
                                 <Text>푸시알림 설정</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.row}>
+                        <TouchableOpacity style={styles.row}
+                            onPress={() => {this.props.navigation.navigate('auth')}}>
                             <Text>피드백</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
