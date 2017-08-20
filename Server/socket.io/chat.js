@@ -19,7 +19,8 @@ module.exports = (server) => {
         })
         
         socket.on('disconnect', () => {
-            console.log(email, 'has been disconnected');
+            clients--;
+            console.log(email, 'has been disconnected', clients, 'user connected now.');
             delete user[email];
             console.log(user)
         })
