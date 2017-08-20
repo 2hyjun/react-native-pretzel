@@ -20,7 +20,7 @@ module.exports = (server) => {
         
         socket.on('disconnect', () => {
             console.log(email, 'has been disconnected');
-            user[email] = undefined;
+            delete user[email];
             console.log(user)
         })
         socket.on('message', (data) => {
