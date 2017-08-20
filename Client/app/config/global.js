@@ -1,4 +1,6 @@
-import SocketIOClient from 'socket.io-client';
+import {
+    AsyncStorage
+} from 'react-native';
 
 const global = {
     user_email: '',
@@ -53,7 +55,6 @@ const global = {
     },
     DateStrtoObj: (str) => {
         let obj = {};
-        console.log('***************', str);
         let date = str.split('T')[0];
 
         obj.year = parseInt(date.split('-')[0]);
@@ -119,14 +120,6 @@ const global = {
 
         return str;
     },
-    SocketIo: () => {
-        const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
-
-        return SocketIOClient('http://13.124.147.152:8124');
-    },
-
-
-
 };
 
 export default global;

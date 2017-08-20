@@ -13,6 +13,7 @@ import styles from './style'
 import SocketIOClient from 'socket.io-client';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import global from '../../config/global';
+import socket from '../../config/socket.io';
 import ChatList from "../../screen/ChatList/index";
 
 export default class Chat extends React.Component {
@@ -31,7 +32,7 @@ export default class Chat extends React.Component {
         this._onReceive = this._onReceive.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = global.SocketIo();
+        this.socket = socket.SocketIo();
         this.socket.on('message', this._onReceive);
 
         this._init();
@@ -54,6 +55,9 @@ export default class Chat extends React.Component {
     }
     _onSend(messages = []) {
         const { params } = this.props.navigation.state;
+        messages[0]['to'] = params.partner_email;
+        messages[0]['title'] = params.title;
+        messages[0]['rid'] = params.rid;
         this.socket.emit('message', messages[0]);
 
         this._storeMessages(messages)
@@ -62,7 +66,6 @@ export default class Chat extends React.Component {
 
     _onReceive(data) {
         const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
-        const { params } = this.props.navigation.state;
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 if (!value) {
@@ -75,9 +78,8 @@ export default class Chat extends React.Component {
                 list.push({
                     user_email: data.to,
                     partner_email: data.user.name,
-                    title: params.title,
-                    rid: params.rid,
-                    recentM: data.text,
+                    title: data.title,
+                    rid: data.rid,
                 });
                 AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
                     .then(() => console.log(list, 'List saved'))

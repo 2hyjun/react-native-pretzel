@@ -30,11 +30,14 @@ class settingScreen extends Component {
     }
 
     Logout() {
-        AsyncStorage.removeItem(STORAGE_KEY)
-            .then(() => {
-                this.props.navigation.navigate('auth')
-            })
-            .catch((err) => console.log(err))
+        AsyncStorage.getAllKeys()
+            .then((values) => {
+                AsyncStorage.multiRemove(values)
+                    .then(() => {
+                        this.props.navigation.navigate('auth')
+                    })
+                    .catch(e => console.error(e))
+                })
     };
 
     LogOut = () => {

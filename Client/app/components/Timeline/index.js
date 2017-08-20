@@ -24,6 +24,7 @@ import TimelineListItem from '../../components/TimelineListItem';
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
 import global from '../../config/global'
+import socket from '../../config/socket.io';
 
 
 
@@ -44,9 +45,10 @@ export default class TimeLine extends React.Component {
         }
 
 
-        this.socket = global.SocketIo();
+        this.socket = socket.SocketIo();
         this.socket.emit('join', global.user_email);
-        this.socket.on('message', () => {Alert.alert('', 'got it')});
+        this.socket.on('message', this.onChatRecieve);
+
         this.state = {
             otherEnabled: arr,
             dataSource: ds.cloneWithRows([]),
@@ -58,6 +60,12 @@ export default class TimeLine extends React.Component {
         this.HttpRequest = this.HttpRequest.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._showModal = this._showModal.bind(this);
+        this.onChatRecieve = this.onChatRecieve.bind(this);
+    }
+
+    onChatRecieve(data) {
+        socket.onReceive(data)
+            .then(() => Alert.alert('Timeline', 'Messages Got it!'))
     }
     GetToken() {
         return new Promise((resolve, reject) => {
