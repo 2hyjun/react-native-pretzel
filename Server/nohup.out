@@ -112,3 +112,1008 @@ err:  { err: 'No auth token in "x-access-token" headers' }
 token:  undefined
 sign success
 Login SUccess
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+{ err: '존재 하지 않는 이메일입니다.' }
+{ err: '존재 하지 않는 이메일입니다.' }
+{ err: '존재 하지 않는 이메일입니다.' }
+sign success
+Login SUccess
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
+			 eccsicilia@naver.com connected, socket id:  23sARFY36VOezEOQAAAA 1 user connected now.
+{ 'eccsicilia@naver.com': '23sARFY36VOezEOQAAAA' }
+			 biper94@pusan.ac.kr connected, socket id:  9Ofl-xVQdf6PZdG5AAAB 2 user connected now.
+{ 'eccsicilia@naver.com': '23sARFY36VOezEOQAAAA',
+  'biper94@pusan.ac.kr': '9Ofl-xVQdf6PZdG5AAAB' }
+			 biper94@pusan.ac.kr connected, socket id:  sq6R9n-7UEk76DaMAAAC 2 user connected now.
+{ 'eccsicilia@naver.com': '23sARFY36VOezEOQAAAA',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: 'Asdfasdf',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T06:59:18.793Z',
+  _id: 'e9521e4e-5200-41b9-8477-880df95f3887',
+  to: 'eccsicilia@naver.com' }
+message Asdfasdf delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+			 eccsicilia@naver.com connected, socket id:  R7cbEIETFwicilo1AAAD 2 user connected now.
+{ 'eccsicilia@naver.com': 'R7cbEIETFwicilo1AAAD',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: '하이',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:01:49.056Z',
+  _id: '6ffe6094-630f-460b-be93-0c469053e320',
+  to: 'eccsicilia@naver.com' }
+message 하이 delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+{ text: 'hi',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:03:40.045Z',
+  _id: 'b70ef93f-d8b8-4c67-b398-9a78444350d1',
+  to: 'biper94@pusan.ac.kr' }
+message hi delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+{ text: '헤헤헤헿ㅎ',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:02:16.943Z',
+  _id: '7e585416-3dff-4b05-9f20-1cfbe67e0d7d',
+  to: 'eccsicilia@naver.com' }
+message 헤헤헤헿ㅎ delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+{ text: '호호호ㅗ호홓',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:02:19.230Z',
+  _id: '0d98bd92-769a-452e-93e0-caa8cae748ce',
+  to: 'eccsicilia@naver.com' }
+message 호호호ㅗ호홓 delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+{ text: 'akdfjakjfjfjfjfjfj',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:04:06.850Z',
+  _id: '3edff14c-1d3a-4d35-a65d-99c6084b3cb0',
+  to: 'biper94@pusan.ac.kr' }
+message akdfjakjfjfjfjfjfj delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+{ text: '하하하ㅏ하',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:02:20.722Z',
+  _id: '1f61c2d5-d188-4ba2-8510-ed080dc2e9ec',
+  to: 'eccsicilia@naver.com' }
+message 하하하ㅏ하 delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+{ text: 'wtf',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:04:08.475Z',
+  _id: 'b37f5a4e-849d-4fd1-8dbe-90c04b6baaa1',
+  to: 'biper94@pusan.ac.kr' }
+message wtf delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+{ text: 'hihi',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:04:38.421Z',
+  _id: 'b0b792f0-48be-4a2d-88b9-ac6132a799be',
+  to: 'biper94@pusan.ac.kr' }
+message hihi delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+{ text: 'ne',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:05:02.429Z',
+  _id: '51abdd6a-e602-4ad9-8974-490b011b7588',
+  to: 'biper94@pusan.ac.kr' }
+message ne delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 eccsicilia@naver.com connected, socket id:  KSKa8wi5squEeCyZAAAE 2 user connected now.
+{ 'eccsicilia@naver.com': 'KSKa8wi5squEeCyZAAAE',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: 'hehe',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:07:08.320Z',
+  _id: 'e59ed655-81fc-4690-b233-2a7f4856c535',
+  to: 'biper94@pusan.ac.kr' }
+message hehe delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 eccsicilia@naver.com connected, socket id:  V2LxAi36in8XMh5HAAAF 2 user connected now.
+{ 'eccsicilia@naver.com': 'V2LxAi36in8XMh5HAAAF',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: 'kljljkjlk',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:07:45.279Z',
+  _id: '5448e94a-249b-4541-b42d-7bd60eef063f',
+  to: 'biper94@pusan.ac.kr' }
+message kljljkjlk delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 eccsicilia@naver.com connected, socket id:  r5Wp9ITkLPBBwEk6AAAG 2 user connected now.
+{ 'eccsicilia@naver.com': 'r5Wp9ITkLPBBwEk6AAAG',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: 'kjljlkjlk',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:11:02.134Z',
+  _id: '300d6646-51e2-47d4-8353-b17ef04f146e',
+  to: 'biper94@pusan.ac.kr',
+  createAt: 1503022262135 }
+message kjljlkjlk delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 eccsicilia@naver.com connected, socket id:  9PikBxxiSk23hH2dAAAH 2 user connected now.
+{ 'eccsicilia@naver.com': '9PikBxxiSk23hH2dAAAH',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+{ text: 'kljkljlk',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: 1503022345920,
+  _id: 'e22700f5-c35e-4169-9731-03092003dae4',
+  to: 'biper94@pusan.ac.kr' }
+message kljkljlk delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 eccsicilia@naver.com connected, socket id:  RXihFq9i0tT-4KrnAAAI 2 user connected now.
+{ 'eccsicilia@naver.com': 'RXihFq9i0tT-4KrnAAAI',
+  'biper94@pusan.ac.kr': 'sq6R9n-7UEk76DaMAAAC' }
+			 biper94@pusan.ac.kr connected, socket id:  5Qy3Cknfufuc46S4AAAJ 2 user connected now.
+{ 'eccsicilia@naver.com': 'RXihFq9i0tT-4KrnAAAI',
+  'biper94@pusan.ac.kr': '5Qy3Cknfufuc46S4AAAJ' }
+{ text: 'ㅏㅓㅘㅓㅗ',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: 1503097921451,
+  _id: '2cf850e9-5c5a-48cb-b679-e493fb5aec96',
+  to: 'eccsicilia@naver.com' }
+message ㅏㅓㅘㅓㅗ delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+{ text: 'df',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: 1503040431075,
+  _id: 'd594c3d3-9906-498d-88c7-f58c6c8d5ada',
+  to: 'biper94@pusan.ac.kr' }
+message df delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  HkfnlZiOe8R5YC32AAAK 2 user connected now.
+{ 'eccsicilia@naver.com': 'RXihFq9i0tT-4KrnAAAI',
+  'biper94@pusan.ac.kr': 'HkfnlZiOe8R5YC32AAAK' }
+			 eccsicilia@naver.com connected, socket id:  ulPspuWgDoO1E5rYAAAL 2 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'HkfnlZiOe8R5YC32AAAK' }
+{ text: 'ㅏㅓㅘㅓ',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:16:22.073Z',
+  _id: '6dfa5932-1f13-467c-aef5-17e99c34fd5f',
+  to: 'biper94@pusan.ac.kr' }
+message ㅏㅓㅘㅓ delivered from biper94@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: 'adflajkdsfjklafd',
+  user: { _id: 'eccsicilia@naver.com', name: 'eccsicilia@naver.com' },
+  createdAt: '2017-08-17T10:18:11.694Z',
+  _id: 'dadb14c2-60b4-4b79-8720-bdcbb0926103',
+  to: 'biper94@pusan.ac.kr' }
+message adflajkdsfjklafd delivered from eccsicilia@naver.com to biper94@pusan.ac.kr
+{ text: 'ㅏㅏㅓㅘㅓ',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:18:11.335Z',
+  _id: 'b617a25e-1d6a-4269-bfde-988ae8254ce2',
+  to: 'biper94@pusan.ac.kr' }
+message ㅏㅏㅓㅘㅓ delivered from biper94@pusan.ac.kr to biper94@pusan.ac.kr
+sign success
+Login SUccess
+			 biper94@gmail.com connected, socket id:  awADn2Ped66y-9NOAAAM 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'HkfnlZiOe8R5YC32AAAK',
+  'biper94@gmail.com': 'awADn2Ped66y-9NOAAAM' }
+			 biper94@pusan.ac.kr connected, socket id:  Kt0lXwA_y8XWMkahAAAN 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'Kt0lXwA_y8XWMkahAAAN',
+  'biper94@gmail.com': 'awADn2Ped66y-9NOAAAM' }
+{ text: 'It\'sme',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-18T07:40:40.725Z',
+  _id: '55b7df14-2d1d-4495-afbb-4091ea7183c0',
+  to: 'biper94@pusan.ac.kr' }
+message It'sme delivered from biper94@gmail.com to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  zhdJmebF7Baqv6IJAAAO 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'zhdJmebF7Baqv6IJAAAO',
+  'biper94@gmail.com': 'awADn2Ped66y-9NOAAAM' }
+{ text: 'nope',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-18T07:41:08.908Z',
+  _id: '1713c237-6d9d-4010-8813-b7ab97c2c9cd',
+  to: 'biper94@pusan.ac.kr' }
+message nope delivered from biper94@gmail.com to biper94@pusan.ac.kr
+{ text: ',lkjlkk',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-18T07:42:36.292Z',
+  _id: '40a7624a-19cb-4d79-bdc5-b416c1278d27',
+  to: 'biper94@pusan.ac.kr' }
+message ,lkjlkk delivered from biper94@gmail.com to biper94@pusan.ac.kr
+			 biper94@gmail.com connected, socket id:  MJ2FB09FDxzd8nXPAAAP 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'zhdJmebF7Baqv6IJAAAO',
+  'biper94@gmail.com': 'MJ2FB09FDxzd8nXPAAAP' }
+{ text: 'hey',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-18T07:43:14.276Z',
+  _id: 'a205e4ba-347d-4fa2-83e2-90bc17def0dd',
+  to: 'biper94@pusan.ac.kr' }
+message hey delivered from biper94@gmail.com to biper94@pusan.ac.kr
+			 biper94@gmail.com connected, socket id:  q2Cy9JHCOZHjMixeAAAQ 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'zhdJmebF7Baqv6IJAAAO',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ' }
+{ text: 'nope',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-18T07:44:24.526Z',
+  _id: '14f96ed8-30f9-4aa3-bcbd-31479f1eaf52',
+  to: 'biper94@pusan.ac.kr' }
+message nope delivered from biper94@gmail.com to biper94@pusan.ac.kr
+sign success
+Login SUccess
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+{ text: 'Nope',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T07:46:29.156Z',
+  _id: '3dacfb9e-ab84-45d7-8715-2fed0cb611bc',
+  to: 'biper94@pusan.ac.kr' }
+message Nope delivered from biper94@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  tqDXzHAaR1QbWSAKAAAR 3 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'tqDXzHAaR1QbWSAKAAAR',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ' }
+			 pretzel@pusan.ac.kr connected, socket id:  9rYoj4jwXPvlvyJeAAAS 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'tqDXzHAaR1QbWSAKAAAR',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+			 biper94@pusan.ac.kr connected, socket id:  GBgwYu3GpHhRwYmVAAAT 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'GBgwYu3GpHhRwYmVAAAT',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+			 biper94@pusan.ac.kr connected, socket id:  mLScssyBWzrJnqu6AAAU 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'mLScssyBWzrJnqu6AAAU',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+			 biper94@pusan.ac.kr connected, socket id:  OvLFL8glKTzZswHzAAAV 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'OvLFL8glKTzZswHzAAAV',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+			 biper94@pusan.ac.kr connected, socket id:  xZDwdTwYaXszmIhcAAAW 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'xZDwdTwYaXszmIhcAAAW',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+			 biper94@pusan.ac.kr connected, socket id:  XRLEko0oH6hmDeFVAAAX 4 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS' }
+sign success
+Login SUccess
+			 juliansalt@naver.com connected, socket id:  IuyFUGB_7PUNZ5-LAAAY 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'IuyFUGB_7PUNZ5-LAAAY' }
+{ text: 'Gddd',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T08:33:47.616Z',
+  _id: '09fe9cf0-8b94-43bc-88e8-13d0834a371c',
+  to: 'biper94@pusan.ac.kr' }
+message Gddd delivered from juliansalt@naver.com to biper94@pusan.ac.kr
+			 juliansalt@naver.com connected, socket id:  kWTkh1atMn-MgkInAAAZ 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'kWTkh1atMn-MgkInAAAZ' }
+{ text: 'Xcvxvx',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T08:34:07.601Z',
+  _id: '88d9794d-077a-4c61-8340-d4d3cbc24974',
+  to: 'biper94@pusan.ac.kr' }
+message Xcvxvx delivered from juliansalt@naver.com to biper94@pusan.ac.kr
+sign success
+Login SUccess
+			 juliansalt@naver.com connected, socket id:  B-n9w94QNA6_NnycAAAa 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'B-n9w94QNA6_NnycAAAa' }
+{ text: 'F',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T08:41:29.081Z',
+  _id: '7f11e54d-4eb9-40b4-94d0-61a7ef325211',
+  to: 'eccsicilia@naver.com' }
+message F delivered from juliansalt@naver.com to eccsicilia@naver.com
+sign success
+Login SUccess
+sign success
+Login SUccess
+			 juliansalt@naver.com connected, socket id:  V4sdQC4jBMSi3usVAAAb 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'V4sdQC4jBMSi3usVAAAb' }
+			 juliansalt@naver.com connected, socket id:  AHNbUHgECES5hAqcAAAc 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'AHNbUHgECES5hAqcAAAc' }
+			 juliansalt@naver.com connected, socket id:  oLekkBGZZqbG8z_KAAAe 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'oLekkBGZZqbG8z_KAAAe' }
+			 juliansalt@naver.com connected, socket id:  wptQ4i29ohMNxfCMAAAf 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'wptQ4i29ohMNxfCMAAAf' }
+			 juliansalt@naver.com connected, socket id:  HhPOaLOyITS0sHcmAAAg 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'HhPOaLOyITS0sHcmAAAg' }
+{ text: 'Hehe',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T09:43:16.946Z',
+  _id: 'b7a6de63-4f7a-44bc-aa43-ba5ec8f67868',
+  to: 'eccsicilia@naver.com' }
+message Hehe delivered from juliansalt@naver.com to eccsicilia@naver.com
+			 juliansalt@naver.com connected, socket id:  nR1Qg2AOjIAdor_tAAAh 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'nR1Qg2AOjIAdor_tAAAh' }
+			 juliansalt@naver.com connected, socket id:  YQ06f0xK2dzADKvlAAAi 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'YQ06f0xK2dzADKvlAAAi' }
+			 juliansalt@naver.com connected, socket id:  caWhwU5VFhN99SYeAAAj 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'caWhwU5VFhN99SYeAAAj' }
+			 juliansalt@naver.com connected, socket id:  rFADnsotm9fBC__kAAAk 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'rFADnsotm9fBC__kAAAk' }
+			 juliansalt@naver.com connected, socket id:  2coRctUvAeglMR0VAAAl 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': '2coRctUvAeglMR0VAAAl' }
+{ text: 'Y',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T09:49:15.973Z',
+  _id: '0ffe55b8-0dd7-46a4-8973-68e43f95deb7',
+  to: 'pretzel@pusan.ac.kr' }
+message Y delivered from juliansalt@naver.com to pretzel@pusan.ac.kr
+			 juliansalt@naver.com connected, socket id:  8RrxygrPoOvU5H1uAAAm 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': '8RrxygrPoOvU5H1uAAAm' }
+{ text: 'Qqq',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T09:49:23.936Z',
+  _id: '5b01dc83-2e29-47cd-a7dc-47fdca84c095',
+  to: 'biper94@pusan.ac.kr' }
+message Qqq delivered from juliansalt@naver.com to biper94@pusan.ac.kr
+			 juliansalt@naver.com connected, socket id:  TkS0mojDoMDjHqjeAAAn 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'XRLEko0oH6hmDeFVAAAX',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'Hehe',
+  user: { _id: 'juliansalt@naver.com', name: 'juliansalt@naver.com' },
+  createdAt: '2017-08-18T09:49:32.633Z',
+  _id: 'bd5919c3-10f3-4d32-8aff-1e000af6be92',
+  to: 'biper94@pusan.ac.kr' }
+message Hehe delivered from juliansalt@naver.com to biper94@pusan.ac.kr
+sign success
+Login SUccess
+			 biper94@pusan.ac.kr connected, socket id:  _hSNXRCVbptEbkkOAAAo 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': '_hSNXRCVbptEbkkOAAAo',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'Hi',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-18T09:59:04.071Z',
+  _id: 'c6ed3952-b0da-421c-bde0-66a7dff6f6a4',
+  to: 'eccsicilia@naver.com' }
+message Hi delivered from biper94@pusan.ac.kr to eccsicilia@naver.com
+			 biper94@pusan.ac.kr connected, socket id:  sRxmY1XBT7WB0_W5AAAp 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'sRxmY1XBT7WB0_W5AAAp',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': '9rYoj4jwXPvlvyJeAAAS',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+			 pretzel@pusan.ac.kr connected, socket id:  VSrZXznK4CTCZod0AAAq 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'sRxmY1XBT7WB0_W5AAAp',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'hey',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:09:27.086Z',
+  _id: '5ce0c35d-3f8c-45cd-b087-4e46f9884d88',
+  to: 'biper94@pusan.ac.kr' }
+message hey delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  v3PYan8r0KnSp06JAAAr 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'v3PYan8r0KnSp06JAAAr',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+			 biper94@pusan.ac.kr connected, socket id:  _8fTNYhrXBIEEVjJAAAs 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': '_8fTNYhrXBIEEVjJAAAs',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'Hi',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:09:51.837Z',
+  _id: 'f153a411-3931-40ee-8e3f-c9b9a5496781',
+  to: 'biper94@pusan.ac.kr' }
+message Hi delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  56piX12ilYC2bCLOAAAt 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': '56piX12ilYC2bCLOAAAt',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'asdf',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:10:11.256Z',
+  _id: 'e85a650d-ce41-4d2c-84a2-003f7b5777de',
+  to: 'biper94@pusan.ac.kr' }
+message asdf delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  6Lka0-c3SZZsv_O7AAAu 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': '6Lka0-c3SZZsv_O7AAAu',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'hehehehe',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:13:44.189Z',
+  _id: '6d4e2672-8930-4edb-aaca-9898ae51d2ca',
+  to: 'biper94@pusan.ac.kr' }
+message hehehehe delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  DHqlumSxlOQr8Y7AAAAv 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'DHqlumSxlOQr8Y7AAAAv',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'asdf',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:28:26.786Z',
+  _id: '96d5281d-82fd-48be-949c-5ea44e1e4fe7',
+  to: 'biper94@pusan.ac.kr' }
+message asdf delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  zDxy4y4I2WA4hbEmAAAw 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'zDxy4y4I2WA4hbEmAAAw',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'hehe',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:29:44.236Z',
+  _id: '8d7fd850-a368-4f02-9d83-f4eebff2a3f8',
+  to: 'biper94@pusan.ac.kr' }
+message hehe delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  3H7Bx0nL2aOY6MNtAAAx 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': '3H7Bx0nL2aOY6MNtAAAx',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'adsf',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:30:36.354Z',
+  _id: '2defa960-6046-41bd-98e9-b5d2a4e8e348',
+  to: 'biper94@pusan.ac.kr' }
+message adsf delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  r_xJqskCtPcyoFyNAAAy 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'r_xJqskCtPcyoFyNAAAy',
+  'biper94@gmail.com': 'q2Cy9JHCOZHjMixeAAAQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: 'qqqqq',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-18T10:31:33.437Z',
+  _id: '76479390-9cd6-487f-9d9c-178f594830e4',
+  to: 'biper94@pusan.ac.kr' }
+message qqqqq delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+			 biper94@gmail.com connected, socket id:  1WepLkr_JaP5Fqq9AABD 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'r_xJqskCtPcyoFyNAAAy',
+  'biper94@gmail.com': '1WepLkr_JaP5Fqq9AABD',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+			 biper94@pusan.ac.kr connected, socket id:  ztlIh-NqcSI8bUCtAABE 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': '1WepLkr_JaP5Fqq9AABD',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ text: '하이',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T07:14:54.305Z',
+  _id: 'f1695bd3-505b-4e01-83e4-daf3a2bbe970',
+  to: 'biper94@pusan.ac.kr' }
+message 하이 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+{ text: 'He',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:14:54.602Z',
+  _id: 'da72060d-7091-43c1-800a-aa525634ef58',
+  to: 'biper94@gmail.com' }
+message He delivered from biper94@pusan.ac.kr to biper94@gmail.com
+{ text: 'Gpgpgp',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:14:58.392Z',
+  _id: '3d19f60e-bd33-46c7-a6a8-b999e97f91af',
+  to: 'biper94@gmail.com' }
+message Gpgpgp delivered from biper94@pusan.ac.kr to biper94@gmail.com
+{ text: '호호호호ㅗ호호호',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:15:02.368Z',
+  _id: '89af6181-a532-4009-a4b6-9cdff42782db',
+  to: 'biper94@gmail.com' }
+message 호호호호ㅗ호호호 delivered from biper94@pusan.ac.kr to biper94@gmail.com
+{ text: '오옹 개쩌러오',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T07:15:12.260Z',
+  _id: '53f4f1b8-ae30-45aa-8053-8591f08c5c45',
+  to: 'biper94@pusan.ac.kr' }
+message 오옹 개쩌러오 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+{ text: '시간도 굳굳',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T07:15:19.720Z',
+  _id: 'b7cda8c4-ba1a-49ca-a53a-35e1e68c95e2',
+  to: 'biper94@pusan.ac.kr' }
+message 시간도 굳굳 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+{ text: '텍스트인풋',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:15:12.211Z',
+  _id: '51d77e32-65fa-4d65-8c0d-6ab2132bd147',
+  to: 'biper94@gmail.com' }
+message 텍스트인풋 delivered from biper94@pusan.ac.kr to biper94@gmail.com
+{ text: '다바꾸죠',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:15:14.841Z',
+  _id: 'de5af54d-f615-4043-91b8-070c29c472a8',
+  to: 'biper94@gmail.com' }
+message 다바꾸죠 delivered from biper94@pusan.ac.kr to biper94@gmail.com
+{ text: 'ㅎㅎ',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T07:15:16.657Z',
+  _id: 'f3df03c3-49a4-40b9-bb8e-08bbdc211c98',
+  to: 'biper94@gmail.com' }
+message ㅎㅎ delivered from biper94@pusan.ac.kr to biper94@gmail.com
+			 biper94@gmail.com connected, socket id:  SOBvyI5susi5j5raAABF 5 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'SOBvyI5susi5j5raAABF',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn' }
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+{ err: '존재 하지 않는 이메일입니다.' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+			 tndk4997@pusan.ac.kr connected, socket id:  J9nrlgLWrVUEzJEQAABG 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'SOBvyI5susi5j5raAABF',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': 'J9nrlgLWrVUEzJEQAABG' }
+			 tndk4997@pusan.ac.kr connected, socket id:  9YKGA3gEvzEeEIxxAABH 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'SOBvyI5susi5j5raAABF',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+			 biper94@gmail.com connected, socket id:  B1jbjBhceq6XkuV9AABK 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'B1jbjBhceq6XkuV9AABK',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+			 biper94@gmail.com connected, socket id:  OaGdlHhJhGzLfOA2AABL 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'OaGdlHhJhGzLfOA2AABL',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: 'ㅕㅗㅊㄴ',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T09:44:09.229Z',
+  _id: '81d40669-d9b1-4539-a134-4350107fce22',
+  to: 'biper94@pusan.ac.kr' }
+message ㅕㅗㅊㄴ delivered from biper94@gmail.com to biper94@pusan.ac.kr
+			 biper94@gmail.com connected, socket id:  rHdpZ6g0ajqQw3u1AABM 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'rHdpZ6g0ajqQw3u1AABM',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+{ err: 'jwt malformed' }
+err:  { err: 'jwt malformed' }
+token:  null
+sign success
+Login SUccess
+			 biper94@gmail.com connected, socket id:  WahfbILmAgv-GnvXAABN 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'WahfbILmAgv-GnvXAABN',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '안녕하세유',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:17:52.776Z',
+  _id: '59709892-f13f-4262-bc4f-fc93c2d08337',
+  to: 'biper94@gmail.com' }
+message 안녕하세유 delivered from biper94@gmail.com to biper94@gmail.com
+			 biper94@gmail.com connected, socket id:  3daudiYlcxZbtTrPAABO 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': '3daudiYlcxZbtTrPAABO',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '저기유',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:18:09.999Z',
+  _id: 'e19d712a-826f-4dcb-b07f-5c68df9c26e1',
+  to: 'biper94@gmail.com' }
+message 저기유 delivered from biper94@gmail.com to biper94@gmail.com
+			 biper94@gmail.com connected, socket id:  hgpVxEWcZ5q43Ri9AABP 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'hgpVxEWcZ5q43Ri9AABP',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '???',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:18:31.067Z',
+  _id: '04306c97-3ba4-4dc6-b777-9201532aa0d6',
+  to: 'biper94@gmail.com' }
+message ??? delivered from biper94@gmail.com to biper94@gmail.com
+{ text: '헤헤',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:18:37.099Z',
+  _id: 'b429dd5f-a5dc-4abf-8718-27311ba32f9e',
+  to: 'biper94@gmail.com' }
+message 헤헤 delivered from biper94@gmail.com to biper94@gmail.com
+			 biper94@gmail.com connected, socket id:  EfIILy2Rphxn1bMcAABQ 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'EfIILy2Rphxn1bMcAABQ',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '너넘',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:18:56.229Z',
+  _id: 'e248ac9c-ec97-401d-acb0-0a8962cc552a',
+  to: 'biper94@pusan.ac.kr' }
+message 너넘 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+{ text: '투쿤',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:18:59.570Z',
+  _id: '0f3ae170-aaba-4f4f-a253-7a1fcf772cd8',
+  to: 'biper94@pusan.ac.kr' }
+message 투쿤 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+			 biper94@gmail.com connected, socket id:  I8Z3fPwHEf_XAURnAABR 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'I8Z3fPwHEf_XAURnAABR',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+			 biper94@gmail.com connected, socket id:  HTT-CJ1OFyp-zzGIAABS 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'ztlIh-NqcSI8bUCtAABE',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '그러쥬',
+  user: { _id: 'biper94@gmail.com', name: 'biper94@gmail.com' },
+  createdAt: '2017-08-19T11:19:18.052Z',
+  _id: '9439fff7-84e3-4821-b1f0-c0edbaadefe8',
+  to: 'biper94@pusan.ac.kr' }
+message 그러쥬 delivered from biper94@gmail.com to biper94@pusan.ac.kr
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+			 biper94@pusan.ac.kr connected, socket id:  VfZalt4edRXgVESWAABT 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'VfZalt4edRXgVESWAABT',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+{ err: '잘못 된 비밀번호 입니다.' }
+sign success
+Login SUccess
+			 biper94@pusan.ac.kr connected, socket id:  YVQXga_pPgojyLcyAABU 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'YVQXga_pPgojyLcyAABU',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+sign success
+Login SUccess
+			 biper94@pusan.ac.kr connected, socket id:  I7_KP1gVFhcs9-T3AABV 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'I7_KP1gVFhcs9-T3AABV',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'VSrZXznK4CTCZod0AAAq',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+			 pretzel@pusan.ac.kr connected, socket id:  lldTTXQXek745oJ0AABW 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'I7_KP1gVFhcs9-T3AABV',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:03:29.120Z',
+  _id: 'bd6d678d-3f71-4b93-92e9-782ba169c4ce',
+  to: 'biper94@pusan.ac.kr' }
+message 야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '??',
+  user: { _id: 'biper94@pusan.ac.kr', name: 'biper94@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:04:21.239Z',
+  _id: '06cb063e-3f71-457a-8902-a8bea8f86f33',
+  to: 'pretzel@pusan.ac.kr' }
+message ?? delivered from biper94@pusan.ac.kr to pretzel@pusan.ac.kr
+{ text: '뭐인마',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:03:46.542Z',
+  _id: '8e76181e-703c-4d49-a5a3-1c58c956ae17',
+  to: 'biper94@pusan.ac.kr' }
+message 뭐인마 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:03:57.187Z',
+  _id: '246d40e2-daa4-4cda-9042-6fed33975478',
+  to: 'biper94@pusan.ac.kr' }
+message 야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:04:25.956Z',
+  _id: '4bb98b45-cd3f-4fad-bee7-e0e02d023369',
+  to: 'biper94@pusan.ac.kr' }
+message 야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:05:48.275Z',
+  _id: 'ad8c54ed-7b9d-4965-8bb2-20db8ddb91cb',
+  to: 'biper94@pusan.ac.kr' }
+message 야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  E9lvkEajtbripTFvAABX 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'E9lvkEajtbripTFvAABX',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '야야야야0',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:06:10.679Z',
+  _id: '8ba7e5bf-6a43-494b-b812-7133180d3036',
+  to: 'biper94@pusan.ac.kr' }
+message 야야야야0 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  WzcVxIngqbxCFpKBAABY 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'WzcVxIngqbxCFpKBAABY',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:25:50.449Z',
+  _id: '6e6a57dd-734b-4e08-bdc1-60f1ac6c0c59',
+  to: 'biper94@pusan.ac.kr' }
+message 야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  VgjaK0IBqHtFj_8-AABa 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'VgjaK0IBqHtFj_8-AABa',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+			 biper94@pusan.ac.kr connected, socket id:  JiUroTAKACpOhhp9AABb 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'JiUroTAKACpOhhp9AABb',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '야야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:26:15.899Z',
+  _id: '0441075d-0386-468e-a53d-cc61304efa7a',
+  to: 'biper94@pusan.ac.kr' }
+message 야야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+			 biper94@pusan.ac.kr connected, socket id:  xgbsVt_ENBaBNWGOAABc 6 user connected now.
+{ 'eccsicilia@naver.com': 'ulPspuWgDoO1E5rYAAAL',
+  'biper94@pusan.ac.kr': 'xgbsVt_ENBaBNWGOAABc',
+  'biper94@gmail.com': 'HTT-CJ1OFyp-zzGIAABS',
+  'pretzel@pusan.ac.kr': 'lldTTXQXek745oJ0AABW',
+  'juliansalt@naver.com': 'TkS0mojDoMDjHqjeAAAn',
+  'tndk4997@pusan.ac.kr': '9YKGA3gEvzEeEIxxAABH' }
+{ text: '야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:28:32.858Z',
+  _id: '8eb5bf06-e1f6-4c74-9f5b-0d2bef6d18bb',
+  to: 'biper94@pusan.ac.kr' }
+message 야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '여야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:28:34.661Z',
+  _id: 'e96b4188-fba4-4c0e-b1d0-0a56f0e74bd7',
+  to: 'biper94@pusan.ac.kr' }
+message 여야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+{ text: '야야야',
+  user: { _id: 'pretzel@pusan.ac.kr', name: 'pretzel@pusan.ac.kr' },
+  createdAt: '2017-08-19T13:34:11.426Z',
+  _id: '215157c6-4e91-4ff5-a452-ec2b55daad18',
+  to: 'biper94@pusan.ac.kr' }
+message 야야야 delivered from pretzel@pusan.ac.kr to biper94@pusan.ac.kr
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node app.js`[39m
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+pool connected
+Pretzel Server listening at port 8124
