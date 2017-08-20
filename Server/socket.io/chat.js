@@ -19,6 +19,7 @@ module.exports = (server) => {
         })
         
         socket.on('message', (data) => {
+		console.log(data);
             if (user[data.to]) {
                 console.log(data);
                 io.to(user[data.to]).emit('message', data);
