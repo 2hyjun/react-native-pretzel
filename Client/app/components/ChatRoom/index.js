@@ -31,7 +31,7 @@ export default class Chat extends React.Component {
         this._onReceive = this._onReceive.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = SocketIOClient('http://13.124.147.152:8124');
+        this.socket = global.SocketIo();
         this.socket.on('message', this._onReceive);
 
         this._init();
@@ -54,7 +54,6 @@ export default class Chat extends React.Component {
     }
     _onSend(messages = []) {
         const { params } = this.props.navigation.state;
-        messages[0]['to'] = params.partner_email;
         this.socket.emit('message', messages[0]);
 
         this._storeMessages(messages)
@@ -115,7 +114,6 @@ export default class Chat extends React.Component {
 
         return (
 
-<<<<<<< HEAD
                 <GiftedChat
                     messages={this.state.messages}
                     onSend={(messages) => this._onSend(messages)}
@@ -127,19 +125,6 @@ export default class Chat extends React.Component {
                         name: global.user_email,
                     }}
                 />
-=======
-            <GiftedChat
-                messages={this.state.messages}
-                onSend={(messages) => this._onSend(messages)}
-                placeholder={this.props.navigation.state.params.title}
-                locale={'ko'}
-                renderAvatarOnTop={true}
-                user={{
-                    _id: global.user_email,
-                    name: global.user_email,
-                }}
-            />
->>>>>>> ecc4b6600b43dc7f32acad78f91761ff25bc25a5
 
         );
     }

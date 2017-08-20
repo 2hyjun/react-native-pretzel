@@ -244,7 +244,7 @@ export default class TimelineListItem extends React.Component {
                                 <Text style={styles.body_header_text}>시간</Text>
                             </View>
                             <View style={styles.body_body}>
-                                <Text style={[styles.body_body_text, {fontSize: 15}]}>{this.state.timeToDeadLine}</Text>
+                                <Text style={[styles.body_body_text, {fontSize: 14, marginTop: 12}]}>{this.state.timeToDeadLine}</Text>
                             </View>
                         </View>
                     </View>

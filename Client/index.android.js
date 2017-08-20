@@ -4,5 +4,4 @@ import {
 } from 'react-native';
 
 import App from './app/index';
-
 AppRegistry.registerComponent('pretzel', () => App);

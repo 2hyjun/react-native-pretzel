@@ -13,7 +13,9 @@ import DropdownAlert from 'react-native-dropdownalert';
 import {List, ListItem} from 'react-native-elements';
 import SwipeOut from 'react-native-swipeout';
 import _ from 'lodash';
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+import Button from "react-native-elements/src/buttons/Button";
+import SocketIOClient from 'socket.io-client';
+import global from '../../config/global'
 
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 
@@ -22,15 +24,22 @@ export default class ChatList extends React.Component {
         super(props);
 
         this.state = {
-            dataSource: [],
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2) => r1 !== r2
+            }),
             refreshing: false
         };
 
+        this.socket = global.SocketIo();
+        this.socket.on('message', () => {Alert.alert('', 'got it')});
 
+        this._getAllKey = this._getAllKey.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._delete = this._delete.bind(this);
     }
+    _onRecieve() {
 
+    }
     componentWillMount() {
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
@@ -38,13 +47,17 @@ export default class ChatList extends React.Component {
                     let list = JSON.parse(value);
                     list = _.uniqBy(list, 'rid');
                     console.log('*********',list);
-                    this.setState({dataSource: list})
+                    this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
                 } else {
-                    this.setState({dataSource: []})
+                    this.setState({dataSource: this.state.dataSource.cloneWithRows([])})
                 }
             })
             .catch(e => console.error(e))
             .done();
+    }
+
+    componentDidMount() {
+
     }
     _delete(item) {
 
@@ -79,16 +92,24 @@ export default class ChatList extends React.Component {
                     let list = JSON.parse(value);
                     list = _.uniqBy(list, 'rid');
                     //console.log('*********',list);
-                    this.setState({dataSource: []}, () => {
-                        this.setState({dataSource: list})
+                    this.setState(this.state.dataSource.cloneWithRows([]), () => {
+                        this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
                     });
 
                 } else {
-                    this.setState({dataSource: []})
+                    this.state.dataSource.cloneWithRows([])
                 }
             })
             .catch(e => console.error(e))
             .done();
+    }
+    _getAllKey() {
+        AsyncStorage.getAllKeys()
+            .then(keys => {
+                //Alert.alert('', JSON.stringify(keys))
+            });
+        AsyncStorage.getItem(ChatListSTORAGEKEY)
+            .then(key => this.setState({temp: key}))
     }
 
     render() {
@@ -96,37 +117,54 @@ export default class ChatList extends React.Component {
 
         return (
             <View style={{flex: 1}}>
-                <List
-                    containerStyle={{marginTop: 50}}>
-                    {this.state.dataSource.length > 0 && typeof(this.state.dataSource) === typeof([]) ?
-                        this.state.dataSource.map((item, i) => (
+                <Button
+                    title={'GetAllKey'}
+                    onPress={this._getAllKey}
+                    buttonStyle={{height: 50}}/>
+                <Text>{this.state.temp}</Text>
+                <ListView
+
+                    dataSource={this.state.dataSource}
+                    enableEmptySections={true}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._renderRefresh}
+                        />
+                    }
+                    renderRow={(rowData, sectionID, rowID, highlightRow) =>
+                        this.state.dataSource.length === 0 ?
+                            <View><Text>Empty..</Text></View>
+                            :
                             <SwipeOut
-                                key={item.rid}
+                                key={rowData.rid}
                                 right={[{
                                     text: '삭제',
-                                    onPress: () => {this._delete(item)},
+                                    onPress: () => {this._delete(rowData)},
                                     backgroundColor: 'red'
                                 }]}>
                                 <ListItem
-                                    key={item.rid}
+                                    key={rowData.rid}
                                     roundAvatar
                                     avatar={require('../../../img/chatting/chatting_main_default_profile.png')}
-                                    title={item.title}
-                                    subtitle={item.partner_email}
+                                    title={rowData.title}
+                                    subtitle={rowData.partner_email}
                                     onPress={() => {
                                         this.props.navigation.navigate('ChatRoom',
                                             {
-                                                user_email: item.user_email,
-                                                partner_email: item.partner_email,
-                                                title: item.title,
-                                                rid: item.rid
+                                                user_email: rowData.user_email,
+                                                partner_email: rowData.partner_email,
+                                                title: rowData.title,
+                                                rid: rowData.rid
                                             })
                                     }}
                                 />
                             </SwipeOut>
+                    }
+                >
 
-                    )): undefined}
-                </List>
+                </ListView>
+
             </View>
 
         )

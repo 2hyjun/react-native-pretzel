@@ -1,3 +1,5 @@
+import SocketIOClient from 'socket.io-client';
+
 const global = {
     user_email: '',
     setEmail: (email) => { global.user_email = email },
@@ -98,9 +100,8 @@ const global = {
         return check.test(str);
     },
     DateToStr: (date) => {
-        console.log("!!!!!!!!!!!!!!!!!", date);
+
         let obj = global.DateStrtoObj(date);
-        console.log(obj);
         let str = obj.hour + '시 ';
         str += obj.minutes + '분';
 
@@ -117,7 +118,13 @@ const global = {
         str += '까지';
 
         return str;
-    }
+    },
+    SocketIo: () => {
+        const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
+
+        return SocketIOClient('http://13.124.147.152:8124');
+    },
+
 
 
 };
