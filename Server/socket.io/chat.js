@@ -26,8 +26,7 @@ module.exports = (server) => {
                 //console.log(data);
                 console.log('message', data.text, 'delivered from', data.user.name, 'to', data.to)
             } else {
-                console.log(data);
-                console.log(user);
+                console.log('user: ', user);
                 
                 console.log('saved')
             }
