@@ -6,46 +6,45 @@ import {
     ScrollView,
     TextInput,
     Alert,
-    Image,
     Keyboard,
     AsyncStorage,
-    Platform
+    Platform,
 } from 'react-native';
-const STORAGE_KEY = '@PRETZEL:jwt';
 
-import ToggleBox from '../../components/ToggleBox';
-import styles from './style';
-import global from '../../config/global';
+import Reactoron from 'reactotron-react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import Ripple from 'react-native-material-ripple';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconM from 'react-native-vector-icons/MaterialIcons';
-import { KeyboardAwareView }from 'react-native-keyboard-aware-view';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import PopupDialog, {
     DialogTitle,
     SlideAnimation,
     ScaleAnimation,
-    DialogButton,
 } from 'react-native-popup-dialog';
-import Picker from 'react-native-wheel-picker'
+
+import Picker from 'react-native-wheel-picker';
 import Fumi from '../../components/TextInputEffect/Fumi';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+
 import DropdownAlert from '../../components/DropdownAlert';
+import styles from './style';
+import global from '../../config/global';
 
-
-
+const STORAGE_KEY = '@PRETZEL:jwt';
 /*
-            * "user_email": "biper94@gmail.com",
-            "content": "커피",
-            "detailInfo": "나 2시 45분에 수업끈나고 스타벅스갔다가 올라올건데 커피 필요한 사람있음? 선착 10",
-            "expectedPrice": 4500,
-            "fee": 3000,
-            "deadline": "2017-07-25T06:00:00.000Z",
-            "rid": 2,
-            "contentType": "해줄게요",
-            "completed": "N",
-            "title": "UPDATE SAMPLE HEHE2",
-            "time": "2017-08-03T05:42:04.000Z",
-            "place": "정문 스타벅스"*/
+    * "user_email": "biper94@gmail.com",
+    "content": "커피",
+    "detailInfo": "나 2시 45분에 수업끈나고 스타벅스갔다가 올라올건데 커피 필요한 사람있음? 선착 10",
+    "expectedPrice": 4500,
+    "fee": 3000,
+    "deadline": "2017-07-25T06:00:00.000Z",
+    "rid": 2,
+    "contentType": "해줄게요",
+    "completed": "N",
+    "title": "UPDATE SAMPLE HEHE2",
+    "time": "2017-08-03T05:42:04.000Z",
+    "place": "정문 스타벅스"
+*/
 
 
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
@@ -53,7 +52,7 @@ const types = ['해주세요', '해줄게요', '같이해요'];
 
 export default class post extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -74,61 +73,59 @@ export default class post extends React.Component {
             isDateTimePickerVisible: false,
 
         };
-        this._submit = this._submit.bind(this);
+        this.submit = this.submit.bind(this);
         this.GetToken = this.GetToken.bind(this);
 
         this.handleDateTimePick = this.handleDateTimePick.bind(this);
-        this.content_showPopOver = this.content_showPopOver.bind(this);
-        this.type_showPopOver = this.type_showPopOver.bind(this);
-        this.detail_showPopOver = this.detail_showPopOver.bind(this);
+        this.contentShowPopOver = this.contentShowPopOver.bind(this);
+        this.typeShowPopOver = this.typeShowPopOver.bind(this);
+        this.detailShowPopOver = this.detailShowPopOver.bind(this);
         this.HttpRequest = this.HttpRequest.bind(this);
-        this.content_setItem = this.content_setItem.bind(this);
-        this.type_setItem = this.type_setItem.bind(this);
-
+        this.contentSetItem = this.contentSetItem.bind(this);
+        this.typeSetItem = this.typeSetItem.bind(this);
     }
-    content_showPopOver() {
-        //console.log(this.refs);
-        this.setState({elevationToZero: true});
+    componentWillMount() {
+        this.setState({ user_email: global.user_email });
+        // Reactoron.log(global.now());
+        // Reactoron.log(global.nowKST());
+    }
+    contentShowPopOver() {
+        // Reactoron.log(this.refs);
+        this.setState({ elevationToZero: true });
         this.dropdown.alertWithType('info', '휠 피커', '휠피커에서 가장 상위의 항목을 선택 할려면, 다른 항목으로 이동후 다시 가장 상위 항목으로 가시면 됩니다.');
         this.content.show();
-
     }
-    type_showPopOver() {
-        //console.log(this.refs);
-        this.setState({elevationToZero: true});
+    typeShowPopOver() {
+        // Reactoron.log(this.refs);
+        this.setState({ elevationToZero: true });
         this.type.show();
     }
-    detail_showPopOver() {
-        this.setState({elevationToZero: true});
+    detailShowPopOver() {
+        this.setState({ elevationToZero: true });
         this.detail.show();
         this.detail_input.focus();
     }
-    content_setItem(index) {
-        this.setState({content: contents[index]});
+    contentSetItem(index) {
+        this.setState({ content: contents[index] });
         this.content.dismiss();
     }
-    type_setItem(index) {
-        this.setState({contentType: types[index]});
+    typeSetItem(index) {
+        this.setState({ contentType: types[index] });
         this.type.dismiss();
     }
-
-    componentWillMount() {
-        this.setState({user_email: global.user_email});
-        //console.log(global.now());
-        //console.log(global.nowKST());
-    }
     handleDateTimePick(date) {
-        //console.log(global.nowKSTParams(date));
-        if (Platform.OS === 'ios')
+        // Reactoron.log(global.nowKSTParams(date));
+        if (Platform.OS === 'ios') {
             this.setState({
                 deadLine: global.nowKSTParams(date),
-                isDateTimePickerVisible: false
+                isDateTimePickerVisible: false,
             });
-        else if (Platform.OS === 'android')
+        } else if (Platform.OS === 'android') {
             this.setState({
                 deadLine: global.nowParams(date),
                 isDateTimePickerVisible: false,
-            })
+            });
+        }
     }
     GetToken() {
         return new Promise((resolve, reject) => {
@@ -139,7 +136,7 @@ export default class post extends React.Component {
         })
     }
     HttpRequest(token) {
-        let params = {
+        const params = {
             content: this.state.content,
             expectedPrice: this.state.expectedPrice,
             fee: this.state.fee,
@@ -150,14 +147,14 @@ export default class post extends React.Component {
             place: this.state.place,
         };
         let formBody = [];
-        for (let property in params) {
-            let encodedKey = encodeURIComponent(property);
-            let encodedValue = encodeURIComponent(params[property]);
-            //console.log(encodedKey + "=" + encodedValue);
-            formBody.push(encodedKey + "=" + encodedValue);
+        for (const property in params) {
+            const encodedKey = encodeURIComponent(property);
+            const encodedValue = encodeURIComponent(params[property]);
+            // Reactoron.log(encodedKey + "=" + encodedValue);
+            formBody.push(encodedKey + '=' + encodedValue);
         }
         formBody = formBody.join('&');
-        //console.log(formBody);
+        // Reactoron.log(formBody);
         return (
             fetch('http://13.124.147.152:8124/api/timeline', {
                 method: 'POST',
@@ -170,7 +167,7 @@ export default class post extends React.Component {
         )
     }
 
-    _submit() {
+    submit() {
         this.GetToken()
             .then(this.HttpRequest)
             .then((rJSON) => {
@@ -197,7 +194,7 @@ export default class post extends React.Component {
 
         const elevation = this.state.elevationToZero ? {elevation: 0} : {elevation: 5};
         const deadLineText = this.state.deadLine === '배달 기한 설정' ? {color: 'grey'} : {color: '#f95a25'};
-        //console.log(this.state.elevationToZero);
+        //Reactoron.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
                     <ScrollView style={{flex: 1, marginTop: 30}}>
@@ -207,7 +204,7 @@ export default class post extends React.Component {
                                 rippleOpacity={0.87}
                                 rippleDuration={500}
                                 style={[styles.ripple, elevation]}
-                                onPress={this.content_showPopOver.bind(this)}>
+                                onPress={this.contentShowPopOver.bind(this)}>
                                 {/*<Icon name="briefcase" size={20} color={'#f95a25'}/>*/}
                                 <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
                                 <Text style={styles.ripple_text}>{this.state.content}</Text>
@@ -218,7 +215,7 @@ export default class post extends React.Component {
                                 rippleOpacity={0.87}
                                 rippleDuration={500}
                                 style={[styles.ripple, elevation]}
-                                onPress={this.type_showPopOver.bind(this)}>
+                                onPress={this.typeShowPopOver.bind(this)}>
                                 {/*<Icon name="question" size={24} color={'#f95a25'}/>*/}
                                 <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
                                 <Text style={styles.ripple_text}>{this.state.contentType}</Text>
@@ -231,7 +228,7 @@ export default class post extends React.Component {
                                 rippleOpacity={0.87}
                                 rippleDuration={500}
                                 style={[styles.ripple_detail, elevation]}
-                                onPress={this.detail_showPopOver.bind(this)}>
+                                onPress={this.detailShowPopOver.bind(this)}>
                                 {/*<Icon name="asterisk" size={24} color={'#f95a25'}/>*/}
                                 <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
                                 <Text style={styles.ripple_text}>상세 정보 작성</Text>
@@ -291,7 +288,7 @@ export default class post extends React.Component {
 
                                     <TouchableOpacity
                                         style={styles.submitBtn}
-                                        onPress={this._submit}>
+                                        onPress={this.submit}>
                                         <Text style={styles.submitTxt}>
                                             글 작성
                                         </Text>
@@ -311,7 +308,7 @@ export default class post extends React.Component {
                         <Picker style={{width: 150, height: 180}}
                             //selectedValue={this.state.contentItem}
                                 itemStyle={{color:"grey", fontSize:26}}
-                                onValueChange={(index) => this.content_setItem(index)}>
+                                onValueChange={(index) => this.contentSetItem(index)}>
                             {contents.map((value, i) => (
                                 <Picker.Item label={value} value={i} key={value}/>
                             ))}
@@ -327,7 +324,7 @@ export default class post extends React.Component {
                         <Picker style={{width: 150, height: 180}}
                                 selectedValue={this.state.contentItem}
                                 itemStyle={{color:"grey", fontSize:26}}
-                                onValueChange={(index) => this.type_setItem(index)}>
+                                onValueChange={(index) => this.typeSetItem(index)}>
                             {types.map((value, i) => (
                                 <Picker.Item label={value} value={i} key={value}/>
                             ))}

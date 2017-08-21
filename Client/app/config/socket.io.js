@@ -6,6 +6,7 @@ import SocketIOClient from 'socket.io-client';
 import {
     GiftedChat
 } from 'react-native-gifted-chat';
+import Reactotron from 'reactotron-react-native'
 
 import _ from 'lodash';
 import global from './global'
@@ -120,7 +121,7 @@ const Socket = {
             });
     },
     connectSocket: () => {
-        console.log(socket);
+        Reactotron.log(socket);
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124');
             socket.emit('join', global.user_email);

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import {
     Text,
     View,
@@ -8,28 +8,20 @@ import {
     ListView,
     RefreshControl,
     Platform,
-    Alert
+    Alert,
 } from 'react-native';
-import DropdownAlert from '../../components/DropdownAlert';
-import styles from './style';
-import PopupDialog, {
-    DialogTitle,
-    SlideAnimation,
-    ScaleAnimation,
-    DialogButton,
-} from 'react-native-popup-dialog';
-
 import _ from 'lodash';
+import PopupDialog, { ScaleAnimation } from 'react-native-popup-dialog';
+
+import DropdownAlert from '../../components/DropdownAlert';
+import global from '../../config/global';
+import socket from '../../config/socket.io';
+import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
+
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
-import global from '../../config/global'
-import socket from '../../config/socket.io';
-
-
-
-
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 export default class TimeLine extends React.Component {
     static propTypes = {
@@ -39,14 +31,13 @@ export default class TimeLine extends React.Component {
 
     constructor(props) {
         super(props);
-        let arr = [];
-        for (let i in contents) {
+        const arr = [];
+        contents.forEach(() => {
             arr.push(false);
-        }
+        });
 
-
-        //this.socket = socket.connectSocket();
-        //this.socket.on('message', this.onChatRecieve);
+        // this.socket = socket.connectSocket();
+        // this.socket.on('message', this.onChatRecieve);
 
         this.state = {
             otherEnabled: arr,
@@ -57,131 +48,124 @@ export default class TimeLine extends React.Component {
 
         this.GetToken = this.GetToken.bind(this);
         this.HttpRequest = this.HttpRequest.bind(this);
-        this._renderRefresh = this._renderRefresh.bind(this);
-        this._showModal = this._showModal.bind(this);
+        this.RenderRefresh = this.RenderRefresh.bind(this);
+        this.ShowModal = this.ShowModal.bind(this);
         this.onChatRecieve = this.onChatRecieve.bind(this);
+    }
+
+    componentDidMount() {
+        this.RenderRefresh();
     }
 
     onChatRecieve(data) {
         socket.onReceive(data)
-            .then(() => Alert.alert('Timeline', 'Messages Got it!'))
+            .then(() => Alert.alert('Timeline', 'Messages Got it!'));
     }
     GetToken() {
         return new Promise((resolve, reject) => {
             AsyncStorage.getItem(STORAGE_KEY, (err, value) => {
                 if (err) reject(err);
                 else resolve(value);
-            })
-        })
+            });
+        });
     }
-    _filterManager() {
-        let arr = [];
+    filterManager() {
+        const arr = [];
 
-
-        for (let i in this.state.otherEnabled)
-            if (this.state.otherEnabled[i])
-                arr.push(contents[i]);
+        this.state.otherEnabled.forEach((value, index) => {
+            if (value) {
+                arr.push(contents[index]);
+            }
+        });
         return arr;
-
-
     }
     HttpRequest(token) {
+        /* global fetch */
         return fetch('http://13.124.147.152:8124/api/timeline?type=' + this.props.type, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'x-access-token': token,
             },
-        }).then((res) => res.json())
+        }).then(res => res.json());
     }
 
-    _renderRefresh() {
-        this.setState({dataSource: ds.cloneWithRows([])}, () => {
+    RenderRefresh() {
+        this.setState({ dataSource: ds.cloneWithRows([]) }, () => {
             this.GetToken()
                 .then(this.HttpRequest)
                 .then((res) => {
                     if (res.resultCode !== 100) {
                         this.dropdown.alertWithType('error', '서버 에러', res.result);
+                    } else if (_.find(this.state.otherEnabled, o => o)) {
+                        this.setState({ dataSource: this.state.dataSource.cloneWithRows(_.filter(res.result, (o) => {
+                            const arr = this.filterManager();
+                            let founded = false;
+                            arr.forEach((element) => {
+                                if (_.includes(o.content, element)) {
+                                    founded = true;
+                                }
+                            });
+                            return founded;
+                        })) });
                     } else {
-                        if (_.find(this.state.otherEnabled, (o) => { return o})) {
-                            this.setState({
-                                dataSource: this.state.dataSource.cloneWithRows(_.filter(res.result, (o) => {
-                                    let arr = this._filterManager();
-                                    let founded = false;
-                                    arr.forEach(function (element) {
-                                        if (_.includes(o.content, element))
-                                            founded = true;
-                                    });
-                                    return founded
-                                }))
-                            })
-                        } else {
-                            this.setState({
-                                dataSource: this.state.dataSource.cloneWithRows(res.result),
-                            })
-                        }
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(res.result),
+                        });
                     }
-                })
+                },
+                );
         });
-
     }
-    componentDidMount() {
-        this._renderRefresh();
-    }
-
-    _showModal() {
+    ShowModal() {
         this.modal.show();
     }
 
-
-
     render() {
-        const ListViewMarginTop = Platform.OS === 'ios' ? {marginTop: 20} : {marginTop: 0};
-
-
-        return(
+        const ListViewMarginTop = Platform.OS === 'ios' ? { marginTop: 20 } : { marginTop: 0 };
+        return (
             <View style={styles.container}>
                 <View style={styles.filter}>
                     <View style={styles.filter_head}>
-                        <Text style={{fontSize: 12}}>필터</Text>
+                        <Text style={{ fontSize: 12 }}>필터</Text>
                     </View>
                     <View style={styles.filter_content}>
                         <ScrollView horizontal={true} style={styles.filter_scrollview}>
                             <TouchableOpacity
                                 style={
-                                    _.find(this.state.otherEnabled, (o) => {return o}) ? styles.filter_item_disabled : styles.filter_item_enabled
+                                    _.find(this.state.otherEnabled, (o) => { return o; }) ? styles.filter_item_disabled : styles.filter_item_enabled
 
                                 }
                                 onPress={() => {
-                                    let arr = [];
-                                    for (let i in contents) {
+                                    const arr = [];
+                                    contents.forEach(() => {
                                         arr.push(false);
-                                    }
-                                    this.setState({otherEnabled: arr}, () => {
-                                        this._renderRefresh();
                                     });
-                                }} >
+                                    this.setState({ otherEnabled: arr }, () => {
+                                        this.RenderRefresh();
+                                    });
+                                }}>
+
                                 <Text style={
-                                    _.find(this.state.otherEnabled, (o) => {return o}) ? styles.filter_text_disabled : styles.filter_text_enabled
+                                    _.find(this.state.otherEnabled, (o) => { return o; }) ? styles.filter_text_disabled : styles.filter_text_enabled
                                 }>모두보기</Text>
                             </TouchableOpacity>
                             {contents.map((value, i) => (
-                                <TouchableOpacity style=
-                                                      {
-                                                          this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
-                                                      }
-                                                  key={i}
+                                <TouchableOpacity
+                                                style={
+                                                    this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
+                                                }
+                                                key={value}
                                                   onPress={() => {
-                                                      let prevState = this.state.otherEnabled;
+                                                      const prevState = this.state.otherEnabled;
                                                       prevState[i] = !prevState[i];
-                                                      this.setState({otherEnabled: prevState}, () => {
-                                                          this._renderRefresh();
+                                                      this.setState({ otherEnabled: prevState }, () => {
+                                                          this.RenderRefresh();
                                                       });
                                                   }}>
-                                    <Text style=
-                                              {
-                                                  this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
-                                              }
+                                    <Text style={
+                                            this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
+                                        }
                                     >{value}</Text>
                                 </TouchableOpacity>
                             ))}
@@ -197,14 +181,14 @@ export default class TimeLine extends React.Component {
                         refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={this._renderRefresh}
+                                onRefresh={this.RenderRefresh}
                             />
                         }
-                        contentContainerStyle={{paddingBottom: 200}}
+                        contentContainerStyle={{ paddingBottom: 200 }}
                         automaticallyAdjustContentInsets={false}
                         removeClippedSubviews={false}
                         renderRow={(rowData, sectionID, rowID, highlightRow) =>
-                            this.state.dataSource.length === 0 ?
+                            (this.state.dataSource.length === 0 ?
                                 <View><Text>Empty..</Text></View>
                                 :
                                 <View>
@@ -219,21 +203,22 @@ export default class TimeLine extends React.Component {
                                         time={rowData.time}
                                         place={rowData.place}
                                         onPress={() => {
-                                            this.setState({selectedRow: rowData}, () => {
-                                                this._showModal();
-                                            })
+                                            this.setState({ selectedRow: rowData }, () => {
+                                                this.ShowModal();
+                                            });
                                         }}
                                         onNavigate={this.props.onNavigate}
                                     />
                                 </View>
+                            )
                         }
                     />
                 </View>
                 <PopupDialog
                     ref={(ref) => this.modal = ref}
-                    dialogAnimation = { new ScaleAnimation()}
-                    dialogTitle={null}
-                    //dialogTitle={<DialogTitle title="상세 정보" titleTextStyle={{color: '#f95a25'}}/>}
+                    dialogAnimation={new ScaleAnimation()}
+                    dialogTitle={(<View />)}
+                    // dialogTitle={<DialogTitle title="상세 정보" titleTextStyle={{color: '#f95a25'}}/>}
                     dialogStyle={styles.dialog_container}
                 >
                     <View style={styles.dialog}>
@@ -306,10 +291,10 @@ export default class TimeLine extends React.Component {
                 </PopupDialog>
                 <DropdownAlert
                     ref={(ref) => this.dropdown = ref}
-                    onCancel={() => this.setState({elevationToZero: false})}
-                    onClose={() => this.setState({elevationToZero: false})}
+                    onCancel={() => this.setState({ elevationToZero: false })}
+                    onClose={() => this.setState({ elevationToZero: false })}
                 />
             </View>
-        )
+        );
     }
 }

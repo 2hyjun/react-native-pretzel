@@ -37,9 +37,10 @@ export default class ChatList extends React.Component {
         this._getAllKey = this._getAllKey.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._delete = this._delete.bind(this);
-
+        debugger;
         this.socket = socket.connectSocket();
         this.socket.on('message', (data) => { this.onChatRecieve(data) });
+        debugger;
     }
     static navigationOptions = ({navigation}) => ({
         header: ( 

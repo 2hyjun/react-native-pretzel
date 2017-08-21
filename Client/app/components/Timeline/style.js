@@ -2,13 +2,14 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import { height, width, totalSize } from 'react-native-dimension';
+import { height, width } from 'react-native-dimension';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F2F2F2',
-        //justifyContent: 'center',
-        alignItems: 'center'
+        // justifyContent: 'center',
+        alignItems: 'center',
     },
     filter: {
         height: height(10),
@@ -33,13 +34,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         margin: 3,
         marginBottom: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     filter_text_disabled: {
         color: 'lightgrey',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 15
+        fontSize: 15,
     },
     filter_item_enabled: {
         padding: 10,
@@ -56,24 +57,23 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 15
+        fontSize: 15,
     },
     filter_scrollview: {
         height: height(8),
-        //backgroundColor: 'red'
-    }
-    ,
+        // backgroundColor: 'red'
+    },
     timeline_container: {
         height: height(90),
         width: width(100),
-        //backgroundColor: '#e2e2e2',
-        //backgroundColor: 'skyblue'
+        // backgroundColor: '#e2e2e2',
+        // backgroundColor: 'skyblue'
     },
     timeline_scrollview: {
         height: height(90),
         width: width(100),
         backgroundColor: '#e2e2e2',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     dialog_container: {
         marginTop: -200,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         marginRight: 30,
     },
 
-    //팝업창 스타일
+    // 팝업창 스타일
     popCell:{
         flexDirection:'column',
         backgroundColor:'#ffffff',
