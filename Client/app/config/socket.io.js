@@ -15,7 +15,7 @@ const Socket = {
         return new Promise((Resolve, Reject) => {
             const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
             const ChatRoomSTORAGEKEY = '' + data.user._id + ':' + data.rid;
-    
+
             const GetPrevList = () => {
                 return new Promise((resolve, reject) => {
                     AsyncStorage.getItem(ChatListSTORAGEKEY)
@@ -23,11 +23,11 @@ const Socket = {
                             console.log("GetPrevList")
                             if (!value)
                                 resolve([]);
-                            else
+                            else 
                                 resolve(JSON.parse(value));
                         })
                 });
-    
+
             }
             const SetChatList = (list) => {
                 return new Promise((resolve, reject) => {
@@ -38,18 +38,14 @@ const Socket = {
                         title: data.title,
                         rid: data.rid,
                     }
-                    console.log(_.find(list, messageInfo))
-                    if (_.find(list, messageInfo)) {
-                        resolve();
-                    }
-                    else {
+                    if (!_.find(list, messageInfo))
                         list.push(messageInfo);
-                        AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                            .then(() => {
-                                resolve();
-                            })
-                    }
-                    
+                    AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
+                        .then(() => {
+                            resolve();
+                        })
+
+
                 });
             }
             const GetPrevMessages = () => {
@@ -58,15 +54,15 @@ const Socket = {
                     AsyncStorage.getItem(ChatRoomSTORAGEKEY)
                         .then((value) => {
                             if (value)
-                                resolve(value)
+                                resolve(JSON.parse(value))
                             else
                                 resolve([]);
                         })
                 });
-    
-    
+
+
             }
-    
+
             const SetMessages = (list) => {
                 return new Promise((resolve, reject) => {
                     console.log("SetMessages")
@@ -76,11 +72,17 @@ const Socket = {
                             resolve()
                         })
                 });
-    
+
             }
             GetPrevList()
                 .then(SetChatList)
-                .then(GetPrevMessages)
+                .catch(e => {
+                    if (!e.em)
+                        console.error(e)
+                })
+                .done();
+
+            GetPrevMessages()
                 .then(SetMessages)
                 .catch(e => {
                     if (!e.em)
@@ -88,12 +90,11 @@ const Socket = {
                 })
                 .then(() => {
                     return new Promise((resolve, reject) => {
-                        console.log('hehe')
                         Resolve();
                     });
                 })
         });
-        
+
 
 
     },
@@ -119,11 +120,12 @@ const Socket = {
             });
     },
     connectSocket: () => {
+        console.log(socket);
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124');
             socket.emit('join', global.user_email);
         }
-        console.log(socket);
+        
         return socket;
     },
 };

@@ -6,16 +6,17 @@ import {
     Alert,
     Platform,
     AsyncStorage,
+    TouchableOpacity
 } from 'react-native';
 
 import styles from './style'
-
+import { Avatar } from 'react-native-elements';
 import SocketIOClient from 'socket.io-client';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import global from '../../config/global';
 import socket from '../../config/socket.io';
 import ChatList from "../../screen/ChatList/index";
-
+import aa from 'react-navigation';
 export default class Chat extends React.Component {
     constructor(props) {
 
@@ -26,24 +27,27 @@ export default class Chat extends React.Component {
             user_email: global.user_email,
             typingText: null,
         };
-
-        this._init = this._init.bind(this);
+        
         this._onSend = this._onSend.bind(this);
         this._onReceive = this._onReceive.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
         this.socket = socket.connectSocket();
         this.socket.on('message', this._onReceive);
-
-        this._init();
+        console.log(this.props.navigation.state.params.partner_email);
     }
 
-    _init() {
-        this.socket.emit('join', global.user_email);
-    }
+    static navigationOptions = ({navigation}) => ({
+        title: navigation.state.params.partner_email,
+        headerTitleStyle: styles.headerTitle,
+        headerTintColor: '#f95a25',
+        headerBackTitle: null,
+    })
 
     componentDidMount() {
+        
         const { params } = this.props.navigation.state;
+        
         const ChatRoomSTORAGEKEY = '' + params.partner_email + ':'+ params.rid;
         AsyncStorage.getItem(ChatRoomSTORAGEKEY)
             .then((messages) =>  {
@@ -51,6 +55,7 @@ export default class Chat extends React.Component {
                     this.setState({messages: JSON.parse(messages)})
             })
             .catch(e => console.error(e));
+        
 
     }
     _onSend(messages = []) {
@@ -110,7 +115,7 @@ export default class Chat extends React.Component {
                 .done();
         });
     }
-
+    
 
     render() {
 
@@ -121,7 +126,18 @@ export default class Chat extends React.Component {
                     onSend={(messages) => this._onSend(messages)}
                     placeholder={this.props.navigation.state.params.title}
                     locale={'ko'}
+                    isAnimated={true}
                     renderAvatarOnTop={true}
+                    
+                    renderAvatar={() => {
+                        return(
+                            <Avatar
+                                overlayContainerStyle={{backgroundColor: 'transparent'}}
+                                source={require('../../../img/chatting/chatting_main_default_profile.png')}
+                            />
+                            
+                        )
+                    }}
                     user={{
                         _id: global.user_email,
                         name: global.user_email,

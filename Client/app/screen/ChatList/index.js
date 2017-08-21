@@ -14,9 +14,10 @@ import {List, ListItem} from 'react-native-elements';
 import SwipeOut from 'react-native-swipeout';
 import _ from 'lodash';
 import Button from "react-native-elements/src/buttons/Button";
-
+import { Avatar } from 'react-native-elements'
 import global from '../../config/global'
 import socket from '../../config/socket.io';
+import styles from './style';
 
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 
@@ -31,14 +32,24 @@ export default class ChatList extends React.Component {
             refreshing: false
         };
 
-        this.socket = socket.connectSocket();
-        this.socket.emit('join', global.user_email);
-        this.socket.on('message', this.onChatRecieve);
+        
 
         this._getAllKey = this._getAllKey.bind(this);
         this._renderRefresh = this._renderRefresh.bind(this);
         this._delete = this._delete.bind(this);
+
+        this.socket = socket.connectSocket();
+        this.socket.on('message', (data) => { this.onChatRecieve(data) });
     }
+    static navigationOptions = ({navigation}) => ({
+        header: ( 
+            <View style={styles.title}>
+                <Text style={styles.headerTitle}>채팅 리스트</Text>
+            </View>
+        ),
+        headerTitleStyle: styles.headerTitle,
+        headerBackTitle: null,
+    })
     onChatRecieve(data) {
         socket.onReceive(data)
             .then(() => {
@@ -100,7 +111,7 @@ export default class ChatList extends React.Component {
                     //list = _.uniqBy(list, 'rid');
                     list = _.reverse(list);
                     //console.log('*********',list);
-                    this.setState(this.state.dataSource.cloneWithRows([]), () => {
+                    this.setState({dataSource: this.state.dataSource.cloneWithRows([])}, () => {
                         this.setState({dataSource: this.state.dataSource.cloneWithRows(list)})
                     });
 
@@ -123,14 +134,8 @@ export default class ChatList extends React.Component {
     render() {
 
         return (
-            <View style={{flex: 1}}>
-                <Button
-                    title={'GetAllKey'}
-                    onPress={this._getAllKey}
-                    buttonStyle={{height: 50}}/>
-                <Text>{this.state.temp}</Text>
+            <View style={{flex: 1, backgroundColor: 'white'}}>
                 <ListView
-
                     dataSource={this.state.dataSource}
                     enableEmptySections={true}
                     refreshControl={
@@ -154,6 +159,9 @@ export default class ChatList extends React.Component {
                                     key={rowData.rid}
                                     roundAvatar
                                     avatar={require('../../../img/chatting/chatting_main_default_profile.png')}
+                                    avatarOverlayContainerStyle={{backgroundColor: 'transparent'}}
+                                    containerStyle={{backgroundColor: 'white'}}
+                                    wrapperStyle={{backgroundColor: 'white'}}
                                     title={rowData.title}
                                     subtitle={rowData.partner_email}
                                     onPress={() => {

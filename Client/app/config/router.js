@@ -55,17 +55,22 @@ export const MyPageStack = StackNavigator({
 }, {
     headerMode: 'none'
 });
+export const ChatRoom = StackNavigator({
+    ChatRoom: {
+        screen: chat,
+    }
+});
 export const ChatStack = StackNavigator({
     ChatList: {
         screen: chatList,
+        
 
     },
     ChatRoom: {
         screen: chat
     }
 }, {
-
-    headerMode: 'none'
+    
 });
 
 export const TypeTab = TabNavigator({
@@ -92,7 +97,7 @@ export const TypeTab = TabNavigator({
     tabBarPosition: 'Top',
     swipeEnabled: false,
     animationEnabled: false,
-    lazy: false,
+    lazy: true,
     tabBarOptions: {
         showLabel: true,
         indicatorStyle: {

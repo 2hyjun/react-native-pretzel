@@ -45,8 +45,8 @@ export default class TimeLine extends React.Component {
         }
 
 
-        this.socket = socket.connectSocket();
-        this.socket.on('message', this.onChatRecieve);
+        //this.socket = socket.connectSocket();
+        //this.socket.on('message', this.onChatRecieve);
 
         this.state = {
             otherEnabled: arr,
