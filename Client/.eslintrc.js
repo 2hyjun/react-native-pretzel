@@ -32,6 +32,8 @@ module.exports = {
         "react/forbid-prop-types": 0,
         "quotes": 0,
         "no-underscore-dangle": 0,
+        "no-restricted-syntax": 0,
+        'no-nested-ternary': 0,
         // overrides
     },
     "globals": {

@@ -5,13 +5,12 @@ import {
     TouchableOpacity,
     ScrollView,
     TextInput,
-    Alert,
     Keyboard,
     AsyncStorage,
     Platform,
 } from 'react-native';
 
-import Reactoron from 'reactotron-react-native';
+// import Reactoron from 'reactotron-react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Ripple from 'react-native-material-ripple';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -50,7 +49,6 @@ const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', 
 const types = ['해주세요', '해줄게요', '같이해요'];
 
 export default class post extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -191,108 +189,108 @@ export default class post extends React.Component {
         // Reactoron.log(this.state.elevationToZero);
         return(
             <View style={styles.container}>
-                    <ScrollView style={{flex: 1, marginTop: 30}}>
-                        <View style={styles.contents_container}>
-                            <Ripple
-                                rippleColor={"#f95a25"}
-                                rippleOpacity={0.87}
-                                rippleDuration={500}
-                                style={[styles.ripple, elevation]}
-                                onPress={this.contentShowPopOver.bind(this)}>
-                                <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
-                                <Text style={styles.ripple_text}>{this.state.content}</Text>
-                            </Ripple>
+                <ScrollView style={{flex: 1, marginTop: 30}}>
+                    <View style={styles.contents_container}>
+                        <Ripple
+                            rippleColor={"#f95a25"}
+                            rippleOpacity={0.87}
+                            rippleDuration={500}
+                            style={[styles.ripple, elevation]}
+                            onPress={this.contentShowPopOver.bind(this)}>
+                            <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                            <Text style={styles.ripple_text}>{this.state.content}</Text>
+                        </Ripple>
 
-                            <Ripple
-                                rippleColor={"#f95a25"}
-                                rippleOpacity={0.87}
-                                rippleDuration={500}
-                                style={[styles.ripple, elevation]}
-                                onPress={this.typeShowPopOver.bind(this)}>
-                                <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
-                                <Text style={styles.ripple_text}>{this.state.contentType}</Text>
-                            </Ripple>
-                        </View>
-                        <View style={styles.detail_cell_style}>
-                            <Ripple
-                                rippleColor={'#f95a25'}
-                                rippleOpacity={0.87}
-                                rippleDuration={500}
-                                style={[styles.ripple_detail, elevation]}
-                                onPress={this.detailShowPopOver}>
-                                <Text style={{ fontSize: 25, color: '#f95a25' }}>#</Text>
-                                <Text style={styles.ripple_text}>상세 정보 작성</Text>
-                            </Ripple>
-                        </View>
-                        <View style={styles.forms}>
-                            <KeyboardAwareView >
-                                <ScrollView>
-                                    <Fumi
-                                        style={styles.form_input}
-                                        label={'제목'}
-                                        iconClass={IconM}
-                                        iconName={'title'}
-                                        iconColor={'#f95a25'}
-                                        secure={false}
-                                        onTextChanged={(title) => this.setState({title})}
-                                        autoCorrection={false}
-                                        autoCapital={'none'}
-                                    />
-                                    <Fumi
-                                        style={styles.form_input}
-                                        label={'수령위치'}
-                                        iconClass={IconM}
-                                        iconName={'place'}
-                                        iconColor={'#f95a25'}
-                                        secure={false}
-                                        onTextChanged={(place) => this.setState({place})}
-                                        autoCorrection={false}
-                                        autoCapital={'none'}
-                                    />
-                                    <Fumi
-                                        style={styles.form_input}
-                                        label={'예상금액 (숫자만, "데려다줘"일 경우 0)'}
-                                        iconClass={Icon}
-                                        iconName={'money'}
-                                        iconColor={'#f95a25'}
-                                        secure={false}
-                                        onTextChanged={(expectedPrice) => this.setState({expectedPrice})}
-                                        autoCorrection={false}
-                                        autoCapital={'none'}
-                                        keyType={'decimal-pad'}
-                                    />
-                                    <Fumi
-                                        style={styles.form_input}
-                                        label={'배달금액 (숫자만)'}
-                                        iconClass={Icon}
-                                        iconName={'motorcycle'}
-                                        iconColor={'#f95a25'}
-                                        secure={false}
-                                        onTextChanged={(fee) => this.setState({ fee })}
-                                        autoCorrection={false}
-                                        autoCapital={'none'}
-                                        keyType="decimal-pad"
-                                    />
-                                    <TouchableOpacity
-                                        style={styles.deadline}
-                                        onPress={() => this.setState({ isDateTimePickerVisible: true })}>
-                                        <IconM name="timer" size={20} color={this.state.deadLine === '배달 기한 설정' ? 'grey' : '#f95a25'}/>
-                                        <Text style={[styles.deadline_text, deadLineText]}>{this.state.deadLine}</Text>
-                                    </TouchableOpacity>
+                        <Ripple
+                            rippleColor={"#f95a25"}
+                            rippleOpacity={0.87}
+                            rippleDuration={500}
+                            style={[styles.ripple, elevation]}
+                            onPress={this.typeShowPopOver.bind(this)}>
+                            <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                            <Text style={styles.ripple_text}>{this.state.contentType}</Text>
+                        </Ripple>
+                    </View>
+                    <View style={styles.detail_cell_style}>
+                        <Ripple
+                            rippleColor={'#f95a25'}
+                            rippleOpacity={0.87}
+                            rippleDuration={500}
+                            style={[styles.ripple_detail, elevation]}
+                            onPress={this.detailShowPopOver}>
+                            <Text style={{ fontSize: 25, color: '#f95a25' }}>#</Text>
+                            <Text style={styles.ripple_text}>상세 정보 작성</Text>
+                        </Ripple>
+                    </View>
+                    <View style={styles.forms}>
+                        <KeyboardAwareView >
+                            <ScrollView>
+                                <Fumi
+                                    style={styles.form_input}
+                                    label={'제목'}
+                                    iconClass={IconM}
+                                    iconName={'title'}
+                                    iconColor={'#f95a25'}
+                                    secure={false}
+                                    onTextChanged={(title) => this.setState({title})}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
+                                />
+                                <Fumi
+                                    style={styles.form_input}
+                                    label={'수령위치'}
+                                    iconClass={IconM}
+                                    iconName={'place'}
+                                    iconColor={'#f95a25'}
+                                    secure={false}
+                                    onTextChanged={(place) => this.setState({place})}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
+                                />
+                                <Fumi
+                                    style={styles.form_input}
+                                    label={'예상금액 (숫자만, "데려다줘"일 경우 0)'}
+                                    iconClass={Icon}
+                                    iconName={'money'}
+                                    iconColor={'#f95a25'}
+                                    secure={false}
+                                    onTextChanged={(expectedPrice) => this.setState({expectedPrice})}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
+                                    keyType={'decimal-pad'}
+                                />
+                                <Fumi
+                                    style={styles.form_input}
+                                    label={'배달금액 (숫자만)'}
+                                    iconClass={Icon}
+                                    iconName={'motorcycle'}
+                                    iconColor={'#f95a25'}
+                                    secure={false}
+                                    onTextChanged={(fee) => this.setState({ fee })}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
+                                    keyType="decimal-pad"
+                                />
+                                <TouchableOpacity
+                                    style={styles.deadline}
+                                    onPress={() => this.setState({ isDateTimePickerVisible: true })}>
+                                    <IconM name="timer" size={20} color={this.state.deadLine === '배달 기한 설정' ? 'grey' : '#f95a25'}/>
+                                    <Text style={[styles.deadline_text, deadLineText]}>{this.state.deadLine}</Text>
+                                </TouchableOpacity>
 
-                                    <TouchableOpacity
-                                        style={styles.submitBtn}
-                                        onPress={this.submit}>
-                                        <Text style={styles.submitTxt}>
+                                <TouchableOpacity
+                                    style={styles.submitBtn}
+                                    onPress={this.submit}>
+                                    <Text style={styles.submitTxt}>
                                             글 작성
-                                        </Text>
-                                    </TouchableOpacity>
+                                    </Text>
+                                </TouchableOpacity>
 
-                                </ScrollView>
-                            </KeyboardAwareView>
-                        </View>
+                            </ScrollView>
+                        </KeyboardAwareView>
+                    </View>
 
-                    </ScrollView>
+                </ScrollView>
                 <PopupDialog
                     ref={(ref) => { this.content = ref; }}
                     dialogAnimation={new SlideAnimation({ slideFrom: 'left' })}
@@ -335,8 +333,8 @@ export default class post extends React.Component {
                     ref={(ref) => { this.detail = ref; }}
                     dialogAnimation={new ScaleAnimation()}
                     dialogTitle={<DialogTitle
-                                    title="상세 정보 작성"
-                                    titleTextStyle={{ color: '#f95a25' }}
+                        title="상세 정보 작성"
+                        titleTextStyle={{ color: '#f95a25' }}
                     />}
                     onDismissed={() => {
                         Keyboard.dismiss();

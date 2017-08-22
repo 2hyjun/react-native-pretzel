@@ -1,9 +1,9 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform, AppState } from 'react-native';
 import SocketIOClient from 'socket.io-client';
 import Reactotron from 'reactotron-react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import _ from 'lodash';
-
+import PushNotification from 'react-native-push-notification';
 import global from './global';
 
 let socket = null;
@@ -70,6 +70,34 @@ const Socket = {
                         });
                 });
             };
+            try {
+                if (Platform.OS === 'android') {
+                    if (AppState.currentState !== 'active') {
+                        const date = new Date(Date.now());
+                        PushNotification.localNotificationSchedule({
+                            title: '메세지가 도착 했습니다.',
+                            message: `${data.user._id}: ${data.text}`,
+                            date,
+                            number: 3,
+                            actions: 'Yes',
+                        });
+                        PushNotification.setApplicationIconBadgeNumber(3);
+                    }
+                } else {
+                    const date = new Date(Date.now());
+                    PushNotification.localNotificationSchedule({
+                        title: '메세지가 도착 했습니다.',
+                        message: `${data.user._id}: ${data.text}`,
+                        date,
+                        number: 3,
+                        actions: 'Yes',
+                    });
+                    PushNotification.setApplicationIconBadgeNumber(3);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
             GetPrevList()
                 .then(SetChatList)
                 .catch(e => {

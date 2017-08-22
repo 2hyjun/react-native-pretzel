@@ -25,6 +25,7 @@
     "react-native-modal-datetime-picker": "^4.9.0",
     "react-native-panel": "^1.0.3",
     "react-native-popup-dialog": "^0.9.34",
+    "react-native-push-notification": "^3.0.0",
     "react-native-randombytes": "^2.2.0",
     "react-native-show-hide-toggle-box": "^1.0.1",
     "react-native-simple-encryption": "^1.2.1",
