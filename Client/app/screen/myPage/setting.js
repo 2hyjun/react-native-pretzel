@@ -14,14 +14,15 @@ import {
 } from 'react-native';
 
 import styles from './settingStyle';
-import { NavigationActions } from 'react-navigation'
+import socket from '../../config/socket.io';
+
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class settingScreen extends Component {
     constructor(props) {
         super(props);
 
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: ds.cloneWithRows([
                 '비밀번호 변경', '푸시알림 설정', '피드백'

@@ -30,7 +30,8 @@ module.exports = {
         "no-return-assign": 0,
         "guard-for-in": 0,
         "react/forbid-prop-types": 0,
-
+        "quotes": 0,
+        "no-underscore-dangle": 0,
         // overrides
     },
     "globals": {
@@ -38,5 +39,6 @@ module.exports = {
       "navigationOptions": true,
       "propTypes": true,
       "fetch": true,
+      "defaultProps": true,
     }
   }

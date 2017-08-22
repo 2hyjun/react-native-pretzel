@@ -35,11 +35,12 @@ export default class Chat extends React.Component {
     componentDidMount() {
         const { params } = this.props.navigation.state;
         const ChatRoomSTORAGEKEY = `${params.partner_email}:${params.rid}`;
-
+        Reactotron.log('ChatRoomSTORAGEKEY: ' + ChatRoomSTORAGEKEY);
         AsyncStorage.getItem(ChatRoomSTORAGEKEY)
             .then((messages) => {
+                Reactotron.log('messages' + messages);
                 if (messages !== null) {
-                    this.setState({ essages: JSON.parse(messages) });
+                    this.setState({ messages: JSON.parse(messages) });
                 }
             })
             .catch(e => Reactotron.error(e));
