@@ -100,6 +100,10 @@ const Socket = {
 
         return socket;
     },
+    disconnect: () => {
+        socket.disconnect();
+        socket = null;
+    },
 };
 
 

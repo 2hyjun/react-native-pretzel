@@ -1,6 +1,6 @@
 /* This page is for "My page" which includes logout and sets */
 
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import {
     Image,
     View,
@@ -10,23 +10,20 @@ import {
     TouchableOpacity,
     ListView,
     Alert,
-
 } from 'react-native';
-
+import Reactotron from 'reactotron-react-native';
 import styles from './settingStyle';
 import socket from '../../config/socket.io';
-
-const STORAGE_KEY = '@PRETZEL:jwt';
 
 class settingScreen extends Component {
     constructor(props) {
         super(props);
 
-        var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: ds.cloneWithRows([
-                '비밀번호 변경', '푸시알림 설정', '피드백'
-            ])
+                '비밀번호 변경', '푸시알림 설정', '피드백',
+            ]),
         };
     }
 
@@ -35,29 +32,29 @@ class settingScreen extends Component {
             .then((values) => {
                 AsyncStorage.multiRemove(values)
                     .then(() => {
-                        this.props.navigation.navigate('auth')
+                        socket.disconnect();
+                        this.props.navigation.navigate('auth');
                     })
-                    .catch(e => console.error(e))
-                })
-    };
+                    .catch((e) => { console.error(e); });
+            });
+    }
 
     LogOut = () => {
-        //this.props.navigation.navigate('main');
-        Alert.alert('','로그아웃 하시겠습니까?',[{
+        // this.props.navigation.navigate('main');
+        Alert.alert('', '로그아웃 하시겠습니까?', [
+            {
                 text: '네',
-                onPress: (text)=>{
+                onPress: () => {
                     this.Logout();
-                }
-            },
-                {
-                    text:'계속있을래요',
-                    onPress: (text)=> {
-                        console.log('button press no')
-                    }
                 },
-
-            ]
-        );
+            },
+            {
+                text: '계속있을래요',
+                onPress: () => {
+                    Reactotron.log('button press no');
+                },
+            },
+        ]);
     };
 
     handleBack = () => {
@@ -74,14 +71,15 @@ class settingScreen extends Component {
             <View style={styles.parent}>
                 <View style={styles.cellOne}>
                     <TouchableHighlight onPress={this.handleBack}>
-                        <Image source={require('../../../img/basic/basic_arrow_left.png')}
-                               style={{resizeMode:'center'}}/>
+                        <Image
+                            source={require('../../../img/basic/basic_arrow_left.png')}
+                            style={{ resizeMode: 'center' }} />
                     </TouchableHighlight>
                 </View>
 
                 <TouchableHighlight onPress={this.LogOut}>
                     <View style={styles.cellTwo}>
-                        <Text style={{color: '#ff6666'}}>로그아웃</Text>
+                        <Text style={{ color: '#ff6666' }}>로그아웃</Text>
                     </View>
                 </TouchableHighlight>
 
@@ -95,8 +93,9 @@ class settingScreen extends Component {
                                 <Text>푸시알림 설정</Text>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.row}
-                            onPress={() => {this.props.navigation.navigate('auth')}}>
+                        <TouchableOpacity
+                            style={styles.row}
+                            onPress={() => { this.props.navigation.navigate('auth') ;}}>
                             <Text>피드백</Text>
                         </TouchableOpacity>
                     </View>

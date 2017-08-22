@@ -45,7 +45,6 @@ export default class ChatList extends React.Component {
         this.socket.on('message', (data) => { this.onChatRecieve(data); });
     }
     componentDidMount() {
-        this.dropdown.alertWithType('info', '채팅 리스트 갱신 방법', '아래로 스크롤 하여 갱신 할 수 있습니다.')
         AsyncStorage.getItem(ChatListSTORAGEKEY)
         .then((value) => {
             if (value) {
