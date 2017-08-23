@@ -46,6 +46,7 @@ export default class Chat extends React.Component {
             .catch(e => Reactotron.error(e));
     }
     onSend(messages = []) {
+        this.socket = socket.checkConnection();
         const message = messages;
         const { params } = this.props.navigation.state;
         message[0].to = params.partner_email;

@@ -10,6 +10,7 @@ let socket = null;
 
 const Socket = {
     onReceive: (data) => {
+        Reactotron.log(socket.connect());
         return new Promise((Resolve) => {
             const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
             const ChatRoomSTORAGEKEY = '' + data.user._id + ':' + data.rid;
@@ -124,14 +125,21 @@ const Socket = {
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124');
             socket.emit('join', global.user_email);
+        } else if (socket.disconnected) {
+            socket = SocketIOClient('http://13.124.147.152:8124');
+            socket.emit('join', global.user_email);
         }
-
         return socket;
     },
     disconnect: () => {
         socket.disconnect();
         socket = null;
     },
+    checkConnection: () => {
+        socket = socket.connectSocket();
+        return socket;
+    },
+
 };
 
 
