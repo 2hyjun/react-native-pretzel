@@ -64,14 +64,14 @@ module.exports = (server) => {
             if (user[data.to]) {
                 io.to(user[data.to]).emit('message', data);
                 //console.log(data);
-                console.log('message', data.text, 'delivered from', data.user.name, 'to', data.to)
+                console.log('message', data.text, 'delivered from', data.user.name, 'to', data.to);
             } else {
                 if (messageBuffer[data.to] === undefined) {
                     messageBuffer[data.to] = [];
                 }
                 messageBuffer[data.to].push(data);
+                console.log(`a messages to ${data.to} is saved.`);
             }
-            
         });
 
         // {
