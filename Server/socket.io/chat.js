@@ -59,6 +59,7 @@ module.exports = (server) => {
                 console.log(user);
             } 
         });
+        
         socket.on('message', (data) => {
             console.log('MESSAGE: ',data);
             if (user[data.to]) {
