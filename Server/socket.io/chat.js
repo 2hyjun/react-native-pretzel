@@ -1,6 +1,7 @@
-const socketIo = require('socket.io')
+const socketIo = require('socket.io');
 var clients = 0;
 var user = {};
+var messageBuffer = {};
 module.exports = (server) => {
 
 
@@ -18,8 +19,17 @@ module.exports = (server) => {
             } else {
                 console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
             }
+
+            if (messageBuffer[email]) {
+                if (messageBuffer[email].length > 0) {
+                    for (var i = 0; i < messageBuffer[email].length; i++) {
+                        io.to(user[email]).emit('message', messageBuffer[email][i]);
+                    }
+                    messageBuffer[email] = [];
+                }
+            }
             console.log(user);
-        })
+        });
 
         socket.on('check', (user_email) => {
             email = user_email;
@@ -30,36 +40,39 @@ module.exports = (server) => {
             } else {
                 console.log('\t\t\t', email, 'was connected successfully, socket id: ', socket.id, clients, 'user connected now.');
             }
+            if (messageBuffer[email]) {
+                if (messageBuffer[email].length > 0) {
+                    for (var i = 0; i < messageBuffer[email].length; i++) {
+                        io.to(user[email]).emit('message', messageBuffer[email][i]);
+                    }
+                    messageBuffer[email] = [];
+                }
+            }
             console.log(user);
-        })
+        });
         
         socket.on('disconnect', () => {
             if (user[email]) {
                 clients--;
                 console.log(email, 'has been disconnected', clients, 'user connected now.');
                 delete user[email];
-                console.log(user)
-            }
-            
-        })
+                console.log(user);
+            } 
+        });
         socket.on('message', (data) => {
-		console.log('MESSAGE: ',data);
+            console.log('MESSAGE: ',data);
             if (user[data.to]) {
-                
                 io.to(user[data.to]).emit('message', data);
                 //console.log(data);
                 console.log('message', data.text, 'delivered from', data.user.name, 'to', data.to)
             } else {
-                console.log('user: ', user);
-                
-                console.log('saved')
+                if (messageBuffer[data.to] === undefined) {
+                    messageBuffer[data.to] = [];
+                }
+                messageBuffer[data.to].push(data);
             }
             
-        })
-
-        socket.on('debug', (data) => {
-            //console.log('message', data);
-        })
+        });
 
         // {
         //     _id: 1,
@@ -73,5 +86,5 @@ module.exports = (server) => {
         //     image: 'https://facebook.github.io/react/img/logo_og.png',
         //     // Any additional custom parameters are passed through
         // }
-    })
-}
+    });
+};
