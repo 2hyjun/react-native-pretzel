@@ -1,23 +1,22 @@
-import React from 'react'
-import {
-    Text,
-    View,
-    Image,
-    Alert,
-    Platform,
-    AsyncStorage,
-} from 'react-native';
+import React from 'react';
+import { Avatar } from 'react-native-elements';
+import { AsyncStorage } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+import Reactotron from 'reactotron-react-native';
 
-import styles from './style'
-
-import SocketIOClient from 'socket.io-client';
-import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import styles from './style';
 import global from '../../config/global';
-import ChatList from "../../screen/ChatList/index";
+import socket from '../../config/socket.io';
+
 
 export default class Chat extends React.Component {
+    static navigationOptions = ({ navigation }) => ({
+        title: navigation.state.params.partner_email,
+        headerTitleStyle: styles.headerTitle,
+        headerTintColor: '#f95a25',
+        headerBackTitle: null,
+    })
     constructor(props) {
-
         super(props);
         this.state = {
             partnerId: -1,
@@ -25,75 +24,70 @@ export default class Chat extends React.Component {
             user_email: global.user_email,
             typingText: null,
         };
+        this.onSend = this.onSend.bind(this);
+        this.onRecieve = this.onRecieve.bind(this);
+        this.storeMessages = this.storeMessages.bind(this);
 
-        this._init = this._init.bind(this);
-        this._onSend = this._onSend.bind(this);
-        this._onReceive = this._onReceive.bind(this);
-        this._storeMessages = this._storeMessages.bind(this);
-
-        this.socket = SocketIOClient('http://13.124.147.152:8124');
-        this.socket.on('message', this._onReceive);
-
-        this._init();
+        this.socket = socket.connectSocket();
+        this.socket.on('message', this.onRecieve);
+        // console.log(this.props.navigation.state.params.partner_email);
     }
-
-    _init() {
-        this.socket.emit('join', global.user_email);
-    }
-
     componentDidMount() {
         const { params } = this.props.navigation.state;
-        const ChatRoomSTORAGEKEY = '' + params.partner_email + ':'+ params.rid;
+        const ChatRoomSTORAGEKEY = `${params.partner_email}:${params.rid}`;
+        Reactotron.log('ChatRoomSTORAGEKEY: ' + ChatRoomSTORAGEKEY);
         AsyncStorage.getItem(ChatRoomSTORAGEKEY)
-            .then((messages) =>  {
-                if (messages !== null)
-                    this.setState({messages: JSON.parse(messages)})
+            .then((messages) => {
+                Reactotron.log('messages' + messages);
+                if (messages !== null) {
+                    this.setState({ messages: JSON.parse(messages) });
+                }
             })
-            .catch(e => console.error(e));
-
+            .catch(e => Reactotron.error(e));
     }
-    _onSend(messages = []) {
+    onSend(messages = []) {
+        this.socket = socket.checkConnection();
+        const message = messages;
         const { params } = this.props.navigation.state;
-        messages[0]['to'] = params.partner_email;
+        message[0].to = params.partner_email;
+        message[0].title = params.title;
+        message[0].rid = params.rid;
         this.socket.emit('message', messages[0]);
-
-        this._storeMessages(messages)
-
+        this.storeMessages(messages);
     }
 
-    _onReceive(data) {
+    onRecieve(data) {
         const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
-        const { params } = this.props.navigation.state;
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 if (!value) {
-                    return new Promise.resolve([])
+                    return new Promise.resolve([]);
                 } else {
-                    return new Promise.reject({em: 'already exist'})
+                    return new Promise.reject({ em: 'already exist' });
                 }
             })
             .then((list) => {
                 list.push({
                     user_email: data.to,
                     partner_email: data.user.name,
-                    title: params.title,
-                    rid: params.rid,
-                    recentM: data.text,
+                    title: data.title,
+                    rid: data.rid,
                 });
                 AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                    .then(() => console.log(list, 'List saved'))
+                    .then(() => Reactotron.log(list, 'List saved'))
                     .catch(e => console.error(e))
                     .done();
             })
             .catch((e) => {
-                if (!e.em)
-                    console.error(e)
+                if (!e.em) {
+                    console.error(e);
+                }
             })
             .done();
-        this._storeMessages(data);
+        this.storeMessages(data);
     }
 
-    _storeMessages(messages) {
+    storeMessages(messages) {
         this.setState((previousState) => ({
             messages: GiftedChat.append(previousState.messages, messages),
         }), () => {
@@ -101,10 +95,10 @@ export default class Chat extends React.Component {
             const str = JSON.stringify(arr);
 
             const { params } = this.props.navigation.state;
-            const ChatRoomSTORAGEKEY = '' + params.partner_email + ':'+ params.rid;
+            const ChatRoomSTORAGEKEY = '' + params.partner_email + ':' + params.rid;
 
             AsyncStorage.setItem(ChatRoomSTORAGEKEY, str)
-                .then(() => console.log(str, 'saved'))
+                .then(() => Reactotron.log(str, 'saved'))
                 .catch(e => console.error(e))
                 .done();
         });
@@ -112,8 +106,8 @@ export default class Chat extends React.Component {
 
 
     render() {
-
         return (
+<<<<<<< HEAD
 
                 <GiftedChat
                     messages={this.state.messages}
@@ -126,6 +120,31 @@ export default class Chat extends React.Component {
                         name: global.user_email,
                     }}
                 />
+=======
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={(messages) => this.onSend(messages)}
+                placeholder={this.props.navigation.state.params.title}
+                locale={'ko'}
+                isAnimated={true}
+                renderAvatarOnTop={true}
+
+                renderAvatar={() => {
+                    return (
+                        <Avatar
+                            overlayContainerStyle={{ backgroundColor: 'transparent' }}
+                            /* global require */
+                            source={require('../../../img/chatting/chatting_main_default_profile.png')}
+                        />
+
+                    );
+                }}
+                user={{
+                    _id: global.user_email,
+                    name: global.user_email,
+                }}
+            />
+>>>>>>> babf076f19ed22c33563a7db2a974578c0c1392c
 
         );
     }

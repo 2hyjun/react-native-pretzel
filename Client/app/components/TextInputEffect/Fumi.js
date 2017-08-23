@@ -176,7 +176,7 @@ export default class Fumi extends BaseInput {
                     onChangeText={onTextChanged}
                     autoCorrect={autoCorrection}
                     autoCapitalize={autoCapital}
-                    maxLength={16}
+                    maxLength={25}
                 />
             </View>
         );

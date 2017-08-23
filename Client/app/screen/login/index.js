@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     Image,
     View,
@@ -6,119 +6,117 @@ import {
     Text,
     Alert,
     AsyncStorage,
-    ScrollView
+    ScrollView,
 } from 'react-native';
 
-const STORAGE_KEY = '@PRETZEL:jwt';
 import { NavigationActions } from 'react-navigation';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
+import { encrypt } from 'react-native-simple-encryption';
+import Reactoron from 'reactotron-react-native';
 
 import styles from './style';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Fumi from '../../components/TextInputEffect/Fumi';
-import { KeyboardAwareView }from 'react-native-keyboard-aware-view';
-import { encrypt } from 'react-native-simple-encryption';
-
 import DropdownAlert from '../../components/DropdownAlert';
 import global from '../../config/global';
+import './../../index/ReactotronConfig';
+
+const STORAGE_KEY = '@PRETZEL:jwt';
+
 class login extends Component {
-    constructor(props) {
-        super(props);
-        this._handleSignIn = this._handleSignIn.bind(this);
-        this.httpRequest = this.httpRequest.bind(this);
-        this.Register = this.Register.bind(this);
-        this.state={
-            email: '',
-            password: '',
-        }
+    static FindPassword() {
+        Alert.alert('', '구현중입니다.ㅠㅠ');
     }
     static propTypes = {
-        navigation : PropTypes.object.isRequired,
+        navigation: PropTypes.object.isRequired,
     };
+    constructor(props) {
+        super(props);
+        this.handleSign = this.handleSign.bind(this);
+        this.httpRequest = this.httpRequest.bind(this);
+        this.Register = this.Register.bind(this);
+        this.state = {
+            email: '',
+            password: '',
+        };
+    }
 
     componentWillMount() {
 
     }
-    _handleSignIn() {
+    handleSign() {
         this.httpRequest();
     }
-
-    static FindPassword() {
-        Alert.alert('', '구현중입니다.ㅠㅠ')
-    }
-
     Register() {
-        this.props.navigation.navigate('Register')
+        this.props.navigation.navigate('Register');
     }
     httpRequest() {
         if (this.state.email && this.state.password) {
-            let params = {
+            const params = {
                 email: this.state.email,
                 password: this.state.password,
             };
-            let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
+            const enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
             params.password = encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
-            //console.log(params.password);
+            // Reactoron.log(params.password);
             let formBody = [];
-            for (let property in params) {
-                let encodedKey = encodeURIComponent(property);
-                let encodedValue = encodeURIComponent(params[property]);
-                formBody.push(encodedKey + "=" + encodedValue);
+            for (const property in params) {
+                const encodedKey = encodeURIComponent(property);
+                const encodedValue = encodeURIComponent(params[property]);
+                formBody.push(encodedKey + '=' + encodedValue);
             }
-            formBody = formBody.join("&");
-            console.log(formBody);
+            formBody = formBody.join('&');
+            Reactoron.log(formBody);
 
             fetch('http://13.124.147.152:8124/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: formBody
+                body: formBody,
             }).then((res) => res.json())
                 .then((resJSON) => {
                     if (resJSON.resultCode === 100) {
                         const token = resJSON.result;
                         global.setEmail(this.state.email);
                         AsyncStorage.setItem(STORAGE_KEY, token)
-                            .then(() =>  {
-                                console.log('saved token to disk: ' + token);
+                            .then(() => {
+                                Reactoron.log('saved token to disk: ' + token);
                                 const resetAction = NavigationActions.reset({
                                     index: 0,
                                     actions: [
-                                        NavigationActions.navigate({ routeName: 'MainTab'})
-                                    ]
+                                        NavigationActions.navigate({ routeName: 'MainTab' }),
+                                    ],
                                 });
                                 this.props.navigation.dispatch(resetAction);
                             })
-                            .catch((error) => console.log('AsynchStorage error:' + error.message))
+                            .catch((error) => Reactoron.log('AsynchStorage error:' + error.message))
                             .done();
                     } else {
                         this.dropdown.alertWithType('error', '로그인 실패', resJSON.result);
                     }
-
-
                 })
                 .catch((err) => {
-                    console.error(err)
-                })
+                    console.error(err);
+                });
         } else {
             this.dropdown.alertWithType('error', '로그인 실패', '아이디와 비밀번호 모두 입력해주세요.');
         }
-
-
     }
     render() {
-
         return (
             <View style={styles.container}>
                 <KeyboardAwareView style={styles.kav}>
-                    <ScrollView sytle={{flex: 1, flexDirection: 'column'}}>
+                    <ScrollView sytle={{ flex: 1, flexDirection: 'column' }}>
                         <View style={styles.cell_logo}>
-                            <Image source={require('../../../img/join+login/join,login_logotype.png')}
-                                style={styles.logo}/>
+                            <Image
+                                source={require('../../../img/join+login/join,login_logotype.png')}
+                                style={styles.logo}
+                            />
                         </View>
                         <View style={styles.cell_form}>
                             <View style={styles.sae_form_email}>
-                                <Fumi style={{flex: 1}}
+                                <Fumi style={{ flex: 1 }}
                                       label={'이메일'}
                                       iconClass={FontAwesomeIcon}
                                       iconName={'pencil'}
@@ -145,7 +143,7 @@ class login extends Component {
                             </View>
                             <View style={styles.form_config}>
                                 <TouchableOpacity style={styles.config_signin}
-                                                onPress={this._handleSignIn}>
+                                                onPress={this.handleSign}>
                                     <Text style={styles.signin_txt}>로그인</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.config_forgot_pw}

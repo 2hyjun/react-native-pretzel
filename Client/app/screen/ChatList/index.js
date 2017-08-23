@@ -4,131 +4,159 @@ import {
     View,
     ListView,
     RefreshControl,
-    ScrollView,
     AsyncStorage,
-    Alert
+    Alert,
 } from 'react-native';
 
+import Reactotron from 'reactotron-react-native';
 import DropdownAlert from 'react-native-dropdownalert';
-import {List, ListItem} from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import SwipeOut from 'react-native-swipeout';
 import _ from 'lodash';
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+import socket from '../../config/socket.io';
+import styles from './style';
 
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 
 export default class ChatList extends React.Component {
+
+    static navigationOptions = {
+        header: (
+            <View style={styles.title}>
+                <Text style={styles.headerTitle}>채팅 리스트</Text>
+            </View>
+        ),
+        headerTitleStyle: styles.headerTitle,
+        headerBackTitle: null,
+    }
     constructor(props) {
         super(props);
 
         this.state = {
-            dataSource: [],
-            refreshing: false
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2) => r1 !== r2,
+            }),
+            refreshing: false,
         };
-
-
-        this._renderRefresh = this._renderRefresh.bind(this);
-        this._delete = this._delete.bind(this);
+        this.renderRefresh = this.renderRefresh.bind(this);
+        this.delete = this.delete.bind(this);
+        this.socket = socket.connectSocket();
+        this.socket.on('message', (data) => { this.onChatRecieve(data); });
     }
-
-    componentWillMount() {
+    componentDidMount() {
         AsyncStorage.getItem(ChatListSTORAGEKEY)
-            .then((value) => {
-                if (value) {
-                    let list = JSON.parse(value);
-                    list = _.uniqBy(list, 'rid');
-                    console.log('*********',list);
-                    this.setState({dataSource: list})
-                } else {
-                    this.setState({dataSource: []})
-                }
-            })
-            .catch(e => console.error(e))
-            .done();
-    }
-    _delete(item) {
-
-        AsyncStorage.getItem(ChatListSTORAGEKEY)
-            .then((value) => {
+        .then((value) => {
+            if (value) {
                 let list = JSON.parse(value);
+                // list = _.uniqBy(list, 'rid');
+                list = _.reverse(list);
+                Reactotron.log('*********', list);
+                this.setState({ dataSource: this.state.dataSource.cloneWithRows(list) });
+            } else {
+                this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) });
+            }
+        })
+        .catch(e => console.error(e))
+        .done();
+    }
+    onChatRecieve(data) {
+        socket.onReceive(data)
+            .then(() => {
+                Alert.alert('ChatList', 'Messages Got it!');
+                this.renderRefresh();
+            });
+    }
+    delete(item) {
+        AsyncStorage.getItem(ChatListSTORAGEKEY)
+            .then((value) => {
+                const list = JSON.parse(value);
                 _.remove(list, (ele) => {
                     return ele.rid === item.rid;
                 });
                 AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                    .then(() => {console.log(list, 'saved')})
-                    .then(() => {this.setState({list: list})})
+                    .then(() => { Reactotron.log(list, 'saved'); })
+                    .then(() => { this.setState(list); })
                     .catch((e) => console.error(e));
-
             })
             .then(() => {
-                const ChatRoomSTORAGEKEY = '' + item.partner_email + ':'+ item.rid;
+                const ChatRoomSTORAGEKEY = '' + item.partner_email + ':' + item.rid;
                 AsyncStorage.removeItem(ChatRoomSTORAGEKEY)
-                    .then(() => {this._renderRefresh()})
-                    .then(() => console.log(ChatRoomSTORAGEKEY, 'removed'))
-                    .catch(e => console.log(e))
+                    .then(() => { this.renderRefresh(); })
+                    .then(() => Reactotron.log(ChatRoomSTORAGEKEY, 'removed'))
+                    .catch(e => Reactotron.log(e));
             })
-            .catch(e => console.log(e));
-
-
+            .catch(e => Reactotron.log(e));
     }
-    _renderRefresh() {
+    renderRefresh() {
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 if (value) {
-
                     let list = JSON.parse(value);
-                    list = _.uniqBy(list, 'rid');
-                    //console.log('*********',list);
-                    this.setState({dataSource: []}, () => {
-                        this.setState({dataSource: list})
+                    // list = _.uniqBy(list, 'rid');
+                    list = _.reverse(list);
+                    // Reactotron.log('*********',list);
+                    this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) }, () => {
+                        this.setState({ dataSource: this.state.dataSource.cloneWithRows(list) });
                     });
-
                 } else {
-                    this.setState({dataSource: []})
+                    this.state.dataSource.cloneWithRows([]);
                 }
             })
             .catch(e => console.error(e))
             .done();
     }
 
-    render() {
-        console.log('render',this.state.dataSource);
 
+    render() {
         return (
-            <View style={{flex: 1}}>
-                <List
-                    containerStyle={{marginTop: 50}}>
-                    {this.state.dataSource.length > 0 && typeof(this.state.dataSource) === typeof([]) ?
-                        this.state.dataSource.map((item, i) => (
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    enableEmptySections={true}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.renderRefresh}
+                        />
+                    }
+                    renderRow={(rowData) => (
+                        this.state.dataSource.length === 0 ?
+                            <View><Text>Empty..</Text></View>
+                            :
                             <SwipeOut
-                                key={item.rid}
+                                key={rowData.rid}
                                 right={[{
                                     text: '삭제',
-                                    onPress: () => {this._delete(item)},
-                                    backgroundColor: 'red'
+                                    onPress: () => { this.delete(rowData); },
+                                    backgroundColor: 'red',
                                 }]}>
                                 <ListItem
-                                    key={item.rid}
+                                    key={rowData.rid}
                                     roundAvatar
                                     avatar={require('../../../img/chatting/chatting_main_default_profile.png')}
-                                    title={item.title}
-                                    subtitle={item.partner_email}
+                                    avatarOverlayContainerStyle={{ backgroundColor: 'transparent' }}
+                                    containerStyle={{ backgroundColor: 'white' }}
+                                    wrapperStyle={{ backgroundColor: 'white' }}
+                                    title={rowData.title}
+                                    subtitle={rowData.partner_email}
                                     onPress={() => {
                                         this.props.navigation.navigate('ChatRoom',
                                             {
-                                                user_email: item.user_email,
-                                                partner_email: item.partner_email,
-                                                title: item.title,
-                                                rid: item.rid
-                                            })
+                                                user_email: rowData.user_email,
+                                                partner_email: rowData.partner_email,
+                                                title: rowData.title,
+                                                rid: rowData.rid,
+                                            });
                                     }}
                                 />
                             </SwipeOut>
-
-                    )): undefined}
-                </List>
+                    )}
+                />
+                <DropdownAlert
+                    ref={(ref) => this.dropdown = ref}
+                />
             </View>
-
-        )
+        );
     }
 }

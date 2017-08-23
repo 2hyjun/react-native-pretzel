@@ -1,14 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
     View,
     Image,
-    AsyncStorage,
-    Alert,
-
-} from 'react-native'
+} from 'react-native';
 
 import styles from './style';
-import global from '../../config/global'
+import global from '../../config/global';
+
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class Loading extends React.Component {
@@ -49,16 +47,17 @@ class Loading extends React.Component {
     }
 
     render() {
-        return(
-            <Image source={require("../../../img/index/index_background_minimalize.jpg")}
-                                   style={styles.backgroundImg}
-                                   >
+        return (
+            <Image
+                source={require("../../../img/index/index_background_minimalize.jpg")}
+                style={styles.backgroundImg}>
                 <View style={styles.logo}>
-                    <Image source={require('../../../img/index/index_logo.png')}
-                           style={styles.logoDesign}/>
-
-                    <Image source={require("../../../img/index/index_logotype.png")}
-                           style={styles.logoDesign}/>
+                    <Image
+                        source={require('../../../img/index/index_logo.png')}
+                        style={styles.logoDesign} />
+                    <Image
+                        source={require("../../../img/index/index_logotype.png")}
+                        style={styles.logoDesign} />
                 </View>
             </Image>
         );
