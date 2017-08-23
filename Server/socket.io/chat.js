@@ -17,10 +17,20 @@ module.exports = (server) => {
                 user[email] = socket.id;
             } else {
                 console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
-
             }
             console.log(user);
-            
+        })
+
+        socket.on('check', (user_email) => {
+            email = user_email;
+            if (!user[email]) {
+                clients++;
+                console.log('\t\t\t', email, 'reconnected, socket id: ', socket.id, clients, 'user connected now.');
+                user[email] = socket.id;
+            } else {
+                console.log('\t\t\t', email, 'was connected successfully, socket id: ', socket.id, clients, 'user connected now.');
+            }
+            console.log(user);
         })
         
         socket.on('disconnect', () => {
