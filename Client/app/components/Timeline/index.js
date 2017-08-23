@@ -21,11 +21,7 @@ import TimelineListItem from '../../components/TimelineListItem';
 
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
-<<<<<<< HEAD
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-=======
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
->>>>>>> babf076f19ed22c33563a7db2a974578c0c1392c
 
 export default class TimeLine extends React.Component {
     static propTypes = {
@@ -156,20 +152,20 @@ export default class TimeLine extends React.Component {
                             </TouchableOpacity>
                             {contents.map((value, i) => (
                                 <TouchableOpacity
-                                                style={
-                                                    this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
-                                                }
-                                                key={value}
-                                                  onPress={() => {
-                                                      const prevState = this.state.otherEnabled;
-                                                      prevState[i] = !prevState[i];
-                                                      this.setState({ otherEnabled: prevState }, () => {
-                                                          this.RenderRefresh();
-                                                      });
-                                                  }}>
+                                    style={
+                                        this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
+                                    }
+                                    key={value}
+                                    onPress={() => {
+                                        const prevState = this.state.otherEnabled;
+                                        prevState[i] = !prevState[i];
+                                        this.setState({ otherEnabled: prevState }, () => {
+                                            this.RenderRefresh();
+                                        });
+                                    }}>
                                     <Text style={
-                                            this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
-                                        }
+                                        this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
+                                    }
                                     >{value}</Text>
                                 </TouchableOpacity>
                             ))}
