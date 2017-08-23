@@ -21,7 +21,11 @@ import TimelineListItem from '../../components/TimelineListItem';
 
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
+<<<<<<< HEAD
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+=======
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+>>>>>>> babf076f19ed22c33563a7db2a974578c0c1392c
 
 export default class TimeLine extends React.Component {
     static propTypes = {
