@@ -10,12 +10,17 @@ module.exports = (server) => {
         let email = undefined;
 
         socket.on('join', (user_email) => {
-            if (!user[user_email])
-                clients++;
-            console.log('\t\t\t', user_email, 'connected, socket id: ', socket.id, clients, 'user connected now.');
             email = user_email;
-            user[email] = socket.id;
+            if (!user[email]) {
+                clients++;
+                console.log('\t\t\t', email, 'connected, socket id: ', socket.id, clients, 'user connected now.');
+                user[email] = socket.id;
+            } else {
+                console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
+
+            }
             console.log(user);
+            
         })
         
         socket.on('disconnect', () => {

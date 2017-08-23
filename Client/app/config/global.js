@@ -1,18 +1,9 @@
-import {
-    AsyncStorage
-} from 'react-native';
-
 const global = {
     user_email: '',
-    setEmail: (email) => { global.user_email = email },
-    // user_name: '',
-    // setName: (name) => { global.user_name = name},
-    // user_univ: '',
-    // setUniv: (univ) => { global.user_univ = univ},
-    // user_major: '',
-    // setMajor: (major) => { global.user_major = major},
+    setEmail: (email) => { global.user_email = email; },
+
     nowKST: () => {
-        var date;
+        let date;
         date = new Date();
         date.getUTCDate();
         date = date.getUTCFullYear() + '-' +
@@ -24,7 +15,7 @@ const global = {
         return date;
     },
     now: () => {
-        var date;
+        let date;
         date = new Date();
         date.getUTCDate();
         date = date.getUTCFullYear() + '-' +
@@ -35,49 +26,45 @@ const global = {
             ('00' + date.getUTCSeconds()).slice(-2);
         return date;
     },
-    nowParams: (date) => {
-        date = date.getUTCFullYear() + '-' +
+    nowParams: date =>
+        date.getUTCFullYear() + '-' +
             ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
             ('00' + date.getUTCDate()).slice(-2) + ' ' +
             ('00' + (date.getUTCHours())).slice(-2) + ':' +
             ('00' + date.getUTCMinutes()).slice(-2) + ':' +
-            ('00' + date.getUTCSeconds()).slice(-2);
-        return date;
-    },
-    nowKSTParams: (date) => {
-        date = date.getUTCFullYear() + '-' +
+            ('00' + date.getUTCSeconds()).slice(-2),
+    nowKSTParams: date =>
+        date.getUTCFullYear() + '-' +
             ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
             ('00' + date.getUTCDate()).slice(-2) + ' ' +
             ('00' + (date.getUTCHours() + 9)).slice(-2) + ':' +
             ('00' + date.getUTCMinutes()).slice(-2) + ':' +
-            ('00' + date.getUTCSeconds()).slice(-2);
-        return date;
-    },
+            ('00' + date.getUTCSeconds()).slice(-2),
     DateStrtoObj: (str) => {
-        let obj = {};
-        let date = str.split('T')[0];
+        const obj = {};
+        const date = str.split('T')[0];
 
-        obj.year = parseInt(date.split('-')[0]);
-        obj.month = parseInt(date.split('-')[1]);
-        obj.day = parseInt(date.split('-')[2]);
+        obj.year = parseInt(date.split('-')[0], 10);
+        obj.month = parseInt(date.split('-')[1], 10);
+        obj.day = parseInt(date.split('-')[2], 10);
 
-        let time = str.split('T')[1];
+        const time = str.split('T')[1];
 
-        obj.hour = parseInt(time.split(':')[0]);
-        obj.minutes = parseInt(time.split(':')[1]);
-        obj.second = parseInt(time.split(':')[2].split('.')[0]);
+        obj.hour = parseInt(time.split(':')[0], 10);
+        obj.minutes = parseInt(time.split(':')[1], 10);
+        obj.second = parseInt(time.split(':')[2].split('.')[0], 10);
 
         return obj;
     },
     DateStrtoObj2: (str) => {
-        let obj = {};
-        let date = str.split(' ')[0];
+        const obj = {};
+        const date = str.split(' ')[0];
 
         obj.year = parseInt(date.split('-')[0]);
         obj.month = parseInt(date.split('-')[1]);
         obj.day = parseInt(date.split('-')[2]);
 
-        let time = str.split(' ')[1];
+        const time = str.split(' ')[1];
 
         obj.hour = parseInt(time.split(':')[0]);
         obj.minutes = parseInt(time.split(':')[1]);
@@ -86,7 +73,7 @@ const global = {
         return obj;
     },
     DateSubtraction: (d1, d2) => {
-        let obj = {};
+        const obj = {};
         obj.year = d1.year - d2.year;
         obj.month = d1.month - d2.month;
         obj.day = d1.day - d2.day;
@@ -97,21 +84,18 @@ const global = {
         return obj;
     },
     CheckKorean: (str) => {
-        let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        const check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
         return check.test(str);
     },
     DateToStr: (date) => {
-
-        let obj = global.DateStrtoObj(date);
+        const obj = global.DateStrtoObj(date);
         let str = obj.hour + '시 ';
         str += obj.minutes + '분';
 
         return str;
     },
     DateToStr2: (date) => {
-        console.log("!!!!!!!!!!!!!!!!!", date);
-        let obj = global.DateStrtoObj(date);
-        console.log(obj);
+        const obj = global.DateStrtoObj(date);
         let str = '' + obj.month + '월 ';
         str += obj.day + '일 ';
         str += obj.hour + '시 ';

@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#F2F2F2',
         padding: 16,
-        height: height(20),
-        //backgroundColor: 'skyblue',
+        height: height(10),
+        // backgroundColor: 'skyblue',
         marginLeft: 30,
         marginRight: 30,
 
