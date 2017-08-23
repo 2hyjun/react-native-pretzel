@@ -11,8 +11,6 @@ import {
     TabView,
     TabBarBottom,
     TabBarTop,
-
-
 } from 'react-navigation';
 
 import loading from '../screen/loading';

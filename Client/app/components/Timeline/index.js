@@ -24,11 +24,6 @@ import global from '../../config/global'
 import TimelineListItem from '../../components/TimelineListItem';
 const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
 const STORAGE_KEY = '@PRETZEL:jwt';
-import global from '../../config/global'
-
-
-
-
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class TimeLine extends React.Component {

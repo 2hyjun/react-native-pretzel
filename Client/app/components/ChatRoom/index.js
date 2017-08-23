@@ -115,7 +115,6 @@ export default class Chat extends React.Component {
 
         return (
 
-<<<<<<< HEAD
                 <GiftedChat
                     messages={this.state.messages}
                     onSend={(messages) => this._onSend(messages)}
@@ -127,19 +126,6 @@ export default class Chat extends React.Component {
                         name: global.user_email,
                     }}
                 />
-=======
-            <GiftedChat
-                messages={this.state.messages}
-                onSend={(messages) => this._onSend(messages)}
-                placeholder={this.props.navigation.state.params.title}
-                locale={'ko'}
-                renderAvatarOnTop={true}
-                user={{
-                    _id: global.user_email,
-                    name: global.user_email,
-                }}
-            />
->>>>>>> ecc4b6600b43dc7f32acad78f91761ff25bc25a5
 
         );
     }
