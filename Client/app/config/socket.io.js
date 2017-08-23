@@ -136,7 +136,8 @@ const Socket = {
         socket = null;
     },
     checkConnection: () => {
-        socket = socket.connectSocket();
+        socket = Socket.connectSocket();
+        socket.emit('check', global.user_email);
         return socket;
     },
 
