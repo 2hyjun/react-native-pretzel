@@ -427,7 +427,7 @@ exports.checkEmailAuth = (req, res) => {
     
     const verify = (obj) => {
         return new Promise((resolve, reject) => {
-            var sql = 'UPDATE USERS SET auth=? where user_email=?';
+            var sql = 'UPDATE users SET auth=? where user_email=?';
             var params = ['Y', email];
             obj.conn.query(sql, params, (err, results) => {
                 if (err)
