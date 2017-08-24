@@ -104,11 +104,10 @@ const styles = StyleSheet.create({
     },
     forms: {
         //backgroundColor: 'skyblue',
-        height: height(70)
+        height: height(70),
     },
     detail_cell_style: {
         alignItems: 'center',
-
         //backgroundColor: 'skyblue',
         marginTop: 10,
         marginBottom: 10

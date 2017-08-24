@@ -277,7 +277,7 @@ export default class post extends React.Component {
                                     <IconM name="timer" size={20} color={this.state.deadLine === '배달 기한 설정' ? 'grey' : '#f95a25'}/>
                                     <Text style={[styles.deadline_text, deadLineText]}>{this.state.deadLine}</Text>
                                 </TouchableOpacity>
-
+                                
                                 <TouchableOpacity
                                     style={styles.submitBtn}
                                     onPress={this.submit}>
@@ -289,7 +289,6 @@ export default class post extends React.Component {
                             </ScrollView>
                         </KeyboardAwareView>
                     </View>
-
                 </ScrollView>
                 <PopupDialog
                     ref={(ref) => { this.content = ref; }}

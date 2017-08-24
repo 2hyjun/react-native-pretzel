@@ -104,6 +104,15 @@ const global = {
 
         return str;
     },
+    DateToStr3: (date) => {
+        const obj = global.DateStrtoObj(date);
+        let str = '' + obj.month + '월';
+        str += obj.day + '일 ';
+        str += obj.hour + ':';
+        str += obj.minutes + ' 작성';
+
+        return str;
+    },
 };
 
 export default global;
