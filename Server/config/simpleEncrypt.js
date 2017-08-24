@@ -1,14 +1,15 @@
 var _ = require('lodash');
-exports.b64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+const b64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+exports.b64Table = b64Table;
 
 exports.encrypt = (key, data) => {
-    xorEncrypt = (key, data) => {
+    const xorEncrypt = (key, data) => {
         return _.map(data, function (c, i) {
             return c.charCodeAt(0) ^ key.charCodeAt(Math.floor(i % key.length));
         });
-    },
+    };
 
-    b64Encode = (data) => {
+    const b64Encode = (data) => {
         var o1, o2, o3, h1, h2, h3, h4, bits, r, i = 0,
             enc = '';
         if (!data) {
@@ -28,8 +29,8 @@ exports.encrypt = (key, data) => {
         } while (i < data.length);
         r = data.length % 3;
         return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
-    },
+    };
 
-    data = this.xorEncrypt(key, data);
-    return this.b64Encode(data);
+    data = xorEncrypt(key, data);
+    return b64Encode(data);
 };
