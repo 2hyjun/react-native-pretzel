@@ -1,5 +1,5 @@
-var config = require("../../../config");
-var db = require("../../../db/mysql");
+var config = require('../../../config');
+var db = require('../../../db/mysql');
 
 exports.timeline = (req, res) => {
     const checkParams = () => {
@@ -10,12 +10,12 @@ exports.timeline = (req, res) => {
                 req.query.type === 'together')
                 return Promise.resolve();
             else
-                return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.'})
+                return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 올바르지 않습니다.'});
 
         } else {
-            return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 없습니다.'})
+            return Promise.reject({err: '컨텐트 타입에 대한 파라미터가 없습니다.'});
         }
-    }
+    };
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
@@ -25,20 +25,20 @@ exports.timeline = (req, res) => {
                 //         err: err
                 //     })
                 // } else
-                    resolve(conn);
-            })
-        })
+                resolve(conn);
+            });
+        });
         // return Promise.resolve(db.get());
-    }
+    };
     const query = (conn) => {
         return new Promise((resolve, reject) => {
             var type = '';
             if (req.query.type === 'helpme') 
-                type = '해주세요'
+                type = '해주세요';
             else if (req.query.type === 'helpyou')
-                type = '해줄게요'
+                type = '해줄게요';
             else 
-                type = '같이해요'
+                type = '같이해요';
             var sql = 'SELECT * FROM timeline where completed="N" AND contentType=? ORDER BY time DESC';
             var params = [type];
             conn.query(sql, params, (err, results, fields) => {
@@ -47,20 +47,20 @@ exports.timeline = (req, res) => {
                     console.log(err);
                     reject({
                         err: err
-                    })
+                    });
                 } else {
-                    resolve(results)
+                    resolve(results);
                 }
-            })
-        })
-    }
+            });
+        });
+    };
 
     const respond = (results) => {
         res.status(201).send({
             resultCode: 100,
             result: results
-        })
-    }
+        });
+    };
 
     const onError = (err) => {
         console.log(err);
@@ -68,24 +68,24 @@ exports.timeline = (req, res) => {
             res.status(500).send({
                 resultCode: 2, 
                 result: err.err
-            })
+            });
         else if (err.err === '컨텐트 타입에 대한 파라미터가 없습니다.')
             res.status(500).send({
                 resultCode: 3,
                 result: err.err
-            })
+            });
         else 
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
-            })
-    }
+            });
+    };
     checkParams()
         .then(getConn)
         .then(query)
         .then(respond)
         .catch(onError);
-}
+};
 
 exports.post = (req, res) => {
     const {
@@ -112,9 +112,9 @@ exports.post = (req, res) => {
             else
                 reject({
                     err: '모든 항목을 모두 입력해주십시오.'
-                })
-        })
-    }
+                });
+        });
+    };
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
@@ -125,12 +125,12 @@ exports.post = (req, res) => {
                 //     })
                 // }
                 // else {
-                    resolve(conn);
+                resolve(conn);
                 // }
                     
-            })
-        })
-    }
+            });
+        });
+    };
     const post = (conn) => {
         return new Promise((resolve, reject) => {
             var sql = 'INSERT INTO timeline' +
@@ -147,48 +147,48 @@ exports.post = (req, res) => {
                 if (err)
                     reject({
                         err: err
-                    })
+                    });
                 else {
-                    resolve(results)
+                    resolve(results);
                 }
 
-            })
-        })
-    }
+            });
+        });
+    };
     const onSuccess = (results) => {
         res.status(201).send({
             resultCode: 100,
             result: results
-        })
-    }
+        });
+    };
 
     const onError = (err) => {
         if (err.err === '모든 항목을 모두 입력해주십시오.') {
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
-            })
+            });
         } else if (err.err === undefined) {
             res.status(500).send({
                 resultCode: 3,
                 result: err
-            })
+            });
         } else {
             // console.log('hehehe')
             res.status(500).send({
                 resultCode: 2,
                 result: err.err.message
-            })
+            });
         }
 
-    }
+    };
 
     checkParams()
         .then(getConn)
         .then(post)
         .then(onSuccess)
-        .catch(onError)
-}
+        .catch(onError);
+};
 exports.delete = (req, res) => {
 
     var rid = parseInt(req.params.rid);
@@ -199,8 +199,8 @@ exports.delete = (req, res) => {
         else
             return Promise.reject({
                 err: '모든 항목을 모두 입력해주십시오.'
-            })
-    }
+            });
+    };
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
@@ -210,35 +210,35 @@ exports.delete = (req, res) => {
                 //         err: err
                 //     })
                 // else
-                    resolve(conn);
-            })
-        })
-    }
+                resolve(conn);
+            });
+        });
+    };
     const CheckPermission = (conn) => {
         return new Promise((resolve, reject) => {
-            var sql = 'SELECT user_email FROM timeline WHERE rid=?;'
+            var sql = 'SELECT user_email FROM timeline WHERE rid=?;';
             var params = [rid];
 
             conn.query(sql, params, (err, results, fields) => {
                 if (err)
                     reject({
                         err: err
-                    })
+                    });
                 else if (results.length === 0)
                     reject({
                         err: '해당 하는 게시물이 없습니다.'
-                    })
+                    });
                 else if (req.decoded.user_email !== results[0].user_email) {
                     // console.log(req.decoded.user_email)
                     // console.log(results[0])
                     reject({
                         err: '권한이 없습니다.'
-                    })
+                    });
                 } else
                     resolve(conn);
-            })
-        })
-    }
+            });
+        });
+    };
 
     const Delete = (conn) => {
         return new Promise((resolve, reject) => {
@@ -250,49 +250,49 @@ exports.delete = (req, res) => {
                 if (err)
                     reject({
                         err: err
-                    })
+                    });
                 else
                     resolve(results);
-            })
-        })
-    }
+            });
+        });
+    };
 
     const onError = (err) => {
         if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
-            })
+            });
         else if (err.err === '해당 하는 게시물이 없습니다.')
             res.status(500).send({
                 resultCode: 2,
                 result: err.err
-            })
+            });
         else if (err.err === '권한이 없습니다.')
             res.status(500).send({
                 resultCode: 3,
                 result: err.err
-            })
+            });
         else
             res.status(500).send({
                 resultCode: 4,
                 result: err.err.message
-            })
-    }
+            });
+    };
 
     const onSuccess = (results) => {
         res.status(201).send({
             resultCode: 100,
             result: results
-        })
-    }
+        });
+    };
     checkParams()
         .then(getConn)
         .then(CheckPermission)
         .then(Delete)
         .then(onSuccess)
-        .catch(onError)
-}
+        .catch(onError);
+};
 
 exports.update = (req, res) => {
 
@@ -315,8 +315,8 @@ exports.update = (req, res) => {
         else
             return Promise.reject({
                 err: '모든 항목을 모두 입력해주십시오.'
-            })
-    }
+            });
+    };
     const checkBodyParams = () => {
         return new Promise((resolve, reject) => {
             if (title && content && detailInfo && expectedPrice && fee && deadLine && contentType && place)
@@ -324,9 +324,9 @@ exports.update = (req, res) => {
             else
                 reject({
                     err: '모든 항목을 모두 입력해주십시오.'
-                })
-        })
-    }
+                });
+        });
+    };
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
@@ -336,10 +336,10 @@ exports.update = (req, res) => {
                 //         err: err
                 //     })
                 // else
-                    resolve(conn);
-            })
-        })
-    }
+                resolve(conn);
+            });
+        });
+    };
 
     const checkPermission = (conn) => {
         return new Promise((resolve, reject) => {
@@ -350,25 +350,25 @@ exports.update = (req, res) => {
                 if (err) {
                     reject({
                         err: err
-                    })
+                    });
                 } else if (results[0] === undefined) {
                     reject({
                         err: '해당하는 게시물이 없습니다.'
-                    })
+                    });
                 } else if (req.decoded.user_email !== results[0].user_email) {
                     reject({
                         err: '권한이 없습니다.'
-                    })
+                    });
                 } else {
                     resolve(conn);
                 }
-            })
-        })
-    }
+            });
+        });
+    };
 
     const Update = (conn) => {
         return new Promise((resolve, reject) => {
-            var sql = 'UPDATE timeline SET title=?, content=?, detailInfo=?, expectedPrice=?, fee=?, deadline=?, contentType=? , time=?, place=? where rid=?';
+            var sql = 'UPDATE timeline SET title=?, content=?, detailInfo=?, expectedPrice=?, fee=?, deadline=?, contentType=?, time=?, place=? where rid=?';
             var params = [title, content, detailInfo, expectedPrice, fee, deadLine, contentType, config.now(), place, rid];
 
             conn.query(sql, params, (err, result, fields) => {
@@ -376,47 +376,47 @@ exports.update = (req, res) => {
                 if (err) {
                     reject({
                         err: err
-                    })
+                    });
                 } else {
-                    resolve(result)
+                    resolve(result);
                 }
-            })
-        })
-    }
+            });
+        });
+    };
     const onSuccess = (results) => {
         res.status(201).send({
             resultCode: 100,
             result: results
-        })
-    }
+        });
+    };
 
     const onError = (err) => {
         if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 1,
                 result: err.err
-            })
+            });
         else if (err.err === '모든 항목을 모두 입력해주십시오.')
             res.status(500).send({
                 resultCode: 2,
                 result: err.err
-            })
+            });
         else if (err.err === '해당하는 게시물이 없습니다.')
             res.status(500).send({
                 resultCode: 3,
                 result: err.err
-            })
+            });
         else if (err.err === '권한이 없습니다.')
             res.status(500).send({
                 resultCode: 4,
                 result: err.err
-            })
+            });
         else
             res.status(500).send({
                 resultCode: 5,
                 result: err.err
-            })
-    }
+            });
+    };
 
     checkParams()
         .then(checkBodyParams)
@@ -424,9 +424,9 @@ exports.update = (req, res) => {
         .then(checkPermission)
         .then(Update)
         .then(onSuccess)
-        .catch(onError)
+        .catch(onError);
 
-}
+};
 
 exports.mypage = (req, res) => {
     var email = req.decoded.user_email;
@@ -440,34 +440,34 @@ exports.mypage = (req, res) => {
                 //         err: err
                 //     })
                 // else
-                    resolve(conn);
-            })
-        })
-    }
+                resolve(conn);
+            });
+        });
+    };
     const myPosts = (conn) => {
         return new Promise((resolve, reject) => {
             var sql = 'SELECT * FROM timeline where user_email=?;';
-            params = [email];
+            var params = [email];
             //console.log(req.session.signedUser.user_email);
             conn.query(sql, params, (err, results, fields) => {
                 if (err) {
                     reject({
                         err: err
-                    })
+                    });
                 } else {
-                    resolve(results)
+                    resolve(results);
                 }
-            })
-        })
-    }
+            });
+        });
+    };
 
     const onSuccess = (results) => {
         res.status(201).send({
             resultCode: 100,
             result: results,
             myInfo: req.decoded
-        })
-    }
+        });
+    };
 
     const onError = (err) => {
         console.log(err);
@@ -475,10 +475,10 @@ exports.mypage = (req, res) => {
             resultCode: 1,
             result: err.err.message,
             myInfo: undefined
-        })
-    }
+        });
+    };
     getConn()
         .then(myPosts)
         .then(onSuccess)
         .catch(onError);
-}
+};
