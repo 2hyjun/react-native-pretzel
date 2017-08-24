@@ -101,7 +101,7 @@ exports.register = (req, res) => {
                 </head>
                 <body>
                     <fieldset>
-                        <form action='http://localhost:8124/api/auth/checkEmail' method="POST">
+                        <form action='http://13.124.147.152:8124/api/auth/checkEmail' method="POST">
                             <p>
                                 <h5>이메일: </h5>
                                 <input type='text' name="email" value=${email} />
