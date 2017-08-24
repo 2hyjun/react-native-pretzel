@@ -2,7 +2,8 @@ var crypto = require('crypto'),
     db = require('../../../db/mysql'),
     config = require('../../../config'),
     jwt = require('jsonwebtoken'),
-    nodemailer = require('nodemailer');
+    nodemailer = require('nodemailer'),
+    simpleEncrypt = require('../../../config/simpleEncrypt');
 /*
     POST /api/auth/register
     {
@@ -356,10 +357,13 @@ exports.check = (req, res) => {
 };
 
 exports.checkEmailAuth = (req, res) => {
-    const {
+    let {
         email,
         password
     } = req.body;
+
+    const enc1 = simpleEncrypt.encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', password);
+    password = simpleEncrypt.encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
     
     const getConn = () => {
         return new Promise((resolve, reject) => {
