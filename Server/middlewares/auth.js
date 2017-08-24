@@ -10,46 +10,47 @@ const authMiddleware = (req, res, next) => {
             if (!token)
                 reject({
                     err: 'No auth token in "x-access-token" headers'
-                })
+                });
             else {
                 jwt.verify(token, secret, (err, decoded) => {
                     if (err)
                         reject({
                             err: err.message
-                        })
+                        });
                     else {
                         resolve(decoded);
                     }
-                })
+                });
             }
-        })
-    }
+        });
+    };
 
     const onVerified = (decoded) => {
-        req.decoded = decoded
+        req.decoded = decoded;
         next();
-    }
+    };
 
     const onError = (err) => {
-        console.log(err)
+        console.log(err);
+        let resultCode;
         if (err.err === 'No auth token in "x-access-token" headers ')
-            resultCode = 1
+            resultCode = 1;
         else {
-            resultCode = 2
-            console.log("err: ", err);
-            console.log("token: ", token);
+            resultCode = 2;
+            console.log('err: ', err);
+            console.log('token: ', token);
         }
             
 
         res.send({
             resultCode: resultCode,
             result: err.err
-        })
-    }
+        });
+    };
 
     verify(token)
         .then(onVerified)
-        .catch(onError)
-}
+        .catch(onError);
+};
 
 module.exports = authMiddleware;

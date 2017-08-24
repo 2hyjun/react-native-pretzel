@@ -5,21 +5,19 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    Alert,
-    FlatList,
-    Platform
 } from 'react-native';
 
-
-import styles from './style';
-import Fumi from '../../components/TextInputEffect/Fumi';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import { encrypt } from 'react-native-simple-encryption';
+
+
+import Fumi from '../../components/TextInputEffect/Fumi';
 import DropdownAlert from '../../components/DropdownAlert';
 
-export default class Register extends React.Component {
+import styles from './style';
 
+export default class Register extends React.Component {
     constructor(props) {
         super(props);
 
@@ -29,7 +27,7 @@ export default class Register extends React.Component {
             password_confirm: '',
             name: '',
             univ: '',
-            major: ''
+            major: '',
         };
         this.Register = this.Register.bind(this);
     }
@@ -37,7 +35,7 @@ export default class Register extends React.Component {
 
     }
     Register() {
-        let params = {
+        const params = {
             email: this.state.email,
             password: this.state.password,
             password_confirm: this.state.password_confirm,
@@ -47,20 +45,18 @@ export default class Register extends React.Component {
         };
         let formBody = [];
         if (!params.email || !params.password || !params.password_confirm || !params.name ||
-            !params.univ || !params.major)
+            !params.univ || !params.major) {
             this.dropdown.alertWithType('error', '회원가입 실패', '6개 항목을 모두 입력해주세요.');
-
-            //Alert.alert('', '6개 항목을 모두 입력해주세요.');
-        else if (this.state.password !== this.state.password_confirm)
+        } else if (this.state.password !== this.state.password_confirm) {
             this.dropdown.alertWithType('error', '회원가입 실패', '비밀번호와 비밀번호 확인 값이 다릅니다.');
-            //Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
-        else {
-            //params.password = cryptDecrypt('pretzelWOwAwesome', params.password);
-            let enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
+            // Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
+        } else {
+            // params.password = cryptDecrypt('pretzelWOwAwesome', params.password);
+            const enc1 = encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', params.password);
             params.password = encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
-            for (let property in params) {
-                let encodedKey = encodeURIComponent(property);
-                let encodedValue = encodeURIComponent(params[property]);
+            for (const property in params) {
+                const encodedKey = encodeURIComponent(property);
+                const encodedValue = encodeURIComponent(params[property]);
                 formBody.push(encodedKey + "=" + encodedValue);
             }
             formBody = formBody.join("&");
@@ -75,45 +71,31 @@ export default class Register extends React.Component {
                 .then((rJSON) => {
                     if (rJSON.resultCode === 100) {
                         this.dropdown.alertWithType('success', '회원가입 성공', rJSON.result);
-                        //Alert.alert('회원가입 성공');
-                        this.props.navigation.navigate('auth')
+                        // Alert.alert('회원가입 성공');
+                        this.props.navigation.navigate('auth');
                     } else {
                         this.dropdown.alertWithType('error', '회원가입 실패', rJSON.result);
-                        //Alert.alert('회원가입 실패', rJSON.result)
+                        // Alert.alert('회원가입 실패', rJSON.result)
                     }
                 })
-                .catch((err) => console.error(err))
+                .catch((err) => console.error(err));
         }
-
-
-
     }
-
-
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.cell_logo}>
-                    <Image source={require('../../../img/join+login/join,login_logotype.png')}
-                           style={styles.logo}/>
+                    <Image
+                        source={require('../../../img/join+login/join,login_logotype.png')}
+                        style={styles.logo} />
                 </View>
                 <View style={styles.cell_form}>
-                    <View style={styles.cell_info}>
-
-                    </View>
-
-
-                    {/*<ScrollView style={styles.form_scroll}*/}
-                                {/*ref={ref => this.scrollView = ref}*/}
-                                {/*onContentSizeChange={( contentWidth, contentHeight ) => {*/}
-                                    {/*this._contentHeight = contentHeight*/}
-                                {/*}}>*/}
+                    <View style={styles.cell_info} />
                     <KeyboardAwareView
                         animated={false}
-
-                        >
+                    >
                         <ScrollView
-                            ref="scroll"
+                            ref='scroll'
                             contentContainerStyle={{paddingVertical: 20}}
                         >
                             <Fumi
@@ -196,37 +178,23 @@ export default class Register extends React.Component {
                                 autoCorrection={false}
                                 myOnFocus={() => {
                                     this.refs.scroll.scrollTo({x: 0, y: 250, animated: true})
-                                    //this._scrollToInput(ReactNative.findNodeHandle(event.target))
+                                    //  this._scrollToInput(ReactNative.findNodeHandle(event.target))
                                 }}
-                                autoCapital={'none'}/>
-                            {/*<View>*/}
-                                {/*<Text style={{*/}
-                                    {/*textAlign: 'center',*/}
-                                    {/*fontWeight: 'bold',*/}
-                                    {/*fontSize: 17,*/}
-                                    {/*color: '#f95a25',*/}
-                                {/*}}>*/}
-                                    {/*키보드를 내리면 회원가입 버튼이 있습니다. 찡긋*/}
-                                {/*</Text>*/}
-                            {/*</View>*/}
+                                autoCapital={'none'} />
                         </ScrollView>
                     </KeyboardAwareView>
 
                 </View>
 
                 <View style={styles.cell_register}>
-                    <TouchableOpacity style={styles.registerBtn}
-                                        onPress={this.Register}>
+                    <TouchableOpacity
+                        style={styles.registerBtn}
+                        onPress={this.Register}>
                         <Text style={styles.registerTxt}>회원 가입</Text>
                     </TouchableOpacity>
                 </View>
-                {/*<View style={styles.cell_wave}>*/}
-                    {/*<Image source={require('../../../img/join+login/login_wave.png')}*/}
-                           {/*style={styles.wave}/>*/}
-                {/*</View>*/}
                 <DropdownAlert
-                    ref={(ref) => this.dropdown = ref}/>
-
+                    ref={(ref) => this.dropdown = ref} />
             </View>
         );
     }

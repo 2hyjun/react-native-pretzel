@@ -152,20 +152,20 @@ export default class TimeLine extends React.Component {
                             </TouchableOpacity>
                             {contents.map((value, i) => (
                                 <TouchableOpacity
-                                                style={
-                                                    this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
-                                                }
-                                                key={value}
-                                                  onPress={() => {
-                                                      const prevState = this.state.otherEnabled;
-                                                      prevState[i] = !prevState[i];
-                                                      this.setState({ otherEnabled: prevState }, () => {
-                                                          this.RenderRefresh();
-                                                      });
-                                                  }}>
+                                    style={
+                                        this.state.otherEnabled[i] ? styles.filter_item_enabled : styles.filter_item_disabled
+                                    }
+                                    key={value}
+                                    onPress={() => {
+                                        const prevState = this.state.otherEnabled;
+                                        prevState[i] = !prevState[i];
+                                        this.setState({ otherEnabled: prevState }, () => {
+                                            this.RenderRefresh();
+                                        });
+                                    }}>
                                     <Text style={
-                                            this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
-                                        }
+                                        this.state.otherEnabled[i] ? styles.filter_text_enabled : styles.filter_text_disabled
+                                    }
                                     >{value}</Text>
                                 </TouchableOpacity>
                             ))}
