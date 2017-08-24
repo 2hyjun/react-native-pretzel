@@ -99,6 +99,7 @@ exports.register = (req, res) => {
                     <meta charset='utf-8'>
                     <h3>Pretzel 이메일 인증</h3>
                     <img src="cid:unique@kreata.ee" />
+                    <a href='http://localhost:8124/api/auth/emailAuthPage'>인증 페이지로 이동</a>
                 </head>
                 <body>
                     <fieldset>
@@ -466,4 +467,16 @@ exports.checkEmailAuth = (req, res) => {
         .then(verify)
         .then(respond)
         .catch(onError);
+};
+
+exports.emailAuthPage = (req, res) => {
+    var html = `
+    <html>
+        <body>
+            <img src="http://13.124.147.152:8124/hsk.gif"/>
+            <h3>Hello</h3>
+        </body>
+    </html>
+    `;
+    res.send(html);
 };

@@ -9,5 +9,5 @@ router.post('/login', controller.login);
 router.post('/checkEmail', controller.checkEmailAuth);
 
 router.get('/check', controller.check);
-
+router.get('/emailAuthPage', controller.emailAuthPage);
 module.exports = router;
