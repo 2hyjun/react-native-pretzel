@@ -35,7 +35,7 @@ exports.encrypt = (key, data) => {
     return b64Encode(data);
 };
 
-export function decrypt(key, data) {
+exports.decrypt = (key, data) => {
     const b64Decode = (data) => {
         var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
             result = [];
@@ -72,5 +72,5 @@ export function decrypt(key, data) {
   
     data = b64Decode(data);
     return xorDecrypt(key, data);
-}
+};
   
