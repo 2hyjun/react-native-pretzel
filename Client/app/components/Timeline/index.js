@@ -50,16 +50,11 @@ export default class TimeLine extends React.Component {
         this.HttpRequest = this.HttpRequest.bind(this);
         this.RenderRefresh = this.RenderRefresh.bind(this);
         this.ShowModal = this.ShowModal.bind(this);
-        this.onChatRecieve = this.onChatRecieve.bind(this);
+        // this.onChatRecieve = this.onChatRecieve.bind(this);
     }
 
     componentDidMount() {
         this.RenderRefresh();
-    }
-
-    onChatRecieve(data) {
-        socket.onReceive(data)
-            .then(() => Alert.alert('Timeline', 'Messages Got it!'));
     }
     GetToken() {
         return new Promise((resolve, reject) => {

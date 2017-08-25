@@ -19,11 +19,13 @@ module.exports = (server) => {
             } else {
                 console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
             }
+            console.log(messageBuffer[email].length);
 
             if (messageBuffer[email]) {
                 if (messageBuffer[email].length > 0) {
                     for (var i = 0; i < messageBuffer[email].length; i++) {
                         io.to(user[email]).emit('message', messageBuffer[email][i]);
+                        
                     }
                     messageBuffer[email] = [];
                 }

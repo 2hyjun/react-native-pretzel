@@ -10,7 +10,7 @@ let socket = null;
 
 const Socket = {
     onReceive: (data) => {
-        Reactotron.log(socket.connect());
+        // Reactotron.log(socket.connect());
         return new Promise((Resolve) => {
             const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
             const ChatRoomSTORAGEKEY = '' + data.user._id + ':' + data.rid;
@@ -72,19 +72,7 @@ const Socket = {
                 });
             };
             try {
-                if (Platform.OS === 'android') {
-                    if (AppState.currentState !== 'active') {
-                        const date = new Date(Date.now());
-                        PushNotification.localNotificationSchedule({
-                            title: '메세지가 도착 했습니다.',
-                            message: `${data.user._id}: ${data.text}`,
-                            date,
-                            number: 3,
-                            actions: 'Yes',
-                        });
-                        PushNotification.setApplicationIconBadgeNumber(3);
-                    }
-                } else {
+                if (AppState.currentState !== 'active') {
                     const date = new Date(Date.now());
                     PushNotification.localNotificationSchedule({
                         title: '메세지가 도착 했습니다.',
@@ -93,7 +81,6 @@ const Socket = {
                         number: 3,
                         actions: 'Yes',
                     });
-                    PushNotification.setApplicationIconBadgeNumber(3);
                 }
             } catch (e) {
                 console.error(e);
@@ -121,12 +108,20 @@ const Socket = {
         });
     },
     connectSocket: () => {
-        Reactotron.log(socket);
+        // Reactotron.log(socket);
+        if (socket)
+            console.log(socket.disconnected);
         if (socket === null) {
-            socket = SocketIOClient('http://13.124.147.152:8124');
+            socket = SocketIOClient('http://13.124.147.152:8124', {
+                autoConnect: false,
+            });
+            socket.open();
             socket.emit('join', global.user_email);
         } else if (socket.disconnected) {
-            socket = SocketIOClient('http://13.124.147.152:8124');
+            socket = SocketIOClient('http://13.124.147.152:8124', {
+                autoConnect: false,
+            });
+            socket.open();
             socket.emit('join', global.user_email);
         }
         return socket;
@@ -137,7 +132,7 @@ const Socket = {
     },
     checkConnection: () => {
         socket = Socket.connectSocket();
-        socket.emit('check', global.user_email);
+        // socket.emit('check', global.user_email);
         return socket;
     },
 
