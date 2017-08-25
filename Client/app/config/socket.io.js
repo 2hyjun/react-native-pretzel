@@ -9,6 +9,11 @@ import global from './global';
 let socket = null;
 
 const Socket = {
+    onRecieveBuffer: (buffer) => {
+        for (let i = 0; i < buffer; i++) {
+            Socket.onReceive(buffer[i]);
+        }
+    },
     onReceive: (data) => {
         // Reactotron.log(socket.connect());
         return new Promise((Resolve) => {
@@ -120,12 +125,9 @@ const Socket = {
                 reconnection: false,
             });
             socket.open();
-            socket.on('disconnect', () => {
-                Alert.alert('disconncted');
+            socket.on('reconnect', () => {
+                Alert.alert('reconnect');
             });
-            socket.on('message', (data) => {
-                console.log(data);
-            })
             socket.emit('join', global.user_email);
         } else if (socket.disconnected) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
