@@ -303,10 +303,15 @@ exports.checkEmailAuth = (req, res) => {
     };
 
     const onError = (err) => {
+
+        console.error(err);
+        
         if (err.errMessage) {
             res.send(err.errMessage);
+        } else {
+            res.status(500).send('오류가 발생했습니다.');
         }
-        res.status(500).send('오류가 발생했습니다.');
+        
     };
     getConn()
         .then(checkEmail)
