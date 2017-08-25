@@ -21,12 +21,10 @@ module.exports = (server) => {
             if (messageBuffer[email]) {
                 if (messageBuffer[email].length > 0) {
                     console.log(`-----${email}'s buffer has ${messageBuffer[email].length} messages.`);
+                    console.log(messageBuffer[email]);
                     for (var i = 0; i < messageBuffer[email].length; i++) {
-                        setTimeout(() => {
-                            io.to(user[email]).emit('message', messageBuffer[email][i]);
-                            console.log(`${i + 1}'th messages ${messageBuffer[email][i].text} sent`)
-                        }, 100);
-                        
+                        io.to(user[email]).emit('message', messageBuffer[email][i]);
+                        console.log(`${i + 1}'th messages ${messageBuffer[email][i].text} sent`)
                     }
                     messageBuffer[email] = [];
                 }

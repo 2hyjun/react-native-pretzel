@@ -52,7 +52,7 @@ export default class Chat extends React.Component {
         message[0].to = params.partner_email;
         message[0].title = params.title;
         message[0].rid = params.rid;
-        this.socket.emit('message', messages[0]);
+        this.socket.emit('message', message[0]);
         this.storeMessages(messages);
     }
 
