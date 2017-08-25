@@ -127,6 +127,7 @@ const Socket = {
         return socket;
     },
     disconnect: () => {
+        console.log('hehe');
         socket.disconnect();
         socket = null;
     },
