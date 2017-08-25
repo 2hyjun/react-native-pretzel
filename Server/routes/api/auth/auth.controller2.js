@@ -2,7 +2,8 @@ var crypto = require('crypto'),
     db = require('../../../db/mysql'),
     config = require('../../../config'),
     nodemailer = require('nodemailer'),
-    simpleEncrypt = require('../../../config/simpleEncrypt');
+    simpleEncrypt = require('../../../config/simpleEncrypt'),
+    fs = require('fs');
 
 exports.register = (req, res) => {
     const {
@@ -299,7 +300,7 @@ exports.checkEmailAuth = (req, res) => {
     };
 
     const respond = () => {
-        res.send('인증되었습니다');
+        res.redirect('/emailVerified');
     };
 
     const onError = (err) => {
@@ -309,7 +310,7 @@ exports.checkEmailAuth = (req, res) => {
         if (err.errMessage) {
             res.send(err.errMessage);
         } else {
-            res.status(500).send('오류가 발생했습니다.');
+            res.status(500).send('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
         }
         
     };
@@ -318,4 +319,14 @@ exports.checkEmailAuth = (req, res) => {
         .then(verify)
         .then(respond)
         .catch(onError);
+};
+
+exports.emailVerified = (req, res) => {
+    fs.readFile('verified.html', (err, data) => {
+        if (err)
+            console.error(err);
+        else {
+            res.send(data);
+        }
+    });
 };
