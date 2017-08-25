@@ -13,5 +13,17 @@ const config = {
         return date;
     } ,
     secret: 'pretzelauthsecretkey'
+};
+
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+    var date = date.getDate();
+    newDate.setHours(hours - offset);
+
+    return newDate;   
 }
+console.log(convertUTCDateToLocalDate(new Date()));
 module.exports = config;

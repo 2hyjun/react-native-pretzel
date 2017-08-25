@@ -136,8 +136,8 @@ exports.post = (req, res) => {
             var sql = 'INSERT INTO timeline' +
                 ' (user_email, content, detailInfo, expectedPrice, fee, deadline, title, contentType, time, place) ' +
                 'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
-            var time = config.now();
-            //console.log(time);
+            var time = new Date().toLocaleString();
+            console.log('uploadTime: ', time);
             var params = [req.decoded.user_email, content, detailInfo,
                 expectedPrice.toString(), fee.toString(), deadLine, title, contentType, time, place
             ];

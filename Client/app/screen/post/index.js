@@ -113,8 +113,11 @@ export default class post extends React.Component {
     handleDateTimePick(date) {
         // Reactoron.log(global.nowKSTParams(date));
         if (Platform.OS === 'ios') {
+            console.log(date);
+            console.log(global.nowParams(date));
+            // Sat Aug 26 2017 23:19:05 GMT+0900 (KST)
             this.setState({
-                deadLine: global.nowKSTParams(date),
+                deadLine: global.nowParams(date),
                 isDateTimePickerVisible: false,
             });
         } else if (Platform.OS === 'android') {
