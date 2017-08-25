@@ -50,7 +50,7 @@ class settingScreen extends Component {
             {
                 text: '계속있을래요',
                 onPress: () => {
-                    Reactotron.log('button press no');
+                    // Reactotron.log('button press no');
                 },
             },
         ]);

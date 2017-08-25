@@ -100,7 +100,7 @@ export default class Register extends React.Component {
         const url = 'https://webmail.pusan.ac.kr';
         Linking.canOpenURL(url).then(supported => {
             if (!supported) {
-                Reactotron.log('Can\'t handle url: ' + url);
+                // Reactotron.log('Can\'t handle url: ' + url);
             } else {
                 return Linking.openURL(url);
             }

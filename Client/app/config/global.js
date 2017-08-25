@@ -55,7 +55,7 @@ const global = {
         if (Platform.OS === 'ios') {
             const date = str.split('. ');
 
-            Reactotron.log(date);
+            // Reactotron.log(date);
             obj.year = parseInt(date[0], 10);
             obj.month = parseInt(date[1], 10);
             obj.day = parseInt(date[2], 10);

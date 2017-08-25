@@ -4,7 +4,7 @@ var user = {};
 var messageBuffer = {};
 module.exports = (server) => {
 
-    const io = socketIo(server, {pingTimeout: 30000});
+    const io = socketIo(server, {pingTimeout: 300000});
     io.on('connection', (socket) => {
         
         let email = undefined;

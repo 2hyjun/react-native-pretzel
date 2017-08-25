@@ -57,13 +57,13 @@ class Auth extends React.Component {
     componentDidMount = () => {
         this.PushConfigure();
         AppState.addEventListener('change', (state) => {
-            Reactotron.log("Current AppState" + state);
+            Reactotron.log("Current AppState " + state);
         });
     }
     PushConfigure() {
         PushNotification.configure({
             onRegister: (device) => {
-                Reactotron.log("REGISTER DEVICE", device);
+                // Reactotron.log("REGISTER DEVICE", device);
                 //registerDevice(device.token, device.os);
             },
             onNotification: (notification) => {

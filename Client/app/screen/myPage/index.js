@@ -136,7 +136,7 @@ class myPageScreen extends Component {
                             {
                                 text: '아니요',
                                 onPress: () => {
-                                    Reactotron.log('button press no');
+                                    // Reactotron.log('button press no');
                                 },
                             },
                         ]);

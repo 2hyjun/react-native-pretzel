@@ -118,29 +118,32 @@ const Socket = {
     },
     connectSocket: () => {
         Reactotron.log(socket);
-        console.log(socket);
+        // console.log(socket);
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
-                autoConnect: false,
-                reconnection: false,
+                reconnection: true,
+
             });
             socket.open();
-            socket.on('reconnect', () => {
-                Alert.alert('reconnect');
-            });
+           
             socket.emit('join', global.user_email);
         } else if (socket.disconnected) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
                 autoConnect: false,
                 reconnection: false,
+                reconnectionDelay: 200,
+                reconnectionDelayMax: 300000,
             });
             socket.open();
-            socket.on('disconnect', () => {
-                Alert.alert('disconncted');
-            });
             socket.emit('join', global.user_email);
         }
         socket.on('messageBuffer', Socket.onRecieveBuffer);
+        socket.on('reconnect', () => {
+            Alert.alert('reconnect');
+        });
+        socket.on('disconnect', () => {
+            Alert.alert('disconncted');
+        });
         return socket;
     },
     disconnect: () => {

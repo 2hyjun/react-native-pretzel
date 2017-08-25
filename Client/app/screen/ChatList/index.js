@@ -74,7 +74,7 @@ export default class ChatList extends React.Component {
                     return ele.rid === item.rid;
                 });
                 AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                    .then(() => { Reactotron.log(list, 'saved'); })
+                    // .then(() => { Reactotron.log(list, 'saved'); })
                     .then(() => { this.setState(list); })
                     .catch((e) => console.error(e));
             })
@@ -82,7 +82,7 @@ export default class ChatList extends React.Component {
                 const ChatRoomSTORAGEKEY = '' + item.partner_email + ':' + item.rid;
                 AsyncStorage.removeItem(ChatRoomSTORAGEKEY)
                     .then(() => { this.renderRefresh(); })
-                    .then(() => Reactotron.log(ChatRoomSTORAGEKEY, 'removed'))
+                    // .then(() => Reactotron.log(ChatRoomSTORAGEKEY, 'removed'))
                     .catch(e => Reactotron.log(e));
             })
             .catch(e => Reactotron.log(e));

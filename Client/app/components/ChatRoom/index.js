@@ -35,10 +35,10 @@ export default class Chat extends React.Component {
     componentDidMount() {
         const { params } = this.props.navigation.state;
         const ChatRoomSTORAGEKEY = `${params.partner_email}:${params.rid}`;
-        Reactotron.log('ChatRoomSTORAGEKEY: ' + ChatRoomSTORAGEKEY);
+        // Reactotron.log('ChatRoomSTORAGEKEY: ' + ChatRoomSTORAGEKEY);
         AsyncStorage.getItem(ChatRoomSTORAGEKEY)
             .then((messages) => {
-                Reactotron.log('messages' + messages);
+                // Reactotron.log('messages' + messages);
                 if (messages !== null) {
                     this.setState({ messages: JSON.parse(messages) });
                 }
@@ -74,7 +74,7 @@ export default class Chat extends React.Component {
                     rid: data.rid,
                 });
                 AsyncStorage.setItem(ChatListSTORAGEKEY, JSON.stringify(list))
-                    .then(() => Reactotron.log(list, 'List saved'))
+                    // .then(() => Reactotron.log(list, 'List saved'))
                     .catch(e => console.error(e))
                     .done();
             })
@@ -98,7 +98,7 @@ export default class Chat extends React.Component {
             const ChatRoomSTORAGEKEY = '' + params.partner_email + ':' + params.rid;
 
             AsyncStorage.setItem(ChatRoomSTORAGEKEY, str)
-                .then(() => Reactotron.log(str, 'saved'))
+                // .then(() => Reactotron.log(str, 'saved'))
                 .catch(e => console.error(e))
                 .done();
         });
