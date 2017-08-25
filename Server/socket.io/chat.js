@@ -40,7 +40,7 @@ module.exports = (server) => {
         });
         
         socket.on('message', (data) => {
-            console.log('MESSAGE: ',data);
+            //console.log('MESSAGE: ',data);
             if (user[data.to]) {
                 io.to(user[data.to]).emit('message', data);
                 //console.log(data);
