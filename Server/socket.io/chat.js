@@ -16,7 +16,7 @@ module.exports = (server) => {
                 console.log('\t\t\t', email, 'connected, socket id: ', socket.id, clients, 'user connected now.');
                 user[email] = socket.id;
             } else {
-                console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
+                console.log('\t\t\t\t\t', email, 'connected.., socket id: ', socket.id, clients, 'user connected now.');
             }
             if (messageBuffer[email]) {
                 if (messageBuffer[email].length > 0) {
@@ -27,6 +27,11 @@ module.exports = (server) => {
                 }
             }
             console.log(user);
+        });
+
+        socket.on('reconnect', () => {
+            console.log(`********************${socket.id} reconnected************`);
+            io.to(socket.id).emit('reconnect');
         });
         socket.on('disconnect', () => {
             if (user[email]) {
