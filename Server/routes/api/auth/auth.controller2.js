@@ -251,109 +251,66 @@ exports.register = (req, res) => {
 exports.checkEmailAuth = (req, res) => {
     let EncryptedEmail = req.query.email;
     //const email = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
-    const email = simpleEncrypt.decrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', EncryptedEmail)
+    let email = simpleEncrypt.decrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', EncryptedEmail)
     //console.log('decrypted: 'email);
+    email = decodeURIComponent(email);
     console.log(email);
-    res.send(email);
-    // const getConn = () => {
-    //     return new Promise((resolve, reject) => {
-    //         db.get().getConnection((err, conn) => {
-    //             resolve(conn);
-    //         });
-    //     });
-    // };
-    // const checkEmail = (conn) => {
-    //     return new Promise((resolve, reject) => {
-    //         var sql = 'SELECT * FROM users where user_email=?;';
-    //         var params = [email];
-    //         conn.query(sql, params, (err, results, fields) => {
-    //             if (err) {
-    //                 reject({
-    //                     err: err
-    //                 });
-    //             } else if (results.length === 0) {
-    //                 reject({
-    //                     errMessage: '존재 하지 않는 이메일입니다.'
-    //                 });
-    //             } else {
-    //                 resolve({
-    //                     conn: conn,
-    //                     result:results[0]
-    //                 });
-    //             }
-    //         });
-    //     });
-    // };
-    // const Encrypt = (obj) => {
-    //     return new Promise((resolve, reject) => {
-    //         crypto.pbkdf2(password, config.salt.toString('base64'), 1000, 64, 'sha512', (err, key) => {
-    //             if (err) {
-    //                 console.error(err);
-    //                 reject({
-    //                     err: err
-    //                 });
-    //             }
-    //             else {
-    //                 resolve({
-    //                     conn: obj.conn,
-    //                     result: obj.result, 
-    //                     encryptedPassword: key.toString('base64')
-    //                 });
-    //             }
-    //         });
-    //     });
-    // };
-    // const checkPassword = (obj) => {
-    //     return new Promise((resolve, reject) => {
-    //         if (obj.encryptedPassword === obj.result.user_password) {
-    //             resolve(obj);
-    //         } else {
-    //             reject({
-    //                 errMessage: '잘못 된 비밀번호 입니다.'
-    //             });
-    //         }
-    //     });
-    // };
-    
-    // const verify = (obj) => {
-    //     return new Promise((resolve, reject) => {
-    //         var sql = 'UPDATE users SET auth=? where user_email=?';
-    //         var params = ['Y', email];
-    //         obj.conn.query(sql, params, (err, results) => {
-    //             if (err)
-    //                 reject({
-    //                     err:err
-    //                 });
-    //             else {
-    //                 resolve();
-    //             }
-    //         });
-    //     });
-    // };
+    const getConn = () => {
+        return new Promise((resolve, reject) => {
+            db.get().getConnection((err, conn) => {
+                resolve(conn);
+            });
+        });
+    };
+    const checkEmail = (conn) => {
+        return new Promise((resolve, reject) => {
+            var sql = 'SELECT * FROM users where user_email=?;';
+            var params = [email];
+            conn.query(sql, params, (err, results) => {
+                if (err) {
+                    reject({
+                        err: err
+                    });
+                } else if (results.length === 0) {
+                    reject({
+                        errMessage: '존재 하지 않는 이메일입니다.'
+                    });
+                } else {
+                    resolve(conn);
+                }
+            });
+        });
+    };
 
-    // const respond = () => {
-    //     res.send('인증되었습니다.');
-    // };
+    const verify = (obj) => {
+        return new Promise((resolve, reject) => {
+            var sql = 'UPDATE users SET auth=? where user_email=?';
+            var params = ['Y', email];
+            obj.conn.query(sql, params, (err) => {
+                if (err)
+                    reject({
+                        err:err
+                    });
+                else {
+                    resolve();
+                }
+            });
+        });
+    };
 
-    // const onError = (err) => {
-        
-    //     if (err.errMessage) {
-    //         const html = `
-    //         <script language=javascript>alert('${err.errMessage}')</script>
-    //         `;
-    //         res.send(html);
-    //     } else {
-    //         res.send({
-    //             err: err
-    //         });
-    //     }
-    // };
+    const respond = () => {
+        res.send('인증되었습니다');
+    };
 
-    // getConn()
-    //     .then(checkEmail)
-    //     .then(Encrypt)
-    //     .then(checkPassword)
-    //     .then(verify)
-    //     .then(respond)
-    //     .catch(onError);
+    const onError = (err) => {
+        if (err.errMessage) {
+            res.send(err.errMessage);
+        }
+        res.status(500).send('오류가 발생했습니다.');
+    };
+    getConn()
+        .then(checkEmail)
+        .then(verify)
+        .then(respond)
+        .catch(onError);
 };
