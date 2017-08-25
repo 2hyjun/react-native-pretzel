@@ -34,3 +34,43 @@ exports.encrypt = (key, data) => {
     data = xorEncrypt(key, data);
     return b64Encode(data);
 };
+
+export function decrypt(key, data) {
+    const b64Decode = (data) => {
+        var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+            result = [];
+        if (!data) {
+            return data;
+        }
+  
+        data += '';
+        do {
+            h1 = b64Table.indexOf(data.charAt(i++));
+            h2 = b64Table.indexOf(data.charAt(i++));
+            h3 = b64Table.indexOf(data.charAt(i++));
+            h4 = b64Table.indexOf(data.charAt(i++));
+            bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+            o1 = bits >> 16 & 0xff;
+            o2 = bits >> 8 & 0xff;
+            o3 = bits & 0xff;
+            result.push(o1);
+            if (h3 !== 64) {
+                result.push(o2);
+                if (h4 !== 64) {
+                    result.push(o3);
+                }
+            }
+        } while (i < data.length);
+        return result;
+    };
+  
+    const xorDecrypt = (key, data) => {
+        return _.map(data, function (c, i) {
+            return String.fromCharCode(c ^ key.charCodeAt(Math.floor(i % key.length)));
+        }).join('');
+    };
+  
+    data = b64Decode(data);
+    return xorDecrypt(key, data);
+}
+  

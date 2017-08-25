@@ -12,8 +12,6 @@ import {
     Switch,
     Button,
 } from 'react-native';
-import TabBar from 'react-native-xtabbar';
-import { Navigator } from 'react-native-deprecated-custom-components';
 import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
 import { ListItem, Icon } from 'react-native-elements'; //ㅅㅈ
