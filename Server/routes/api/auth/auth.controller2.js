@@ -249,6 +249,7 @@ exports.checkEmailAuth = (req, res) => {
     let EncryptedEmail = req.query.email;
     const email = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
     
+    console.log(email);
     res.send(email);
     // const getConn = () => {
     //     return new Promise((resolve, reject) => {
