@@ -40,7 +40,7 @@ exports.register = (req, res) => {
         });
     };
     const getConn = (encryptedPassword) => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             db.get().getConnection((err, conn) => {
                 resolve({
                     password: encryptedPassword,
@@ -62,7 +62,7 @@ exports.register = (req, res) => {
             var conn = obj.conn;
             var params = [email, name, encryptedPassword, univ, major];
             
-            conn.query(sql, params, (err, results, fields) => {
+            conn.query(sql, params, (err) => {
                 conn.release();
                 if (err)
                     reject({
@@ -146,7 +146,7 @@ exports.register = (req, res) => {
                                                                                         <td width="85"></td>
                                                                                         <td width="390">
                                                                                             <p style="margin:0 0 0 0; padding-bottom: 0; font-family:Malgun Gothic, Dotum; font-size:18px; font-weight:bold; color:#333; line-height:26px; word-break:break-all; white-space:pre-wrap;"
-                                                                                                align="center"><a href="http://13.124.147.152:8124/api/auth/checkEmailAuth?email=${encrypted2Email}" style=" color: #ea604a">pretzel 시작하기</a></p>
+                                                                                                align="center"><a href="http://13.124.147.152:8124/api/auth/checkEmailAuth?email=${encryptedEmail}" style=" color: #ea604a">pretzel 시작하기</a></p>
                                                                                         </td>
                                                                                         <td></td>
                                                                                     </tr>
@@ -202,7 +202,7 @@ exports.register = (req, res) => {
                 html: html,
             };
             //console.log(mailOptions);
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, (error) => {
                 if (error) {
                     reject({
                         error: error
