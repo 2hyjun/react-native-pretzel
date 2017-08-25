@@ -282,11 +282,11 @@ exports.checkEmailAuth = (req, res) => {
         });
     };
 
-    const verify = (obj) => {
+    const verify = (conn) => {
         return new Promise((resolve, reject) => {
             var sql = 'UPDATE users SET auth=? where user_email=?';
             var params = ['Y', email];
-            obj.conn.query(sql, params, (err) => {
+            conn.query(sql, params, (err) => {
                 if (err)
                     reject({
                         err:err
@@ -305,7 +305,7 @@ exports.checkEmailAuth = (req, res) => {
     const onError = (err) => {
 
         console.error(err);
-        
+
         if (err.errMessage) {
             res.send(err.errMessage);
         } else {
