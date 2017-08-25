@@ -20,7 +20,6 @@ import styles from './style';
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 
 export default class ChatList extends React.Component {
-
     static navigationOptions = {
         header: (
             <View style={styles.title}>
@@ -46,24 +45,24 @@ export default class ChatList extends React.Component {
     }
     componentDidMount() {
         AsyncStorage.getItem(ChatListSTORAGEKEY)
-        .then((value) => {
-            if (value) {
-                let list = JSON.parse(value);
-                // list = _.uniqBy(list, 'rid');
-                list = _.reverse(list);
-                Reactotron.log('*********', list);
-                this.setState({ dataSource: this.state.dataSource.cloneWithRows(list) });
-            } else {
-                this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) });
-            }
-        })
-        .catch(e => console.error(e))
-        .done();
+            .then((value) => {
+                if (value) {
+                    let list = JSON.parse(value);
+                    // list = _.uniqBy(list, 'rid');
+                    list = _.reverse(list);
+                    console.log('*********', list);
+                    this.setState({ dataSource: this.state.dataSource.cloneWithRows(list) });
+                } else {
+                    this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) });
+                }
+            })
+            .catch(e => console.error(e))
+            .done();
     }
     onChatRecieve(data) {
         socket.onReceive(data)
             .then(() => {
-                Alert.alert('ChatList', 'Messages Got it!');
+                // Alert.alert('ChatList', 'Messages Got it!');
                 this.renderRefresh();
             });
     }
@@ -89,6 +88,8 @@ export default class ChatList extends React.Component {
             .catch(e => Reactotron.log(e));
     }
     renderRefresh() {
+        this.socket = socket.checkConnection();
+        console.log('refreshed');
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 if (value) {
@@ -110,7 +111,11 @@ export default class ChatList extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={{ flex: 1, backgroundColor: '#f7f7f7' }}>
+                <View style={{ alignSelf: 'center', padding: 10, }}>
+                    <Text>아래로 당겨서 채팅 리스트를 갱신해주세요.</Text>
+                </View>
+                
                 <ListView
                     dataSource={this.state.dataSource}
                     enableEmptySections={true}

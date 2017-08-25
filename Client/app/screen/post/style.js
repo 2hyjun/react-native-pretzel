@@ -104,11 +104,10 @@ const styles = StyleSheet.create({
     },
     forms: {
         //backgroundColor: 'skyblue',
-        height: height(70)
+        height: height(70),
     },
     detail_cell_style: {
         alignItems: 'center',
-
         //backgroundColor: 'skyblue',
         marginTop: 10,
         marginBottom: 10
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'skyblue',
         marginLeft: 30,
         marginRight: 30,
+        alignItems: 'center',
 
     },
     deadline_text: {
@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
         padding: 7,
         paddingLeft: 0,
         marginLeft: 20,
+        // marginBottom: 10,
+        // backgroundColor: 'skyblue',
     },
     detail_done: {
         alignItems: 'center',

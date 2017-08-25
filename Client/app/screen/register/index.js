@@ -5,12 +5,18 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
+    Linking,
+    ActivityIndicator,
 } from 'react-native';
 
+import Reactotron from 'reactotron-react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import { encrypt } from 'react-native-simple-encryption';
-
+import PopupDialog, {
+    DialogTitle,
+    ScaleAnimation,
+} from 'react-native-popup-dialog';
 
 import Fumi from '../../components/TextInputEffect/Fumi';
 import DropdownAlert from '../../components/DropdownAlert';
@@ -28,13 +34,16 @@ export default class Register extends React.Component {
             name: '',
             univ: '',
             major: '',
+            isLoading: false,
         };
         this.Register = this.Register.bind(this);
+        this.Linking = this.Linking.bind(this);
     }
     componentDidMount() {
 
     }
     Register() {
+        this.setState({ isLoading: true });
         const params = {
             email: this.state.email,
             password: this.state.password,
@@ -46,9 +55,13 @@ export default class Register extends React.Component {
         let formBody = [];
         if (!params.email || !params.password || !params.password_confirm || !params.name ||
             !params.univ || !params.major) {
-            this.dropdown.alertWithType('error', '회원가입 실패', '6개 항목을 모두 입력해주세요.');
+            this.setState({ isLoading: false }, () => {
+                this.dropdown.alertWithType('error', '회원가입 실패', '6개 항목을 모두 입력해주세요.');
+            });
         } else if (this.state.password !== this.state.password_confirm) {
-            this.dropdown.alertWithType('error', '회원가입 실패', '비밀번호와 비밀번호 확인 값이 다릅니다.');
+            this.setState({ isLoading: false }, () => {
+                this.dropdown.alertWithType('error', '회원가입 실패', '비밀번호와 비밀번호 확인 값이 다릅니다.');
+            });
             // Alert.alert('', '비밀번호와 비밀번호 확인 값이 다릅니다.');
         } else {
             // params.password = cryptDecrypt('pretzelWOwAwesome', params.password);
@@ -70,18 +83,31 @@ export default class Register extends React.Component {
             }).then((res) => res.json())
                 .then((rJSON) => {
                     if (rJSON.resultCode === 100) {
-                        this.dropdown.alertWithType('success', '회원가입 성공', rJSON.result);
-                        // Alert.alert('회원가입 성공');
-                        this.props.navigation.navigate('auth');
+                        this.setState({ isLoading: false }, () => {
+                            this.dialog.show();
+                            this.dropdown.alertWithType('success', '회원가입 성공', rJSON.result);
+                        });
                     } else {
-                        this.dropdown.alertWithType('error', '회원가입 실패', rJSON.result);
-                        // Alert.alert('회원가입 실패', rJSON.result)
+                        this.setState({ isLoading: false }, () => {
+                            this.dropdown.alertWithType('error', '회원가입 실패', rJSON.result);
+                        });
                     }
                 })
                 .catch((err) => console.error(err));
         }
     }
+    Linking() {
+        const url = 'https://webmail.pusan.ac.kr';
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                Reactotron.log('Can\'t handle url: ' + url);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => Reactotron.error('An error occurred', err));
+    }
     render() {
+        const email = this.state.email;
         return (
             <View style={styles.container}>
                 <View style={styles.cell_logo}>
@@ -193,6 +219,43 @@ export default class Register extends React.Component {
                         <Text style={styles.registerTxt}>회원 가입</Text>
                     </TouchableOpacity>
                 </View>
+                <PopupDialog
+                    ref={(ref) => { this.dialog = ref; }}
+                    dialogAnimation={new ScaleAnimation()}
+                    dialogStyle={{ height: 200 }}
+                    dialogTitle={
+                        <DialogTitle
+                            title="이메일 인증 안내"
+                            titleTextStyle={{ color: '#f95a25' }}
+                        />
+                    }
+                    onDismissed={() => {
+                        this.props.navigation.navigate('auth');
+                    }}
+                >
+                    <View style={styles.dialogContentView}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                            {email}로
+                        </Text>
+                        <Text style={styles.dialog_text}>
+                                인증 메일이 발송되었습니다
+                        </Text>
+                        <TouchableOpacity
+                            style={styles.dialog_touch}
+                            onPress={this.Linking}>
+                            <Text>부산대학교 웹메일로 이동</Text>
+                        </TouchableOpacity>
+                    </View>
+                </PopupDialog>
+                {
+                    this.state.isLoading &&
+                    <ActivityIndicator
+                        style={styles.loading}
+                        animating={this.state.isLoading}
+                        size={'large'}
+                    />
+                }
+                
                 <DropdownAlert
                     ref={(ref) => this.dropdown = ref} />
             </View>

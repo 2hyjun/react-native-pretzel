@@ -29,7 +29,7 @@ export default class Chat extends React.Component {
         this.storeMessages = this.storeMessages.bind(this);
 
         this.socket = socket.connectSocket();
-        this.socket.on('message', this.onRecieve);
+        //this.socket.on('message', this.onRecieve);
         // console.log(this.props.navigation.state.params.partner_email);
     }
     componentDidMount() {
