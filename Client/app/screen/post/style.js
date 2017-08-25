@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'skyblue',
         marginLeft: 30,
         marginRight: 30,
+        alignItems: 'center',
 
     },
     deadline_text: {
@@ -136,6 +137,8 @@ const styles = StyleSheet.create({
         padding: 7,
         paddingLeft: 0,
         marginLeft: 20,
+        // marginBottom: 10,
+        // backgroundColor: 'skyblue',
     },
     detail_done: {
         alignItems: 'center',
