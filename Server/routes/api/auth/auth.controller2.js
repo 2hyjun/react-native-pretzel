@@ -300,7 +300,7 @@ exports.checkEmailAuth = (req, res) => {
     };
 
     const respond = () => {
-        res.redirect('/api/auth/emailVerified');
+        res.redirect('http://13.124.147.152:8124/verified.html');
     };
 
     const onError = (err) => {
@@ -322,11 +322,12 @@ exports.checkEmailAuth = (req, res) => {
 };
 
 exports.emailVerified = (req, res) => {
-    fs.readFile('verified.html', (err, data) => {
+    fs.readFile('/verified.html', (err, data) => {
         if (err)
             console.error(err);
         else {
-            res.send(data);
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.end(data);
         }
     });
 };
