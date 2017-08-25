@@ -82,8 +82,7 @@ exports.register = (req, res) => {
                     pass: 'pretzel123',
                 }
             });
-            const enc1 = simpleEncrypt.encrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', email);
-            let encryptedEmail = simpleEncrypt.encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', enc1);
+            let encryptedEmail = simpleEncrypt.encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', email);
             const html = 
             `
             <!doctype html>
@@ -248,10 +247,8 @@ exports.register = (req, res) => {
 };
 exports.checkEmailAuth = (req, res) => {
     let EncryptedEmail = req.query.email;
-    EncryptedEmail = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
     const email = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
     
-
     res.send(email);
     // const getConn = () => {
     //     return new Promise((resolve, reject) => {
