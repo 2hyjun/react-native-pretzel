@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform, AppState } from 'react-native';
+import { AsyncStorage, Platform, AppState, PushNotificationIOS } from 'react-native';
 import SocketIOClient from 'socket.io-client';
 import Reactotron from 'reactotron-react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -71,21 +71,32 @@ const Socket = {
                         });
                 });
             };
-            try {
-                if (AppState.currentState !== 'active') {
-                    const date = new Date(Date.now());
-                    PushNotification.localNotificationSchedule({
-                        title: '메세지가 도착 했습니다.',
-                        message: `${data.user._id}: ${data.text}`,
-                        date,
-                        number: 3,
-                        actions: 'Yes',
-                    });
+            if (Platform.OS === 'android') {
+                try {
+                    if (AppState.currentState !== 'active') {
+                        const date = new Date(Date.now());
+                        PushNotification.localNotificationSchedule({
+                            title: '메세지가 도착 했습니다.',
+                            message: `${data.user._id}: ${data.text}`,
+                            date,
+                            actions: 'Yes',
+                        });
+                    }
+                } catch (e) {
+                    console.error(e);
                 }
-            } catch (e) {
-                console.error(e);
+            } else {
+                try {
+                    PushNotificationIOS.scheduleLocalNotification({
+                        fireDate: new Date(Date.now()),
+                        alertBody: `${data.user._id}: ${data.text}`,
+                        applicationIconBadgeNumber: 0,
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
             }
-
+            
             GetPrevList()
                 .then(SetChatList)
                 .catch(e => {
@@ -108,20 +119,27 @@ const Socket = {
         });
     },
     connectSocket: () => {
-        // Reactotron.log(socket);
-        if (socket)
-            console.log(socket.disconnected);
+        Reactotron.log(socket);
+        console.log(socket);
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
                 autoConnect: false,
+                reconnection: false,
             });
             socket.open();
+            socket.on('disconnect', () => {
+                Alert.alert('disconncted');
+            });
             socket.emit('join', global.user_email);
         } else if (socket.disconnected) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
                 autoConnect: false,
+                reconnection: false,
             });
             socket.open();
+            socket.on('disconnect', () => {
+                Alert.alert('disconncted');
+            });
             socket.emit('join', global.user_email);
         }
         return socket;

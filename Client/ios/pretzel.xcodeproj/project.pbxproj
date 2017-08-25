@@ -40,7 +40,6 @@
 		423949A7A8B1467D9E1B8616 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A3CDF9CCD0D476DA502EDB4 /* Octicons.ttf */; };
 		4371565D1F4C4A710011E2F8 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4371562E1F4C47EC0011E2F8 /* libRCTPushNotification.a */; };
 		437157251F503B900011E2F8 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E2075D1F48237F001422A2 /* libRNVectorIcons.a */; };
-		437157471F503B9E0011E2F8 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E2075A1F48237F001422A2 /* libRNRandomBytes.a */; };
 		437157621F503F350011E2F8 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 437157581F503F350011E2F8 /* Entypo.ttf */; };
 		437157631F503F350011E2F8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 437157591F503F350011E2F8 /* EvilIcons.ttf */; };
 		437157641F503F350011E2F8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4371575A1F503F350011E2F8 /* FontAwesome.ttf */; };
@@ -350,6 +349,7 @@
 		4371575F1F503F350011E2F8 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		437157601F503F350011E2F8 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		437157611F503F350011E2F8 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		4371578D1F50AA330011E2F8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4AD8A71BDFB14FCFB5303635 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5A3CDF9CCD0D476DA502EDB4 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -389,7 +389,6 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				437157251F503B900011E2F8 /* libRNVectorIcons.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
-				437157471F503B9E0011E2F8 /* libRNRandomBytes.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 			);
@@ -773,6 +772,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = MAJ732B76L;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes.appletvos = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1246,6 +1250,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				4371578D1F50AA330011E2F8 /* ko */,
 			);
 			name = LaunchScreen.xib;
 			path = pretzel;
@@ -1484,6 +1489,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1525,6 +1531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

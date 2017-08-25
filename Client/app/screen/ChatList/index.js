@@ -89,7 +89,7 @@ export default class ChatList extends React.Component {
     }
     renderRefresh() {
         this.socket = socket.checkConnection();
-        console.log('refreshed');
+        Alert.alert('refreshed');
         AsyncStorage.getItem(ChatListSTORAGEKEY)
             .then((value) => {
                 if (value) {
@@ -113,7 +113,7 @@ export default class ChatList extends React.Component {
         return (
             <View style={{ flex: 1, backgroundColor: '#f7f7f7' }}>
                 <View style={{ alignSelf: 'center', padding: 10, }}>
-                    <Text>아래로 당겨서 채팅 리스트를 갱신해주세요.</Text>
+                    <Text>아래로 당겨서 채팅 리스트를 자주 갱신해주세요.</Text>
                 </View>
                 
                 <ListView

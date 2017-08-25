@@ -10,6 +10,7 @@ var server = app.listen(port);
 var bodyParser = require('body-parser');
 
 var db = require('./db/mysql');
+var config = require('./config');
 db.connect();
 
 app.locals.pretty = true;
@@ -27,4 +28,5 @@ RegisterSocketIoServer(server);
 
 server.listen(port, () => {
     console.log('Pretzel Server listening at port', port);
+    console.log('Current Time: ', config.now());
 });

@@ -11,9 +11,9 @@ export default StyleSheet.create({
         height: containerHeight,
         width: width(90),
         flexDirection: 'row',
-        //backgroundColor: 'skyblue',
-        //borderWidth: 1,
-        //borderColor: 'red',
+        // backgroundColor: 'skyblue',
+        // borderWidth: 1,
+        // borderColor: 'red',
         margin: 15,
         marginBottom: 0,
         borderRadius: 10,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
         backgroundColor: 'white',
     },
     header: {
-        //backgroundColor: 'red',
+        // backgroundColor: 'red',
         height: height(5),
         width: width(80),
         marginTop: 5,
@@ -52,7 +52,7 @@ export default StyleSheet.create({
         height: height(5),
         marginLeft: 20,
         marginTop: 5,
-        fontSize: totalSize(2.3), //18
+        fontSize: totalSize(2.3), // 18
         fontWeight: 'bold',
         color: '#585858'
 
@@ -61,12 +61,12 @@ export default StyleSheet.create({
         width: width(20),
         height: height(5),
         marginTop: 5,
-        fontSize: totalSize(2), //15
+        fontSize: totalSize(1.95), // 15
         color: '#585858'
     },
     acceptButtonTxt1: {
         padding: 10,
-        fontSize: totalSize(2.1), //20
+        fontSize: totalSize(2.1), // 20
         fontWeight: 'bold',
         color: '#333333',
         marginTop: 5,
@@ -75,17 +75,17 @@ export default StyleSheet.create({
         padding: 10,
         paddingTop: 15,
         paddingBottom: 0,
-        fontSize: totalSize(2.1), //20
+        fontSize: totalSize(2.1), // 20
         fontWeight: 'bold',
         color: '#333333',
     },
     body: {
-        //backgroundColor: 'red',
+        // backgroundColor: 'red',
         height: height(10),
         width: width(80),
         flexDirection: 'row',
         marginTop: 10,
-        //justifyContent: 'center',
+        // justifyContent: 'center',
         // backgroundColor: 'skyblue'
     },
     body_header: {
@@ -110,7 +110,7 @@ export default StyleSheet.create({
         width: width(25)
     },
     body_header_text: {
-        fontSize: totalSize(2.3), //15
+        fontSize: totalSize(2.3), // 15
         color: '#333333'
     },
     body_header_line: {
@@ -122,8 +122,8 @@ export default StyleSheet.create({
         backgroundColor: '#eb6736'
     },
     body_body_text: {
-        marginTop: 5,
+        marginTop: 2,
         color: '#eb6736',
-        fontSize: totalSize(2), //17
+        fontSize: totalSize(2), // 17
     }
 })
