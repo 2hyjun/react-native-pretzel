@@ -6,7 +6,6 @@ import {
     View,
     Text,
     AsyncStorage,
-    TouchableHighlight,
     TouchableOpacity,
     ListView,
     Alert,
@@ -70,18 +69,18 @@ class settingScreen extends Component {
         return (
             <View style={styles.parent}>
                 <View style={styles.cellOne}>
-                    <TouchableHighlight onPress={this.handleBack}>
+                    <TouchableOpacity onPress={this.handleBack}>
                         <Image
                             source={require('../../../img/basic/basic_arrow_left.png')}
                             style={{ resizeMode: 'center' }} />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
-                <TouchableHighlight onPress={this.LogOut}>
+                <TouchableOpacity onPress={this.LogOut}>
                     <View style={styles.cellTwo}>
                         <Text style={{ color: '#ff6666' }}>로그아웃</Text>
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
 
                 <View style={styles.cellThree}>
                     <View style={styles.container}>

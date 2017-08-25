@@ -66,18 +66,18 @@ export default StyleSheet.create({
     },
     acceptButtonTxt1: {
         padding: 10,
-        fontSize: 20,
+        fontSize: totalSize(2), //20
         fontWeight: 'bold',
         color: '#333333',
         marginTop: 10,
     },
     acceptButtonTxt2: {
         padding: 10,
+        paddingTop: 15,
         paddingBottom: 0,
-        fontSize: 20,
+        fontSize: totalSize(2), //20
         fontWeight: 'bold',
         color: '#333333',
-        marginTop: 0,
     },
     body: {
         //backgroundColor: 'red',

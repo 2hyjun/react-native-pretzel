@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginLeft:20,
         borderWidth: 1,
-        borderColor: 'orange',
+        borderColor: '#eb6736',
         borderRadius:10,
         justifyContent: 'center',
     },
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
+        width: width(90),
     },
     imageStyle: {
         marginTop : 20,
