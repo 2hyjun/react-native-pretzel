@@ -13,7 +13,7 @@ var db = require('./db/mysql');
 db.connect();
 
 app.locals.pretty = true;
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));

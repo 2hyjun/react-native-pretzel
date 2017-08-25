@@ -5,7 +5,7 @@ var messageBuffer = {};
 module.exports = (server) => {
 
 
-    const io = socketIo(server);
+    const io = socketIo(server, {pingTimeout: 30000});
     io.on('connection', (socket) => {
         
         let email = undefined;
@@ -19,29 +19,8 @@ module.exports = (server) => {
             } else {
                 console.log('\t\t\t\t\t', email, 'reconnected., socket id: ', socket.id, clients, 'user connected now.');
             }
-            console.log(messageBuffer[email].length);
 
-            if (messageBuffer[email]) {
-                if (messageBuffer[email].length > 0) {
-                    for (var i = 0; i < messageBuffer[email].length; i++) {
-                        io.to(user[email]).emit('message', messageBuffer[email][i]);
-                        
-                    }
-                    messageBuffer[email] = [];
-                }
-            }
-            console.log(user);
-        });
 
-        socket.on('check', (user_email) => {
-            email = user_email;
-            if (!user[email]) {
-                clients++;
-                console.log('\t\t\t', email, 'reconnected, socket id: ', socket.id, clients, 'user connected now.');
-                user[email] = socket.id;
-            } else {
-                console.log('\t\t\t', email, 'was connected successfully, socket id: ', socket.id, clients, 'user connected now.');
-            }
             if (messageBuffer[email]) {
                 if (messageBuffer[email].length > 0) {
                     for (var i = 0; i < messageBuffer[email].length; i++) {

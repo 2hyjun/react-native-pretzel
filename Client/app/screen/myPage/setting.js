@@ -94,7 +94,7 @@ class settingScreen extends Component {
                         </View>
                         <TouchableOpacity
                             style={styles.row}
-                            onPress={() => { this.props.navigation.navigate('auth') ;}}>
+                            onPress={() => { this.props.navigation.navigate('auth'); }}>
                             <Text>피드백</Text>
                         </TouchableOpacity>
                     </View>
