@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import BaseInput from './BaseInput';
-
+import { height, width, totalSize } from 'react-native-dimension';
 const PADDING = 16;
 const ICON_WIDTH = 40;
 
@@ -190,14 +190,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     label: {
-        fontSize: 18,
+        fontSize: totalSize(2),
         //fontFamily: 'Arial',
         fontWeight: 'bold',
     },
     textInput: {
         flex: 1,
         color: 'black',
-        fontSize: 18,
+        fontSize: totalSize(2),
         padding: 7,
         paddingLeft: 0,
     },

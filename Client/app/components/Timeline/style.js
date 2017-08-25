@@ -2,7 +2,7 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import { height, width } from 'react-native-dimension';
+import { height, width, totalSize } from 'react-native-dimension';
 
 const styles = StyleSheet.create({
     container: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         color: 'lightgrey',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: totalSize(2), //15
     },
     filter_item_enabled: {
         padding: 10,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: totalSize(2),
     },
     filter_scrollview: {
         height: height(8),

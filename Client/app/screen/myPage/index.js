@@ -10,14 +10,15 @@ import {
     AsyncStorage,
     Alert,
     Switch,
+    Button,
 } from 'react-native';
 import TabBar from 'react-native-xtabbar';
 import { Navigator } from 'react-native-deprecated-custom-components';
 import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
-import { ListItem } from 'react-native-elements'; //ㅅㅈ
+import { ListItem, Icon } from 'react-native-elements'; //ㅅㅈ
 import global from '../../config/global';
-
+import { width, height, totalSize } from 'react-native-dimension';
 const STORAGE_KEY = '@PRETZEL:jwt';
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }); //ㅅㅈ
 
@@ -34,6 +35,7 @@ class myPageScreen extends Component {
             title: '',
             content: '',
             contentType: '',
+            complete:'진행',
             dataSource: ds.cloneWithRows([]), //ㅅㅈ
         };
         
@@ -92,19 +94,17 @@ class myPageScreen extends Component {
         this.props.navigation.navigate('Setting');
     }
 
-    Complete = () => {
-        // this.props.navigation.navigate('main');
+    Complete(item){
         Alert.alert('', '완료하셨어요?', [
             {
                 text: '네',
                 onPress: () => {
-                    this.Logout();
+                    this._onValueChange()
                 },
             },
             {
                 text: '아니요',
                 onPress: () => {
-                    Reactotron.log('button press no');
                 },
             },
         ]);
@@ -200,26 +200,21 @@ class myPageScreen extends Component {
                                 wrapperStyle={{ backgroundColor: 'white' }}
                                 title={rowData.title}
                                 subtitle={global.DateToStr3(rowData.time)}
-                                label={<Text style={{color:'#eb6736'}}>진행</Text>}
-                                onPress={()=>{
-                                    Alert.alert('', '완료하셨어요?', [
-                                        {
-                                            text: '네',
-                                            onPress: () => {
-                                                label=<Text style={{color:'grey'}}>완료</Text>
-                                            },
-                                        },
-                                        {
-                                            text: '아니요',
-                                            onPress: () => {
-                                                label=<Text style={{color:'#eb6736'}}>진행</Text>
-                                            },
-                                        },
-                                    ]);
-                                    }
-                                }>
+                                
+                                label={
+                                    <Button
+                                    key={rowData.rid}
+                                    title={(this.state.value)? "진행":"완료"}
+                                    onPress={()=>this.Complete(rowData)}
+                                >
+                                </Button>
+                                }                          
+                           >
                             </ListItem>
+                    
                 )}
+
+                
             />
             </View>
             </View>

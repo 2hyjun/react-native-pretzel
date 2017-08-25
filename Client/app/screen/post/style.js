@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
         },
     },
     ripple_text: {
-        fontSize: 16,
+        fontSize: totalSize(2.3),
+        alignSelf:'center',
         marginLeft: 10,
         marginTop: 5,
     },
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     },
     detail_input: {
         height: 180,
-        fontSize: 20,
+        fontSize: totalSize(2),
         //backgroundColor: 'skyblue'
     },
     forms: {
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     deadline_text: {
         //color: 'grey',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: totalSize(1.8),
         padding: 7,
         paddingLeft: 0,
         marginLeft: 20,
@@ -154,13 +155,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#d3e229',
         alignItems: 'center',
         justifyContent: 'center',
-        width: width(50),
+        width: width(40),
         height: height(10),
         marginTop: 10,
         alignSelf: 'center'
     },
     submitTxt: {
-        fontSize: 20,
+        fontSize: totalSize(2.3),
         fontWeight: 'bold'
     }
 
