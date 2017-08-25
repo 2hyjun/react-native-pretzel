@@ -24,8 +24,9 @@ module.exports = (server) => {
                     for (var i = 0; i < messageBuffer[email].length; i++) {
                         setTimeout(() => {
                             io.to(user[email]).emit('message', messageBuffer[email][i]);
+                            console.log(`${i + 1}'th messages ${messageBuffer[email][i].text} sent`)
                         }, 100);
-                        console.log(`${i + 1}'th messages sent`)
+                        
                     }
                     messageBuffer[email] = [];
                 }

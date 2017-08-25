@@ -99,14 +99,7 @@ const Socket = {
             
             GetPrevList()
                 .then(SetChatList)
-                .catch(e => {
-                    if (!e.em) {
-                        console.error(e);
-                    }
-                })
-                .done();
-
-            GetPrevMessages()
+                .then(GetPrevMessages)
                 .then(SetMessages)
                 .catch(e => {
                     if (!e.em) {
