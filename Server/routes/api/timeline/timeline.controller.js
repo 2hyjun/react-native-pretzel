@@ -490,7 +490,6 @@ exports.completing = (req, res) => {
     const getConn = () => {
         return new Promise((resolve) => {
             db.get().getConnection((err, conn) => {
-                conn.release();
                 resolve(conn);
             });
         });
