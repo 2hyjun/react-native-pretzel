@@ -322,7 +322,7 @@ exports.checkEmailAuth = (req, res) => {
 };
 
 exports.emailVerified = (req, res) => {
-    fs.readFile('verified.html', (err, data) => {
+    fs.readFile('http://13.124.147.152:8124/verified.html', (err, data) => {
         if (err)
             console.error(err);
         else {
