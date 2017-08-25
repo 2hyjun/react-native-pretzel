@@ -28,19 +28,19 @@ module.exports = (server) => {
             }
             console.log(user);
         });
-        
         socket.on('disconnect', () => {
             if (user[email]) {
                 clients--;
                 console.log(`\n\t\t\t\t*****${email} disconnected****\n`);
                 // console.log(email, 'has been disconnected', clients, 'user connected now.');
-                delete user[email];
+                // delete user[email];
                 console.log(user);
             } 
         });
         
         socket.on('message', (data) => {
             //console.log('MESSAGE: ',data);
+            console.log('socket.id');
             if (user[data.to]) {
                 io.to(user[data.to]).emit('message', data);
                 //console.log(data);

@@ -9,12 +9,12 @@ import global from './global';
 let socket = null;
 
 const Socket = {
-    onRecieveBuffer: (buffer) => {
-        for (let i = 0; i < buffer; i++) {
-            Socket.onReceive(buffer[i]);
+    onRecieveBuffer: async (buffer) => {
+        for (let i = 0; i < buffer.length; i++) {
+            await Socket.onReceive(buffer[i]);
         }
     },
-    onReceive: (data) => {
+    onReceive: async (data) => {
         // Reactotron.log(socket.connect());
         return new Promise((Resolve) => {
             const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
@@ -140,6 +140,7 @@ const Socket = {
             });
             socket.emit('join', global.user_email);
         }
+        socket.on('messageBuffer', Socket.onRecieveBuffer);
         return socket;
     },
     disconnect: () => {
