@@ -300,7 +300,7 @@ exports.checkEmailAuth = (req, res) => {
     };
 
     const respond = () => {
-        res.redirect('/emailVerified');
+        res.redirect('/api/auth/emailVerified');
     };
 
     const onError = (err) => {
