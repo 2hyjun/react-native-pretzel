@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform, AppState, PushNotificationIOS } from 'react-native';
+import { AsyncStorage, Platform, AppState, PushNotificationIOS, Alert } from 'react-native';
 import SocketIOClient from 'socket.io-client';
 import Reactotron from 'reactotron-react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
