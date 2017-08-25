@@ -9,6 +9,6 @@ router.delete(['/:rid', '/'], controller.delete);
 router.post('/', controller.post);
 router.put(['/', '/:rid'], controller.update);
 router.get('/mypage', controller.mypage);
-router.put(['/completing/rid', '/completing'], controller.completing);
+router.put(['/completing/:rid', '/completing'], controller.completing);
 
 module.exports = router;
