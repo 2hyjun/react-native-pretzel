@@ -11,15 +11,23 @@ import {
     Alert,
     Switch,
     Button,
+    RefreshControl,
 } from 'react-native';
+
+import _ from 'lodash';
+import { ListItem, Icon } from 'react-native-elements';
+import SwipeOut from 'react-native-swipeout';
+import { width, height, totalSize } from 'react-native-dimension';
+import Reactotron from 'reactotron-react-native';
+
 import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
-import { ListItem, Icon } from 'react-native-elements'; //ㅅㅈ
+import socket from '../../config/socket.io';
 import global from '../../config/global';
-import { width, height, totalSize } from 'react-native-dimension';
-const STORAGE_KEY = '@PRETZEL:jwt';
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }); //ㅅㅈ
 
+
+const STORAGE_KEY = '@PRETZEL:jwt';
+const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 class myPageScreen extends Component {
     constructor(props) {
@@ -33,11 +41,13 @@ class myPageScreen extends Component {
             title: '',
             content: '',
             contentType: '',
-            complete:'진행',
-            dataSource: ds.cloneWithRows([]), //ㅅㅈ
+            dataSource: ds.cloneWithRows([]),
+            refreshing: false,
         };
-        
         this.Setting = this.Setting.bind(this);
+        this.refresh = this.refresh.bind(this);
+        this.completing = this.completing.bind(this);
+        this.HttpRequestCompleting = this.HttpRequestCompleting.bind(this);
     }
 
     _onValueChange(value) {
@@ -48,26 +58,26 @@ class myPageScreen extends Component {
     };
 
     componentDidMount() {
-        this.setState({dataSource: ds.cloneWithRows([])}, ()=>{  //수정
+        this.refresh();
+    }
+
+    refresh() {
+        this.setState({dataSource: ds.cloneWithRows([])}, ()=>{ 
         this.GetToken()
             .then(this.HTTPRequest)
             .then((res) => {
-                //Alert.alert('', JSON.stringify(res.result));
+                res.result = _.reverse(res.result);
                 this.setState({
                     user_email: res.myInfo.user_email,
                     user_name: res.myInfo.user_name,
                     user_univ: res.myInfo.user_univ,
                     user_major: res.myInfo.user_major,
-                    /*title: res.result.title,
-                    content: res.result.content,
-                    contentType: res.result.contentType,*/
-                    //ㅅㅈ
                     dataSource: this.state.dataSource.cloneWithRows(res.result),
                 });
             })
             .catch((err) => console.error(err))
-        }); //ㅅㅈ
-        }
+        }); 
+    }
 
     HTTPRequest(value) {
         return fetch('http://13.124.147.152:8124/api/timeline/mypage', {
@@ -91,22 +101,51 @@ class myPageScreen extends Component {
     Setting() {
         this.props.navigation.navigate('Setting');
     }
-
-    Complete(item){
-        Alert.alert('', '완료하셨어요?', [
-            {
-                text: '네',
-                onPress: () => {
-                    this._onValueChange()
-                },
-            },
-            {
-                text: '아니요',
-                onPress: () => {
-                },
-            },
-        ]);
-    };
+    HttpRequestCompleting(obj) {
+        
+        return 
+            fetch(obj.url, {
+                method: 'PUT',
+                headers: {
+                    'x-access-token': obj.token,
+                },  
+            })
+            .then(res => res.json);
+        
+    }
+    completing(rid) {
+        const url = 'http://13.124.147.152:8124/api/timeline/completing/' + rid;
+        this.GetToken()
+            .then((token) => {
+                return fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'x-access-token': token,
+                    },
+                })
+                .then(res => res.json())
+                .then((res) => {
+                    if (res.resultCode === 100) {
+                        Alert.alert('', '완료하셨나요?', [
+                            {
+                                text: '네',
+                                onPress: () => {
+                                    this.refresh();
+                                },
+                            },
+                            {
+                                text: '아니요',
+                                onPress: () => {
+                                    Reactotron.log('button press no');
+                                },
+                            },
+                        ]);
+                    } else {
+                        Alert.alert('', res.result);
+                    }
+                })
+            })
+    }
 
     render() {
         return (
@@ -180,13 +219,13 @@ class myPageScreen extends Component {
 
                 </View>
                 <View style={styles.cellFour}>
-                <ListView 
-                dataSource={this.state.dataSource}
-                enableEmptySections={true}
-                renderRow={(rowData) => (
-                    this.state.dataSource.length === 0 ?
-                        <View><Text>Empty..</Text></View>
-                        :
+                    <ListView 
+                    dataSource={this.state.dataSource}
+                    enableEmptySections={true}
+                    renderRow={(rowData) => (
+                        this.state.dataSource.length === 0 ?
+                            <View><Text>Empty..</Text></View>
+                            :
                             <ListItem
                                 key={rowData.rid}
                                 roundAvatar
@@ -198,23 +237,19 @@ class myPageScreen extends Component {
                                 wrapperStyle={{ backgroundColor: 'white' }}
                                 title={rowData.title}
                                 subtitle={global.DateToStr3(rowData.time)}
-                                
                                 label={
-                                    <Button
-                                    key={rowData.rid}
-                                    title={(this.state.value)? "진행":"완료"}
-                                    onPress={()=>this.Complete(rowData)}
-                                >
-                                </Button>
-                                }                          
-                           >
+                                    rowData.completed === 'N' ? 
+                                        <Button
+                                            title={'완료하기'}
+                                            onPress={() => {
+                                                this.completing(rowData.rid)
+                                            }}/> :
+                                        <Text>완료</Text>
+                                }>
                             </ListItem>
-                    
-                )}
-
-                
-            />
-            </View>
+                    )}
+                    />
+                </View>
             </View>
         );
     }
