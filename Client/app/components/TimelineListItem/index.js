@@ -11,6 +11,7 @@ const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', 
 
 import styles from './style';
 import global from '../../config/global';
+import { height, width, totalSize } from 'react-native-dimension';
 const ChatListSTORAGEKEY = '@PRETZEL:chatlist';
 export default class TimelineListItem extends React.Component {
     /**
@@ -244,7 +245,7 @@ export default class TimelineListItem extends React.Component {
                                 <Text style={styles.body_header_text}>시간</Text>
                             </View>
                             <View style={styles.body_body}>
-                                <Text style={[styles.body_body_text, {fontSize: 14, marginTop: 12}]}>{this.state.timeToDeadLine}</Text>
+                                <Text style={[styles.body_body_text, {fontSize: totalSize(2), marginTop: 5}]}>{this.state.timeToDeadLine}</Text>
                             </View>
                         </View>
                     </View>
