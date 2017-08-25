@@ -5,7 +5,7 @@ var messageBuffer = {};
 module.exports = (server) => {
 
 
-    const io = socketIo(server);
+    const io = socketIo(server, {pingTimeout: 30000});
     io.on('connection', (socket) => {
         
         let email = undefined;
@@ -21,6 +21,7 @@ module.exports = (server) => {
             }
 
             if (messageBuffer[email]) {
+		console.log(messageBuffer[email].length);
                 if (messageBuffer[email].length > 0) {
                     for (var i = 0; i < messageBuffer[email].length; i++) {
                         io.to(user[email]).emit('message', messageBuffer[email][i]);
