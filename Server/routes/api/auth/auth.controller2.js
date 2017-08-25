@@ -82,7 +82,10 @@ exports.register = (req, res) => {
                     pass: 'pretzel123',
                 }
             });
+            let encrypted2Email = encodeURIComponent (email);
             let encryptedEmail = simpleEncrypt.encrypt('thisiSSeCONdSimplepretzelClientEncryptionKEy', email);
+            console.log('encryptedEmail', encryptedEmail);
+            console.log('encrypted2Email', encrypted2Email);
             const html = 
             `
             <!doctype html>
@@ -143,7 +146,7 @@ exports.register = (req, res) => {
                                                                                         <td width="85"></td>
                                                                                         <td width="390">
                                                                                             <p style="margin:0 0 0 0; padding-bottom: 0; font-family:Malgun Gothic, Dotum; font-size:18px; font-weight:bold; color:#333; line-height:26px; word-break:break-all; white-space:pre-wrap;"
-                                                                                                align="center"><a href="http://13.124.147.152:8124/api/auth/checkEmailAuth?email=${encryptedEmail}" style=" color: #ea604a">pretzel 시작하기</a></p>
+                                                                                                align="center"><a href="http://13.124.147.152:8124/api/auth/checkEmailAuth?email=${encrypted2Email}" style=" color: #ea604a">pretzel 시작하기</a></p>
                                                                                         </td>
                                                                                         <td></td>
                                                                                     </tr>
@@ -247,10 +250,11 @@ exports.register = (req, res) => {
 };
 exports.checkEmailAuth = (req, res) => {
     let EncryptedEmail = req.query.email;
-    const email = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
+    //const email = simpleEncrypt.decrypt('thisiSfIrStSimplepretzelClientEncryptionKEy', EncryptedEmail);
     
-    console.log(email);
-    res.send(email);
+    //console.log('decrypted: 'email);
+    console.log(EncryptedEmail)
+    res.send(EncryptedEmail);
     // const getConn = () => {
     //     return new Promise((resolve, reject) => {
     //         db.get().getConnection((err, conn) => {
