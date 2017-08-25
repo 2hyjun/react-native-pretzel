@@ -13,7 +13,6 @@ import {
     Button,
     RefreshControl,
 } from 'react-native';
-<<<<<<< HEAD
 
 import _ from 'lodash';
 import { ListItem, Icon } from 'react-native-elements';
@@ -21,8 +20,6 @@ import SwipeOut from 'react-native-swipeout';
 import { width, height, totalSize } from 'react-native-dimension';
 import Reactotron from 'reactotron-react-native';
 
-=======
->>>>>>> d23a3b86db370981f56ad6350a7ed3977d7751e2
 import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
 import socket from '../../config/socket.io';
