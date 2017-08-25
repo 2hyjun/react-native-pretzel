@@ -450,6 +450,7 @@ exports.mypage = (req, res) => {
             var params = [email];
             //console.log(req.session.signedUser.user_email);
             conn.query(sql, params, (err, results, fields) => {
+                conn.release();
                 if (err) {
                     reject({
                         err: err
@@ -480,5 +481,55 @@ exports.mypage = (req, res) => {
     getConn()
         .then(myPosts)
         .then(onSuccess)
+        .catch(onError);
+};
+
+exports.completing = (req, res) => {
+    const rid = req.params.rid;
+
+    const getConn = () => {
+        return new Promise((resolve) => {
+            db.get().getConnection((err, conn) => {
+                conn.release();
+                resolve(conn);
+            });
+        });
+    };
+
+    const completingPost = (conn) => {
+        return new Promise((resolve, reject) => {
+            const sql = 'UPDATE timeline SET completed=? where rid=?';
+            const params = ['Y', rid];
+            conn.query(sql, params, (err, result) => {
+                conn.release();
+                if (err)
+                    reject({
+                        err: err
+                    });
+                else {
+                    resolve(result);
+                }
+            });
+        });
+    };
+
+    const respond = (result) => {
+        res.send({
+            resultCode: 100,
+            result: result
+        });
+    };
+
+    const onError = (e) => {
+        console.error(e);
+        res.send({
+            resultCode: 1,
+            result: e.message
+        });
+    };
+
+    getConn()
+        .then(completingPost)
+        .then(respond)
         .catch(onError);
 };
