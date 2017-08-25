@@ -21,7 +21,7 @@ import PopupDialog, {
     SlideAnimation,
     ScaleAnimation,
 } from 'react-native-popup-dialog';
-
+import { height, width, totalSize } from 'react-native-dimension';
 import Picker from 'react-native-wheel-picker';
 import Fumi from '../../components/TextInputEffect/Fumi';
 import DropdownAlert from '../../components/DropdownAlert';
@@ -197,7 +197,7 @@ export default class post extends React.Component {
                             rippleDuration={500}
                             style={[styles.ripple, elevation]}
                             onPress={this.contentShowPopOver.bind(this)}>
-                            <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                            <Text style={{fontSize: totalSize(4), color: '#f95a25', alignSelf:'center'}}>#</Text>
                             <Text style={styles.ripple_text}>{this.state.content}</Text>
                         </Ripple>
 
@@ -207,7 +207,7 @@ export default class post extends React.Component {
                             rippleDuration={500}
                             style={[styles.ripple, elevation]}
                             onPress={this.typeShowPopOver.bind(this)}>
-                            <Text style={{fontSize: 25, color: '#f95a25'}}>#</Text>
+                            <Text style={{fontSize: totalSize(4), color: '#f95a25'}}>#</Text>
                             <Text style={styles.ripple_text}>{this.state.contentType}</Text>
                         </Ripple>
                     </View>
@@ -218,7 +218,7 @@ export default class post extends React.Component {
                             rippleDuration={500}
                             style={[styles.ripple_detail, elevation]}
                             onPress={this.detailShowPopOver}>
-                            <Text style={{ fontSize: 25, color: '#f95a25' }}>#</Text>
+                            <Text style={{ fontSize: totalSize(4), color: '#f95a25' }}>#</Text>
                             <Text style={styles.ripple_text}>상세 정보 작성</Text>
                         </Ripple>
                     </View>

@@ -111,6 +111,10 @@ const styles = StyleSheet.create({
         height: 35,
         alignItems: 'center',
     },
+    CompleteBtn:{
+        width:width(5), 
+        height:height(5),
+    }
 });
 
 
