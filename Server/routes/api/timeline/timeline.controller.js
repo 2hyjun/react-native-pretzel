@@ -433,7 +433,7 @@ exports.mypage = (req, res) => {
     const getConn = () => {
         return new Promise((resolve, reject) => {
             db.get().getConnection((err, conn) => {
-                conn.release();
+                //conn.release();
                 // console.log('getConn Error: ', err);
                 // if (err)
                 //     reject({
