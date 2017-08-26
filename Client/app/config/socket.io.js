@@ -139,8 +139,13 @@ const Socket = {
         }
         socket.on('messageBuffer', Socket.onRecieveBuffer);
         socket.on('reconnect', () => {
-            Alert.alert('reconnect');
+            socket.emit('join', global.user_email);
         });
+
+        socket.on('reconnect_error', (err) => {
+            // console.error('reconnect_error', err);
+        })
+
         socket.on('disconnect', () => {
             Alert.alert('disconncted');
         });

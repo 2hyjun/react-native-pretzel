@@ -37,8 +37,6 @@ module.exports = (server) => {
             if (user[email]) {
                 clients--;
                 console.log(`\n\t\t\t\t*****${email} disconnected****\n`);
-                // console.log(email, 'has been disconnected', clients, 'user connected now.');
-                // delete user[email];
                 console.log(user);
             } 
         });
