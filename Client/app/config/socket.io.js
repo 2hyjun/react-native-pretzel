@@ -121,8 +121,8 @@ const Socket = {
         // console.log(socket);
         if (socket === null) {
             socket = SocketIOClient('http://13.124.147.152:8124', {
-                reconnection: true,
-
+                autoConnect: false,
+                reconnection: false,
             });
             socket.open();
            
@@ -131,21 +131,14 @@ const Socket = {
             socket = SocketIOClient('http://13.124.147.152:8124', {
                 autoConnect: false,
                 reconnection: false,
-                reconnectionDelay: 200,
-                reconnectionDelayMax: 300000,
             });
             socket.open();
             socket.emit('join', global.user_email);
         }
         socket.on('messageBuffer', Socket.onRecieveBuffer);
         socket.on('reconnect', () => {
-            socket.emit('join', global.user_email);
+            Alert.alert('reconnect');
         });
-
-        socket.on('reconnect_error', (err) => {
-            // console.error('reconnect_error', err);
-        })
-
         socket.on('disconnect', () => {
             Alert.alert('disconncted');
         });

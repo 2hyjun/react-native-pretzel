@@ -36,6 +36,7 @@ module.exports = (server) => {
         socket.on('disconnect', () => {
             if (user[email]) {
                 clients--;
+                delete user[email];
                 console.log(`\n\t\t\t\t*****${email} disconnected****\n`);
                 console.log(user);
             } 
