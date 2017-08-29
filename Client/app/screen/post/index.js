@@ -231,6 +231,7 @@ export default class post extends React.Component {
                                 <Fumi
                                     style={styles.form_input}
                                     label={'제목'}
+                                    labelStyle={{fontSize:totalSize(1.8)}}
                                     iconClass={IconM}
                                     iconName={'title'}
                                     iconColor={'#f95a25'}
@@ -242,6 +243,7 @@ export default class post extends React.Component {
                                 <Fumi
                                     style={styles.form_input}
                                     label={'수령위치'}
+                                    labelStyle={{fontSize:totalSize(1.8)}}
                                     iconClass={IconM}
                                     iconName={'place'}
                                     iconColor={'#f95a25'}
@@ -253,6 +255,7 @@ export default class post extends React.Component {
                                 <Fumi
                                     style={styles.form_input}
                                     label={'예상금액 (숫자만, "데려다줘"일 경우 0)'}
+                                    labelStyle={{fontSize:totalSize(1.8)}}
                                     iconClass={Icon}
                                     iconName={'money'}
                                     iconColor={'#f95a25'}
@@ -265,6 +268,7 @@ export default class post extends React.Component {
                                 <Fumi
                                     style={styles.form_input}
                                     label={'배달금액 (숫자만)'}
+                                    labelStyle={{fontSize:totalSize(1.8)}}
                                     iconClass={Icon}
                                     iconName={'motorcycle'}
                                     iconColor={'#f95a25'}

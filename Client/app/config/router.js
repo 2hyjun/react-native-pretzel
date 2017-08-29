@@ -21,6 +21,7 @@ import auth from '../screen/auth';
 import timelineHelpme from '../screen/timeline_helpme';
 import timelineHelpyou from '../screen/timeline_helpyou';
 import timelineTogether from '../screen/timeline_together';
+import {totalSize} from 'react-native-dimension';
 
 import styles from './style';
 
@@ -77,7 +78,7 @@ export const TypeTab = TabNavigator({
         },
         labelStyle: {
             color: 'black',
-            fontSize: 17,
+            fontSize: totalSize(2.5),
             marginTop: 20,
         },
         style: {

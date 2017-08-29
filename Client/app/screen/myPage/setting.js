@@ -72,7 +72,7 @@ class settingScreen extends Component {
                     <TouchableOpacity onPress={this.handleBack}>
                         <Image
                             source={require('../../../img/basic/basic_arrow_left.png')}
-                            style={{ resizeMode: 'center' }} />
+                            style={{ marginLeft:10, resizeMode: 'center' }} />
                     </TouchableOpacity>
                 </View>
 

@@ -14,22 +14,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#EAEAEA'
     },
-
-
     cell_logo: {
         height: height(15),
         alignItems: 'center'
     },
     logo: {
         marginTop: 60,
+        resizeMode:'center',
     },
-
-
     cell_form: {
         marginTop: height(10),
         height: cell_form_height,
         //backgroundColor: 'skyblue',
-
     },
     form_email: {
         flex: 1,
@@ -40,7 +36,8 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: width(80),
     },
     sae_form_email: {
         flex: 1,
@@ -48,18 +45,6 @@ const styles = StyleSheet.create({
         marginRight: 30,
         borderRadius: 5,
         borderColor: '#EAEAEA'
-    },
-    email_icon: {
-        flex: 1,
-        marginLeft: 10,
-        height: 30,
-        width: 30,
-        resizeMode: 'center'
-
-    },
-    email_txt: {
-        flex: 5,
-        marginRight: 30,
     },
     form_pw: {
         flex: 1,
@@ -99,7 +84,7 @@ const styles = StyleSheet.create({
         width: 150,
     },
     signin_txt: {
-        fontSize: 20,
+        fontSize: totalSize(2.3),
         fontWeight: 'bold'
     },
     config_forgot_pw: {
@@ -110,12 +95,11 @@ const styles = StyleSheet.create({
     config_register: {
         flex: 1,
         borderRadius: 17,
+        marginBottom: 10
     },
     cell_wave: {
-        marginTop: height(5),
         height: height(30),
         alignItems: 'center',
-
     },
     wave: {
         flex: 1,

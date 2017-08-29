@@ -22,10 +22,11 @@ const styles = StyleSheet.create({
         width: width(100),
         backgroundColor: '#ffffff',
         alignItems: 'flex-start',
+        justifyContent:'center',
     },
     cellTwo: { //Log Out
         width: width(100),
-        height: 60,
+        height: height(7),
         marginTop: 40,
         flexDirection: 'row',
         alignItems: 'center',
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        height: 50,
+        height: height(7),
         alignItems: 'center',
         borderWidth: 0.5,
         borderColor: '#ffffff',

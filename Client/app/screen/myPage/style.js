@@ -18,15 +18,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cellOne: { // setting 톱니바퀴 아이콘
-        height: 50,
+        height: height(3),
         width: width(100),
         alignItems: 'flex-end',
     },
     cellTwo: { //User info : profile pic, major/student ID/name
-        height: height(20),
+        height: height(18),
         width: width(100),
         flexDirection: 'row',
         marginTop: 10,
+        marginRight: 10,
     },
     cellTwoOne: { //User info : profile pic
         width: width(30),
@@ -71,10 +72,10 @@ const styles = StyleSheet.create({
         //borderWidth: 0.5,
         //borderBottomColor: '#d6d7da',
     },
-    cellThree: { //요청현황
-        flex: 0.2,
-        alignSelf:'flex-start',
+    cellThree: { //작성 글
+        alignSelf:'center',
         width:width(25),
+        height:height(4),
         marginTop:10,
         marginLeft:20,
         borderWidth: 1,
@@ -84,10 +85,12 @@ const styles = StyleSheet.create({
     },
     cellFour: { //Detailed sets
         flex: 2,
-        marginTop: 10,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
         width: width(90),
+        height: height(70),
+        marginTop:10,
+        marginBottom: 10,
     },
     imageStyle: {
         marginTop : 20,
@@ -114,7 +117,8 @@ const styles = StyleSheet.create({
     CompleteBtn:{
         width:width(5), 
         height:height(5),
-    }
+        borderRadius:10,
+    },
 });
 
 
