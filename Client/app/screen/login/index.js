@@ -14,6 +14,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import { encrypt } from 'react-native-simple-encryption';
 import Reactoron from 'reactotron-react-native';
+import {totalSize} from 'react-native-dimension';
 
 import styles from './style';
 import Fumi from '../../components/TextInputEffect/Fumi';
@@ -118,6 +119,7 @@ class login extends Component {
                             <View style={styles.sae_form_email}>
                                 <Fumi style={{ flex: 1 }}
                                       label={'이메일'}
+                                      labelStyle={{fontSize:totalSize(2)}}
                                       iconClass={FontAwesomeIcon}
                                       iconName={'pencil'}
                                       iconColor={'#f95a25'}
@@ -131,12 +133,12 @@ class login extends Component {
                             <View style={styles.sae_form_email}>
                                 <Fumi style={{flex: 1}}
                                       label={'비밀번호'}
+                                      labelStyle={{fontSize:totalSize(2)}}
                                       iconClass={FontAwesomeIcon}
                                       iconName={'lock'}
                                       iconColor={'#f95a25'}
                                       secure={true}
                                       onTextChanged={(password) => this.setState({password})}
-
                                       autoCorrection={false}
                                       autoCapital={'none'}
                                 />
@@ -148,11 +150,11 @@ class login extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.config_forgot_pw}
                                                 onPress={this.FindPassword}>
-                                    <Text>비밀번호를 잊으셨나요?</Text>
+                                    <Text style={{fontSize:totalSize(1.5)}}>비밀번호를 잊으셨나요?</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.config_register}
                                                 onPress={this.Register}>
-                                    <Text>회원가입</Text>
+                                    <Text style={{fontSize:totalSize(1.5)}}>회원가입</Text>
                                 </TouchableOpacity>
 
                             </View>

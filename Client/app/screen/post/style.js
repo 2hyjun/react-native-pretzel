@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#efefef',
         justifyContent: 'center',
-        minHeight: height(5),
+        minHeight: height(4),
         width: width(40),
         margin: 4,
         borderRadius: 2,
@@ -116,8 +116,9 @@ const styles = StyleSheet.create({
     form_input: {
         marginLeft: 30,
         marginRight: 30,
-        height: height(10),
+        height: height(8),
         backgroundColor: "#F2F2F2",
+
     },
     deadline: {
         flexDirection: 'row',
