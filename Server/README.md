@@ -2,22 +2,22 @@
 
 ---
 
-#####CREATE TABLE users (
+##### CREATE TABLE users (
 #####    user_email VARCHAR(50) NOT NULL,
 #####    user_name VARCHAR(50) NOT NULL,
 #####    user_password CHAR(88) NOT NULL,
 #####    user_univ VARCHAR(50) NOT NULL,
 #####    user_major VARCHAR(50) NOT NULL,
 #####    primary key(user_email)
-#####) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+##### ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ---
 
-#####ALTER TABLE users MODIFY user_password CHAR(88) NOT NULL;
+##### ALTER TABLE users MODIFY user_password CHAR(88) NOT NULL;
 
 ---
 
-#####CREATE TABLE timeline(
+##### CREATE TABLE timeline(
 #####    user_email VARCHAR(50) NOT NULL,
 #####    content VARCHAR(50) NOT NULL,
 #####    detailInfo TEXT(100) NOT NULL,
@@ -30,13 +30,15 @@
 #####    title VARCHAR(50) NOT NULL,
 #####    time DATETIME NOT NULL,
 #####    place VARCHAR(50) NOT NULL
-#####) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+##### ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ---
+# Deprecated
+---
 
-#**url & result forms**
+# **url & result forms**
 
-###자동로그인 확인( 매 실행 때 마다 체크 )
+### 자동로그인 확인( 매 실행 때 마다 체크 )
 '/' (Get 방식)
 
     - 자동로그인 시
@@ -47,7 +49,7 @@
             { resultCode: 1 }
     
 
-###로그아웃
+### 로그아웃
 '/logout' (Get 방식)
 ```
     - 로그아웃

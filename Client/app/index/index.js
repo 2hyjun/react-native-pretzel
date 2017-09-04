@@ -1,17 +1,34 @@
-import './ReactotronConfig';
-//`\import Reactotron from 'reactotron-react-native'
+// `\import Reactotron from 'reactotron-react-native'
 import React from 'react';
+import PushNotification from 'react-native-push-notification';
 
 import {
     Auth
-} from '../config/router.js';
+} from '../config/router';
+import './ReactotronConfig';
+
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
 
-
+        this.PushConfigure();
+    }
+    PushConfigure() {
+        PushNotification.configure({
+            onNotification: (notification) => {
+                console.log('NOTIFICATION:', JSON.stringify(notification));
+            },
+            permissions: {
+                alert: true,
+                badge: true,
+                sound: true,
+            },
+            popInitialNotification: true,
+            requestPermissions: true,
+        });
+    }
     render() {
-        return (
-            <Auth/>
-        );
+        return <Auth />;
     }
 }
 // import React, {Component} from 'react'

@@ -4,7 +4,6 @@ import {
     AppState,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import PushNotification from 'react-native-push-notification';
 import Reactotron from 'reactotron-react-native';
 
 import global from '../../config/global';
@@ -19,7 +18,6 @@ class Auth extends React.Component {
         this.state = {
             signed: null,
         };
-        this.PushConfigure();
     }
     componentWillMount() {
         AsyncStorage.getItem(STORAGE_KEY)
@@ -55,29 +53,11 @@ class Auth extends React.Component {
             }).catch((err) => console.error(err));
     }
     componentDidMount = () => {
-        this.PushConfigure();
         AppState.addEventListener('change', (state) => {
             Reactotron.log("Current AppState " + state);
         });
     }
-    PushConfigure() {
-        PushNotification.configure({
-            onRegister: (device) => {
-                // Reactotron.log("REGISTER DEVICE", device);
-                //registerDevice(device.token, device.os);
-            },
-            onNotification: (notification) => {
-                console.log('NOTIFICATION:', JSON.stringify(notification));
-            },
-            permissions: {
-                alert: true,
-                badge: true,
-                sound: true,
-            },
-            popInitialNotification: true,
-            requestPermissions: true,
-        });
-    }
+    
     render() {
         const Render = this.state.signed === null ?
             <Loading /> : this.state.signed ?
