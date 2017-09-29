@@ -134,8 +134,8 @@ export default class TimelineListItem extends React.Component {
     _computeDeadLine() {
         const deadline = global.DateStrtoObj(this.props.deadline);
         const cur = global.nowKST();
-        // console.log('deadline', deadline);
-        // console.log('cur', cur);
+        console.log('deadline', deadline);
+        console.log('cur', cur);
 
         const sub = global.DateSubtraction(deadline, cur);
         if (sub.year) {

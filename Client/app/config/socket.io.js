@@ -142,7 +142,7 @@ const Socket = {
         });
         socket.on('reconnecting', (num) => {
             Alert.alert('Reconnecting', num.toString());
-        })
+        });
         socket.on('disconnect', () => {
             Alert.alert('disconncted');
         });

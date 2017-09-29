@@ -19,12 +19,12 @@ import { ListItem, Icon } from 'react-native-elements';
 import SwipeOut from 'react-native-swipeout';
 import { width, height, totalSize } from 'react-native-dimension';
 import Reactotron from 'reactotron-react-native';
-import DropdownAlert from 'react-native-dropdownalert';
 
 import styles from './style';
 import TimelineListItem from '../../components/TimelineListItem';
 import socket from '../../config/socket.io';
 import global from '../../config/global';
+
 
 const STORAGE_KEY = '@PRETZEL:jwt';
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -136,7 +136,7 @@ class myPageScreen extends Component {
                             {
                                 text: '아니요',
                                 onPress: () => {
-                                     Reactotron.log('button press no');
+                                    // Reactotron.log('button press no');
                                 },
                             },
                         ]);
@@ -155,7 +155,7 @@ class myPageScreen extends Component {
                         <TouchableOpacity onPress={this.Setting}>
                             <Image
                                 source={require('../../../img/mypage/mypage_main_settingbutton.png')}
-                                style={{ marginTop: 10, marginRight: 10, resizeMode: 'center'  }} />
+                                style={{ marginTop: 10, marginRight: 10 }} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -213,21 +213,16 @@ class myPageScreen extends Component {
                         </View>
                     </View>
                 </View>
-            {/*
-            <View style={styles.cellWrite}>
+
                 <View style={styles.cellThree}>
                     <Text style={{ alignSelf: 'center', color: '#eb6736' }}>작성 글</Text>
-                </View> */}
+
+                </View>
                 <View style={styles.cellFour}>
                     <ListView 
                     dataSource={this.state.dataSource}
+                    
                     enableEmptySections={true}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this.refresh}
-                        />
-                    }
                     renderRow={(rowData) => (
                         this.state.dataSource.length === 0 ?
                             <View><Text>Empty..</Text></View>
@@ -245,22 +240,17 @@ class myPageScreen extends Component {
                                 subtitle={global.DateToStr3(rowData.time)}
                                 label={
                                     rowData.completed === 'N' ? 
-                                        <Button style={styles.CompleteBtn}
+                                        <Button
                                             title={'완료하기'}
                                             onPress={() => {
                                                 this.completing(rowData.rid)
-                                            }}/>
-                                            :
-                                        <Text style={{alignSelf:'center'}}>완료</Text>
+                                            }}/> :
+                                        <Text>완료</Text>
                                 }>
                             </ListItem>
                     )}
                     />
-                    <DropdownAlert
-                    ref={(ref) => this.dropdown = ref}
-                />
                 </View>
-                {/*</View>*/}
             </View>
         );
     }

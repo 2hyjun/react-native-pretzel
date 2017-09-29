@@ -14,7 +14,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import { encrypt } from 'react-native-simple-encryption';
 import Reactoron from 'reactotron-react-native';
-import {totalSize} from 'react-native-dimension';
+import { totalSize } from 'react-native-dimension';
 
 import styles from './style';
 import Fumi from '../../components/TextInputEffect/Fumi';
@@ -25,9 +25,6 @@ import './../../index/ReactotronConfig';
 const STORAGE_KEY = '@PRETZEL:jwt';
 
 class login extends Component {
-    static FindPassword() {
-        Alert.alert('', '구현중입니다.ㅠㅠ');
-    }
     static propTypes = {
         navigation: PropTypes.object.isRequired,
     };
@@ -44,6 +41,9 @@ class login extends Component {
 
     componentWillMount() {
 
+    }
+    FindPassword() {
+        Alert.alert('', '구현중입니다.ㅠㅠ');
     }
     handleSign() {
         this.httpRequest();
@@ -108,7 +108,7 @@ class login extends Component {
         return (
             <View style={styles.container}>
                 <KeyboardAwareView style={styles.kav}>
-                    <ScrollView sytle={{ flex: 1, flexDirection: 'column' }}>
+                    <ScrollView >
                         <View style={styles.cell_logo}>
                             <Image
                                 source={require('../../../img/join+login/join,login_logotype.png')}
@@ -117,57 +117,64 @@ class login extends Component {
                         </View>
                         <View style={styles.cell_form}>
                             <View style={styles.sae_form_email}>
-                                <Fumi style={{ flex: 1 }}
-                                      label={'이메일'}
-                                      labelStyle={{fontSize:totalSize(2)}}
-                                      iconClass={FontAwesomeIcon}
-                                      iconName={'pencil'}
-                                      iconColor={'#f95a25'}
-                                      secure={false}
-                                      keyType={'email-address'}
-                                      onTextChanged={(email) => this.setState({email})}
-                                      autoCorrection={false}
-                                      autoCapital={'none'}
+                                <Fumi
+                                    style={{ flex: 1 }}
+                                    label={'이메일'}
+                                    labelStyle={{ fontSize: totalSize(2) }}
+                                    iconClass={FontAwesomeIcon}
+                                    iconName={'pencil'}
+                                    iconColor={'#f95a25'}
+                                    secure={false}
+                                    keyType={'email-address'}
+                                    onTextChanged={(email) => this.setState({ email })}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
                                 />
                             </View>
                             <View style={styles.sae_form_email}>
-                                <Fumi style={{flex: 1}}
-                                      label={'비밀번호'}
-                                      labelStyle={{fontSize:totalSize(2)}}
-                                      iconClass={FontAwesomeIcon}
-                                      iconName={'lock'}
-                                      iconColor={'#f95a25'}
-                                      secure={true}
-                                      onTextChanged={(password) => this.setState({password})}
-                                      autoCorrection={false}
-                                      autoCapital={'none'}
+                                <Fumi
+                                    style={{ flex: 1 }}
+                                    label={'비밀번호'}
+                                    labelStyle={{ fontSize: totalSize(2) }}
+                                    iconClass={FontAwesomeIcon}
+                                    iconName={'lock'}
+                                    iconColor={'#f95a25'}
+                                    secure={true}
+                                    onTextChanged={(password) => this.setState({ password })}
+                                    autoCorrection={false}
+                                    autoCapital={'none'}
                                 />
                             </View>
                             <View style={styles.form_config}>
-                                <TouchableOpacity style={styles.config_signin}
-                                                onPress={this.handleSign}>
+                                <TouchableOpacity
+                                    style={styles.config_signin}
+                                    onPress={this.handleSign}>
                                     <Text style={styles.signin_txt}>로그인</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.config_forgot_pw}
-                                                onPress={this.FindPassword}>
-                                    <Text style={{fontSize:totalSize(1.5)}}>비밀번호를 잊으셨나요?</Text>
+                                <TouchableOpacity
+                                    style={styles.config_forgot_pw}
+                                    onPress={this.FindPassword}>
+                                    <Text style={{ fontSize: totalSize(1.5) }}>비밀번호를 잊으셨나요?</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.config_register}
-                                                onPress={this.Register}>
-                                    <Text style={{fontSize:totalSize(1.5)}}>회원가입</Text>
+                                <TouchableOpacity
+                                    style={styles.config_register}
+                                    onPress={this.Register}>
+                                    <Text style={{ fontSize: totalSize(1.5) }}>회원가입</Text>
                                 </TouchableOpacity>
 
                             </View>
                         </View>
 
                         <View style={styles.cell_wave}>
-                            <Image source={require('../../../img/join+login/login_wave.png')}
-                                style={styles.wave}/>
+                            <Image
+                                source={require('../../../img/join+login/login_wave.png')}
+                                style={styles.wave}
+                            />
                         </View>
                     </ScrollView>
                 </KeyboardAwareView>
                 <DropdownAlert
-                    ref={(ref) => this.dropdown = ref}/>
+                    ref={(ref) => this.dropdown = ref} />
             </View>
         );
     }

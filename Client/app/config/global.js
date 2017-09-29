@@ -52,7 +52,7 @@ const global = {
     nowKST: () => {
         const obj = {};
         const str = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-        if (Platform.OS === 'ios') {
+        if (str[0] === '2' || str[0] === 2) {
             const date = str.split('. ');
 
             // Reactotron.log(date);
@@ -71,7 +71,7 @@ const global = {
                 obj.hour = parseInt(times.split(':')[0], 10) + 12;
                 obj.minutes = parseInt(times.split(':')[1], 10);
                 obj.second = parseInt(times.split(':')[2], 10);
-            } 
+            }
         } else {
             const splited = str.split(' ');
             obj.month = global.MonthStrtoInt(splited[1]);
