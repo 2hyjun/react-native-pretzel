@@ -52,9 +52,11 @@ const global = {
     nowKST: () => {
         const obj = {};
         const str = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+        // Alert.alert(new Date().toLocaleString('en-US', { timeZone: "America/New_York"}));
+        // Alert.alert(str[0]);
         if (str[0] === '2' || str[0] === 2) {
             const date = str.split('. ');
-
+            
             // Reactotron.log(date);
             obj.year = parseInt(date[0], 10);
             obj.month = parseInt(date[1], 10);
@@ -72,18 +74,34 @@ const global = {
                 obj.minutes = parseInt(times.split(':')[1], 10);
                 obj.second = parseInt(times.split(':')[2], 10);
             }
+            
         } else {
             const splited = str.split(' ');
+            // Alert.alert(JSON.stringify(splited));
             obj.month = global.MonthStrtoInt(splited[1]);
-            obj.day = parseInt(splited[2], 10);
-            obj.year = parseInt(splited[4], 10);
+            Alert.alert(JSON.stringify(splited));
+            let time;
+            if (splited[2] === "") {
+                obj.day = parseInt(splited[3], 10);
+                // Alert.alert(splited[3], JSON.stringify(splited));
+                obj.year = parseInt(splited[5], 10);
+                // Alert.alert(splited[5], JSON.stringify(splited));
+                time = splited[3].split(':');
+            } else {
+                obj.day = parseInt(splted[2], 10);
+                obj.year = parseInt(splited[4], 10);
+                time = splited[4].split(':');    
+            }
 
-            const time = splited[3].split(':');
+            
 
             obj.hour = parseInt(time[0], 10);
             obj.minutes = parseInt(time[1], 10);
             obj.second = parseInt(time[2], 10);
+            // Alert.alert(str, JSON.stringify(obj));
+            
         }
+        // Alert.alert(str, JSON.stringify(obj));
 
         return obj;
     },

@@ -44,9 +44,10 @@ const STORAGE_KEY = '@PRETZEL:jwt';
     "place": "정문 스타벅스"
 */
 
-
-const contents = ['커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
-const types = ['해주세요', '해줄게요', '같이해요'];
+const initialContents = '배달 항목 선택';
+const initialTypes = '방식 선택';
+const contents = [initialContents, '커피', '밥버거', '토스트', '데려다줘', '인쇄', '책반납', '기타'];
+const types = [initialTypes, '해주세요', '해줄게요', '같이해요'];
 
 export default class post extends React.Component {
     constructor(props) {
@@ -54,12 +55,12 @@ export default class post extends React.Component {
 
         this.state = {
             user_email: '',
-            content: '배달 항목 선택', // 커피
+            content: initialContents, // 커피
             detailInfo: '',
             expectedPrice: '',
             fee: '',
             deadLine: '배달 기한 설정',
-            contentType: '방식 선택', // 해주세요
+            contentType: initialTypes, // 해주세요
             title: '',
             place: '',
             elevationToZero: false,
@@ -89,7 +90,7 @@ export default class post extends React.Component {
     contentShowPopOver() {
         // Reactoron.log(this.refs);
         this.setState({ elevationToZero: true });
-        this.dropdown.alertWithType('info', '휠 피커', '휠피커에서 가장 상위의 항목을 선택 할려면, 다른 항목으로 이동후 다시 가장 상위 항목으로 가시면 됩니다.');
+        // this.dropdown.alertWithType('info', '휠 피커', '휠피커에서 가장 상위의 항목을 선택 할려면, 다른 항목으로 이동후 다시 가장 상위 항목으로 가시면 됩니다.');
         this.content.show();
     }
     typeShowPopOver() {
@@ -168,7 +169,8 @@ export default class post extends React.Component {
     }
 
     submit() {
-        this.GetToken()
+        if (this.state.content !== initialContents && this.state.contentType !== initialTypes) {
+            this.GetToken()
             .then(this.HttpRequest)
             .then((rJSON) => {
                 if (rJSON.resultCode === 100) {
@@ -185,6 +187,12 @@ export default class post extends React.Component {
                     });
                 }
             });
+        } else {
+            this.setState({ elevationToZero: true }, () => {
+                this.dropdown.alertWithType('error', '배달 항목과 배달 방식을 선택해주세요.', '');
+            });
+        }
+        
     }
     render() {
         const elevation = this.state.elevationToZero ? {elevation: 0} : {elevation: 5};

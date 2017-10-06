@@ -137,14 +137,14 @@ const Socket = {
         }
         socket.on('messageBuffer', Socket.onRecieveBuffer);
         socket.on('reconnect', () => {
-            Alert.alert('reconnect');
+            // Alert.alert('reconnect');
             socket.emit('join', global.user_email);
         });
         socket.on('reconnecting', (num) => {
-            Alert.alert('Reconnecting', num.toString());
+            // Alert.alert('Reconnecting', num.toString());
         });
         socket.on('disconnect', () => {
-            Alert.alert('disconncted');
+            // Alert.alert('disconncted');
         });
         return socket;
     },
